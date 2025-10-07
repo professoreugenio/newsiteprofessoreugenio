@@ -7,7 +7,7 @@
 
 
 
-`a_site_vendas` (
+`a_site_vendas` 
   `codigovendas` int(11) NOT NULL,
   `idcursosv` int(11) DEFAULT NULL,
   `chaveturmasv` int(11) DEFAULT NULL,

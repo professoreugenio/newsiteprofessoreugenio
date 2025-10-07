@@ -47,6 +47,8 @@ try {
     // Sessões
     $idUsuarioSess = $_SESSION['idUsuario']  ?? '';
     $chaveTurma    = $_SESSION['chaveTurma'] ?? '';
+    $idCurso       = $_SESSION['idCurso']   ?? '';
+    $chaveAfiliado = $_SESSION['chaveAfiliado'] ?? '';
     if (!$idUsuarioSess || !$chaveTurma) {
         http_response_code(400);
         json_quit(['status' => 'erro', 'mensagem' => 'Sessão expirada ou inválida.']);
@@ -113,6 +115,25 @@ try {
     $stmt->bindParam(':hora',       $hora);
     $stmt->execute();
 
+
+   
+
+    $sql = "INSERT INTO a_site_vendas 
+            (idcursosv, chaveturmasv, idalunosv, chaveafiliadosv, valorvendasv, datacomprasv, horacomprasv, statussv)
+        VALUES 
+            (:idcurso, :chaveturma, :idaluno, :chaveafiliado, :valor, :data, :hora, :status)";
+
+    $status = 0;
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':idcurso',       $idCurso,       PDO::PARAM_INT);
+    $stmt->bindParam(':chaveturma',    $chaveTurma,    PDO::PARAM_INT);
+    $stmt->bindParam(':idaluno',       $idUsuario,       PDO::PARAM_INT);
+    $stmt->bindParam(':chaveafiliado', $chaveAfiliado, PDO::PARAM_STR);
+    $stmt->bindParam(':valor',         $valorPlanoRaw);
+    $stmt->bindParam(':data',          $data);
+    $stmt->bindParam(':hora',          $hora);
+    $stmt->bindParam(':status',        $status,        PDO::PARAM_INT);
+    $stmt->execute();
 
 
 
