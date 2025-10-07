@@ -96,6 +96,8 @@ try {
     $rwNome = $query->fetch(PDO::FETCH_ASSOC);
     $idAfiliado = $rwNome['idusuarioSA'] ?? 0;
 
+    
+
 
     $sql = "INSERT INTO a_site_afiliados_cache
             (idafiliadochaveac, idprodutoac, idclienteac, valorac, statusac, dataac, horaac)

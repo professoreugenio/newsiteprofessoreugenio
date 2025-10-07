@@ -34,7 +34,8 @@ $versaoAssets    = time();
                 <?php // if ($vendaliberada == '1'): 
                 ?>
                 <?php if ($vendaliberada == "1"): ?>
-<?php echo $dec = encrypt($_COOKIE['nav'], $action = 'd'); ?>
+                    <?php $dec = encrypt($_COOKIE['nav'], $action = 'd'); ?>
+                    <?php echo $_SESSION['chaveAfiliado']; ?>
                     <?php include_once __DIR__ . '/vendasv1.0/bodyVendasPlano.php'; ?>
                 <?php else: ?>
 
