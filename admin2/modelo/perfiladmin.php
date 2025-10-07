@@ -39,10 +39,10 @@ require_once APP_ROOT . '/autenticacao.php';
                 <small><?= diadasemana($data, 2); ?></small>
 
             </div>
-            <?php require_once APP_ROOT . '/admin2/modelo/perfiladmin1.0/Subnav.php'; ?>
+            <?php require APP_ROOT . '/admin2/modelo/perfiladmin1.0/Subnav.php'; ?>
         </div>
-[ <?php echo $dec= encrypt("MWNUTXpvZWhHYlR0bHBaSGlHYTY0SlNyak5Vbnh0N0Y0c2lPdDUwQ0Jza3lCcVRURERjUktnSk0za2tscjlaMnh0MERueGlIY1Ix", $action = 'd' );  ?> ]
-        <?php require_once APP_ROOT . '/admin2/modelo/perfiladmin1.0/BodyPerfilAdmin.php'; ?>
+        [ <?php   ?> ]
+        <?php require APP_ROOT . '/admin2/modelo/perfiladmin1.0/BodyPerfilAdmin.php'; ?>
 
 
     </div>

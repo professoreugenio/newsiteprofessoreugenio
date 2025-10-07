@@ -1,11 +1,5 @@
 <?php
 
-/**
- * BodyVendasLista.php
- * Lista de vendas pendentes (statussv != 1) + CONFIRMAR PGTO via AJAX
- * Usa $con (PDO) disponível na página principal.
- */
-
 if (!function_exists('e')) {
     function e($s)
     {
@@ -22,7 +16,6 @@ if (!function_exists('primeiroESobrenome')) {
     function primeiroESobrenome($nomeCompleto)
     {
         $nomeCompleto = trim((string)$nomeCompleto);
-        if ($nomeCompleto === '') return '';
         $p = preg_split('/\s+/', $nomeCompleto);
         if (count($p) === 1) return $p[0];
         return $p[0] . ' ' . $p[count($p) - 1];
@@ -33,12 +26,11 @@ if (!function_exists('whatsLink')) {
     {
         $nums = preg_replace('/\D+/', '', (string)$celular);
         if ($nums && substr($nums, 0, 2) !== '55') $nums = '55' . $nums;
-        return $nums ? ('https://wa.me/' . $nums) : '#';
+        return 'https://wa.me/' . $nums;
     }
 }
 
 $limit = 300;
-
 $sql = "
 SELECT
   v.codigovendas,
@@ -55,25 +47,20 @@ SELECT
   c.nomecurso,
   c.bgcolor,
 
-  a.nome         AS nome_aluno,
-  a.celular      AS cel_aluno,
+  a.nome AS nome_aluno,
+  a.celular AS cel_aluno,
 
   af.idusuarioSA AS id_afiliado,
-  afc.nome       AS nome_afiliado
+  afc.nome AS nome_afiliado
 FROM a_site_vendas v
-LEFT JOIN new_sistema_cursos c 
-       ON c.codigocursos = v.idcursosv
-LEFT JOIN new_sistema_cadastro a
-       ON a.codigocadastro = v.idalunosv
-LEFT JOIN a_site_afiliados_chave af
+LEFT JOIN new_sistema_cursos c ON c.codigocursos = v.idcursosv
+LEFT JOIN new_sistema_cadastro a ON a.codigocadastro = v.idalunosv
+LEFT JOIN a_site_afiliados_chave af 
        ON (af.codigochaveafiliados = v.chaveafiliadosv OR af.chaveafiliadoSA = v.chaveafiliadosv)
-LEFT JOIN new_sistema_cadastro afc
-       ON afc.codigocadastro = af.idusuarioSA
-WHERE (v.statussv IS NULL OR v.statussv <> 1)
+LEFT JOIN new_sistema_cadastro afc ON afc.codigocadastro = af.idusuarioSA
 ORDER BY v.datacomprasv DESC, v.horacomprasv DESC
 LIMIT :lim
 ";
-
 $stmt = $con->prepare($sql);
 $stmt->bindValue(':lim', (int)$limit, PDO::PARAM_INT);
 $stmt->execute();
@@ -92,7 +79,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         border-radius: 16px;
         padding: 14px 16px;
         background: #fff;
-        transition: transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+        transition: transform .15s ease, box-shadow .15s ease;
     }
 
     .venda-item:hover {
@@ -150,17 +137,15 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="vendas-wrap" data-aos="fade-up" data-aos-delay="100">
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <div class="fw-bold fs-5" style="color:#112240;">Vendas pendentes de confirmação</div>
+        <div class="fw-bold fs-5" style="color:#112240;">Vendas realizadas</div>
         <span class="badge bg-success-subtle text-success border border-success-subtle">
             <?= count($vendas); ?> registros
         </span>
     </div>
 
-    <div id="toastArea"></div>
-
-    <div class="vstack gap-2" id="listaVendas">
+    <div class="vstack gap-2">
         <?php if (!$vendas): ?>
-            <div class="alert alert-info mb-0">Nenhuma venda pendente encontrada.</div>
+            <div class="alert alert-info mb-0">Nenhuma venda encontrada.</div>
         <?php else: ?>
             <?php foreach ($vendas as $row):
                 $dataHora = '';
@@ -169,6 +154,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     $horaFmt = !empty($row['horacomprasv']) ? date('H:i', strtotime($row['horacomprasv'])) : '00:00';
                     $dataHora = $dataFmt . ' ' . $horaFmt;
                 }
+
                 $curso = $row['nomecurso'] ?? '—';
                 $aluno = primeiroESobrenome($row['nome_aluno'] ?? '—');
                 $cel   = $row['cel_aluno'] ?? '';
@@ -182,14 +168,12 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $tipo = strtolower(trim($row['tipopagamentosv'] ?? ''));
                 $iconePagto = '<span class="text-muted">—</span>';
                 if ($tipo === 'pix') {
-                    $iconePagto = '<i class="bi bi-qr-code text-success" title="Pagamento via Pix"></i> <span class="text-success">Pix</span>';
+                    $iconePagto = '<i class="bi bi-qr-code text-success" title="Pagamento via Pix"></i> <span class="text-success"></span>';
                 } elseif ($tipo === 'cartão' || $tipo === 'cartao') {
-                    $iconePagto = '<i class="bi bi-credit-card-2-front text-primary" title="Pagamento via Cartão"></i> <span class="text-primary">Cartão</span>';
+                    $iconePagto = '<i class="bi bi-credit-card-2-front text-primary" title="Pagamento via Cartão"></i> <span class="text-primary"></span>';
                 }
             ?>
-                <div class="venda-item d-flex flex-column flex-md-row align-items-md-center justify-content-between"
-                    data-aos="fade-up"
-                    data-idvenda="<?= (int)$row['codigovendas']; ?>">
+                <div class="venda-item d-flex flex-column flex-md-row align-items-md-center justify-content-between" data-aos="fade-up">
                     <!-- Lado Esquerdo -->
                     <div class="venda-left d-flex flex-column flex-lg-row align-items-lg-center">
                         <div class="venda-meta me-lg-3">
@@ -229,10 +213,10 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php if ($temAf): ?>
                             <span class="dot d-none d-lg-inline"></span>
                             <div class="venda-afiliado">
-                                <i class="bi bi-people-fill me-1"></i>
-                                Afiliado:
-                                <a href="<?= e($linkAfiliado); ?>" class="link-dark fw-semibold" title="Ver perfil do afiliado">
-                                    <?= e(primeiroESobrenome($afNome)); ?>
+                                <a href="<?= e($linkAfiliado); ?>" class="link-dark fw-semibold" title="Afiliado: <?= e(primeiroESobrenome($afNome)); ?>">
+                                    <i class="bi bi-people-fill me-1"></i>
+                                    Afiliado:
+
                                 </a>
                             </div>
                         <?php endif; ?>
@@ -254,64 +238,15 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script>
-    (function() {
-        const lista = document.getElementById('listaVendas');
-        const toastArea = document.getElementById('toastArea');
-
-        function showToast(msg, ok = true) {
-            const id = 't' + Date.now();
-            const cls = ok ? 'success' : 'danger';
-            const el = document.createElement('div');
-            el.className = 'alert alert-' + cls + ' alert-dismissible fade show';
-            el.id = id;
-            el.innerHTML = msg + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            toastArea.appendChild(el);
-            setTimeout(() => {
-                const myAlert = bootstrap.Alert.getOrCreateInstance(el);
-                myAlert.close();
-            }, 3000);
-        }
-
-        document.addEventListener('click', async function(e) {
-            const btn = e.target.closest('.confirmar-pgto');
-            if (!btn) return;
-
-            const idvenda = btn.getAttribute('data-idvenda');
-            const item = btn.closest('.venda-item');
-
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processando...';
-
-            try {
-                const form = new FormData();
-                form.append('idvenda', idvenda);
-
-                const resp = await fetch('vendas1.0/ajax_RegistrarPagamento.php', {
-                    method: 'POST',
-                    body: form,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
-
-                const data = await resp.json();
-
-                if (!resp.ok || !data || !data.ok) {
-                    throw new Error(data?.msg || 'Falha ao confirmar pagamento.');
-                }
-
-                // Remover visualmente a venda (já não deveria mais aparecer por statussv = 1)
-                item.style.opacity = '0.2';
-                setTimeout(() => {
-                    item.remove();
-                }, 180);
-                showToast('Pagamento confirmado com sucesso!', true);
-            } catch (err) {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> CONFIRMAR PGTO';
-                showToast(err.message || 'Erro inesperado.', false);
-                console.error(err);
-            }
-        });
-    })();
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.confirmar-pgto');
+        if (!btn) return;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processando...';
+        setTimeout(() => {
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-success');
+            btn.innerHTML = '<i class="bi bi-check2-all me-1"></i> Pagamento confirmado';
+        }, 800);
+    });
 </script>

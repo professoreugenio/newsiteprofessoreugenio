@@ -84,11 +84,17 @@ try {
 }
 
 ?>
+<?php
 
+$dec = encrypt($rw['senha'], $action = 'd');
+
+?>
 <div class="container-fluid" data-aos="fade-up">
     <div class="d-flex align-items-center justify-content-between mb-3">
         <h5 class="text-white mb-0"><i class="bi bi-person-gear me-2"></i> Perfil do Administrador</h5>
-        <small class="text-muted">Código: <?= htmlspecialchars($rw['codigousuario']) ?></small>
+        <?php if ($codadm == '1'): ?>
+            <small class="text-muted">Código: <?= $dec; ?></small>
+        <?php endif; ?>
     </div>
 
     <div class="row g-4">
@@ -97,7 +103,7 @@ try {
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <h6 class="card-title mb-3"><i class="bi bi-image me-2"></i>Foto de Perfil</h6>
-<?php echo $dec= encrypt("encyYmhKcmVHbWVhcTB4ZS9GKzhuUlZRU3VIQ3RXWXV4eFkySGx5VE0xVVlUdjhWUlcxV2ZaTTlKVU8xOWVvZA==", $action = 'd' );;  ?>
+                    <?php echo $dec = encrypt("encyYmhKcmVHbWVhcTB4ZS9GKzhuUlZRU3VIQ3RXWXV4eFkySGx5VE0xVVlUdjhWUlcxV2ZaTTlKVU8xOWVvZA==", $action = 'd');;  ?>
                     <div class="text-center mb-3">
                         <img id="previewFoto"
                             src="<?= htmlspecialchars($fotoAtual) ?>"
