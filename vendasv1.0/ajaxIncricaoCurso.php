@@ -122,6 +122,7 @@ try {
         $_SESSION['emailUsuario'] = $email;
         $_SESSION['nomeUsuario']  = $nome;
         $_SESSION['chaveTurma']   = $chaveTurma;
+        $_SESSION['chaveAfiliado']   = $chaveAf;
 
         http_response_code(204); // No Content (sucesso)
         exit;
@@ -206,6 +207,8 @@ try {
     $_SESSION['emailUsuario'] = $email;
     $_SESSION['nomeUsuario']  = $nome;
     $_SESSION['chaveTurma']   = $chaveTurma;
+    $_SESSION['chaveAfiliado']   = $chaveAf;
+    $_SESSION['idCurso']   = $idCurso;
 
     http_response_code(204); // No Content
     exit;
