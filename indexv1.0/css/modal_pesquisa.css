@@ -1,0 +1,166 @@
+.modal-content img {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    margin-top: 15px;
+}
+
+/* Ícone de lupa fixo */
+#searchIcon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#searchIcon:hover {
+    background-color: #0056b3;
+}
+
+.fixed-search-btn {
+    position: fixed;
+    bottom: 22px;
+    right: 80px;
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transform: scale(1.0);
+    opacity: 0.5;
+    transition: transform 0.3s;
+    color: #ffffff;
+}
+
+.fixed-search-btn:hover {
+    color: #ffffff;
+    background-color: #0056b3;
+    font-size: 14px;
+    transform: scale(1.3);
+    transition: transform 0.3s;
+    opacity: 1;
+}
+
+
+
+.modal-content {
+    background-color: #595858;
+    color: #f5f5f5;
+}
+
+.btn-close {
+    background-image: none;
+    color: #f5f5f5;
+    font-size: 30px;
+
+    transition: transform 0.3s;
+
+}
+
+.btn-close:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+    transition: transform 0.3s;
+    transform: scale(1.1);
+}
+
+.btn-search {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    font-size: 20px;
+    color: #000000;
+    transition: 0.3s;
+}
+
+.btn-search:hover {
+
+    color: #017951;
+    background-color: #ffffff;
+    transition: 0.3s;
+}
+
+a.link-resultado {
+    display: block;
+    padding: 8px;
+    margin-bottom: 5px;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #4b535a;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 14px;
+}
+
+.link-resultado:hover {
+    background-color: #e8f0fe;
+    color: #0b53c0;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.carousel-indicators button {
+    padding: 6px 12px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.carousel-indicators button:hover {
+    background-color: #0b53c0;
+
+}
+
+a.botoesextraspesquisa {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+    background-color: #2b2b2b;
+    border: 1px solid #d3d3d3;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    color: #ffffff;
+}
+
+a.botoesextraspesquisa:hover {
+    border: 1px solid #d3d3d3;
+    background-color: #3b3b3b;
+    transition: 0.3s;
+    transform: scale(1.05);
+    color: #ffffff;
+}
+
+.input-group>.form-control,
+.input-group>.form-floating,
+.input-group>.form-select {
+    position: relative;
+    flex: 0.95 1 auto;
+    width: 1%;
+    min-width: 0;
+}

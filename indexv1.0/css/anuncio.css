@@ -1,0 +1,93 @@
+.container-anuncio {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title-anuncio {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #ff5722;
+}
+
+.features {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.features li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.price {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 20px 0;
+}
+
+.date-time {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.access-count {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+}
+
+.cta {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cta button {
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.cta button:hover {
+    background: #45a049;
+}
+
+.img-fluid {
+    width: 100%;
+}
+
+
+.card-div-banner {
+    width: 20%;
+}
+
+@media (max-width: 768px) {
+    .card-div-banner {
+        width: 45%;
+    }
+}
+
+@media (max-width: 468px) {
+    .card-div-banner {
+        width: 45%;
+        margin-bottom: 20px;
+    }
+}

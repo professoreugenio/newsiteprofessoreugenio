@@ -1,0 +1,57 @@
+a {
+    text-decoration: none;
+}
+#userhead .fotouserNav {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px 20px 20px 20px;
+    border: solid 2px #d6d6d6;
+    background-position: center;
+    background-size: cover;
+    margin: 3px;
+}
+
+#userhead .userdados {
+    /* border: solid 1px #ccc; */
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#userhead .NomeUser {
+    font-weight: 600;
+    color: #ff8040;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#userhead .nomeTurma {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 12px;
+    margin-top: -3px;
+    padding: 0;
+}
+
+#userhead .Userdesc p {
+    margin: 0;
+    padding: 0;
+}
+
+#userhead .Userdesc {
+    font-weight: 600;
+    color: #000000;
+    font-size: 13px;
+    margin-top: -3px;
+    padding: 0;
+    border: solid 1px #cccccc;
+    border-radius: 0px 8px 8px 8px;
+    padding: 5px 10px;
+    font-style: italic;
+    word-wrap: break-word;
+    max-width: 300px;
+    min-width: 200px;
+    background-color: #ffeee6;
+    position: relative;
+}
