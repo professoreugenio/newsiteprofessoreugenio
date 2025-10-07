@@ -1,0 +1,95 @@
+/* === Cores e fundo base === */
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+body {
+    background-color: #112240;
+    color: #ffffff;
+}
+
+h1 {
+    color: #00BB9C;
+}
+
+h2 {
+    color: #FF9C00;
+}
+
+/* === Cartões e navbar === */
+.card {
+    background-color: #0A192F;
+    color: #ffffff;
+    border: 1px solid #ccc;
+}
+
+.navbar {
+    background-color: #0A192F;
+}
+
+.navbar .nav-link,
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+    color: #00BB9C !important;
+}
+
+/* === Botões padrão === */
+.btn-personalizado,
+.btn-contato {
+    background-color: #00BB9C;
+    color: #ffffff;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.btn-personalizado:hover,
+.btn-contato:hover {
+    transform: scale(1.05);
+    background-color: #009f84;
+}
+
+/* === Ícones por aplicativo === */
+.icone-windows {
+    color: #085C9D;
+}
+
+.icone-word {
+    color: #1293B6;
+}
+
+.icone-excel {
+    color: #2FCEAD;
+}
+
+.icone-powerpoint {
+    color: #DB6632;
+}
+
+
+.btn-youtube {
+    background-color: #FF0000;
+    color: #ffffff;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.btn-youtube:hover {
+    transform: scale(1.05);
+    background-color: #cc0000;
+}
+
+.btn-instagram {
+    background-color: #C13584;
+    color: #ffffff;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.btn-instagram:hover {
+    transform: scale(1.05);
+    background-color: #a02c6b;
+}

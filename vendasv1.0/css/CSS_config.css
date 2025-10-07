@@ -1,0 +1,87 @@
+/* === Cores e fundo base === */
+:root {
+    --cor-primaria: #00BB9C;
+    --cor-primaria-hover: #009f84;
+    --cor-secundaria: #FF9C00;
+    --cor-fundo: #112240;
+    --cor-card: #0A192F;
+    --cor-texto: #ffffff;
+    --cor-hover: #00BB9C;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+h1 {
+    color: var(--cor-primaria);
+}
+
+h2 {
+    color: var(--cor-secundaria);
+}
+
+a {
+    color: var(--cor-texto);
+    text-decoration: none;
+}
+
+.card {
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+    border: 1px solid #2a2a2a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(0, 187, 156, 0.15);
+}
+
+.navbar {
+    background-color: var(--cor-card);
+}
+
+.navbar .nav-link,
+.navbar-brand {
+    color: var(--cor-texto) !important;
+}
+
+.navbar .nav-link:hover {
+    color: var(--cor-primaria) !important;
+}
+
+.btn-personalizado,
+.btn-contato,
+.btn-gradient {
+    background-color: var(--cor-primaria);
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding: 10px 24px;
+}
+
+.btn-personalizado:hover,
+.btn-contato:hover,
+.btn-gradient:hover {
+    background-color: var(--cor-primaria-hover);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 187, 156, 0.4);
+}
+
+.icone-windows,
+.icone-word,
+.icone-excel,
+.icone-powerpoint {
+    transition: transform 0.3s ease;
+}
+
+.icone-windows:hover,
+.icone-word:hover,
+.icone-excel:hover,
+.icone-powerpoint:hover {
+    transform: scale(1.2);
+}

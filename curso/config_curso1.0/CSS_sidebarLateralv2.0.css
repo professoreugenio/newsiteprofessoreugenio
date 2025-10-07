@@ -1,0 +1,238 @@
+/* ===== Sidebar Lateral (Tema Claro) ===== */
+
+:root {
+    --sidebar-width: 280px;
+    --sidebar-z: 1051;
+    --accent: #4f86ff;
+    /* cor de destaque suave */
+    --btn-bg: #ffffff;
+    --btn-border: #dcdfe4;
+    --btn-text: #2b2f36;
+    --btn-hover-bg: #f3f5f8;
+    --sidebar-bg: #ffffff;
+    /* fundo claro */
+    --sidebar-text: #222;
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+/* Botão flutuante (direita, centro) */
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: var(--sidebar-z);
+    background: #ffa500;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    padding: 10px 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+.sidebar-toggle-btn:hover {
+    background: #ffc75f;
+}
+
+/* Container do sidebar (direita -> entra da direita para a esquerda) */
+.sidebarLateral {
+    position: fixed;
+    inset: 0 0 0 auto;
+    /* top/right/bottom definidos, encostado à direita */
+    /* width: var(--sidebar-width); */
+    height: 100%;
+    background: #2F96BA;
+    color: var(--sidebar-text);
+    border-left: 1px solid var(--btn-border);
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    z-index: var(--sidebar-z);
+    padding: 1.25rem 1rem;
+    /* px-3 py-4 equivalente */
+    box-shadow: var(--shadow-lg);
+}
+
+.sidebarLateral.is-open {
+    transform: translateX(0);
+}
+
+/* Header do sidebar */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.sidebar-header h5 {
+    margin: 0;
+    color: var(--btn-text);
+}
+
+/* Botões internos (estilo claro) */
+.sidebarLateral .btn {
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    color: var(--btn-text);
+}
+
+.sidebarLateral .btn i {
+    vertical-align: middle;
+}
+
+.sidebarLateral .btn:hover {
+    background: var(--btn-hover-bg);
+    color: var(--btn-text);
+    border-color: var(--btn-border);
+}
+
+/* Ajustes utilitários */
+.mb-2 {
+    margin-bottom: .5rem !important;
+}
+
+/* Opcional: melhorar a separação visual do grupo de navegação */
+.sidebarLateral .nav {
+    gap: .25rem;
+}
+
+/* Opcional: ícones coloridos específicos podem continuar vindo via classes BS (text-danger, etc.) */
+
+
+.box-licoes {
+    position: fixed;
+    top: 70px;
+    right: 5px;
+    /* afastado da sidebar */
+    height: 85vh;
+    width: 350px;
+    background-color: #f1f1f1;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    z-index: 1051;
+    display: none;
+}
+
+.licao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    padding: 0.1rem 0.8rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.2rem;
+    color: #343a40;
+    cursor: pointer;
+}
+
+.licao.lida {
+    background-color: #e6f4ea;
+    color: #198754;
+}
+
+.licao.lida:hover {
+    background-color: #e6f4ea;
+    color: #117044;
+}
+
+.licao i {
+    font-size: 1.2rem;
+}
+
+.licao.lida i {
+    color: #198754;
+}
+
+.licao span {
+    font-size: 12px;
+}
+
+.licao button {
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: #ffffff;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.licao button:hover {
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #5ec669;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.licao:hover {
+    background-color: #cdd2d8;
+}
+
+.licao.lida {
+    background-color: #e2f4e9;
+}
+
+.titulo-licao {
+    font-weight: 500;
+    flex-grow: 1;
+}
+
+.box-botoes-licao-fixoRodape {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 40px;
+    background-color: #00000093;
+    z-index: 10;
+
+}
+
+/* Modal arrastável */
+.draggable-modal {
+    position: fixed;
+    /* permite mover pela tela */
+    margin: 0;
+    /* remove centralização padrão */
+    top: 10%;
+    /* posição inicial aproximada */
+    left: calc(50% - 400px);
+    /* centraliza aprox. modal-lg (800px) */
+    z-index: 1060;
+    /* acima do backdrop */
+    transition: none !important;
+}
+
+.cursor-move {
+    cursor: move;
+}
+
+/* Ajuste responsivo: garante que não “escape” da tela em telas pequenas */
+@media (max-width: 820px) {
+    .draggable-modal {
+        left: 2%;
+        right: 2%;
+        width: 96%;
+    }
+}
+
+
+/* Remove backdrop padrão do Bootstrap */
+.modal-backdrop {
+    display: none !important;
+}
+
+/* Modal do caderno ocupando toda a largura no rodapé */
+#modalCaderno {
+    pointer-events: none;
+    /* evita bloquear cliques fora */
+}
+
+#modalCaderno .modal-dialog {
+    pointer-events: all;
+    /* mantém clique dentro */
+}

@@ -1,0 +1,98 @@
+ .card-modulo {
+     background: linear-gradient(135deg, #ff7300, #ffa733);
+     border-radius: 15px;
+     border: solid 3px #fbde99;
+     color: white;
+     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+     transition: transform 0.3s ease;
+     cursor: pointer;
+     min-height: 200px;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     padding: 15px;
+     transition: 0.3s;
+ }
+
+ .card-modulo-verde {
+     background: linear-gradient(135deg, #018125, #02a832);
+     border-radius: 15px;
+     border: solid 3px #6eff97;
+     color: white;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     transition: transform 0.3s ease;
+     cursor: pointer;
+     min-height: 200px;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     padding: 15px;
+     transition: 0.3s;
+ }
+
+ .card-modulo-cinza {
+     background: linear-gradient(135deg, #8d8d8d, #b3b3b3);
+     border-radius: 15px;
+     border: solid 3px #cecece;
+     color: white;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     transition: transform 0.3s ease;
+     cursor: pointer;
+     min-height: 200px;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     padding: 15px;
+     transition: 0.3s;
+ }
+
+ /* Efeitos de Hover */
+
+ .card-modulo-cinza:hover {
+     background: linear-gradient(135deg, #676767, #8c8c8c);
+     transform: scale(1.05);
+     transition: 0.3s;
+ }
+
+ .card-modulo-verde:hover {
+     background: linear-gradient(135deg, #016a1e, #029e2f);
+     transform: scale(1.05);
+     transition: 0.3s;
+ }
+
+ .card-modulo:hover {
+     background: linear-gradient(135deg, #b96600, #ff9900);
+     transform: scale(1.05);
+     transition: 0.3s;
+ }
+
+ #nmtumras .card-title {
+     font-size: 1.2rem;
+     font-weight: bold;
+     text-align: center;
+     margin-top: 10px;
+     text-decoration: none;
+ }
+
+ .card-footer-custom {
+     text-align: center;
+ }
+
+ .seta {
+     font-size: 1.5rem;
+     display: block;
+     margin-top: 5px;
+ }
+
+@media (max-width: 1200px) {
+    .col-md-3 {
+        width: 33.33%;
+        margin-bottom: 15px;
+    }
+
+        @media (max-width: 600px) {
+            .col-md-3 {
+                width: 50%;
+                margin-bottom: 15px;
+            }
+}

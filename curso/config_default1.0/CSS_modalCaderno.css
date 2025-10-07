@@ -1,0 +1,46 @@
+/* ===== Folha de caderno ===== */
+/* Largura maior do modal tipo caderno */
+.modal-lg .caderno-modal {
+    width: 1000px;
+    /* valor padrão era 800px no modal-lg */
+}
+.caderno-modal .modal-content {
+    background-color: #fffbea;
+    background-image:
+        linear-gradient(to bottom, transparent 95%, rgba(0, 0, 0, 0.05) 100%),
+        /* linhas horizontais */
+        linear-gradient(to right, #f5f5f5 50px, transparent 50px);
+    /* margem esquerda */
+    background-size: 100% 30px, 100% 100%;
+    border-left: 5px solid #ccc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", sans-serif;
+    position: relative;
+}
+
+/* Aramado lateral (anéis) */
+.caderno-modal .modal-content::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    bottom: 10px;
+    width: 10px;
+    background-image: radial-gradient(circle, #666 3px, transparent 4px);
+    background-size: 10px 30px;
+    background-repeat: repeat-y;
+}
+
+/* Cabeçalho do modal */
+.caderno-modal .modal-header {
+    background-color: #f5deb3;
+    border-bottom: 2px solid #d2b48c;
+    padding: 10px 15px;
+}
+
+/* Botão salvar pequeno */
+.caderno-modal .btn-salvar {
+    font-size: 0.875rem;
+    padding: 4px 10px;
+}
+

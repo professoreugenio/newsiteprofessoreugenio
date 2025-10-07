@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel | Professor Eugênio</title>
+
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #112240;
+            --text: #ffffff;
+            --brand-h1: #00BB9C;
+            --brand-h2: #FF9C00;
+            --card-bg: #0d1b33;
+            --card-border: rgba(255, 255, 255, .08);
+            --muted: #9fb0d6;
+            --btn: #00BB9C;
+            --btn-hover: #0ad6b3;
+            --gradient: linear-gradient(90deg, #6a00ff 0%, #ff2e7e 50%, #ff9c00 100%);
+        }
+
+        html,
+        body {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .top-strip {
+            height: 10px;
+            background: var(--gradient);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(17, 34, 64, .85);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .navbar .nav-link {
+            color: var(--text);
+            opacity: .85;
+        }
+
+        .navbar .nav-link:hover {
+            opacity: 1;
+        }
+
+        /* Saudação */
+        .greet {
+            display: inline-block;
+            background: #0b1a32;
+            border: 1px solid var(--card-border);
+            color: #e6f7f3;
+            padding: .6rem 1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+        }
+
+        .greet .hi {
+            font-weight: 800;
+            color: #eafffb;
+        }
+
+        /* Busca */
+        .search-wrap {
+            max-width: 720px;
+        }
+
+        .search-input {
+            background: #0b1a32;
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            padding-left: 2.5rem;
+        }
+
+        .search-input::placeholder {
+            color: #8aa0c4;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: .9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9fb0d6;
+        }
+
+        /* Títulos */
+        .section-title {
+            color: var(--brand-h1);
+            font-weight: 800;
+        }
+
+        /* Cards */
+        .lesson-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, .35);
+            border-color: rgba(255, 255, 255, .14);
+        }
+
+        .lesson-meta {
+            font-size: .78rem;
+            color: var(--muted);
+        }
+
+        .badge-date {
+            background: #1f2f52;
+            color: #cfe2ff;
+        }
+
+        .chip {
+            background: #233659;
+            color: #cfe2ff;
+            border-radius: 999px;
+            padding: .25rem .6rem;
+            font-size: .72rem;
+        }
+
+        /* Botões */
+        .btn-watch {
+            background: var(--btn);
+            color: #03221b;
+            font-weight: 800;
+            border: none;
+            border-radius: 10px;
+            padding: .65rem 1rem;
+        }
+
+        .btn-hover {
+            transition: all .25s ease;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(0, 187, 156, .25);
+            background: var(--btn-hover);
+            color: #03221b;
+        }
+
+        .btn-hover .bi {
+            transition: transform .2s ease;
+        }
+
+        .btn-hover:hover .bi {
+            transform: translateX(4px);
+        }
+
+        /* Steps flutuantes e FAB (opcional) */
+        .steps-floating {
+            position: fixed;
+            left: 12px;
+            top: 200px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .step-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #1a1a1a;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .25);
+            transition: transform .2s ease, filter .2s ease;
+        }
+
+        .step-btn:nth-child(1) {
+            background: #ffe08a;
+        }
+
+        .step-btn:nth-child(2) {
+            background: #ffd166;
+        }
+
+        .step-btn:nth-child(3) {
+            background: #ffb703;
+        }
+
+        .step-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        .fab {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            width: 56px;
+            height: 56px;
+            z-index: 999;
+            border-radius: 50%;
+            background: #243a66;
+            color: #fff;
+            border: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .35);
+            cursor: pointer;
+            transition: transform .2s ease, background .2s ease;
+        }
+
+        .fab:hover {
+            transform: translateY(-2px);
+            background: #2b4a88;
+        }
+
+        @media (max-width: 575.98px) {
+            .steps-floating {
+                left: 8px;
+                top: auto;
+                bottom: 120px;
+                flex-direction: row;
+            }
+        }
+    </style>
+
+    <style>
+        /* ===========================
+   TÍTULO DA SECTION
+   =========================== */
+        #aulas-por-modulos .section-title {
+            color: #5ee6cf;
+            /* tom mais “neon” para combinar */
+            font-weight: 800;
+            letter-spacing: .2px;
+            margin-bottom: .75rem;
+        }
+
+        /* ===========================
+   CABEÇALHO DO MÓDULO
+   =========================== */
+        .module-block {
+            background: transparent;
+        }
+
+        .module-header {
+            position: relative;
+            padding-top: 16px;
+            /* espaço para a tarja amarela */
+            padding-bottom: 0;
+            background: transparent;
+            /* some a caixa anterior */
+            border: 0;
+        }
+
+        /* Tarja amarela + selo verde no canto direito
+   - Adicione <div class="module-ribbon" data-pct="30%"></div> dentro do .module-header */
+        .module-ribbon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 22px;
+            background: #FFB703;
+            /* amarelo */
+            border-radius: 6px;
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+        }
+
+        .module-ribbon::after {
+            content: attr(data-pct);
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #118C4F;
+            /* verde */
+            color: #fff;
+            font-weight: 800;
+            font-size: .82rem;
+            line-height: 1;
+            padding: 4px 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 0 rgba(0, 0, 0, .15);
+        }
+
+        /* Título do módulo (linha abaixo da tarja) */
+        .module-header .fw-bold {
+            display: inline-block;
+            background: #F9C319;
+            /* amarelo mais forte */
+            color: #0f2a4a;
+            font-weight: 900;
+            padding: 6px 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 0 rgba(0, 0, 0, .15);
+        }
+
+        /* Remove a antiga barra de progresso e mantém apenas a tarja */
+        .module-progress {
+            display: none !important;
+        }
+
+        /* ===========================
+   GRUPO DE FILTROS
+   =========================== */
+        .filter-group .btn {
+            border-radius: 999px;
+            padding: .3rem .6rem;
+            border: 0;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .btn-filter-all {
+            background: #16325C;
+            color: #E5F0FF;
+        }
+
+        .btn-filter-done {
+            background: #0E3B2A;
+            color: #B8FFD7;
+        }
+
+        .btn-filter-pending {
+            background: #4A3400;
+            color: #FFE6A1;
+        }
+
+        .filter-group .btn .badge {
+            transform: translateY(-1px);
+            border: 0;
+        }
+
+        /* ===========================
+   LISTA DE LIÇÕES
+   =========================== */
+        .lessons-list {
+            list-style: none;
+            margin: .5rem 0 0 0;
+            padding: 0;
+        }
+
+        .lesson-row {
+            background: #0E2A4A;
+            /* fundo da linha */
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 10px;
+            padding: .65rem .8rem;
+            margin-bottom: .55rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            transition: background .2s ease, border-color .2s ease, transform .15s ease;
+        }
+
+        .lesson-row:hover {
+            background: #103154;
+            border-color: rgba(255, 255, 255, .12);
+            transform: translateY(-1px);
+        }
+
+        /* Número (pílula) à esquerda */
+        .lesson-row .num {
+            min-width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #00C2FF 0%, #00B3D8 100%);
+            color: #022131;
+            font-weight: 900;
+            font-size: .9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .25);
+        }
+
+        /* Título e subtítulo */
+        .lesson-row .title {
+            color: #EAF6FF;
+            font-weight: 700;
+            letter-spacing: .2px;
+            cursor: pointer;
+        }
+
+        .lesson-row .title:hover {
+            text-decoration: underline;
+        }
+
+        .lesson-row .role {
+            font-size: .78rem;
+            color: #8FB0D4;
+        }
+
+        /* Status à direita (Assistida | Pendente) */
+        .lesson-row .status {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .85rem;
+            font-weight: 700;
+        }
+
+        .status .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status.done {
+            color: #74E39D;
+        }
+
+        .status.done .dot {
+            background: #2EA043;
+            box-shadow: 0 0 0 2px rgba(46, 160, 67, .25);
+        }
+
+        .status.pending {
+            color: #FFD35F;
+        }
+
+        .status.pending .dot {
+            background: #FFB703;
+            box-shadow: 0 0 0 2px rgba(255, 183, 3, .25);
+        }
+
+        /* ===========================
+   LOADER (overlay)
+   =========================== */
+        .loader-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 12, 25, .85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .loader-overlay.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 64px;
+            height: 64px;
+            border: 6px solid rgba(255, 255, 255, .15);
+            border-top-color: #FFB703;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <style>
+        /* ===== Legenda do módulo (tarja amarela + selo verde) ===== */
+        .module-legend {
+            position: relative;
+            background: #0a2341;
+            /* fundo do container (escuro do tema) */
+            border-radius: 10px;
+            padding: 6px;
+            /* espaçamento externo da barra */
+            box-shadow: 0 2px 0 rgba(0, 0, 0, .25);
+        }
+
+        /* barra amarela */
+        .module-legend::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            right: 110px;
+            /* deixa espaço p/ o selo verde à direita */
+            top: 50%;
+            height: 28px;
+            transform: translateY(-50%);
+            background: #FFB703;
+            /* amarelo */
+            border-radius: 8px;
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+        }
+
+        /* selo verde com a porcentagem (canto direito) */
+        .module-legend::after {
+            content: attr(data-pct);
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            min-width: 92px;
+            /* largura mínima p/ “100%” caber */
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #117A37;
+            /* verde */
+            color: #fff;
+            font-weight: 900;
+            font-size: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 0 rgba(0, 0, 0, .25);
+        }
+
+        /* recorte curvo entre o amarelo e o selo verde (efeito da imagem) */
+        .module-legend .label {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            margin-left: 22px;
+            padding: 6px 10px;
+            font-weight: 900;
+            color: #0d2a49;
+        }
+
+        .module-legend::after,
+        .module-legend::before {
+            pointer-events: none;
+        }
+
+        /* meia-lua para “encaixar” o selo no amarelo */
+        .module-legend::before {
+            clip-path: inset(0 110px 0 0 round 8px)
+        }
+
+        .module-legend::after {
+            /* bolha extra para curva esquerda do selo */
+        }
+
+        .module-legend::after {
+            /* pseudo do selo já cria o bloco; use o seguinte pseudo adicional para a curva */
+        }
+
+        .module-legend::after {
+            /* já está ok visualmente; se quiser mais curva, adicione: */
+        }
+
+        .module-legend::after {
+            --r: 18px;
+        }
+
+        .module-legend::after {
+            border-top-left-radius: var(--r);
+            border-bottom-left-radius: var(--r);
+        }
+
+        .filter-group .btn.active {
+            outline: 2px solid rgba(255, 255, 255, .25);
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, .15) inset;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Faixa gradiente -->
+    <div class="top-strip"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <img src="https://professoreugenio.com/img/logosite.png" alt="Professor Eugênio" height="28" />
+                <span class="fw-bold">Eugênio</span>
+            </a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMain">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i>Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i
+                                class="bi bi-collection-play me-1"></i>Cursos</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">Power BI</a></li>
+                            <li><a class="dropdown-item" href="#">Excel</a></li>
+                            <li><a class="dropdown-item" href="#">Design Gráfico</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-1"></i>Contato</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-box-arrow-right me-1"></i>Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Saudação -->
+    <section class="py-4">
+        <div class="container text-center">
+            <span class="greet" data-aos="zoom-in">Boa tarde!, <span class="hi">PROF. EUGÊNIO</span> 👋</span>
+        </div>
+    </section>
+
+    <!-- Busca -->
+    <section class="pb-2">
+        <div class="container d-flex justify-content-center">
+            <div class="search-wrap position-relative w-100">
+                <i class="bi bi-search search-icon"></i>
+                <input class="form-control form-control-lg search-input" type="search"
+                    placeholder="Buscar conteúdos (título, aula, tag, texto)..." aria-label="Buscar conteúdos" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Últimas aulas -->
+    <main class="pb-5">
+        <div class="container">
+            <h2 class="section-title mb-3" data-aos="fade-right">Últimas aulas adicionadas</h2>
+
+            <div class="row g-4">
+
+                <!-- CARD APLICADO 1 (WORD) -->
+                <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up">
+                    <article class="lesson-card card h-100 border-0 rounded-4 overflow-hidden">
+                        <!-- Imagem 16:9 como background + clique -->
+                        <div class="ratio ratio-16x9" style="background:#0d1324; cursor:pointer;"
+                            onclick="window.location.href='actionCurso.php?pubult=UUdmMTBwSWYrd21kZnV6MEwxNStBa2s0ZTlGSUZiZDB2NTVPSmh0QWxqTT0='">
+                            <div class="w-100 h-100" title="10 DICAS DE SELEÇÃO DE TEXTO NO WORD"
+                                style="background:url('https://professoreugenio.com/fotos/publicacoes//img_0_5262__1758744026_68d44dda6de73.jpg') center/cover no-repeat;">
+                            </div>
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <span class="chip"><i class="bi bi-diagram-3 me-1"></i>Módulo: WORD</span>
+                                <span class="badge badge-date">Publicado: <strong>24.09.2025</strong></span>
+                            </div>
+
+                            <h6 class="fw-semibold mb-1 text-white" title="10 DICAS DE SELEÇÃO DE TEXTO NO WORD">
+                                10 DICAS DE SELEÇÃO DE TEXTO NO WORD
+                            </h6>
+
+                            <div class="mt-auto d-grid">
+                                <a href="actionCurso.php?pubult=UUdmMTBwSWYrd21kZnV6MEwxNStBa2s0ZTlGSUZiZDB2NTVPSmh0QWxqTT0="
+                                    class="btn btn-watch btn-hover">
+                                    Assistir agora <i class="bi bi-play-fill ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- CARD APLICADO 2 (EXCEL BÁSICO) -->
+                <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                    <article class="lesson-card card h-100 border-0 rounded-4 overflow-hidden">
+                        <div class="ratio ratio-16x9" style="background:#0d1324; cursor:pointer;"
+                            onclick="window.location.href='actionCurso.php?pubult=NHp6WjZ4ZXRzNmdHcTQ2N3huYi84eFdZd2FNY2lCY2hXUGZnMzNNVktIRT0='">
+                            <div class="w-100 h-100" title="FUNÇÃO SEQUÊNCIA E CONT.VALORES"
+                                style="background:url('https://professoreugenio.com/fotos/publicacoes//img_0_5254__1757266164_68bdc0f430ccc.jpg') center/cover no-repeat;">
+                            </div>
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <span class="chip"><i class="bi bi-diagram-3 me-1"></i>Módulo: EXCEL BÁSICO</span>
+                                <span class="badge badge-date">Publicado: <strong>03.09.2025</strong></span>
+                            </div>
+
+                            <h6 class="fw-semibold mb-1 text-white" title="FUNÇÃO SEQUÊNCIA E CONT.VALORES">
+                                FUNÇÃO SEQUÊNCIA E CONT.VALORES
+                            </h6>
+
+                            <div class="mt-auto d-grid">
+                                <a href="actionCurso.php?pubult=NHp6WjZ4ZXRzNmdHcTQ2N3huYi84eFdZd2FNY2lCY2hXUGZnMzNNVktIRT0="
+                                    class="btn btn-watch btn-hover">
+                                    Assistir agora <i class="bi bi-play-fill ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- CARD EXEMPLO 3 -->
+                <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+                    <article class="lesson-card card h-100 border-0 rounded-4 overflow-hidden">
+                        <div class="ratio ratio-16x9" style="background:#0d1324; cursor:pointer;"
+                            onclick="alert('Exemplo de card')">
+                            <div class="w-100 h-100" title="FÓRMULAS DAX: CALCULATE com Filtro de Contexto"
+                                style="background:url('https://images.unsplash.com/photo-1518987048-93ac59eca2c6?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;">
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <span class="chip"><i class="bi bi-diagram-3 me-1"></i>Módulo: MODELAGEM DE DADOS</span>
+                                <span class="badge badge-date">Publicado: <strong>30.09.2025</strong></span>
+                            </div>
+                            <h6 class="fw-semibold mb-1 text-white">FÓRMULAS DAX: CALCULATE com Filtro de Contexto</h6>
+                            <div class="mt-auto d-grid">
+                                <a href="#" class="btn btn-watch btn-hover">Assistir agora <i
+                                        class="bi bi-arrow-right-short ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- CARD EXEMPLO 4 -->
+                <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+                    <article class="lesson-card card h-100 border-0 rounded-4 overflow-hidden">
+                        <div class="ratio ratio-16x9" style="background:#0d1324; cursor:pointer;"
+                            onclick="alert('Exemplo de card')">
+                            <div class="w-100 h-100" title="CALCULE MÉDIAS com DAX: AVERAGE"
+                                style="background:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;">
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <span class="chip"><i class="bi bi-diagram-3 me-1"></i>Módulo: MODELAGEM DE DADOS</span>
+                                <span class="badge badge-date">Publicado: <strong>01.10.2025</strong></span>
+                            </div>
+                            <h6 class="fw-semibold mb-1 text-white">CALCULE MÉDIAS com DAX: AVERAGE</h6>
+                            <div class="mt-auto d-grid">
+                                <a href="#" class="btn btn-watch btn-hover">Assistir agora <i
+                                        class="bi bi-arrow-right-short ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <!-- SECTION: Aulas por Módulos -->
+    <section id="aulas-por-modulos" class="py-4">
+        <div class="container">
+            <h2 class="section-title mb-3" data-aos="fade-right">Aulas por Módulos</h2>
+
+            <!-- ===== MÓDULO XXX ===== -->
+            <div class="module-block mb-4" data-aos="fade-up">
+                <!-- Header do módulo -->
+                <div class="module-header mb-2">
+                    
+                    <div class="module-legend" data-pct="30%">
+                        <span class="label">MÓDULO XXX</span>
+                    </div>
+
+                </div>
+
+                <!-- Filtros -->
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="filter-group btn-group" role="group" aria-label="Filtros de lições">
+                        <input type="radio" class="btn-check" name="f-xxx" id="fxxx-pending" data-filter="pending"
+                            autocomplete="off" checked>
+                        <label class="btn btn-sm btn-filter-pending" for="fxxx-pending">
+                            Pendentes <span
+                                class="badge rounded-pill ms-1 bg-warning-subtle text-dark count-pending">0</span>
+                        </label>
+
+                        <input type="radio" class="btn-check" name="f-xxx" id="fxxx-done" data-filter="done"
+                            autocomplete="off">
+                        <label class="btn btn-sm btn-filter-done" for="fxxx-done">
+                            Assistidas <span
+                                class="badge rounded-pill ms-1 bg-success-subtle text-dark count-done">0</span>
+                        </label>
+
+                        <input type="radio" class="btn-check" name="f-xxx" id="fxxx-all" data-filter="all"
+                            autocomplete="off">
+                        <label class="btn btn-sm btn-filter-all" for="fxxx-all">
+                            Todos <span class="badge rounded-pill ms-1 bg-info-subtle text-dark count-all">0</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Lista de lições -->
+                <ul class="lessons-list">
+                    <!-- Exemplo de item (troque por loop PHP) -->
+                    <li class="lesson-row" data-status="done">
+                        <div class="num">01</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=1">CRIANDO BOTÕES</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status done ms-auto"><span class="dot"></span><span>Status: Assistida</span></div>
+                    </li>
+
+                    <li class="lesson-row" data-status="done">
+                        <div class="num">02</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=2">CARD</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status done ms-auto"><span class="dot"></span><span>Status: Assistida</span></div>
+                    </li>
+
+                    <li class="lesson-row" data-status="done">
+                        <div class="num">03</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=3">SEGMENTAÇÃO DE DADOS*</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status done ms-auto"><span class="dot"></span><span>Status: Assistida</span></div>
+                    </li>
+
+                    <li class="lesson-row" data-status="pending">
+                        <div class="num">05</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=5">CÁLCULOS DAX</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status pending ms-auto"><span class="dot"></span><span>Status: Pendente</span></div>
+                    </li>
+
+                    <li class="lesson-row" data-status="done">
+                        <div class="num">11</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=11">CRIANDO COLUNAS-MESES</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status done ms-auto"><span class="dot"></span><span>Status: Assistida</span></div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ===== MÓDULO YYY (exemplo com mais itens) ===== -->
+            <div class="module-block mb-4" data-aos="fade-up" data-aos-delay="80">
+                <div class="module-header mb-2">
+                    <div class="fw-bold text-warning">MÓDULO YYY</div>
+                    <div class="module-progress ms-3 flex-grow-1 mx-3">
+                        <div class="bar" style="width:30%;"></div>
+                        <span class="pct">30%</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="filter-group btn-group" role="group" aria-label="Filtros de lições">
+                        <input type="radio" class="btn-check" name="f-yyy" id="fyyy-pending" data-filter="pending"
+                            autocomplete="off" checked>
+                        <label class="btn btn-sm btn-filter-pending" for="fyyy-pending">
+                            Pendentes <span
+                                class="badge rounded-pill ms-1 bg-warning-subtle text-dark count-pending">0</span>
+                        </label>
+
+                        <input type="radio" class="btn-check" name="f-yyy" id="fyyy-done" data-filter="done"
+                            autocomplete="off">
+                        <label class="btn btn-sm btn-filter-done" for="fyyy-done">
+                            Assistidas <span
+                                class="badge rounded-pill ms-1 bg-success-subtle text-dark count-done">0</span>
+                        </label>
+
+                        <input type="radio" class="btn-check" name="f-yyy" id="fyyy-all" data-filter="all"
+                            autocomplete="off">
+                        <label class="btn btn-sm btn-filter-all" for="fyyy-all">
+                            Todos <span class="badge rounded-pill ms-1 bg-info-subtle text-dark count-all">0</span>
+                        </label>
+                    </div>
+                </div>
+
+                <ul class="lessons-list">
+                    <!-- Pendentes -->
+                    <li class="lesson-row" data-status="pending">
+                        <div class="num">06</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=106">DAX: SUM (SOMA) E CALCULATE SUM
+                            </div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status pending ms-auto"><span class="dot"></span><span>Status: Pendente</span></div>
+                    </li>
+                    <li class="lesson-row" data-status="pending">
+                        <div class="num">07</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=107">DAX: CALCULATE COM FILTRO DE
+                                CONTEXTO</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status pending ms-auto"><span class="dot"></span><span>Status: Pendente</span></div>
+                    </li>
+                    <li class="lesson-row" data-status="pending">
+                        <div class="num">08</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=108">CÁLCULOS DAX: CALCULATE SUM,
+                                DIVID
+                                E PORCENTAGEM</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status pending ms-auto"><span class="dot"></span><span>Status: Pendente</span></div>
+                    </li>
+                    <li class="lesson-row" data-status="pending">
+                        <div class="num">09</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=109">DAX: AVERAGE CÁLCULO DA MÉDIA
+                            </div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status pending ms-auto"><span class="dot"></span><span>Status: Pendente</span></div>
+                    </li>
+                    <li class="lesson-row" data-status="pending">
+                        <div class="num">10</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=110">DAX: CÁLCULO DE PORCENTAGEM
+                            </div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status pending ms-auto"><span class="dot"></span><span>Status: Pendente</span></div>
+                    </li>
+                    <!-- Assistida -->
+                    <li class="lesson-row" data-status="done">
+                        <div class="num">11</div>
+                        <div>
+                            <div class="title lesson-title" data-href="licao.php?id=111">CRIANDO COLUNAS-MESES</div>
+                            <div class="role">Exibida por perfil administrador</div>
+                        </div>
+                        <div class="status done ms-auto"><span class="dot"></span><span>Status: Assistida</span></div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Steps laterais -->
+    <div class="steps-floating" aria-label="Atalhos">
+        <button class="step-btn" title="Etapa 1" data-aos="fade-right">1</button>
+        <button class="step-btn" title="Etapa 2" data-aos="fade-right" data-aos-delay="50">2</button>
+        <button class="step-btn" title="Etapa 3" data-aos="fade-right" data-aos-delay="100">3</button>
+    </div>
+
+    <!-- FAB -->
+    <button class="fab" title="Menu rápido" aria-label="Menu rápido"><i class="bi bi-three-dots"></i></button>
+
+    <!-- JS -->
+
+    <script>
+        (function ensureLoader() {
+            if (!document.querySelector('.loader-overlay')) {
+                const div = document.createElement('div');
+                div.className = 'loader-overlay';
+                div.innerHTML = '<div class="spinner" role="status" aria-label="Carregando"></div>';
+                document.body.appendChild(div);
+            }
+        })();
+
+        function showLoader() { document.querySelector('.loader-overlay').classList.add('active'); }
+
+        // Ativar loader ao clicar no título da lição
+        document.addEventListener('click', function (e) {
+            const t = e.target.closest('.lesson-title');
+            if (!t) return;
+            const href = t.dataset.href || '#';
+            showLoader();
+            setTimeout(() => { window.location.href = href; }, 350);
+        }, false);
+    </script>
+
+
+    <script>
+        // Scroll suave ao clicar nos botões laterais (1/2/3)
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.step-btn');
+            if (!btn) return;
+            const alvo = document.querySelector('#aulas-por-modulos');
+            if (!alvo) return;
+            alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+
+
+    <script>
+        // Aplica filtro numa .module-block
+        function filtrarModulo(block, filtro) {
+            block.querySelectorAll('.lesson-row').forEach(li => {
+                const ok = (filtro === 'all') ? true : (li.dataset.status === filtro);
+                li.style.display = ok ? '' : 'none';
+            });
+
+            // estado visual do botão ativo (opcional)
+            block.querySelectorAll('.filter-group .btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.filter === filtro);
+            });
+        }
+
+        // Inicialização: pendentes como padrão
+        function initFiltrosModulos() {
+            document.querySelectorAll('.module-block').forEach(block => {
+                // default: pendentes
+                filtrarModulo(block, 'pending');
+
+                // clique nos botões de filtro
+                block.querySelectorAll('.filter-group .btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filtrarModulo(block, btn.dataset.filter || 'all');
+                    });
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initFiltrosModulos);
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 700, easing: 'ease-out' });
+    </script>
+</body>
+
+</html>

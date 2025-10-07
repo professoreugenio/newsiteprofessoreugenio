@@ -1,0 +1,498 @@
+body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+* {
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #2e3134;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #473b2e;
+    transition: 0.3s;
+
+}
+
+.card-img-left {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.card {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    border: none;
+}
+
+.card-text {
+    margin: 0;
+}
+
+#listalicoes .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grupobotoes button {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-title {
+
+    position: relative;
+}
+
+.card-title::after {
+    content: '';
+    /* content: '✅🟢'; */
+
+    transition: color 0.3s;
+}
+
+.card-title:hover::after {
+    color: #ff8040;
+}
+
+.play-button {
+    position: absolute;
+    right: 10px;
+    bottom: -30px;
+    transform: translateY(-50%) scale(1);
+    opacity: 0.7;
+    transition: opacity 0.3s, transform 0.3s;
+    font-size: 30px;
+    border-radius: 50px;
+    color: #ff8040;
+}
+
+.play-button:hover {
+    color: #ff5500;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.4);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.comentarios-container {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    /* Inicialmente oculto */
+    position: relative;
+}
+
+.comentarios-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.comentarios-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comentarios-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.comentario-texto {
+    flex: 1;
+}
+
+.comentario-nome {
+    font-weight: bold;
+}
+
+.fechar-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.fechar-btn:hover {
+    color: #ff0000;
+}
+
+#comentarios-toggle {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: -10px;
+    background-color: #ffffff;
+    border: solid 1px #cccccc;
+    padding: 3px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-roxo {
+    background-color: #800080;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-roxo:hover {
+    background-color: #4b0082;
+    color: #ffffff;
+}
+
+
+/**formata texto da lição **/
+
+#curso-corpotexto {
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #343a40;
+}
+
+/* Espaçamento entre blocos */
+
+
+#curso-corpotexto h2 {
+    background-color: #dde5ec;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 1.1rem;
+}
+
+#curso-corpotexto h4 {
+    display: inline-block;
+    min-width: 200px;
+    border-radius: 15px;
+    background-color: #ddecde;
+
+}
+
+#curso-corpotexto h1,
+#curso-corpotexto h2,
+#curso-corpotexto h3,
+#curso-corpotexto h4,
+#curso-corpotexto h5 {
+    padding: 0.3rem 2rem;
+    position: relative;
+}
+
+/* Ícones com pseudo-elementos */
+#curso-corpotexto h1::before {
+    content: "📘 ";
+    position: absolute;
+    left: 0;
+}
+
+#curso-corpotexto h2::before {
+    content: "📝 ";
+    position: absolute;
+    left: 0;
+
+}
+
+#curso-corpotexto h3 {
+    font-size: 1.1rem;
+
+}
+
+#curso-corpotexto h3::before {
+    content: "🌍 ";
+    position: absolute;
+    left: 0;
+
+}
+
+#curso-corpotexto h4::before {
+    content: "📌 ";
+    position: absolute;
+    left: 0;
+}
+
+#curso-corpotexto h5::before {
+    content: "✅ ";
+    position: absolute;
+    left: 0;
+}
+
+/* Parágrafos */
+#curso-corpotexto p {
+    margin-bottom: 0.1rem;
+    text-align: justify;
+    font-size: 1rem;
+}
+
+/* Listagem de atividade simulada */
+#curso-corpotexto h5+br,
+#curso-corpotexto h5+p,
+#curso-corpotexto h5+span {
+    display: block;
+    margin-left: 2rem;
+    font-weight: 500;
+    color: #495057;
+}
+
+#curso-corpotexto h5+span::before {
+    content: "👉 ";
+}
+
+#curso-corpotexto blockquote {
+    background-color: #e3ebf4;
+    border-left: 5px solid #0d6efd;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #495057;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* #curso-corpotexto span {
+    background-color: #fff3d2;
+    border-left: 5px solid #ff7b00;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #495057;
+    border-radius: 8px;
+    position: relative;
+} */
+
+#curso-corpotexto blockquote::before {
+    content: "“";
+    font-size: 3rem;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    color: #0d6efd;
+    opacity: 0.2;
+}
+
+
+
+:root {
+    --brand-h1: #00BB9C;
+    --brand-h2: #FF9C00;
+    --brand-bg: #112240;
+    --brand-text: #ffffff;
+    --indigo: #4F46E5;
+    --amber: #FF9C00;
+    --emerald: #00BB9C;
+}
+
+* {
+    scroll-margin-top: 96px
+}
+
+body {
+    background: var(--brand-bg);
+    color: var(--brand-text)
+}
+
+/* .navbar {
+    background: #0f1d36
+} */
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #fff !important
+}
+
+.navbar .nav-link:hover {
+    opacity: .85
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba(255, 255, 255, .2)
+}
+
+.navbar-dark .navbar-toggler-icon {
+    filter: invert(1)
+}
+
+h1,
+.h1 {
+    color: var(--brand-h1)
+}
+
+h2,
+.h2 {
+    color: var(--brand-h2)
+}
+
+.badge-soft {
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .12);
+    color: #e2e8f0;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .35rem .6rem;
+    border-radius: 999px;
+    font-size: .8rem;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(0, 0, 0, .2);
+}
+
+.progress {
+    background: rgba(255, 255, 255, .08);
+    height: 10px
+}
+
+.progress-bar {
+    background: var(--brand-h1)
+}
+
+.section-gap {
+    padding-top: 24px;
+    padding-bottom: 24px
+}
+
+.text-muted-2 {
+    color: #cbd5e1 !important
+}
+
+.btn-emerald {
+    background: var(--emerald);
+    color: #0b1c17;
+    border: 0
+}
+
+.btn-emerald:hover {
+    filter: brightness(.95)
+}
+
+.btn-amber {
+    background: var(--amber);
+    color: #111;
+    border: 0
+}
+
+.btn-amber:hover {
+    filter: brightness(.95)
+}
+
+.btn-indigo {
+    background: var(--indigo);
+    color: #fff;
+    border: 0
+}
+
+.btn-indigo:hover {
+    filter: brightness(1.05)
+}
+
+.btn-outline-light {
+    --bs-btn-color: #e5e7eb;
+    --bs-btn-border-color: #e5e7eb;
+    --bs-btn-hover-bg: #e5e7eb;
+    --bs-btn-hover-color: #0f172a;
+    --bs-btn-hover-border-color: #e5e7eb;
+}
+
+.card {
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .08);
+    backdrop-filter: blur(2px);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+    border-color: rgba(255, 255, 255, .16);
+}
+
+/* Player 16:9 */
+.ratio-16x9 {
+    position: relative;
+    width: 100%;
+    /* padding-top: 56.25%; */
+    border-radius: 1rem;
+    overflow: hidden
+}
+
+.ratio-16x9 iframe,
+.ratio-16x9 .yt-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0
+}
+
+/* Barra fixa inferior (65%) */
+.bottom-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 34, 64, .65);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    z-index: 1030;
+}
+
+/* Voltar ao topo */
+#btnTop {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    right: 16px;
+    bottom: 88px;
+    text-align: center;
+line-height: 40px;
+    font-size: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .25s ease;
+    z-index: 1030;
+}
+
+#btnTop.show {
+    opacity: 1;
+    visibility: visible
+}
+
+/* Print */
+@media print {
+
+    .navbar,
+    .bottom-bar,
+    #btnTop {
+        display: none !important
+    }
+
+    a[href]:after {
+        content: "" !important
+    }
+
+    body {
+        background: #fff;
+        color: #000
+    }
+}
