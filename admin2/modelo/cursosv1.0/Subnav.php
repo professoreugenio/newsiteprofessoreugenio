@@ -7,13 +7,13 @@ $todos = isset($_GET['todos']) ? $_GET['todos'] : null;
 ?>
 <div class="d-flex gap-2 flex-wrap mb-3 mt-4">
     <?php if (temPermissao($niveladm, [1,2])): ?>
-        <a href="vendas.php?status=1"
-            class="btn btn-flat btn-sm <?= ($pagina == 'vendas.php' && $status == 1) ? 'btn-laranja' : '' ?>">
+        <a href="cursos.php?status=1"
+            class="btn btn-flat btn-sm <?= ($pagina == 'cursos.php' && $status == 1) ? 'btn-laranja' : '' ?>">
             <i class="bi bi-shop"></i> COMERCIAL
         </a>
 
-        <a href="vendas.php?institucional=1"
-            class="btn btn-flat btn-sm <?= ($pagina == 'vendas.php' && $institucional == 1) ? 'btn-laranja' : '' ?>">
+        <a href="cursos.php?institucional=1"
+            class="btn btn-flat btn-sm <?= ($pagina == 'cursos.php' && $institucional == 1) ? 'btn-laranja' : '' ?>">
             <i class="bi bi-globe"></i> INSTITUCIONAL
         </a>
 
@@ -22,7 +22,7 @@ $todos = isset($_GET['todos']) ? $_GET['todos'] : null;
             <i class="bi bi-geo-alt"></i> PUBLICAÇÕES
         </a>
         <a href="cursos.php?todos=1"
-            class="btn btn-flat btn-sm <?= ($pagina == 'vendas.php' && $todos == 1) ? 'btn-laranja' : '' ?>">
+            class="btn btn-flat btn-sm <?= ($pagina == 'cursos.php' && $todos == 1) ? 'btn-laranja' : '' ?>">
             <i class="bi bi-geo-alt"></i> TODOS
         </a>
     <?php endif; ?>
@@ -37,8 +37,8 @@ $todos = isset($_GET['todos']) ? $_GET['todos'] : null;
 
     <?php if (temPermissao($niveladm, [1])): ?>
 
-        <a href="relatorio_vendas.php"
-            class="btn btn-flat btn-sm <?= $pagina == 'relatorio_vendas.php' ? 'btn-laranja' : '' ?>"
+        <a href="relatorio_cursos.php"
+            class="btn btn-flat btn-sm <?= $pagina == 'relatorio_cursos.php' ? 'btn-laranja' : '' ?>"
             title="Relatórios">
             <i class="bi bi-bar-chart-line"></i> Relatórios
         </a>
