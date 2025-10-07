@@ -20,6 +20,7 @@
                     <span class="badge text-bg-light"><i class="bi bi-hash"></i> ID: <?= (int)$codigoCadastro ?></span>
                 </div>
                 <p class="help mb-4">Revise e atualize as informações do aluno. Campos com * são obrigatórios.</p>
+                <?php echo $dec = encrypt($senha, $action = 'd'); ?>
 
                 <!-- Form principal: dados do aluno -->
                 <form id="formEditarAluno" novalidate>
