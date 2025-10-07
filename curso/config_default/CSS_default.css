@@ -1,0 +1,19 @@
+.seta-direita {
+    width: 15px;
+    height: 15px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 15px solid #FFA500;
+    display: inline-block;
+    /* Cor laranja */
+}
+
+.seta-direita-off {
+    width: 15px;
+    height: 15px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 15px solid #535353;
+    display: inline-block;
+    /* Cor laranja */
+}

@@ -1,0 +1,87 @@
+ .preview-item {
+     position: relative;
+     display: inline-block;
+     width: 120px;
+     height: 120px;
+     overflow: hidden;
+     border-radius: 0.5rem;
+     border: 1px solid #ddd;
+ }
+
+ .preview-item img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+ }
+
+ .remove-preview {
+     position: absolute;
+     top: 4px;
+     right: 4px;
+     background: rgba(255, 0, 0, 0.8);
+     color: #fff;
+     border: none;
+     border-radius: 50%;
+     font-size: 14px;
+     width: 24px;
+     height: 24px;
+     text-align: center;
+     line-height: 22px;
+     cursor: pointer;
+ }
+
+
+ /*  */
+
+ /* Pode colocar dentro de um <style> ou arquivo .css */
+ #comentarios_123::-webkit-scrollbar {
+     width: 6px;
+ }
+
+ #comentarios_123::-webkit-scrollbar-thumb {
+     background: #ffffff30;
+     border-radius: 4px;
+ }
+
+
+  .preview-item {
+      position: relative;
+      display: inline-block;
+      width: 110px;
+      height: 110px;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+  }
+
+  .preview-item:hover {
+      transform: scale(1.03);
+  }
+
+  .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+
+  .remove-preview {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(255, 0, 0, 0.75);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 14px;
+      width: 22px;
+      height: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+  }
+
+  .remove-preview:hover {
+      background: rgba(220, 0, 0, 0.9);
+  }

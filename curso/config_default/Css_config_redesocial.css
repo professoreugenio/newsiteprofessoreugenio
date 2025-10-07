@@ -1,0 +1,89 @@
+body {
+    /* padding-top: 70px; */
+    /* Espaço para a navbar fixa */
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+}
+
+#descricao #nmuser {
+    position: relative;
+    top: 5px;
+
+}
+
+#descricao #nmturma {
+    position: relative;
+    top: 0px;
+    color: #000000;
+
+
+}
+
+#btsair {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+}
+
+#descricao #nmturma a {
+color: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+}
+
+#descricao #nmsala {
+    position: relative;
+    top: -3px;
+    font-weight: 400;
+
+}
+
+#descricao #nmsala a:link {
+    
+    font-weight: 400;
+    color: black;
+
+}
+
+.navbar {
+    background: linear-gradient(90deg, #4CAF50, #9C27B0, #2196F3);
+    /* Gradiente verde, roxo e azul */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    /* Cor dos links */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: rgba(255, 255, 255, 1);
+    /* Cor dos links ao passar o mouse */
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.8);
+    /* Cor da borda do botão */
+    color: rgba(255, 255, 255, 0.8);
+    /* Cor do texto do botão */
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Cor de fundo ao passar o mouse */
+    border-color: rgba(255, 255, 255, 1);
+    /* Cor da borda ao passar o mouse */
+    color: rgba(255, 255, 255, 1);
+    /* Cor do texto ao passar o mouse */
+}
+
+#interacoes button {
+    font-size: 14px;
+}
