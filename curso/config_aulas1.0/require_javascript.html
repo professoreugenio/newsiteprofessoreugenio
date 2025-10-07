@@ -1,0 +1,94 @@
+
+<script>
+    AOS.init({
+        once: true,
+        duration: 700,
+        easing: 'ease-out-cubic'
+    });
+    document.getElementById('ano').textContent = new Date().getFullYear();
+
+    // Utilitário de Toast
+    const toastEl = document.getElementById('customToast');
+    const toastMsg = document.getElementById('toastMsg');
+    const toastBS = bootstrap.Toast.getOrCreateInstance(toastEl, {
+        delay: 2200
+    });
+
+    function showToast(message, success = true) {
+        toastEl.classList.remove('bg-success', 'bg-danger');
+        toastEl.classList.add(success ? 'bg-success' : 'bg-danger');
+        toastMsg.textContent = message;
+        toastBS.show();
+    }
+
+   
+
+  
+
+    // Smooth scroll âncoras (.link-anchor)
+    document.addEventListener("DOMContentLoaded", function () {
+        const anchorLinks = document.querySelectorAll('a.link-anchor[href^="#"]');
+        const headerOffset = 80;
+        anchorLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                const id = this.getAttribute("href").substring(1);
+                const t = document.getElementById(id);
+                if (!t) return;
+                const y = t.getBoundingClientRect().top + window.scrollY - headerOffset;
+                window.scrollTo({
+                    top: y,
+                    behavior: "smooth"
+                });
+            });
+        });
+    });
+
+    // Summernote (init ao abrir modal p/ render correto)
+    const modalCaderno = document.getElementById('modalCaderno');
+
+    function initSummernote() {
+        const el = document.getElementById('cadernoEditor');
+        if (!el) return;
+        $(el).summernote({
+            placeholder: 'Escreva suas anotações da aula aqui...',
+            tabsize: 2,
+            height: 280,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link']],
+                ['view', ['undo', 'redo', 'fullscreen']]
+            ]
+        });
+    }
+    modalCaderno.addEventListener('shown.bs.modal', initSummernote);
+
+    // Salvar Caderno (AJAX stub) — ajuste URL e payload conforme seu backend
+    document.getElementById('btnSalvarCaderno')?.addEventListener('click', () => {
+        const html = $('#cadernoEditor').summernote('code');
+        // Exemplo de envio:
+        // fetch('licoesv1.0/ajax_salvarCaderno.php', {
+        //   method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        //   body: new URLSearchParams({ idusuario:'<?= (int)($codigoUser ?? 0) ?>', idlicao:'<?= (int)($codigoaula ?? 0) ?>', texto: html })
+        // }).then(r=>r.text()).then(tx=>{
+        //   if(tx.trim()==='1') showToast('✅ Anotações salvas!');
+        //   else showToast('❌ Não foi possível salvar.', false);
+        // }).catch(()=> showToast('⚠️ Falha de comunicação.', false));
+        showToast('✅ Anotações salvas!'); // temporário
+    });
+
+    // Botões de navegação com spinner até carregar
+    document.querySelectorAll('#botoesNavegacao a, #grupoAcoes a.btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            // Apenas links reais (ignora âncoras internas)
+            const href = this.getAttribute('href') || '';
+            if (href.startsWith('#')) return;
+            e.preventDefault();
+            const original = this.innerHTML;
+            this.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Carregando...`;
+            this.classList.add('disabled');
+            window.location.href = href;
+        });
+    });
+</script>

@@ -1,0 +1,670 @@
+html,
+body {
+    scroll-behavior: smooth;
+    /* Aplica o movimento suave para a rolagem */
+}
+
+.fixed-top {
+    padding: 0;
+}
+
+video {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0 20px rgba(13, 110, 253, 0.2);
+}
+
+.col-fixed {
+    position: sticky;
+    margin: 10px 0;
+
+}
+
+/* Estilo da barra de rolagem para WebKit (Chrome, Edge, Safari) */
+.lista-licoes::-webkit-scrollbar {
+    width: 10px;
+}
+
+.lista-licoes::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.lista-licoes::-webkit-scrollbar-thumb {
+    background-color: #0d6efd;
+    border-radius: 8px;
+    border: 2px solid #1e1e1e;
+}
+
+.custom-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.curso-nmModulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.list-group-item a {
+    cursor: pointer
+}
+
+#curso-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #2a3743;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-video video {
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#btn-assistir {
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btn-assistir:hover {
+    background-color: #e69500;
+    transform: scale(1.05);
+}
+
+.text-center {
+    text-align: center;
+}
+
+#curso-corpotexto {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #2a3743;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-corpotexto img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.titulo {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(235, 235, 235);
+}
+
+.info-curso {
+    background: #3a4758;
+    border-left: 6px solid #ffa500;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.info-curso h5 {
+    color: #ff8c00;
+    margin-top: 20px;
+}
+
+.imagem-professor img {
+    width: 100%;
+    max-width: 350px;
+}
+
+#cards-curso .card-custom {
+    font-size: 14px
+}
+
+.li-selecionada {
+    background-color: #ffffff !important;
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+    border-left: 5px solid #000000;
+    transition: 0.3s ease;
+    border-radius: 8px;
+}
+
+.li-selecionada a {
+
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+
+    transition: 0.3s ease;
+}
+
+#topicos-sublista {
+    margin-top: 10px;
+    margin-left: 25px;
+    padding-left: 15px;
+    border-left: 2px solid #ff8c00;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000000;
+    animation: aparecer 0.3s ease-in-out;
+}
+
+#topicos-sublista li {
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 20px;
+}
+
+#topicos-sublista li::before {
+    content: "🟧";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.8em;
+}
+
+
+
+#card-barraprogresso .card-body {
+    background-color: #767a7e;
+    border-radius: 5px;
+    animation: aparecer 0.9s ease-in-out;
+}
+
+/* Animação opcional */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#titulopagina {
+    position: absolute;
+    /* ou absolute se quiser relativo a um container */
+    top: 86px;
+    left: 39px;
+    background: linear-gradient(135deg, #ff8000c4, #ffdd00cc);
+    padding: 5px 20px;
+    border-radius: 12px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 8.3);
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#nmModuloAula {
+    background: linear-gradient(135deg, #045e9bc4, #020507cc);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: 400px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#fecharBox {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    background-color: #fd310d;
+    color: white;
+}
+
+#fecharBox:hover {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    background-color: #731201;
+    color: white;
+}
+
+.badge {
+    cursor: pointer;
+    opacity: 0.8;
+    font-weight: 600;
+    transform: 2s;
+
+}
+
+.badge:hover {
+    opacity: 1;
+    transform: 3s;
+
+}
+
+/** config lista tópicos **/
+/* Estilos para a lista de navegação do menu */
+.menu-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-bottom: 8px;
+}
+
+.menu-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-link:hover {
+    background-color: #6b6b93;
+    color: #ffffff;
+}
+
+/**barraprogresso status **/
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    /* tons de cinza */
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    /* branco */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    /* centraliza e dá espaço abaixo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#barraprogressoAulas {
+    background: linear-gradient(135deg, #ffffff, #b6bdc4);
+    /* tons de cinza */
+}
+
+
+#btnTopo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #0d6efd;
+    color: white;
+}
+
+
+html,
+body {
+    scroll-behavior: smooth;
+    /* Aplica o movimento suave para a rolagem */
+}
+
+.fixed-top {
+    padding: 0;
+}
+
+video {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0 20px rgba(13, 110, 253, 0.2);
+}
+
+.col-fixed {
+    position: sticky;
+    margin: 10px 0;
+
+}
+
+/* Estilo da barra de rolagem para WebKit (Chrome, Edge, Safari) */
+.lista-licoes::-webkit-scrollbar {
+    width: 10px;
+}
+
+.lista-licoes::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.lista-licoes::-webkit-scrollbar-thumb {
+    background-color: #0d6efd;
+    border-radius: 8px;
+    border: 2px solid #1e1e1e;
+}
+
+.custom-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.curso-nmModulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.list-group-item a {
+    cursor: pointer
+}
+
+#curso-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #2a3743;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-video video {
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#btn-assistir {
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btn-assistir:hover {
+    background-color: #e69500;
+    transform: scale(1.05);
+}
+
+.text-center {
+    text-align: center;
+}
+
+#curso-corpotexto {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #2a3743;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-corpotexto img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.titulo {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(235, 235, 235);
+}
+
+.info-curso {
+    background: #3a4758;
+    border-left: 6px solid #ffa500;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.info-curso h5 {
+    color: #ff8c00;
+    margin-top: 20px;
+}
+
+.imagem-professor img {
+    width: 100%;
+    max-width: 350px;
+}
+
+#cards-curso .card-custom {
+    font-size: 14px
+}
+
+.li-selecionada {
+    background-color: #ffffff !important;
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+    border-left: 5px solid #000000;
+    transition: 0.3s ease;
+    border-radius: 8px;
+}
+
+.li-selecionada a {
+
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+
+    transition: 0.3s ease;
+}
+
+#topicos-sublista {
+    margin-top: 10px;
+    margin-left: 25px;
+    padding-left: 15px;
+    border-left: 2px solid #ff8c00;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000000;
+    animation: aparecer 0.3s ease-in-out;
+}
+
+#topicos-sublista li {
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 20px;
+}
+
+#topicos-sublista li::before {
+    content: "🟧";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.8em;
+}
+
+
+
+#card-barraprogresso .card-body {
+    background-color: #767a7e;
+    border-radius: 5px;
+    animation: aparecer 0.9s ease-in-out;
+}
+
+/* Animação opcional */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#titulopagina {
+    position: absolute;
+    /* ou absolute se quiser relativo a um container */
+    top: 86px;
+    left: 39px;
+    background: linear-gradient(135deg, #ff8000c4, #ffdd00cc);
+    padding: 5px 20px;
+    border-radius: 12px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 8.3);
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#nmModuloAula {
+    background: linear-gradient(135deg, #045e9bc4, #020507cc);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: 400px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#fecharBox {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+}
+
+.badge {
+    cursor: pointer;
+    opacity: 0.8;
+    font-weight: 600;
+    transform: 2s;
+
+}
+
+.badge:hover {
+    opacity: 1;
+    transform: 3s;
+
+}
+
+/** config lista tópicos **/
+/* Estilos para a lista de navegação do menu */
+.menu-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-bottom: 8px;
+}
+
+.menu-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-link:hover {
+    background-color: #6b6b93;
+    color: #ffffff;
+}
+
+/**barraprogresso status **/
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    /* tons de cinza */
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    /* branco */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    /* centraliza e dá espaço abaixo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#barraprogressoAulas {
+    background: linear-gradient(135deg, #ffffff, #b6bdc4);
+    /* tons de cinza */
+}
+
+
+#btnTopo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Responsivo para celular */
+@media (max-width: 800px) {
+
+    .col-md-9 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .col-md-9 {
+        width: 100%;
+    }
+}

@@ -1,0 +1,50 @@
+.seta-direita {
+    width: 15px;
+    height: 15px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 15px solid #FFA500;
+    display: inline-block;
+    /* Cor laranja */
+}
+
+.seta-direita-off {
+    width: 15px;
+    height: 15px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 15px solid #535353;
+    display: inline-block;
+    /* Cor laranja */
+}
+
+
+/* AFILIADOS */
+
+a.btn.btn-aff {
+    background: #e0e0e0;
+    /* cinza */
+    color: #333;
+    /* letras escuras */
+    border: none;
+}
+
+a.btn.btn-aff:hover {
+    filter: brightness(0.95);
+    color: #000;
+}
+
+/* Estado ativo (na página atual) */
+a.btn.btn-aff.active {
+    background: #ff7f2a;
+    /* laranja */
+    color: #fff;
+    /* letras brancas */
+}
+
+a.btn.btn-aff.btn-sm.roxo {
+    background: #440b76;
+    /* laranja */
+    color: #fff;
+    /* letras brancas */
+}

@@ -1,0 +1,960 @@
+html,
+body {
+    scroll-behavior: smooth;
+    /* Aplica o movimento suave para a rolagem */
+}
+
+.fixed-top {
+    padding: 0;
+}
+
+video {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0 20px rgba(13, 110, 253, 0.2);
+}
+
+.col-fixed {
+    position: sticky;
+    margin: 10px 0;
+
+}
+
+/* Estilo da barra de rolagem para WebKit (Chrome, Edge, Safari) */
+.lista-licoes::-webkit-scrollbar {
+    width: 10px;
+}
+
+.lista-licoes::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.lista-licoes::-webkit-scrollbar-thumb {
+    background-color: #0d6efd;
+    border-radius: 8px;
+    border: 2px solid #1e1e1e;
+}
+
+.custom-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.curso-nmModulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.list-group-item a {
+    cursor: pointer
+}
+
+#curso-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #2a3743;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-video video {
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#btn-assistir {
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btn-assistir:hover {
+    background-color: #e69500;
+    transform: scale(1.05);
+}
+
+.text-center {
+    text-align: center;
+}
+
+#curso-corpotexto {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #2a3743;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-corpotexto img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.titulo {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(235, 235, 235);
+}
+
+.info-curso {
+    background: #3a4758;
+    border-left: 6px solid #ffa500;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.info-curso h5 {
+    color: #ff8c00;
+    margin-top: 20px;
+}
+
+.imagem-professor img {
+    width: 100%;
+    max-width: 350px;
+}
+
+#cards-curso .card-custom {
+    font-size: 14px
+}
+
+.li-selecionada {
+    background-color: #ffffff !important;
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+    border-left: 5px solid #000000;
+    transition: 0.3s ease;
+    border-radius: 8px;
+}
+
+.li-selecionada a {
+
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+
+    transition: 0.3s ease;
+}
+
+#topicos-sublista {
+    margin-top: 10px;
+    margin-left: 25px;
+    padding-left: 15px;
+    border-left: 2px solid #ff8c00;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000000;
+    animation: aparecer 0.3s ease-in-out;
+}
+
+#topicos-sublista li {
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 20px;
+}
+
+#topicos-sublista li::before {
+    content: "🟧";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.8em;
+}
+
+
+
+#card-barraprogresso .card-body {
+    background-color: #767a7e;
+    border-radius: 5px;
+    animation: aparecer 0.9s ease-in-out;
+}
+
+/* Animação opcional */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#titulopagina {
+    position: absolute;
+    /* ou absolute se quiser relativo a um container */
+    top: 86px;
+    left: 39px;
+    background: linear-gradient(135deg, #ff8000c4, #ffdd00cc);
+    padding: 5px 20px;
+    border-radius: 12px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 8.3);
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#nmModuloAula {
+    background: linear-gradient(135deg, #045e9bc4, #020507cc);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: 400px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#fecharBox {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    background-color: #fd310d;
+    color: white;
+}
+
+#fecharBox:hover {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    background-color: #731201;
+    color: white;
+}
+
+.badge {
+    cursor: pointer;
+    opacity: 0.8;
+    font-weight: 600;
+    transform: 2s;
+
+}
+
+.badge:hover {
+    opacity: 1;
+    transform: 3s;
+
+}
+
+/** config lista tópicos **/
+/* Estilos para a lista de navegação do menu */
+.menu-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-bottom: 8px;
+}
+
+.menu-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-link:hover {
+    background-color: #6b6b93;
+    color: #ffffff;
+}
+
+/**barraprogresso status **/
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    /* tons de cinza */
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    /* branco */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    /* centraliza e dá espaço abaixo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#barraprogressoAulas {
+    background: linear-gradient(135deg, #ffffff, #b6bdc4);
+    /* tons de cinza */
+}
+
+
+#btnTopo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #0d6efd;
+    color: white;
+    z-index: 100;
+}
+
+
+html,
+body {
+    scroll-behavior: smooth;
+    /* Aplica o movimento suave para a rolagem */
+}
+
+.fixed-top {
+    padding: 0;
+}
+
+video {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0 20px rgba(13, 110, 253, 0.2);
+}
+
+.col-fixed {
+    position: sticky;
+    margin: 10px 0;
+
+}
+
+/* Estilo da barra de rolagem para WebKit (Chrome, Edge, Safari) */
+.lista-licoes::-webkit-scrollbar {
+    width: 10px;
+}
+
+.lista-licoes::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.lista-licoes::-webkit-scrollbar-thumb {
+    background-color: #0d6efd;
+    border-radius: 8px;
+    border: 2px solid #1e1e1e;
+}
+
+.custom-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.curso-nmModulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.list-group-item a {
+    cursor: pointer
+}
+
+#curso-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #2a3743;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-video video {
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#btn-assistir {
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btn-assistir:hover {
+    background-color: #e69500;
+    transform: scale(1.05);
+}
+
+.text-center {
+    text-align: center;
+}
+
+#curso-corpotexto {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #2a3743;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#curso-corpotexto img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.titulo {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(235, 235, 235);
+}
+
+.info-curso {
+    background: #3a4758;
+    border-left: 6px solid #ffa500;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.info-curso h5 {
+    color: #ff8c00;
+    margin-top: 20px;
+}
+
+.imagem-professor img {
+    width: 100%;
+    max-width: 350px;
+}
+
+#cards-curso .card-custom {
+    font-size: 14px
+}
+
+.li-selecionada {
+    background-color: #ffffff !important;
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+    border-left: 5px solid #000000;
+    transition: 0.3s ease;
+    border-radius: 8px;
+}
+
+.li-selecionada a {
+
+    /* Laranja */
+    color: #000 !important;
+    font-weight: bold;
+
+    transition: 0.3s ease;
+}
+
+#topicos-sublista {
+    margin-top: 10px;
+    margin-left: 25px;
+    padding-left: 15px;
+    border-left: 2px solid #ff8c00;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #000000;
+    animation: aparecer 0.3s ease-in-out;
+}
+
+#topicos-sublista li {
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 20px;
+}
+
+#topicos-sublista li::before {
+    content: "🟧";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.8em;
+}
+
+
+
+#card-barraprogresso .card-body {
+    background-color: #767a7e;
+    border-radius: 5px;
+    animation: aparecer 0.9s ease-in-out;
+}
+
+/* Animação opcional */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#titulopagina {
+    position: absolute;
+    /* ou absolute se quiser relativo a um container */
+    top: 86px;
+    left: 39px;
+    background: linear-gradient(135deg, #ff8000c4, #ffdd00cc);
+    padding: 5px 20px;
+    border-radius: 12px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 8.3);
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#nmModuloAula {
+    background: linear-gradient(135deg, #045e9bc4, #020507cc);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: 400px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#fecharBox {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+}
+
+.badge {
+    cursor: pointer;
+    opacity: 0.8;
+    font-weight: 600;
+    transform: 2s;
+
+}
+
+.badge:hover {
+    opacity: 1;
+    transform: 3s;
+
+}
+
+/** config lista tópicos **/
+/* Estilos para a lista de navegação do menu */
+.menu-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-bottom: 8px;
+}
+
+.menu-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-link:hover {
+    background-color: #6b6b93;
+    color: #ffffff;
+}
+
+/**barraprogresso status **/
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    /* tons de cinza */
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    /* branco */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    /* centraliza e dá espaço abaixo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#barraprogressoAulas {
+    background: linear-gradient(135deg, #ffffff, #b6bdc4);
+    /* tons de cinza */
+}
+
+
+#btnTopo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Responsivo para celular */
+@media (max-width: 800px) {
+
+    .col-md-9 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .col-md-9 {
+        width: 100%;
+    }
+}
+
+/** LISTA LIÇÕES **/
+
+.btn-group .btn {
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1.5rem;
+}
+
+.btn-group .btn.active {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+}
+
+.btn-group .btn .badge {
+    font-size: 0.75rem;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.btn-group .btn-outline-success.active {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+/* Ícone de check-circle customizado */
+.icon-check-circle {
+    color: #28a745;
+    /* Verde sucesso */
+    font-size: 1.2rem;
+    background-color: #1f2d1f;
+    padding: 6px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.6);
+    transition: transform 0.2s ease;
+}
+
+.icon-check-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.9);
+}
+
+/* Estilo base */
+.atividade-status {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Atividade OK - Verde */
+.atividade-ok {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Atividade Pendente - Vermelha */
+.atividade-pendente {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Nenhuma Atividade - Cinza */
+.atividade-nenhuma {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.atividade-pendente {
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+
+.dicas {
+    background-color: #fff3cd;
+    /* Fundo amarelo claro (atenção, mas agradável) */
+    color: #856404;
+    /* Texto marrom escuro (legível) */
+    border: 1px solid #ffeeba;
+    /* Borda leve */
+    border-radius: 6px;
+    /* Cantos arredondados */
+    padding: 16px 24px;
+    /* Espaçamento interno confortável */
+    font-size: 0.9rem;
+    /* Texto um pouco maior para leitura */
+    font-weight: 500;
+    /* Dá destaque sem ser pesado */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    /* Sombra suave para destacar do fundo */
+    margin: 16px 0;
+    /* Espaçamento em cima e embaixo */
+    display: flex;
+    /* Para alinhar ícone e texto se desejar */
+    align-items: center;
+    gap: 12px;
+    /* Espaço entre ícone e texto */
+}
+
+.dicas::before {
+    content: "⚠️";
+    font-size: 1.4em;
+    /* Ícone maior */
+    margin-right: 8px;
+}
+
+
+/* Estilo do modal (glass + foco visual) */
+.modal-pendencias .modal-content {
+    background: rgba(20, 22, 28, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.modal-pendencias .modal-header {
+    background: linear-gradient(135deg, #ffcf4d, #ff9c00);
+    color: #111;
+    border: 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-pendencias .modal-header::after {
+    content: "";
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    filter: blur(6px);
+}
+
+.modal-pendencias .modal-title {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-weight: 800;
+}
+
+.modal-pendencias .modal-body {
+    color: #f1f1f1;
+}
+
+.modal-pendencias .badge-soft {
+    background: rgba(255, 196, 64, 0.15);
+    border: 1px solid rgba(255, 196, 64, 0.35);
+    color: #ffc040;
+}
+
+.modal-pendencias .btn-cta {
+    border-radius: 999px;
+    padding: .6rem 1rem;
+    font-weight: 600;
+}
+
+.modal-pendencias .listinha {
+    margin: .5rem 0 0 0;
+    padding-left: 1.1rem;
+    font-size: .95rem;
+    opacity: .9;
+}
+
+.modal-pendencias .listinha li {
+    margin-bottom: .25rem;
+}
+
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff3b3b;
+    display: inline-block;
+    margin-right: .4rem;
+    box-shadow: 0 0 0 rgba(255, 59, 59, 0.7);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 12px rgba(255, 59, 59, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 59, 0);
+    }
+}
+
+
+:root {
+    --cor-bg-escuro: #0d1b2a;
+    --cor-bg-card: #023047;
+    --cor-fundo-profundo: #000000;
+    --cor-texto: #ffffff;
+    --cor-destaque: #ff8800;
+}
+
+body {
+    background-color: var(--cor-bg-escuro);
+    color: var(--cor-texto);
+}
+
+.navbar {
+    background-color: var(--cor-fundo-profundo);
+}
+
+.navbar-brand {
+    color: var(--cor-texto);
+    font-weight: bold;
+}
+
+.texto-acolhimento {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.card-turma {
+    width: 280px;
+    height: 230px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.4s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.card-turma:hover {
+    transform: scale(1.05);
+}
+
+.card-turma .topo {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--cor-texto);
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-turma .rodape {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(2, 48, 71, 0.95);
+    text-align: center;
+    color: var(--cor-texto);
+}
+
+.card-turma .rodape .data {
+    font-size: 0.9rem;
+}
+
+.card-turma .rodape .abrir {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--cor-destaque);
+    margin-top: 0.4rem;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding-bottom: 3rem;
+}

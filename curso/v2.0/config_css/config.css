@@ -1,0 +1,148 @@
+a {
+    cursor: pointer;
+}
+
+body {
+    padding-top: 70px;
+    background-color: #0d1b2a;
+    color: #ccc;
+}
+
+.navbar-custom {
+    background-color: #023047;
+}
+
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+    color: #fff;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .navbar-brand:hover {
+    color: #fca311;
+}
+
+.dropdown-menu {
+    background-color: #023047;
+}
+
+.dropdown-item {
+    color: #fff;
+}
+
+.dropdown-item:hover {
+    background-color: #fca311;
+    color: #0d1b2a;
+}
+
+h1,
+h2 {
+    color: #f89c03;
+}
+
+#curso-corpotexto h1,
+#curso-corpotexto h2 {
+    color: #000000;
+}
+
+footer {
+    margin-top: 150px;
+    background-color: #023047;
+    padding: 20px 0;
+    color: #ccc;
+}
+
+.footer-links a {
+    color: #ccc;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #fca311;
+}
+
+
+.user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.module-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    min-height: 200px;
+}
+
+.module-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.info-curso {
+    background: #3a4758;
+    border-left: 6px solid #ffa500;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.info-curso h5 {
+    color: #ff8c00;
+    margin-top: 20px;
+}
+
+.imagem-professor img {
+    width: 100%;
+    max-width: 350px;
+}
+
+#cards-curso .card-custom {
+    font-size: 14px
+}
+
+@media (max-width: 576px) {
+
+    #curso-corpotexto h1,
+    #curso-corpotexto h2 {
+        font-size: 14px;
+
+    }
+}
+
+.btn-abrir-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    background: rgba(255, 200, 0, 0.819);
+    /* Amarelo semi-transparente */
+    color: #1a1a1a;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.6rem 2.5rem;
+    border: none;
+    border-radius: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+    transition: background 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.btn-abrir-centro:hover {
+    background: rgba(255, 150, 0, 1);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.card-turma {
+    position: relative;
+    /* garante que o botão seja posicionado dentro do card */
+}

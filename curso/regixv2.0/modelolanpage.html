@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Professor Eugênio | Cursos Online</title>
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS Animate on Scroll -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(to right, #00BB9C, #00776C);
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .beneficios i {
+            font-size: 2rem;
+            color: #00BB9C;
+        }
+
+        .sobre {
+            background-color: #fff;
+            padding: 60px 0;
+        }
+
+        .footer {
+            background-color: #112240;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .btn-login {
+            background-color: #FF9C00;
+            border: none;
+            color: #112240;
+        }
+
+        .btn-login:hover {
+            background-color: #e68a00;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Professor Eugênio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav me-3">
+                    <li class="nav-item"><a class="nav-link" href="#cursos">Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#beneficios">Benefícios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                </ul>
+                <a href="login.php" class="btn btn-login">Área do Aluno</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center" id="cursos">
+        <div class="container" data-aos="fade-up">
+            <h1 class="display-4 fw-bold">Aprenda com quem entende de verdade</h1>
+            <p class="lead mt-4">Cursos práticos e acessíveis para transformar sua carreira</p>
+            <a href="#beneficios" class="btn btn-warning btn-lg mt-4">Ver Benefícios</a>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="py-5 beneficios bg-light" id="beneficios">
+        <div class="container" data-aos="fade-right">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark">Por que estudar com o Professor Eugênio?</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 text-center" data-aos="zoom-in">
+                    <i class="bi bi-laptop"></i>
+                    <h5 class="mt-3">Aulas 100% Online</h5>
+                    <p>Estude onde e quando quiser, com acesso vitalício.</p>
+                </div>
+                <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <h5 class="mt-3">Material em PDF</h5>
+                    <p>Baixe materiais complementares para cada aula.</p>
+                </div>
+                <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="400">
+                    <i class="bi bi-award"></i>
+                    <h5 class="mt-3">Certificado</h5>
+                    <p>Comprove seu aprendizado com certificados digitais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre o Professor -->
+    <section class="sobre" id="sobre">
+        <div class="container" data-aos="fade-left">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0" data-aos="zoom-in">
+                    <img src="https://via.placeholder.com/500x350" class="img-fluid rounded shadow"
+                        alt="Professor Eugênio">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="fw-bold text-dark">Quem é o Professor Eugênio?</h2>
+                    <p class="mt-3">
+                        Com mais de 20 anos de experiência em educação e tecnologia, Eugênio transforma o aprendizado em
+                        algo prático, envolvente e acessível. São milhares de alunos impactados por seus cursos de
+                        Informática, Excel, Power BI, Design Gráfico e muito mais.
+                    </p>
+                    <a href="#cursos" class="btn btn-outline-primary mt-3">Conhecer os cursos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy;
+                <?= date('Y') ?> professoreugenio.com | Todos os direitos reservados
+            </p>
+            <div class="mt-2">
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+
+</body>
+
+</html>

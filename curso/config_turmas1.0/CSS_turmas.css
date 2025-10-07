@@ -1,0 +1,28 @@
+.btn-success-turma {
+    background-color: #ff8040;
+    color: #ffffff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.125);
+    font-size: 16px;
+    font-weight: 700;
+    transition: 1s;
+    padding: 10px 20px;
+    border: solid 3px #ffffff;
+}
+
+.blinking-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    0% {
+        color: red;
+    }
+
+    100% {
+        color: yellow;
+    }
+}

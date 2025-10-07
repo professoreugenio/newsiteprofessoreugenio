@@ -1,0 +1,553 @@
+/* Paleta utilitária */
+.corsegund {
+    color: #ff7f2a;
+}
+
+.corprima {
+    color: #050b22;
+}
+
+/* ===== NAV / ABAS ===== */
+.afi-tabs .nav-link {
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    font-weight: 600;
+    font-size: .85rem;
+    border: 0 !important;
+    color: #6c757d;
+    padding: .35rem .6rem;
+}
+
+.afi-tabs .nav-link.active {
+    color: #fff;
+    background: linear-gradient(90deg, #00BB9C, #0aa38a);
+    box-shadow: 0 .2rem .5rem rgba(0, 0, 0, .10);
+}
+
+/* ===== CABEÇALHO DA SEÇÃO ===== */
+.pf-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+}
+
+.pf-count {
+    background: rgba(0, 187, 156, .15);
+    color: #00BB9C;
+    border: 1px solid rgba(0, 187, 156, .35);
+    font-size: .75rem;
+    padding: .25rem .5rem;
+}
+
+/* ===== LISTA HORIZONTAL (cards) ===== */
+.pf-hscroll {
+    position: relative;
+    overflow: hidden;
+}
+
+.pf-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 220px;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: .25rem;
+}
+
+.pf-track::-webkit-scrollbar {
+    height: 6px;
+}
+
+.pf-track::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+}
+
+.pf-card {
+    scroll-snap-align: start;
+    background: #112240;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.pf-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 .6rem 1.1rem rgba(0, 0, 0, .16);
+}
+
+.pf-media {
+    height: 96px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pf-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: .2rem .45rem;
+    font-size: .7rem;
+    border-radius: 999px;
+    background: #FF9C00;
+    color: #112240;
+    font-weight: 800;
+}
+
+.pf-actions {
+    display: flex;
+    gap: 6px;
+    padding: 8px 10px 0 10px;
+}
+
+.pf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FF9C00;
+    color: #112240;
+    border: 0;
+    border-radius: 8px;
+    padding: .3rem .5rem;
+    font-weight: 700;
+    font-size: .85rem;
+    text-decoration: none;
+}
+
+.pf-btn:hover {
+    filter: brightness(1.05);
+    color: #112240;
+}
+
+.pf-legend {
+    padding: 6px 10px 10px 10px;
+}
+
+.pf-title {
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    font-size: .95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pf-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: .85rem;
+    opacity: .95;
+}
+
+.tag--valor .v {
+    color: #FF9C00;
+    font-weight: 800;
+}
+
+.tag--comis .c {
+    color: #00BB9C;
+    font-weight: 800;
+}
+
+/* Navegação do carrossel */
+.pf-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    border: 0;
+    box-shadow: 0 .4rem .9rem rgba(0, 0, 0, .14);
+    opacity: .92;
+}
+
+.pf-nav:hover {
+    opacity: 1;
+}
+
+.pf-prev {
+    left: -6px;
+}
+
+.pf-next {
+    right: -6px;
+}
+
+@media (max-width:768px) {
+    .pf-track {
+        grid-auto-columns: 85%;
+    }
+
+    .pf-nav {
+        display: none;
+    }
+}
+
+/* ===== LISTA FULL-WIDTH (estilo da imagem) ===== */
+.af-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.af-item {
+    background: #0f2747;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.af-index {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #00cda9, #0e8f7d);
+    color: #fff;
+    font-weight: 900;
+    font-size: 16px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 42px;
+    box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .16);
+}
+
+.af-sep {
+    width: 3px;
+    height: 40px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .08);
+}
+
+.af-thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #0b172f;
+    flex: 0 0 72px;
+}
+
+.af-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.af-title {
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: .15px;
+    font-size: .95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.af-meta {
+    font-size: .85rem;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.af-meta .val {
+    color: #FF9C00;
+    font-weight: 800;
+}
+
+.af-meta .com {
+    color: #00BB9C;
+    font-weight: 800;
+}
+
+.af-action {
+    margin-left: auto;
+}
+
+.af-btn {
+    background: #FF9C00;
+    color: #112240;
+    border: 0;
+    border-radius: 10px;
+    padding: .45rem .75rem;
+    font-weight: 800;
+    font-size: .9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.af-btn:hover {
+    filter: brightness(1.06);
+    color: #112240;
+}
+
+
+/* Card fixo (topo/direita) com vidro/gradiente */
+.af-metrics-card.glass {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1060;
+    width: 520px;
+    background: linear-gradient(160deg, rgba(17, 34, 64, .92), rgba(17, 34, 64, .86));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .25);
+    backdrop-filter: blur(4px);
+}
+
+/* Grid interno */
+.af-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* Cards com gradiente sutil e barra de destaque */
+.af-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .06);
+    overflow: hidden;
+}
+
+.af-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+
+.af-card .ico {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, .08);
+}
+
+.af-card .txt {
+    min-width: 0;
+}
+
+.af-card .lbl {
+    font-size: .8rem;
+    opacity: .9;
+    margin-bottom: 2px;
+    letter-spacing: .2px;
+}
+
+.af-card .val {
+    font-size: 1.15rem;
+    font-weight: 900;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+/* Gradientes por tipo */
+.af-card.vlr {
+    background: linear-gradient(135deg, rgba(255, 156, 0, .18), rgba(255, 156, 0, .06));
+}
+
+.af-card.perc {
+    background: linear-gradient(135deg, rgba(0, 187, 156, .22), rgba(0, 187, 156, .06));
+}
+
+.af-card.rec {
+    background: linear-gradient(135deg, rgba(99, 102, 241, .22), rgba(30, 64, 175, .10));
+}
+
+/* Chip da chave (pílula com gradiente) */
+.af-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: .82rem;
+    font-weight: 700;
+    color: #00BB9C;
+    padding: .28rem .6rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(0, 187, 156, .12), rgba(0, 187, 156, .04));
+    border: 1px solid rgba(0, 187, 156, .35);
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+    .af-metrics-card.glass {
+        position: static;
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .af-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* Card fixo (topo/direita) com vidro/gradiente */
+.af-metrics-card.glass {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1060;
+    width: 520px;
+    background: linear-gradient(160deg, rgba(17, 34, 64, .92), rgba(17, 34, 64, .86));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .25);
+    backdrop-filter: blur(4px);
+}
+
+/* Grid interno */
+.af-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* Cards com gradiente sutil e barra de destaque */
+.af-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .06);
+    overflow: hidden;
+}
+
+.af-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+
+.af-card .ico {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, .08);
+}
+
+.af-card .txt {
+    min-width: 0;
+}
+
+.af-card .lbl {
+    font-size: .8rem;
+    opacity: .9;
+    margin-bottom: 2px;
+    letter-spacing: .2px;
+}
+
+.af-card .val {
+    font-size: 1.15rem;
+    font-weight: 900;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+/* Gradientes por tipo */
+.af-card.vlr {
+    background: linear-gradient(135deg, rgba(255, 156, 0, .18), rgba(255, 156, 0, .06));
+}
+
+.af-card.perc {
+    background: linear-gradient(135deg, rgba(0, 187, 156, .22), rgba(0, 187, 156, .06));
+}
+
+.af-card.rec {
+    background: linear-gradient(135deg, rgba(99, 102, 241, .22), rgba(30, 64, 175, .10));
+}
+
+/* Chip da chave (pílula com gradiente) */
+.af-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: .82rem;
+    font-weight: 700;
+    color: #00BB9C;
+    padding: .28rem .6rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(0, 187, 156, .12), rgba(0, 187, 156, .04));
+    border: 1px solid rgba(0, 187, 156, .35);
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+    .af-metrics-card.glass {
+        position: static;
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .af-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:576px) {
+    .af-item {
+        padding: 9px 10px;
+        gap: 10px;
+    }
+
+    .af-meta {
+        gap: 10px;
+        font-size: .82rem;
+    }
+
+    .af-btn {
+        padding: .4rem .65rem;
+        font-size: .85rem;
+    }
+}
