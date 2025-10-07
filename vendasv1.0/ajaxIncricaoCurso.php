@@ -172,7 +172,7 @@ try {
         include APP_ROOT . '/modulos_mail/modulo_mail_body_InscricaoAluno.php';
         include APP_ROOT . '/modulos_mail/modulo_mail_send.php';
     }
-
+ 
     // ----- Vincula aluno à turma
     $encIdUsuario = encrypt($idUsuario, 'e');
     $dataprazo    = dataprazo($data, 2);

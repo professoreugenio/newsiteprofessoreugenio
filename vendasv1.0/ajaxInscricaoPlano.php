@@ -45,9 +45,12 @@ try {
         exit;
     }
     // Sessões
+
+    $dec = encrypt($_COOKIE['nav'], $action = 'd');
+    $exp = explode('&', $dec);
+    $idCurso = $exp[1] ?? '0';
     $idUsuarioSess = $_SESSION['idUsuario']  ?? '';
     $chaveTurma    = $_SESSION['chaveTurma'] ?? '';
-    $idCurso       = $_SESSION['idCurso']   ?? '';
     $chaveAfiliado = $_SESSION['chaveAfiliado'] ?? '';
     if (!$idUsuarioSess || !$chaveTurma) {
         http_response_code(400);
@@ -98,9 +101,6 @@ try {
     $rwNome = $query->fetch(PDO::FETCH_ASSOC);
     $idAfiliado = $rwNome['idusuarioSA'] ?? 0;
 
-    
-
-
     $sql = "INSERT INTO a_site_afiliados_cache
             (idafiliadochaveac, idprodutoac, idclienteac, valorac, statusac, dataac, horaac)
             VALUES (:idafiliado, :idproduto, :idcliente, :valor, :status, :data, :hora)";
@@ -116,7 +116,7 @@ try {
     $stmt->execute();
 
 
-   
+
 
     $sql = "INSERT INTO a_site_vendas 
             (idcursosv, chaveturmasv, idalunosv, chaveafiliadosv, valorvendasv, datacomprasv, horacomprasv, statussv)
@@ -135,6 +135,8 @@ try {
     $stmt->bindParam(':status',        $status,        PDO::PARAM_INT);
     $stmt->execute();
 
+    $idVenda = $con->lastInsertId();
+    $_SESSION['idVenda'] = $idVenda;
 
 
     if ($valorPlanoRaw !== '') {

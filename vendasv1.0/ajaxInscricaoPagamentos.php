@@ -166,6 +166,14 @@ try {
     $checkoutPagSeguro   = trim((string)($_POST['checkout_pagseguro']   ?? ''));
     $checkoutMercadoPago = trim((string)($_POST['checkout_mercadopago'] ?? ''));
 
+    $idVenda = $_SESSION['idVenda'] ?? 0;
+    $queryUpdate = $con->prepare("UPDATE a_site_vendas SET tipopagamentosv=:tipo WHERE codigovendas = :idVenda");
+    $queryUpdate->bindParam(":tipo", $metodo);
+    $queryUpdate->bindParam(":idVenda", $idVenda);
+    $queryUpdate->execute();
+    
+    
+
     // ===== Valida método =====
     if (!in_array($metodo, ['pix', 'cartao'], true)) {
         json_quit(['status' => 'erro', 'mensagem' => 'Método de pagamento inválido.'], 422);
