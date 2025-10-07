@@ -1,0 +1,25 @@
+    .btn-flat {
+    background: #fff;
+    color: #112240;
+    border: 2px solid #eee;
+    transition: 0.2s;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+    .btn-flat:hover,
+    .btn-flat:focus {
+    border-color: #FF9C00;
+    color: #FF9C00;
+    background: #fff;
+    }
+    .btn-laranja {
+    background: #FF9C00 !important;
+    color: #fff !important;
+    border: 2px solid #FF9C00 !important;
+    box-shadow: 0 2px 8px 0 rgba(255,156,0,0.10);
+    }
+    .btn-flat i, .btn-laranja i {
+    margin-right: .4em;
+    font-size: 1.1em;
+    vertical-align: middle;
+    }

@@ -1,0 +1,102 @@
+<?php
+define('BASEPATH', true);
+define('APP_ROOT', dirname(__DIR__, 2));
+require_once APP_ROOT . '/conexao/class.conexao.php';
+require_once APP_ROOT . '/autenticacao.php';
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <?php require_once APP_ROOT . '/admin2/v1.0/head.php'; ?>
+    <link rel="stylesheet" href="/admin2/v1.0/CSS_config.css?<?= time(); ?>">
+    <?php require_once APP_ROOT . '/admin2/v1.0/dadosuser.php'; ?>
+    <?php require_once APP_ROOT . '/admin2/modelo/usuariosv1.0/QueryUsuario.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    <style>
+        .note-editor.note-frame {
+            border-radius: 1rem;
+        }
+
+        .note-editable {
+            min-height: 220px;
+        }
+    </style>
+
+    <style>
+        :root {
+            --brand-h1: #00BB9C;
+            --brand-h2: #FF9C00;
+            --brand-bg: #112240;
+            --brand-text: #ffffff;
+        }
+
+        .card-elegant {
+            border: 0 !important;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+        }
+
+        .section-title {
+            color: var(--brand-h2);
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .form-label .bi {
+            opacity: .7;
+            margin-right: .35rem;
+        }
+
+        .input-icon .bi {
+            position: absolute;
+            left: .8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .input-icon input {
+            padding-left: 2.25rem;
+        }
+
+        .avatar-ring {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, .15);
+        }
+
+        .help {
+            font-size: .85rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body id="adminLayout">
+    <?php require_once APP_ROOT . '/admin2/v1.0/nav.php'; ?>
+    <?php require_once APP_ROOT . '/admin2/v1.0/PainelLateral.php'; ?>
+    <div class="container-fluid px-4 mt-5">
+        <!-- Cabeçalho -->
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mt-2">
+                <?php require 'usuariosv1.0/cabecalhoPage.php'; ?>
+            </div>
+            <?php if (temPermissao($niveladm, [1])): ?>
+                <?php require_once APP_ROOT . '/admin2/modelo/usuariosv1.0/Subnav.php'; ?>
+            <?php endif; ?>
+        </div>
+        <?php require_once APP_ROOT . '/admin2/modelo/usuariosv1.0/BodyAlunosPerfil.php'; ?>
+    </div>
+    <!-- Scripts -->
+    <script src="../v1.0/PainelLateral.js"></script>
+    <?php require_once APP_ROOT . '/admin2/v1.0/footer.php'; ?>
+</body>
+
+</html>
