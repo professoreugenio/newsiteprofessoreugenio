@@ -21,18 +21,9 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> Lista de Cursos</h3>
-                <small><?= $saudacao; ?></small><br>
-                <small><?= diadasemana($data, 2); ?></small>
-                <h4>
-                    <?php
-                    if (isset($_GET['status']) && $_GET['status'] === '0') {
-                        echo 'CURSOS PRESENCIAIS';
-                    } else {
-                        echo 'CURSO ONLINE';
-                    }
-                    ?>
-                </h4>
+                <h3><i class="bi bi-journal-text me-2"></i> Vendas</h3>
+               
+                
             </div>
             <?php require_once APP_ROOT . '/admin2/modelo/vendas1.0/Subnav.php'; ?>
         </div>

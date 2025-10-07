@@ -42,7 +42,7 @@ require_once APP_ROOT . '/autenticacao.php';
             </div>
             <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
         </div>
-        <?php require_once APP_ROOT . '/admin2/modelo/vendas1.0/BodyVendasCursos1.0.php'; ?>
+        <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/BodyCursoLista.php'; ?>
     </div>
     <!-- Scripts -->
     <script src="../v1.0/PainelLateral.js"></script>
