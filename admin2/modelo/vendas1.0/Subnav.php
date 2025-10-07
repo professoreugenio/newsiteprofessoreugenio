@@ -8,8 +8,8 @@ $pagina = basename($_SERVER['PHP_SELF']);
             class="btn btn-flat btn-sm <?= ($pagina == 'vendas.php') ? 'btn-laranja' : '' ?>">
             <i class="bi bi-shop"></i> VENDAS
         </a>
-        <a href="vendas.php?status=1"
-            class="btn btn-flat btn-sm <?= ($pagina == 'afiliados.php') ? 'btn-laranja' : '' ?>">
+        <a href="sistema_afiliadosUsuarios.php?status=1"
+            class="btn btn-flat btn-sm <?= ($pagina == 'sistema_afiliadosUsuarios.php') ? 'btn-laranja' : '' ?>">
             <i class="bi bi-shop"></i> AFILIADOS
         </a>
 
