@@ -38,6 +38,7 @@ $linkYoutube = $rwTurma['youtubesct'] ?? '';
 $NomeProfessor = $rwTurma['nomeprofessor'] ?? '';
 $ChaveTurma = $rwTurma['chave'] ?? '';
 $lead = $rwTurma['lead'] ?? '';
+$produtoafiliado = $rwTurma['idprodutoafiliadoct'] ?? '';
 $previa = $rwTurma['previa'] ?? '';
 $detalhes = $rwTurma['detalhes'] ?? '';
 $sobreocurso = $rwTurma['sobreocurso'] ?? '';

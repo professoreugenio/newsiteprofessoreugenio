@@ -524,7 +524,7 @@ $msgsEmail = array_filter($mensagens, fn($r) => (int)($r['idtipomsgatm'] ?? 0) =
         const html = btn.getAttribute('data-html') || '';
         const texto = htmlToText(html);
         const full = (tit ? ('*' + tit + '*\n\n') : '') + texto;
-        const url = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(full);
+        const url = 'https://wa.me/55' + numero + '?text=' + encodeURIComponent(full);
         window.open(url, '_blank');
     }
 

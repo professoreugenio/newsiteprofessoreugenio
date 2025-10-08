@@ -14,6 +14,7 @@ try {
 
     $chave = $_POST['chave'];
     $nome = trim($_POST['nometurma'] ?? '');
+    $produtoAfiliado = trim($_POST['produtoafiliado'] ?? '');
     $pasta = trim($_POST['pasta'] ?? '');
     $nomeProfessor = trim($_POST['nomeprofessor'] ?? '');
     $bgcolor = trim($_POST['bgcolor_cs'] ?? '');
@@ -46,6 +47,7 @@ try {
     $stmt = $con->prepare("
         UPDATE new_sistema_cursos_turmas SET
             nometurma = :nome,
+            idprodutoafiliadoct = :produtoafiliado,
             horadem = :manha1,
             horaparam = :manha2,
             horadet = :tarde1,
@@ -71,6 +73,7 @@ try {
 
     $stmt->execute([
         ':nome' => $nome,
+        ':produtoafiliado' => $produtoAfiliado,
         ':manha1' => $horadem,
         ':manha2' => $horaparam,
         ':tarde1' => $horadet,
@@ -94,7 +97,7 @@ try {
         ':chave' => $chave
     ]);
 
-    echo json_encode(['status' => 'ok', 'mensagem' => 'Turma atualizada com sucesso!']);
+    echo json_encode(['status' => 'ok', 'mensagem' => 'Turma atualizada com sucesso'.$produtoAfiliado.!'.']);
 } catch (Exception $e) {
     echo json_encode(['status' => 'erro', 'mensagem' => $e->getMessage()]);
 }

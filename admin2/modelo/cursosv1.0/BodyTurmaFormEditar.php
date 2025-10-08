@@ -61,6 +61,33 @@
     </div>
     <input type="hidden" name="chave" value="<?= htmlspecialchars($ChaveTurma) ?>">
 
+    <!-- SELECT PRODUTO AFILIADO -->
+    <div class="col-md-4">
+        <?php echo $produtoafiliado;  ?>
+        <label for="produtoAfiliado" class="form-label">Produto Afiliado</label>
+        <select class="form-select" id="produtoAfiliado" name="produtoafiliado">
+            <option value="">Selecione um produto...</option>
+            <?php
+            try {
+                $sql = "SELECT codigoprodutoafiliado, nomeap 
+                    FROM a_site_afiliados_produto 
+                    WHERE visivelap = 1 
+                    ORDER BY nomeap ASC";
+                $stmt = $con->prepare($sql);
+                $stmt->execute();
+
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $selected = ($row['codigoprodutoafiliado'] == $produtoafiliado) ? 'selected' : '';
+                    echo '<option value="' . $row['codigoprodutoafiliado'] . '" ' . $selected . '>' . htmlspecialchars($row['nomeap']) ." ". $row['codigoprodutoafiliado']. '</option>';
+                }
+            } catch (Exception $e) {
+                echo '<option value="">Erro ao carregar produtos</option>';
+            }
+            ?>
+        </select>
+    </div>
+
+
     <div class="col-md-4">
         <label for="nomeTurma" class="form-label">Nome da Turma</label>
         <input type="text" class="form-control" id="nomeTurma" name="nometurma" value="<?= htmlspecialchars($Nometurma) ?>" required>

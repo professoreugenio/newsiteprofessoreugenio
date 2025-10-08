@@ -4,6 +4,11 @@
     <nav aria-label="Navegação de edição de curso">
         <ul class="pagination justify-content-center">
             <li class="page-item">
+                <a class="page-link <?= $paginaAtual == 'cursos.php' ? 'bglaranja' : '' ?>" href="cursos.php?status=1" title="Lista de Cursos">
+                    <i class="bi bi-people-fill"></i>
+                </a>
+            </li>
+            <li class="page-item">
                 <a class="page-link <?= $paginaAtual == 'vendas.php' ? 'bglaranja' : '' ?>" href="vendas.php?status=1" title="Lista de Cursos">
                     <i class="bi bi-list"></i>
                 </a>

@@ -4,17 +4,17 @@
     <?php require '../v1.0/queryContCursos.php'; ?>
     <?php require '../v1.0/queryContAcessos.php'; ?>
     <!-- CARDS -->
+    <?php require '../v1.0/require_Vendas.php'; ?>
+    <?php require '../v1.0/require_Cursos.php'; ?>
     <?php require '../v1.0/require_Aniversariantes.php'; ?>
     <?php require '../v1.0/require_Usuarios.php'; ?>
     <?php require '../v1.0/require_Publicacoes.php'; ?>
-    <?php require '../v1.0/require_Cursos.php'; ?>
     <?php require '../v1.0/require_Avaliacoes.php'; ?>
     <?php require '../v1.0/require_Mensagens.php'; ?>
     <?php require '../v1.0/require_Afiliados.php'; ?>
     <?php require '../v1.0/require_Acessos.php'; ?>
     <?php require '../v1.0/require_BancodeImagens.php'; ?>
     <?php require '../v1.0/require_Anuncio.php'; ?>
-    <?php require '../v1.0/require_Vendas.php'; ?>
     <?php require '../v1.0/require_Financeiro.php'; ?>
 
 

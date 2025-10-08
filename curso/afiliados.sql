@@ -1,9 +1,17 @@
-`a_site_afiliados_chave` (
-  `codigochaveafiliados` int(11) NOT NULL,
-  `idusuarioSA` int(11) DEFAULT NULL,
-  `chaveafiliadoSA` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dataSA` date DEFAULT NULL,
-  `horaSA` time DEFAULT NULL
+tabela: `a_site_afiliados_chave` 
+campos:
+  `codigochaveafiliados` 
+  `idusuarioSA` 
+  `chaveafiliadoSA` 
+  `dataSA` 
+  `horaSA`
+
+
+ tabela: `a_site_afiliados_produto`
+ campos:
+  `codigoprodutoafiliado` 
+  `nomeap` 
+  `visivelap` 
 
 
   
