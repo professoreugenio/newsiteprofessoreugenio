@@ -53,8 +53,9 @@ SELECT
   v.tipopagamentosv,
 
   c.nomecurso,
+  a.email AS email_aluno,
   c.bgcolor,
-
+    a.codigocadastro,
   a.nome         AS nome_aluno,
   a.celular      AS cel_aluno,
 
@@ -172,11 +173,15 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $curso = $row['nomecurso'] ?? '—';
                 $aluno = primeiroESobrenome($row['nome_aluno'] ?? '—');
                 $cel   = $row['cel_aluno'] ?? '';
+                $idCursov   = $row['idcursosv'] ?? '';
+                $encIdCursov = encrypt($idCursov, $action = 'e');
                 $whats = whatsLink($cel);
 
                 $temAf  = !empty($row['chaveafiliadosv']) && !empty($row['nome_afiliado']);
                 $afNome = $row['nome_afiliado'] ?? '';
                 $linkAfiliado = 'afiliadoPerfil.php?af=' . urlencode((string)$row['chaveafiliadosv']);
+
+                $encIdUsuario = encrypt($row['codigocadastro'], $action = 'e');
 
                 // Ícone tipo de pagamento
                 $tipo = strtolower(trim($row['tipopagamentosv'] ?? ''));
@@ -198,23 +203,135 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <span class="dot d-none d-lg-inline"></span>
 
                         <div class="venda-curso me-lg-3">
-                            <i class="bi bi-journal-code me-1"></i><?= e($curso); ?>
+                            <a href="cursos_turmas.php?id=<?= e($encIdCursov); ?>">
+                                <i class="bi bi-journal-code me-1"></i><?= e($curso); ?>
+                            </a>
+
                         </div>
                         <span class="dot d-none d-lg-inline"></span>
 
                         <div class="venda-aluno me-lg-3">
-                            <i class="bi bi-person-circle me-1"></i><?= e($aluno); ?>
+
+                            <a href="alunoAtendimento.php?idUsuario=<?= e($encIdUsuario); ?>"><i class="bi bi-person-circle me-1"></i><?= e($aluno); ?></a>
+
                         </div>
                         <span class="dot d-none d-lg-inline"></span>
 
+                        <!-- ATENDIMENTO PERSONALIZADO -->
+
+                        <?php
+                        // Helpers (se já existirem no topo, não repetir)
+                        if (!function_exists('saudacaoBR')) {
+                            function saudacaoBR()
+                            {
+                                $h = (int)date('G');
+                                if ($h < 12) return 'Bom dia';
+                                if ($h < 18) return 'Boa tarde';
+                                return 'Boa noite';
+                            }
+                        }
+                        if (!function_exists('primeiroNome')) {
+                            function primeiroNome($nome)
+                            {
+                                $nome = trim((string)$nome);
+                                if ($nome === '') return '';
+                                return explode(' ', $nome)[0];
+                            }
+                        }
+                        if (!function_exists('whatsMsgLink')) {
+                            function whatsMsgLink($celular, $texto)
+                            {
+                                $nums = preg_replace('/\D+/', '', (string)$celular);
+                                if ($nums && substr($nums, 0, 2) !== '55') $nums = '55' . $nums;
+                                $base = 'https://wa.me/' . $nums;
+                                return $nums ? ($base . '?text=' . rawurlencode($texto)) : '#';
+                            }
+                        }
+
+                        // Variáveis
+                        $nomeAlunoCompleto = (string)($row['nome_aluno'] ?? '');
+                        $nomeAlunoPrimeiro = primeiroNome($nomeAlunoCompleto);
+                        $nomeCurso         = (string)($row['nomecurso'] ?? '');
+                        $emailAluno        = (string)($row['email_aluno'] ?? 'seu-email');
+                        $senhaAluno        = isset($row['senha_aluno']) ? (string)$row['senha_aluno'] : 'sua-senha';
+                        $nomePlano         = (string)($row['nome_plano'] ?? 'Anual'); // ajustar conforme coluna disponível
+                        $saudacao          = saudacaoBR();
+
+                        // Mensagens
+                        $msg1 = "{$saudacao}, {$nomeAlunoPrimeiro}! Seja bem-vindo(a) ao curso online do Professor Eugênio. "
+                            . "Confirmamos que sua inscrição no curso de {$nomeCurso} foi registrada com sucesso. "
+                            . "Fique à vontade para explorar o portal e dar início às suas aulas.";
+
+                        $msg2 = "Seguem seus dados de acesso:\n"
+                            . "Login: {$emailAluno}\n"
+                            . "Senha: {$senhaAluno}\n\n"
+                            . "Acesse a página de login e utilize seus dados:\n"
+                            . "https://professoreugenio.com/login_aluno.php";
+
+                        $msg3 = "{$nomeAlunoPrimeiro}, estamos aguardando a confirmação de pagamento do financeiro, "
+                            . "mas fique tranquilo(a): seu acesso ao portal já está garantido para hoje. "
+                            . "Aproveite para iniciar seus estudos e nos chame se tiver qualquer dúvida!";
+
+                        $urlDicasUso   = "https://youtube.com";
+                        $urlAlterarPwd = "https://youtube.com";
+
+                        $msg4 = "💡 Dicas de uso do sistema (vídeo):\n{$urlDicasUso}\n\n"
+                            . "Explore o menu de aulas, baixe seus materiais e acompanhe seu progresso.";
+
+                        $msg5 = "🔐 Como alterar sua senha de acesso (tutorial):\n{$urlAlterarPwd}\n\n"
+                            . "Lembre-se de escolher uma senha segura e pessoal.";
+
+                        $msg6 = "🎉 Parabéns, {$nomeAlunoPrimeiro}! Recebemos a confirmação do pagamento do seu curso *{$nomeCurso}*. "
+                            . "Seu acesso ao plano *{$nomePlano}* foi liberado com sucesso! "
+                            . "Aproveite para começar suas aulas agora mesmo — e conte comigo em qualquer etapa da sua jornada!";
+
+                        // Links
+                        $waLink1 = whatsMsgLink($cel, $msg1);
+                        $waLink2 = whatsMsgLink($cel, $msg2);
+                        $waLink3 = whatsMsgLink($cel, $msg3);
+                        $waLink4 = whatsMsgLink($cel, $msg4);
+                        $waLink5 = whatsMsgLink($cel, $msg5);
+                        $waLink6 = whatsMsgLink($cel, $msg6);
+                        ?>
+
                         <div class="venda-meta me-lg-3">
+
+                            <?php if ($cel): ?>
+
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+
+                                        <i class="bi bi-whatsapp me-1"><i class="bi bi-telephone-outbound me-1"></i>
+                                        </i> <?= e($cel); ?>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                        <li class="dropdown-header small text-muted">Enviar no WhatsApp</li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink1); ?>" target="_blank">1. Saudação e Confirmação</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink2); ?>" target="_blank">2. Dados de Acesso (login/senha)</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink3); ?>" target="_blank">3. Aguardando Confirmação (financeiro)</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink6); ?>" target="_blank">4. Confirmação de Pagamento ✅</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink4); ?>" target="_blank">5. Dicas de Uso do Sistema (vídeo)</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink5); ?>" target="_blank">6. Dicas para Alterar Senha (vídeo)</a></li>
+                                    </ul>
+                                </div>
+                            <?php else: ?>
+                                <span class="text-muted">sem celular</span>
+                            <?php endif; ?>
+                        </div>
+
+
+                        <!-- <div class="venda-meta me-lg-3">
                             <i class="bi bi-telephone-outbound me-1"></i>
                             <?php if ($cel): ?>
                                 <a href="<?= e($whats); ?>" target="_blank" class="link-primary" title="Abrir WhatsApp"><?= e($cel); ?></a>
                             <?php else: ?>
                                 <span class="text-muted">sem celular</span>
                             <?php endif; ?>
-                        </div>
+                        </div> -->
                         <span class="dot d-none d-lg-inline"></span>
 
                         <div class="venda-valor me-lg-3">

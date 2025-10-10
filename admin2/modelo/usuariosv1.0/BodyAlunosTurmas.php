@@ -107,7 +107,7 @@ $total = $turmas ? count($turmas) : 0;
                             data-idcurso="<?= htmlspecialchars($encIdCurso) ?>"
                             <?= $jaInscrito ? 'disabled' : '' ?>>
                             <?= htmlspecialchars($rotulo) ?><?= $jaInscrito ? ' (já inscrito)' : '' ?>
-                        </option>
+                           <?= htmlspecialchars($idTurma); ?>-<?= htmlspecialchars($idCurso); ?>                        </option>
                     <?php endforeach; ?>
                 </select>
                 <div class="form-text">Turmas já inscritas aparecem desabilitadas.</div>
@@ -184,7 +184,7 @@ $total = $turmas ? count($turmas) : 0;
             <div class="me-3">
                 <div class="fw-semibold">
                     <a href="cursos_TurmasAlunos.php?id=<?= urlencode($encIdCurso) ?>&tm=<?= urlencode($encIdTurma) ?>">
-                        <?= htmlspecialchars($titulo) ?>
+                        <?= htmlspecialchars($titulo) ?> T:<?= $idTurma; ?>-C:<?= $idCurso; ?>
                     </a>
                 </div>
                 <small class="text-muted">

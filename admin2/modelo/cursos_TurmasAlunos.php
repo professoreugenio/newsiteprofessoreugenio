@@ -40,16 +40,14 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h4><i class="bi bi-journal-text me-2"></i> CURSO <?= $Nomecurso ?>/
-                    <span class="small"> <?= $Nometurma; ?></span>
+                <h4><i class="bi bi-journal-text me-2"></i> CURSO <?= $Nomecurso ?>: <span class="small "> <?= $idCurso; ?></span>/
+                    <span class="small"> <?= $Nometurma; ?>:<?= $idTurma; ?> </span>
+
                 </h4>
-                <?php
-               echo $senhaenc = encrypt("fabianaoliveira252025@gmail.com&vida1570", $action = 'e'); ?>
-<hr>
-                <?php
-               echo $chave = strtoupper(md5("fabianaoliveira252025@gmail.com&vida1570"));
-                ?>
-               
+
+                <hr>
+
+
 
             </div>
             <div class="mt-4">

@@ -1,0 +1,2 @@
+[07-Oct-2025 11:57:09 America/Sao_Paulo] PHP Warning:  require_once(/home/appsrcc/public_html/admin2/conexao/class.conexao.php): Failed to open stream: No such file or directory in /home/appsrcc/public_html/admin2/modelo/vendas1.0/ajax_RegistrarPagamento.php on line 15
+[07-Oct-2025 11:57:17 America/Sao_Paulo] PHP Warning:  require_once(/home/appsrcc/public_html/admin2/conexao/class.conexao.php): Failed to open stream: No such file or directory in /home/appsrcc/public_html/admin2/modelo/vendas1.0/ajax_RegistrarPagamento.php on line 15

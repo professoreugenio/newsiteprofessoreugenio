@@ -12,6 +12,31 @@ require_once APP_ROOT . '/autenticacao.php';
     <link rel="stylesheet" href="/admin2/v1.0/CSS_config.css?<?= time(); ?>">
     <?php require_once APP_ROOT . '/admin2/v1.0/dadosuser.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <style>
+        /* --- Correção para dropdown de mensagens WhatsApp --- */
+        .venda-item {
+            position: relative;
+            /* importante para escopo do dropdown */
+            overflow: visible !important;
+            /* garante que o dropdown não fique cortado */
+        }
+
+        .dropdown-menu {
+            z-index: 9000 !important;
+            position: absolute !important;
+            /* acima dos outros cards */
+        }
+
+        /* Pequeno ajuste visual */
+        .dropdown-menu.show {
+            transform: translate3d(0, 0, 10px) !important;
+            margin-top: 4px;
+            z-index: 9000 !important;
+            position: absolute !important;
+        }
+    </style>
+
 </head>
 
 <body id="adminLayout">
@@ -22,8 +47,6 @@ require_once APP_ROOT . '/autenticacao.php';
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
                 <h3><i class="bi bi-journal-text me-2"></i> Vendas</h3>
-               
-                
             </div>
             <?php require_once APP_ROOT . '/admin2/modelo/vendas1.0/Subnav.php'; ?>
         </div>

@@ -102,7 +102,7 @@ $stmt->execute();
 
                         <a href="cursos_editar.php?id=<?= $encId; ?>"
                             class="text-decoration-none fw-semibold text-dark me-3">
-                            <?= $nome; ?> <?= $matrizLabel; ?>
+                            <?= $nome; ?> <?= $matrizLabel; ?> <?= $id; ?>
                             <small class="text-muted ms-1">(<?= $qtdTurmas; ?> turma<?= $qtdTurmas !== 1 ? 's' : '' ?>)</small>
                         </a>
 

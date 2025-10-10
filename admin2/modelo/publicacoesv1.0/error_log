@@ -1,0 +1,15 @@
+[01-Oct-2025 11:47:05 America/Fortaleza] PHP Warning:  Undefined array key "codigopublicacoescursos " in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_publicacaoUpdateform1.php on line 35
+[01-Oct-2025 11:56:09 America/Fortaleza] PHP Warning:  Trying to access array offset on value of type bool in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_publicacaoUpdateform1.php on line 35
+[01-Oct-2025 18:41:27 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[01-Oct-2025 18:41:27 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[01-Oct-2025 18:41:27 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[01-Oct-2025 18:41:27 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[04-Oct-2025 09:56:26 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[04-Oct-2025 11:24:17 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[04-Oct-2025 11:24:17 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[04-Oct-2025 14:40:23 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[04-Oct-2025 14:40:23 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[06-Oct-2025 16:34:09 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[06-Oct-2025 16:34:09 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[06-Oct-2025 16:34:09 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
+[06-Oct-2025 16:34:09 America/Fortaleza] PHP Warning:  Undefined variable $pastapub in /home/appsrcc/public_html/admin2/modelo/publicacoesv1.0/ajax_anexo_list.php on line 85
