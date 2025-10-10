@@ -220,45 +220,108 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <!-- ATENDIMENTO PERSONALIZADO -->
 
                         <?php
-                        // Variáveis usadas nos data-attributes do botão
-                        // garanta que seu SELECT tenha: a.email AS email_aluno
+                        // Helpers (se já existirem no topo, não repetir)
+                        if (!function_exists('saudacaoBR')) {
+                            function saudacaoBR()
+                            {
+                                $h = (int)date('G');
+                                if ($h < 12) return 'Bom dia';
+                                if ($h < 18) return 'Boa tarde';
+                                return 'Boa noite';
+                            }
+                        }
+                        if (!function_exists('primeiroNome')) {
+                            function primeiroNome($nome)
+                            {
+                                $nome = trim((string)$nome);
+                                if ($nome === '') return '';
+                                return explode(' ', $nome)[0];
+                            }
+                        }
+                        if (!function_exists('whatsMsgLink')) {
+                            function whatsMsgLink($celular, $texto)
+                            {
+                                $nums = preg_replace('/\D+/', '', (string)$celular);
+                                if ($nums && substr($nums, 0, 2) !== '55') $nums = '55' . $nums;
+                                $base = 'https://wa.me/' . $nums;
+                                return $nums ? ($base . '?text=' . rawurlencode($texto)) : '#';
+                            }
+                        }
+
+                        // Variáveis
                         $nomeAlunoCompleto = (string)($row['nome_aluno'] ?? '');
-                        $emailAluno        = (string)($row['email_aluno'] ?? '');
+                        $nomeAlunoPrimeiro = primeiroNome($nomeAlunoCompleto);
                         $nomeCurso         = (string)($row['nomecurso'] ?? '');
-                        // Se tiver plano/senha no contexto, preencha; caso contrário, ficam vazios mesmo
-                        $nomePlano         = (string)($row['nome_plano'] ?? '');
-                        $senhaAluno        = isset($row['senha_aluno']) ? (string)$row['senha_aluno'] : '';
+                        $emailAluno        = (string)($row['email_aluno'] ?? 'seu-email');
+                        $senhaAluno        = isset($row['senha_aluno']) ? (string)$row['senha_aluno'] : 'sua-senha';
+                        $nomePlano         = (string)($row['nome_plano'] ?? 'Anual'); // ajustar conforme coluna disponível
+                        $saudacao          = saudacaoBR();
+
+                        // Mensagens
+                        $msg1 = "{$saudacao}, {$nomeAlunoPrimeiro}! Seja bem-vindo(a) ao curso online do Professor Eugênio. "
+                            . "Confirmamos que sua inscrição no curso de {$nomeCurso} foi registrada com sucesso. "
+                            . "Fique à vontade para explorar o portal e dar início às suas aulas.";
+
+                        $msg2 = "Seguem seus dados de acesso:\n"
+                            . "Login: {$emailAluno}\n"
+                            . "Senha: {$senhaAluno}\n\n"
+                            . "Acesse a página de login e utilize seus dados:\n"
+                            . "https://professoreugenio.com/login_aluno.php";
+
+                        $msg3 = "{$nomeAlunoPrimeiro}, estamos aguardando a confirmação de pagamento do financeiro, "
+                            . "mas fique tranquilo(a): seu acesso ao portal já está garantido para hoje. "
+                            . "Aproveite para iniciar seus estudos e nos chame se tiver qualquer dúvida!";
+
+                        $urlDicasUso   = "https://youtube.com";
+                        $urlAlterarPwd = "https://youtube.com";
+
+                        $msg4 = "💡 Dicas de uso do sistema (vídeo):\n{$urlDicasUso}\n\n"
+                            . "Explore o menu de aulas, baixe seus materiais e acompanhe seu progresso.";
+
+                        $msg5 = "🔐 Como alterar sua senha de acesso (tutorial):\n{$urlAlterarPwd}\n\n"
+                            . "Lembre-se de escolher uma senha segura e pessoal.";
+
+                        $msg6 = "🎉 Parabéns, {$nomeAlunoPrimeiro}! Recebemos a confirmação do pagamento do seu curso *{$nomeCurso}*. "
+                            . "Seu acesso ao plano *{$nomePlano}* foi liberado com sucesso! "
+                            . "Aproveite para começar suas aulas agora mesmo — e conte comigo em qualquer etapa da sua jornada!";
+
+                        // Links
+                        $waLink1 = whatsMsgLink($cel, $msg1);
+                        $waLink2 = whatsMsgLink($cel, $msg2);
+                        $waLink3 = whatsMsgLink($cel, $msg3);
+                        $waLink4 = whatsMsgLink($cel, $msg4);
+                        $waLink5 = whatsMsgLink($cel, $msg5);
+                        $waLink6 = whatsMsgLink($cel, $msg6);
                         ?>
 
                         <div class="venda-meta me-lg-3">
 
-
                             <?php if ($cel): ?>
-                                <!-- Link direto para abrir o chat do aluno -->
 
 
-                                <!-- Botão que abre o modal de mensagens prontas -->
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-success btn-sm btn-wpp-msg"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalWppMensagens"
-                                    data-cel="<?= e($cel); ?>"
-                                    data-nome="<?= e($nomeAlunoCompleto); ?>"
-                                    data-curso="<?= e($nomeCurso); ?>"
-                                    data-email="<?= e($emailAluno); ?>"
-                                    data-senha="<?= e($senhaAluno); ?>"
-                                    data-plano="<?= e($nomePlano); ?>"
-                                    title="Mensagens rápidas no WhatsApp">
-                                    <i class="bi bi-whatsapp me-1"></i> <i class="bi bi-telephone-outbound me-1"></i> <?= e($cel); ?>
-                                </button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+
+                                        <i class="bi bi-whatsapp me-1"><i class="bi bi-telephone-outbound me-1"></i>
+                                        </i> <?= e($cel); ?>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                        <li class="dropdown-header small text-muted">Enviar no WhatsApp</li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink1); ?>" target="_blank">1. Saudação e Confirmação</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink2); ?>" target="_blank">2. Dados de Acesso (login/senha)</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink3); ?>" target="_blank">3. Aguardando Confirmação (financeiro)</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink6); ?>" target="_blank">4. Confirmação de Pagamento ✅</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink4); ?>" target="_blank">5. Dicas de Uso do Sistema (vídeo)</a></li>
+                                        <li><a class="dropdown-item" href="<?= e($waLink5); ?>" target="_blank">6. Dicas para Alterar Senha (vídeo)</a></li>
+                                    </ul>
+                                </div>
                             <?php else: ?>
                                 <span class="text-muted">sem celular</span>
                             <?php endif; ?>
                         </div>
-
-
-
 
 
                         <!-- <div class="venda-meta me-lg-3">
@@ -306,244 +369,6 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </div>
 </div>
-
-
-<!-- Modal Mensagens WhatsApp -->
-<div class="modal fade" id="modalWppMensagens" tabindex="-1" aria-labelledby="modalWppMensagensLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title d-flex align-items-center gap-2" id="modalWppMensagensLabel">
-                    <i class="bi bi-whatsapp"></i> Mensagens rápidas no WhatsApp
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-
-            <div class="modal-body">
-                <div class="row g-3">
-                    <div class="col-12 col-md-6">
-                        <div class="small text-muted">Aluno</div>
-                        <div class="fw-semibold" id="wppAlunoNome">—</div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="small text-muted">Curso</div>
-                        <div class="fw-semibold" id="wppCurso">—</div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="small text-muted">Plano</div>
-                        <div class="fw-semibold" id="wppPlano">—</div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="list-group" id="wppMsgsList">
-                    <!-- Itens gerados via JS -->
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <a class="btn btn-outline-primary" id="wppAbrirChat" href="#" target="_blank">
-                    <i class="bi bi-chat-dots me-1"></i> Abrir chat
-                </a>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-    #wppMsgsList .list-group-item {
-        border-radius: 10px;
-    }
-
-    #wppMsgsList .btn-copy {
-        min-width: 100px;
-    }
-
-    pre.wpp-text {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        margin: 0;
-        font-size: .95rem;
-    }
-</style>
-
-<script>
-    (function() {
-        const URL_LOGIN = 'https://professoreugenio.com/login_aluno.php';
-        // Ajuste para seus vídeos oficiais:
-        const URL_DICAS_USO = 'https://youtube.com';
-        const URL_ALTERAR_PWD = 'https://youtube.com';
-
-        const modalEl = document.getElementById('modalWppMensagens');
-        const listEl = document.getElementById('wppMsgsList');
-        const nomeEl = document.getElementById('wppAlunoNome');
-        const cursoEl = document.getElementById('wppCurso');
-        const planoEl = document.getElementById('wppPlano');
-        const abrirChatBtn = document.getElementById('wppAbrirChat');
-
-        function soNumeros(v) {
-            return (v || '').toString().replace(/\D+/g, '');
-        }
-
-        function waLink(cel, texto) {
-            let n = soNumeros(cel);
-            if (n && !n.startsWith('55')) n = '55' + n;
-            return n ? `https://wa.me/${n}?text=${encodeURIComponent(texto)}` : '#';
-        }
-
-        function saudacao() {
-            const h = new Date().getHours();
-            if (h < 12) return 'Bom dia';
-            if (h < 18) return 'Boa tarde';
-            return 'Boa noite';
-        }
-
-        function primeiroNome(nome) {
-            if (!nome) return '';
-            const p = nome.trim().split(/\s+/);
-            return p[0] || '';
-        }
-
-        function buildMensagens({
-            cel,
-            nome,
-            curso,
-            email,
-            senha,
-            plano
-        }) {
-            const oi = saudacao();
-            const pn = primeiroNome(nome || '');
-            const pwd = senha || 'sua-senha';
-
-            const m1 = `${oi}, ${pn}!\nSeja bem-vindo(a) ao curso online do Professor Eugênio.\n ` +
-                `\nConfirmamos que sua inscrição no curso de ${curso || 'seu curso'} foi registrada com sucesso. ` +
-                `\nAcesse o portal e já pode começar suas aulas!`;
-
-            const m2 = `Seguem seus dados de acesso:\n` +
-                `Login: ${email || 'seu-email'}\n` +
-                `Senha: ${pwd}\n\n` +
-                `Acesse: ${URL_LOGIN}`;
-
-            const m3 = `${pn}, estamos aguardando a confirmação de pagamento do financeiro, ` +
-                `mas fique tranquilo(a): seu acesso ao portal já está garantido para hoje. ` +
-                `Aproveite para iniciar seus estudos e, se precisar, estou à disposição!`;
-
-            const m4 = `💡 Dicas de uso do sistema (vídeo):\n${URL_DICAS_USO}\n\n` +
-                `Explore o menu de aulas, baixe seus materiais e acompanhe seu progresso.`;
-
-            const m5 = `🔐 Como alterar sua senha de acesso (tutorial):\n${URL_ALTERAR_PWD}\n\n` +
-                `Escolha uma senha segura e pessoal.`;
-
-            const m6 = `🎉 Parabéns, ${pn}! Recebemos a confirmação do pagamento do seu curso *${curso || 'seu curso'}*. ` +
-                `Seu acesso ao plano *${plano || 'Anual'}* foi liberado com sucesso. ` +
-                `Aproveite para começar suas aulas agora mesmo — conte comigo no que precisar!`;
-
-            return [{
-                    id: 'm1',
-                    titulo: '1) Saudação e Confirmação',
-                    texto: m1
-                },
-                {
-                    id: 'm2',
-                    titulo: '2) Dados de Acesso (login/senha)',
-                    texto: m2
-                },
-                {
-                    id: 'm3',
-                    titulo: '3) Aguardando Confirmação (financeiro)',
-                    texto: m3
-                },
-                {
-                    id: 'm6',
-                    titulo: '4) Confirmação de Pagamento ✅',
-                    texto: m6
-                },
-                {
-                    id: 'm4',
-                    titulo: '5) Dicas de Uso do Sistema (vídeo)',
-                    texto: m4
-                },
-                {
-                    id: 'm5',
-                    titulo: '6) Dicas para Alterar Senha (vídeo)',
-                    texto: m5
-                },
-            ];
-        }
-
-        function renderList(msgs, cel) {
-            listEl.innerHTML = '';
-            msgs.forEach(m => {
-                const item = document.createElement('div');
-                item.className = 'list-group-item d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-2';
-                item.innerHTML = `
-        <div class="me-lg-3">
-          <div class="fw-semibold">${m.titulo}</div>
-          <pre class="wpp-text">${m.texto}</pre>
-        </div>
-        <div class="d-flex gap-2">
-          <a class="btn btn-success btn-sm" href="${waLink(cel, m.texto)}" target="_blank">
-            <i class="bi bi-send me-1"></i> Enviar
-          </a>
-          <button type="button" class="btn btn-outline-secondary btn-sm btn-copy" data-text="${encodeURIComponent(m.texto)}">
-            <i class="bi bi-clipboard-check me-1"></i> Copiar
-          </button>
-        </div>
-      `;
-                listEl.appendChild(item);
-            });
-
-            // handler copiar
-            listEl.querySelectorAll('.btn-copy').forEach(btn => {
-                btn.addEventListener('click', async () => {
-                    const txt = decodeURIComponent(btn.getAttribute('data-text') || '');
-                    try {
-                        await navigator.clipboard.writeText(txt);
-                        btn.innerHTML = '<i class="bi bi-clipboard-check-fill me-1"></i> Copiado';
-                        setTimeout(() => btn.innerHTML = '<i class="bi bi-clipboard-check me-1"></i> Copiar', 1200);
-                    } catch (e) {
-                        alert('Não foi possível copiar o texto.');
-                    }
-                });
-            });
-        }
-
-        // Abre modal já preenchido
-        modalEl.addEventListener('show.bs.modal', function(ev) {
-            const btn = ev.relatedTarget; // botão que abriu o modal
-            if (!btn) return;
-            const cel = btn.getAttribute('data-cel') || '';
-            const nome = btn.getAttribute('data-nome') || '';
-            const curso = btn.getAttribute('data-curso') || '';
-            const email = btn.getAttribute('data-email') || '';
-            const senha = btn.getAttribute('data-senha') || '';
-            const plano = btn.getAttribute('data-plano') || '';
-
-            nomeEl.textContent = nome || '—';
-            cursoEl.textContent = curso || '—';
-            planoEl.textContent = plano || '—';
-
-            // Botão "Abrir chat" (sem mensagem) para iniciar conversa
-            let n = soNumeros(cel);
-            if (n && !n.startsWith('55')) n = '55' + n;
-            abrirChatBtn.href = n ? `https://wa.me/${n}` : '#';
-
-            const mensagens = buildMensagens({
-                cel,
-                nome,
-                curso,
-                email,
-                senha,
-                plano
-            });
-            renderList(mensagens, cel);
-        });
-    })();
-</script>
-
 
 <script>
     (function() {
