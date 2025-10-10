@@ -10,8 +10,8 @@ if (temPermissao($niveladm, [1])):
     if(!empty($_GET['md'])): $idModulo= encrypt($_GET['md'], $action = 'd' ); endif;
     if(!empty($_GET['pub'])): $idPublicacao= encrypt($_GET['pub'], $action = 'd' ); endif;
 
-    $mod = "<h3>{ C: $idCurso * M: $idModulo }";
-    $mod .= "{ P: $idPublicacao }";
-    $mod .= "</h3>";
+    $mod = "<h6>{ Curso: $idCurso * Módulo: $idModulo }";
+    $mod .= "{ Publicação: $idPublicacao }";
+    $mod .= "</h6>";
 endif;
 echo $mod;

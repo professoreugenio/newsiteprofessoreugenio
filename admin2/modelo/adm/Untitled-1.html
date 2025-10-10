@@ -1,0 +1,287 @@
+<h2 data-start="0" data-end="84"><strong data-start="2" data-end="84">Power BI – Pop-ups com Segmentações para Otimizar
+        Espaço (Bookmarks + Seleção)</strong></h2>
+<p data-start="86" data-end="337"><strong data-start="86" data-end="106">Objetivo da aula</strong><br data-start="106"
+        data-end="109">
+    Você vai aprender a criar um <strong data-start="138" data-end="190">painel pop-up de filtros (segmentações de
+        dados)</strong> no Power BI usando <strong data-start="210" data-end="237">Indicadores (Bookmarks)</strong> e o
+    <strong data-start="242" data-end="263">Painel de Seleção</strong>, para liberar espaço no relatório e manter o
+    layout limpo e profissional.</p>
+<hr data-start="339" data-end="342">
+<h2 data-start="344" data-end="384"><strong data-start="346" data-end="382">Por que usar pop-ups de filtros?</strong>
+</h2>
+<ul data-start="385" data-end="567">
+    <li data-start="385" data-end="449">
+        <p data-start="387" data-end="449">Evita “briga” de espaço entre <strong data-start="417"
+                data-end="446">gráficos, mapas e cartões</strong>.</p>
+    </li>
+    <li data-start="450" data-end="509">
+        <p data-start="452" data-end="509">Mantém filtros acessíveis <strong data-start="478" data-end="493">sob
+                demanda</strong> (abre/fecha).</p>
+    </li>
+    <li data-start="510" data-end="567">
+        <p data-start="512" data-end="567">Melhora <strong data-start="520" data-end="535">usabilidade</strong> e
+            <strong data-start="538" data-end="553">foco visual</strong> do dashboard.</p>
+    </li>
+</ul>
+<hr data-start="569" data-end="572">
+<h2 data-start="574" data-end="616"><strong data-start="576" data-end="614">Conceitos rápidos (mini-glossário)</strong>
+</h2>
+<ul data-start="617" data-end="1225">
+    <li data-start="617" data-end="715">
+        <p data-start="619" data-end="715"><strong data-start="619" data-end="653">Segmentação de dados
+                (Slicer):</strong> visual para filtrar dados por campos (Ano, Estado, Marca…).</p>
+    </li>
+    <li data-start="716" data-end="825">
+        <p data-start="718" data-end="825"><strong data-start="718" data-end="740">Painel de Seleção:</strong> lista
+            todos os objetos da página para <strong data-start="779" data-end="798">mostrar/ocultar</strong> e <strong
+                data-start="801" data-end="822">organizar camadas</strong>.</p>
+    </li>
+    <li data-start="826" data-end="972">
+        <p data-start="828" data-end="972"><strong data-start="828" data-end="856">Indicadores (Bookmarks):</strong>
+            “fotos” do estado da página (o que está visível, posição, etc.), usadas para criar ações de abrir/fechar
+            pop-ups.</p>
+    </li>
+    <li data-start="973" data-end="1115">
+        <p data-start="975" data-end="1115"><strong data-start="975" data-end="986">Pop-up:</strong> container visual
+            (geralmente uma <strong data-start="1020" data-end="1029">forma</strong> com bordas arredondadas) que
+            <strong data-start="1059" data-end="1070">aparece</strong> sobre o relatório com segmentações dentro.</p>
+    </li>
+    <li data-start="1116" data-end="1225">
+        <p data-start="1118" data-end="1225"><strong data-start="1118" data-end="1136">Ação (Action):</strong>
+            configuração de um elemento (imagem/botão) para <strong data-start="1185" data-end="1196">navegar</strong>
+            para um marcador (bookmark).</p>
+    </li>
+</ul>
+<hr data-start="1227" data-end="1230">
+<h2 data-start="1232" data-end="1285"><strong data-start="1234" data-end="1285">Passo a passo – Construindo o pop-up de
+        filtros</strong></h2>
+<p data-start="1287" data-end="1320"><strong data-start="1287" data-end="1318">1) Preparar a área e ícones</strong></p>
+<ul data-start="1321" data-end="1528">
+    <li data-start="1321" data-end="1449">
+        <p data-start="1323" data-end="1449"><strong data-start="1323" data-end="1350">Inserir → Imagem/Ícone:</strong>
+            adicione um <strong data-start="1363" data-end="1389">ícone de abrir filtros</strong> (ex.: funil/menu) e
+            outro <strong data-start="1416" data-end="1435">ícone de fechar</strong> (ex.: “X”).</p>
+    </li>
+    <li data-start="1450" data-end="1528">
+        <p data-start="1452" data-end="1528">Posicione o ícone <strong data-start="1470" data-end="1479">Abrir</strong>
+            no canto superior do relatório (fixo e visível).</p>
+    </li>
+</ul>
+<p data-start="1530" data-end="1564"><strong data-start="1530" data-end="1562">2) Criar o container (forma)</strong></p>
+<ul data-start="1565" data-end="1866">
+    <li data-start="1565" data-end="1628">
+        <p data-start="1567" data-end="1628"><strong data-start="1567" data-end="1588">Inserir → Formas:</strong>
+            escolha um <strong data-start="1600" data-end="1625">retângulo arredondado</strong>.</p>
+    </li>
+    <li data-start="1629" data-end="1694">
+        <p data-start="1631" data-end="1694">Ajuste <strong data-start="1638" data-end="1657">raio dos cantos</strong>
+            (nem muito reto, nem muito curvo).</p>
+    </li>
+    <li data-start="1695" data-end="1779">
+        <p data-start="1697" data-end="1779">Em <strong data-start="1700" data-end="1742">Formatação do visual →
+                Borda/Contorno:</strong> desative se quiser pop-up “clean”.</p>
+    </li>
+    <li data-start="1780" data-end="1866">
+        <p data-start="1782" data-end="1866"><strong data-start="1782" data-end="1800">Preenchimento:</strong> use uma
+            cor neutra (ex.: 20% mais escuro) para destacar do fundo.</p>
+    </li>
+</ul>
+<p data-start="1868" data-end="1924"><strong data-start="1868" data-end="1922">3) Adicionar as segmentações (Ano,
+        Estado, Marca…)</strong></p>
+<ul data-start="1925" data-end="2335">
+    <li data-start="1925" data-end="2005">
+        <p data-start="1927" data-end="2005"><strong data-start="1927" data-end="1967">Visualizações → Segmentação de
+                dados</strong> e selecione o <strong data-start="1982" data-end="1991">campo</strong> (ex.: Ano).</p>
+    </li>
+    <li data-start="2006" data-end="2127">
+        <p data-start="2008" data-end="2127">Em <strong data-start="2011" data-end="2052">Formatação do visual →
+                Configurações:</strong> mude para <strong data-start="2063" data-end="2081">Lista vertical</strong> (se
+            preferir); ajuste <strong data-start="2104" data-end="2124">Tamanho da fonte</strong>.</p>
+    </li>
+    <li data-start="2128" data-end="2202">
+        <p data-start="2130" data-end="2202">Copie/cole a segmentação e troque o campo para <strong data-start="2177"
+                data-end="2187">Estado</strong> e <strong data-start="2190" data-end="2199">Marca</strong>.</p>
+    </li>
+    <li data-start="2203" data-end="2335">
+        <p data-start="2205" data-end="2335"><strong data-start="2205" data-end="2230">Remover “(em branco)”</strong>:
+            no painel de <strong data-start="2245" data-end="2256">Filtros</strong> da segmentação → <strong
+                data-start="2274" data-end="2293">Filtro avançado</strong> → <strong data-start="2296"
+                data-end="2320">“não está em branco”</strong> → <strong data-start="2323"
+                data-end="2334">Aplicar</strong>.</p>
+    </li>
+</ul>
+<p data-start="2337" data-end="2380"><strong data-start="2337" data-end="2378">4) Harmonizar visual (cores e
+        textos)</strong></p>
+<ul data-start="2381" data-end="2604">
+    <li data-start="2381" data-end="2487">
+        <p data-start="2383" data-end="2487"><strong data-start="2383" data-end="2400">Tela de fundo</strong> da
+            segmentação = mesma paleta do container; <strong data-start="2445" data-end="2454">Fonte</strong> clara
+            (branco) para contraste.</p>
+    </li>
+    <li data-start="2488" data-end="2604">
+        <p data-start="2490" data-end="2604"><strong data-start="2490" data-end="2503">Cabeçalho</strong> com cor de
+            destaque (ex.: amarelo) e aplique com o <strong data-start="2555" data-end="2579">Pincel de
+                formatação</strong> nas demais segmentações.</p>
+    </li>
+</ul>
+<p data-start="2606" data-end="2644"><strong data-start="2606" data-end="2642">5) Alinhar, distribuir e agrupar</strong>
+</p>
+<ul data-start="2645" data-end="2901">
+    <li data-start="2645" data-end="2747">
+        <p data-start="2647" data-end="2747">Selecione as segmentações (Shift + clique) → <strong data-start="2692"
+                data-end="2724">Formato → Alinhar/Distribuir</strong> (distâncias iguais).</p>
+    </li>
+    <li data-start="2748" data-end="2835">
+        <p data-start="2750" data-end="2835">Selecione <strong data-start="2760" data-end="2788">container +
+                segmentações</strong> (sem o ícone Abrir) → <strong data-start="2811" data-end="2832">Formato →
+                Agrupar</strong>.</p>
+    </li>
+    <li data-start="2836" data-end="2901">
+        <p data-start="2838" data-end="2901">Coloque o <strong data-start="2848" data-end="2864">ícone Fechar</strong>
+            dentro do pop-up, no canto superior.</p>
+    </li>
+</ul>
+<p data-start="2903" data-end="2931"><strong data-start="2903" data-end="2929">6) Painéis necessários</strong></p>
+<ul data-start="2932" data-end="3066">
+    <li data-start="2932" data-end="2995">
+        <p data-start="2934" data-end="2995"><strong data-start="2934" data-end="2964">Exibir → Painel de
+                Seleção</strong> e <strong data-start="2967" data-end="2992">Painel de Indicadores</strong>.</p>
+    </li>
+    <li data-start="2996" data-end="3066">
+        <p data-start="2998" data-end="3066">No <strong data-start="3001" data-end="3022">Painel de Seleção</strong>,
+            renomeie o grupo para <strong data-start="3046" data-end="3065">“Painel Pop-up”</strong>.</p>
+    </li>
+</ul>
+<p data-start="3068" data-end="3109"><strong data-start="3068" data-end="3107">7) Criar os Indicadores
+        (Bookmarks)</strong></p>
+<ul data-start="3110" data-end="3551">
+    <li data-start="3110" data-end="3385">
+        <p data-start="3112" data-end="3141"><strong data-start="3112" data-end="3139">Estado “Fechado” (OFF):</strong>
+        </p>
+        <ul data-start="3144" data-end="3385">
+            <li data-start="3144" data-end="3221">
+                <p data-start="3146" data-end="3221">No <strong data-start="3149" data-end="3170">Painel de
+                        Seleção</strong>, <strong data-start="3172" data-end="3182">oculte</strong> o grupo <strong
+                        data-start="3191" data-end="3208">Painel Pop-up</strong> (olhinho).</p>
+            </li>
+            <li data-start="3224" data-end="3305">
+                <p data-start="3226" data-end="3305">No <strong data-start="3229" data-end="3254">Painel de
+                        Indicadores</strong>, <strong data-start="3256" data-end="3269">Adicionar</strong> → renomeie
+                    para <strong data-start="3286" data-end="3302">“Painel OFF”</strong>.</p>
+            </li>
+            <li data-start="3308" data-end="3385">
+                <p data-start="3310" data-end="3385"><strong data-start="3310" data-end="3331">Desmarque
+                        “Dados”</strong> no indicador (para não limpar filtros ao alternar).</p>
+            </li>
+        </ul>
+    </li>
+    <li data-start="3386" data-end="3551">
+        <p data-start="3388" data-end="3415"><strong data-start="3388" data-end="3413">Estado “Aberto” (ON):</strong>
+        </p>
+        <ul data-start="3418" data-end="3551">
+            <li data-start="3418" data-end="3458">
+                <p data-start="3420" data-end="3458"><strong data-start="3420" data-end="3429">Exiba</strong> o grupo
+                    <strong data-start="3438" data-end="3455">Painel Pop-up</strong>.</p>
+            </li>
+            <li data-start="3461" data-end="3512">
+                <p data-start="3463" data-end="3512"><strong data-start="3463" data-end="3476">Adicionar</strong> novo
+                    indicador → <strong data-start="3494" data-end="3509">“Painel ON”</strong>.</p>
+            </li>
+            <li data-start="3515" data-end="3551">
+                <p data-start="3517" data-end="3551"><strong data-start="3517" data-end="3538">Desmarque
+                        “Dados”</strong> aqui também.</p>
+            </li>
+        </ul>
+    </li>
+</ul>
+<p data-start="3553" data-end="3578"><strong data-start="3553" data-end="3576">8) Ações nos ícones</strong></p>
+<ul data-start="3579" data-end="3730">
+    <li data-start="3579" data-end="3674">
+        <p data-start="3581" data-end="3674"><strong data-start="3581" data-end="3596">Ícone Abrir</strong> → <strong
+                data-start="3599" data-end="3671">Formatação do visual → Ação → Tipo: Marcador → Marcador: “Painel
+                ON”</strong>.</p>
+    </li>
+    <li data-start="3675" data-end="3730">
+        <p data-start="3677" data-end="3730"><strong data-start="3677" data-end="3693">Ícone Fechar</strong> → <strong
+                data-start="3696" data-end="3729">Ação → Marcador: “Painel OFF”</strong>.</p>
+    </li>
+</ul>
+<p data-start="3732" data-end="3746"><strong data-start="3732" data-end="3744">9) Teste</strong></p>
+<ul data-start="3747" data-end="3959">
+    <li data-start="3747" data-end="3794">
+        <p data-start="3749" data-end="3794">Clique no <strong data-start="3759" data-end="3774">ícone Abrir</strong>
+            (pop-up aparece).</p>
+    </li>
+    <li data-start="3795" data-end="3840">
+        <p data-start="3797" data-end="3840">Clique no <strong data-start="3807" data-end="3823">ícone Fechar</strong>
+            (pop-up some).</p>
+    </li>
+    <li data-start="3841" data-end="3959">
+        <p data-start="3843" data-end="3959">Aplique um filtro e feche o pop-up: <strong data-start="3879"
+                data-end="3910">os filtros devem permanecer</strong> (porque “Dados” foi desmarcado nos indicadores).
+        </p>
+    </li>
+</ul>
+<p data-start="3961" data-end="3980"><strong data-start="3961" data-end="3978">Boas práticas</strong></p>
+<ul data-start="3981" data-end="4210">
+    <li data-start="3981" data-end="4054">
+        <p data-start="3983" data-end="4054">Crie <strong data-start="3988" data-end="4005">padrão visual</strong>
+            (cores e fontes) e reutilize com o <strong data-start="4041" data-end="4051">Pincel</strong>.</p>
+    </li>
+    <li data-start="4055" data-end="4134">
+        <p data-start="4057" data-end="4134">Use <strong data-start="4061" data-end="4078">poucos níveis</strong> de
+            filtros por pop-up para não “pesar” a experiência.</p>
+    </li>
+    <li data-start="4135" data-end="4210">
+        <p data-start="4137" data-end="4210">Nomeie objetos e indicadores de forma clara: <strong data-start="4182"
+                data-end="4209">“Popup_Filtros_ON/ OFF”</strong>.</p>
+    </li>
+</ul>
+<hr data-start="4212" data-end="4215">
+<h2 data-start="4217" data-end="4239"><strong data-start="4219" data-end="4239">Checklist rápido</strong></h2>
+<ul class="contains-task-list" data-start="4240" data-end="4533">
+    <li class="task-list-item" data-start="4240" data-end="4276">
+        <p data-start="4246" data-end="4276"><input disabled="" type="checkbox"> Container criado e formatado</p>
+    </li>
+    <li class="task-list-item" data-start="4277" data-end="4328">
+        <p data-start="4283" data-end="4328"><input disabled="" type="checkbox"> Segmentações configuradas (sem “em
+            branco”)</p>
+    </li>
+    <li class="task-list-item" data-start="4329" data-end="4378">
+        <p data-start="4335" data-end="4378"><input disabled="" type="checkbox"> Itens alinhados, distribuídos e
+            agrupados</p>
+    </li>
+    <li class="task-list-item" data-start="4379" data-end="4435">
+        <p data-start="4385" data-end="4435"><input disabled="" type="checkbox"> Painéis de <strong data-start="4396"
+                data-end="4407">Seleção</strong> e <strong data-start="4410" data-end="4425">Indicadores</strong>
+            abertos</p>
+    </li>
+    <li class="task-list-item" data-start="4436" data-end="4498">
+        <p data-start="4442" data-end="4498"><input disabled="" type="checkbox"> Indicadores <strong data-start="4454"
+                data-end="4464">ON/OFF</strong> criados <strong data-start="4473" data-end="4480">sem</strong> “Dados”
+            marcado</p>
+    </li>
+    <li class="task-list-item" data-start="4499" data-end="4533">
+        <p data-start="4505" data-end="4533"><input disabled="" type="checkbox"> Ações nos ícones funcionando</p>
+    </li>
+</ul>
+<hr data-start="4535" data-end="4538">
+<h2 data-start="4540" data-end="4563"><strong data-start="4542" data-end="4563">Exercício prático</strong></h2>
+<ol data-start="4564" data-end="4817">
+    <li data-start="4564" data-end="4629">
+        <p data-start="4567" data-end="4629">Monte um pop-up com <strong data-start="4587" data-end="4605">3
+                segmentações</strong> (Ano, Estado, Marca).</p>
+    </li>
+    <li data-start="4630" data-end="4702">
+        <p data-start="4633" data-end="4702">Crie <strong data-start="4638" data-end="4648">ícones</strong> de
+            abrir/fechar e configure <strong data-start="4677" data-end="4699">Indicadores ON/OFF</strong>.</p>
+    </li>
+    <li data-start="4703" data-end="4780">
+        <p data-start="4706" data-end="4780">Aplique filtros, feche e reabra para validar que <strong data-start="4755"
+                data-end="4777">filtros permanecem</strong>.</p>
+    </li>
+    <li data-start="4781" data-end="4817">
+        <p data-start="4784" data-end="4817">Padronize cores com o <strong data-start="4806"
+                data-end="4816">Pincel</strong>.</p>
+    </li>
+</ol>

@@ -27,8 +27,8 @@ require_once APP_ROOT . '/autenticacao.php';
         <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
             <div class="mt-4">
                 <h3>Painel Admin</h3>
-                <small><?= $saudacao; ?></small><br>
-                <small><?= diadasemana($data, 2); ?></small>
+                <!-- <small><?= $saudacao; ?></small><br>
+                <small><?= diadasemana($data, 2); ?></small> -->
                 <h4 class="mt-2">
                     <small class="text-muted">Bem-vindo de volta, <strong><?= $nomeadm ?? 'Administrador'; ?></strong>!</small>
                 </h4>

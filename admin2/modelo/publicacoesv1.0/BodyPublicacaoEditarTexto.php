@@ -1,4 +1,6 @@
-<?php require_once APP_ROOT . '/admin2/modelo/adm/idcursomodulo.php'; ?>
+<div style="position:fixed; top: 140px; right:20px; z-index:1050;color:#ff0080;">
+    <?php require_once APP_ROOT . '/admin2/modelo/adm/idcursomodulo.php'; ?>
+</div>
 
 <form id="formEditarTexto" method="post" action="ajax_publicacaoEditarTexto.php">
     <input type="hidden" name="idpublicacao" value="<?= $encIdPublicacao; ?>">

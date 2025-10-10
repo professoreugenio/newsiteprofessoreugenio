@@ -9,18 +9,15 @@
     <?php require '../v1.0/require_Aniversariantes.php'; ?>
     <?php require '../v1.0/require_Usuarios.php'; ?>
     <?php require '../v1.0/require_Publicacoes.php'; ?>
+    <?php require '../v1.0/require_Acessos.php'; ?>
     <?php require '../v1.0/require_Avaliacoes.php'; ?>
     <?php require '../v1.0/require_Mensagens.php'; ?>
     <?php require '../v1.0/require_Afiliados.php'; ?>
-    <?php require '../v1.0/require_Acessos.php'; ?>
     <?php require '../v1.0/require_BancodeImagens.php'; ?>
     <?php require '../v1.0/require_Anuncio.php'; ?>
     <?php require '../v1.0/require_Financeiro.php'; ?>
 
-
-
-
-    
+   
     <?php if (temPermissao($niveladm, [1])): ?>
         <!-- CPanel -->
         <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="550">

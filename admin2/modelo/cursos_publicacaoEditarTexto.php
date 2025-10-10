@@ -37,7 +37,7 @@ require_once APP_ROOT . '/autenticacao.php';
     <!-- =========================
      PAINEL LATERAL DESLIZANTE
 ========================= -->
-    
+
 </head>
 
 <body id="adminLayout">
@@ -47,7 +47,8 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> Módulo <?= $Nomecurso ?></h3>
+                <h4><i class="bi bi-journal-text me-2"></i> <?= $Nomemodulo ?>/<?= $Nomecurso ?> </h4>
+                <p><?= $tituloPublicacao ?></p>
             </div>
 
             <div class="mt-4">
