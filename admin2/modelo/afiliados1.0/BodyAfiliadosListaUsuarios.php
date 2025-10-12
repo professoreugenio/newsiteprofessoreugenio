@@ -214,7 +214,6 @@ $makeUrl = function ($p) use ($q, $nome) {
         const listWrap = document.getElementById('afList'); // container da lista
         const countBad = document.getElementById('afCount'); // badge de contagem
         const pagWrap = document.getElementById('afPagination'); // paginação (pode não existir)
-        const emptyBox = document.getElementById('afEmpty');
 
         function showToast(msg, ok = true) {
             const id = 't' + Date.now();
@@ -231,27 +230,27 @@ $makeUrl = function ($p) use ($q, $nome) {
 
         function parseCount() {
             if (!countBad) return null;
-            const raw = (countBad.textContent || '').trim().replace(/\./g, '').replace(',', '.');
+            const raw = (countBad.textContent || '').replace(/\./g, '').trim();
             const n = parseInt(raw, 10);
-            return isNaN(n) ? null : n;
+            return Number.isFinite(n) ? n : null;
         }
 
         function setCount(n) {
             if (!countBad) return;
-            // formatação simples: separador de milhar com ponto
-            countBad.textContent = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            // Formata com ponto a cada milhar
+            countBad.textContent = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         }
 
         function currentPage() {
             const url = new URL(window.location.href);
             const p = parseInt(url.searchParams.get('p') || '1', 10);
-            return isNaN(p) ? 1 : p;
+            return Number.isFinite(p) && p > 0 ? p : 1;
         }
 
         function goToPrevPage() {
-            const url = new URL(window.location.href);
             const p = currentPage();
             if (p > 1) {
+                const url = new URL(window.location.href);
                 url.searchParams.set('p', String(p - 1));
                 window.location.href = url.toString();
                 return true;
@@ -259,15 +258,20 @@ $makeUrl = function ($p) use ($q, $nome) {
             return false;
         }
 
-        function afterRemoveHandling() {
-            // Se ainda há itens, nada a fazer:
-            if (listWrap && listWrap.querySelector('.list-group-item')) return;
+        // Conta itens restantes de forma robusta (apenas filhos da lista)
+        function remainingItems() {
+            if (!listWrap) return 0;
+            return Array.from(listWrap.children).filter(el => el.classList && el.classList.contains('list-group-item')).length;
+        }
+
+        function handleEmptyAfterRemoval() {
+            const rest = remainingItems();
+            if (rest > 0) return; // ainda há itens
 
             // Se não há itens:
-            // 1) Se página > 1, volta automaticamente para a página anterior
-            if (goToPrevPage()) return;
+            if (goToPrevPage()) return; // se página > 1, volta
 
-            // 2) Se é página 1, mostra alerta de vazio, remove lista e paginação
+            // Página 1: mostra alerta e remove lista/paginação
             if (listWrap) listWrap.remove();
             if (pagWrap) pagWrap.remove();
 
@@ -276,6 +280,7 @@ $makeUrl = function ($p) use ($q, $nome) {
                 alert.id = 'afEmpty';
                 alert.className = 'alert alert-info';
                 alert.textContent = 'Nenhum afiliado encontrado.';
+                // insere logo abaixo do toastArea
                 toastArea.insertAdjacentElement('afterend', alert);
             }
         }
@@ -288,8 +293,7 @@ $makeUrl = function ($p) use ($q, $nome) {
             const idaf = item ? item.getAttribute('data-idaf') : null;
             if (!idaf) return;
 
-            const ok = confirm('Confirma a exclusão desta chave de afiliado? Esta ação não pode ser desfeita.');
-            if (!ok) return;
+            if (!confirm('Confirma a exclusão desta chave de afiliado? Esta ação não pode ser desfeita.')) return;
 
             btn.disabled = true;
             btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Excluindo...';
@@ -305,19 +309,23 @@ $makeUrl = function ($p) use ($q, $nome) {
                         'X-Requested-With': 'XMLHttpRequest'
                     }
                 });
-                const data = await resp.json();
-                if (!resp.ok || !data || !data.ok) throw new Error(data?.msg || 'Falha ao excluir.');
 
-                // Remove item da DOM
-                item.style.opacity = '.2';
-                setTimeout(() => item.remove(), 160);
+                const data = await resp.json().catch(() => ({}));
+                if (!resp.ok || !data || !data.ok) {
+                    throw new Error((data && data.msg) ? data.msg : 'Falha ao excluir.');
+                }
 
-                // Atualiza contador
+                // 1) Remove IMEDIATAMENTE o item da DOM
+                if (item && item.parentNode) {
+                    item.parentNode.removeChild(item);
+                }
+
+                // 2) Atualiza contador
                 const c = parseCount();
                 if (c !== null && c > 0) setCount(c - 1);
 
-                // Se ficou vazio, age conforme regras (volta página anterior ou mostra alerta)
-                setTimeout(afterRemoveHandling, 200);
+                // 3) Se a lista ficou vazia, trata (volta página ou mostra alerta)
+                handleEmptyAfterRemoval();
 
                 showToast('Afiliado excluído com sucesso.', true);
             } catch (err) {
