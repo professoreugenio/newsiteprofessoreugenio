@@ -28,4 +28,8 @@ $queryAfiliado = $con->prepare("SELECT * FROM a_site_afiliados_chave WHERE idusu
 $queryAfiliado->bindParam(":id", $idUser);
 $queryAfiliado->execute();
 $rwAfiliado = $queryAfiliado->fetch(PDO::FETCH_ASSOC);
+if (empty($rwAfiliado['chaveafiliadoSA'])) {
+    echo ('<meta http-equiv="refresh" content="0; url=../curso/">');
+    exit();
+}
 $chaveAfiliado = $rwAfiliado['chaveafiliadoSA'];
