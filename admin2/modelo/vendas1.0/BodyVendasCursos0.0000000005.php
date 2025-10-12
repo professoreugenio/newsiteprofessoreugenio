@@ -2,9 +2,8 @@
 
 /**
  * BodyVendasLista.php
- * Lista de vendas com filtros (pendentes/confirmados/atuais), WhatsApp via modal,
- * confirmar pagamento via AJAX e EXCLUIR venda com confirmação.
- * Usa $con disponível na página principal.
+ * Lista de vendas pendentes (statussv != 1) + CONFIRMAR PGTO via AJAX
+ * Usa $con (PDO) disponível na página principal.
  */
 
 if (!function_exists('e')) {
@@ -38,20 +37,6 @@ if (!function_exists('whatsLink')) {
     }
 }
 
-/* ------------------ Filtros de visualização ------------------ */
-$view = isset($_GET['view']) ? strtolower(trim($_GET['view'])) : 'pendentes';
-$titulo = 'Vendas pendentes de confirmação';
-$where  = '(v.statussv IS NULL OR v.statussv <> 1)'; // padrão
-
-if ($view === 'confirmados') {
-    $titulo = 'Pagamentos confirmados';
-    $where  = 'v.statussv = 1';
-} elseif ($view === 'atuais') {
-    $titulo = 'Vendas de hoje';
-    $where  = 'DATE(v.datacomprasv) = CURDATE()';
-}
-
-/* ------------------ Consulta ------------------ */
 $limit = 300;
 
 $sql = "
@@ -70,19 +55,22 @@ SELECT
   c.nomecurso,
   a.email AS email_aluno,
   c.bgcolor,
-  a.codigocadastro,
+    a.codigocadastro,
   a.nome         AS nome_aluno,
   a.celular      AS cel_aluno,
 
   af.idusuarioSA AS id_afiliado,
   afc.nome       AS nome_afiliado
 FROM a_site_vendas v
-LEFT JOIN new_sistema_cursos c  ON c.codigocursos     = v.idcursosv
-LEFT JOIN new_sistema_cadastro a ON a.codigocadastro  = v.idalunosv
+LEFT JOIN new_sistema_cursos c 
+       ON c.codigocursos = v.idcursosv
+LEFT JOIN new_sistema_cadastro a
+       ON a.codigocadastro = v.idalunosv
 LEFT JOIN a_site_afiliados_chave af
        ON (af.codigochaveafiliados = v.chaveafiliadosv OR af.chaveafiliadoSA = v.chaveafiliadosv)
-LEFT JOIN new_sistema_cadastro afc ON afc.codigocadastro = af.idusuarioSA
-WHERE {$where}
+LEFT JOIN new_sistema_cadastro afc
+       ON afc.codigocadastro = af.idusuarioSA
+WHERE (v.statussv IS NULL OR v.statussv <> 1)
 ORDER BY v.datacomprasv DESC, v.horacomprasv DESC
 LIMIT :lim
 ";
@@ -154,10 +142,6 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         font-size: 1.1rem;
     }
 
-    .toolbar .btn {
-        min-width: 180px;
-    }
-
     @media (max-width: 768px) {
         .venda-right {
             margin-top: .75rem;
@@ -166,23 +150,8 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </style>
 
 <div class="vendas-wrap" data-aos="fade-up" data-aos-delay="100">
-
-    <!-- Toolbar de filtros -->
-    <div class="toolbar d-flex flex-wrap align-items-center gap-2 mb-3">
-        <a href="?view=confirmados" class="btn btn-outline-success <?= $view === 'confirmados' ? 'active' : '' ?>">
-            <i class="bi bi-check2-circle me-1"></i> Pagamentos confirmados
-        </a>
-        <a href="?view=atuais" class="btn btn-outline-primary <?= $view === 'atuais' ? 'active' : '' ?>">
-            <i class="bi bi-calendar-date me-1"></i> Vendas atuais (hoje)
-        </a>
-        <a href="?view=pendentes" class="btn btn-outline-warning <?= $view === 'pendentes' ? 'active' : '' ?>">
-            <i class="bi bi-hourglass-split me-1"></i> Pendentes
-        </a>
-    </div>
-
-    <!-- Cabeçalho -->
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <div class="fw-bold fs-5" style="color:#112240;"><?= e($titulo); ?></div>
+        <div class="fw-bold fs-5" style="color:#112240;">Vendas pendentes de confirmação</div>
         <span class="badge bg-success-subtle text-success border border-success-subtle">
             <?= count($vendas); ?> registros
         </span>
@@ -192,7 +161,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="vstack gap-2" id="listaVendas">
         <?php if (!$vendas): ?>
-            <div class="alert alert-info mb-0">Nenhum registro encontrado para este filtro.</div>
+            <div class="alert alert-info mb-0">Nenhuma venda pendente encontrada.</div>
         <?php else: ?>
             <?php foreach ($vendas as $row):
                 $dataHora = '';
@@ -201,17 +170,18 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     $horaFmt = !empty($row['horacomprasv']) ? date('H:i', strtotime($row['horacomprasv'])) : '00:00';
                     $dataHora = $dataFmt . ' ' . $horaFmt;
                 }
-                $curso  = $row['nomecurso'] ?? '—';
-                $aluno  = primeiroESobrenome($row['nome_aluno'] ?? '—');
-                $cel    = $row['cel_aluno'] ?? '';
-                $whats  = whatsLink($cel);
+                $curso = $row['nomecurso'] ?? '—';
+                $aluno = primeiroESobrenome($row['nome_aluno'] ?? '—');
+                $cel   = $row['cel_aluno'] ?? '';
                 $idCursov   = $row['idcursosv'] ?? '';
                 $encIdCursov = encrypt($idCursov, $action = 'e');
-                $encIdUsuario = encrypt($row['codigocadastro'], $action = 'e');
+                $whats = whatsLink($cel);
 
                 $temAf  = !empty($row['chaveafiliadosv']) && !empty($row['nome_afiliado']);
                 $afNome = $row['nome_afiliado'] ?? '';
                 $linkAfiliado = 'afiliadoPerfil.php?af=' . urlencode((string)$row['chaveafiliadosv']);
+
+                $encIdUsuario = encrypt($row['codigocadastro'], $action = 'e');
 
                 // Ícone tipo de pagamento
                 $tipo = strtolower(trim($row['tipopagamentosv'] ?? ''));
@@ -225,7 +195,6 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="venda-item d-flex flex-column flex-md-row align-items-md-center justify-content-between"
                     data-aos="fade-up"
                     data-idvenda="<?= (int)$row['codigovendas']; ?>">
-
                     <!-- Lado Esquerdo -->
                     <div class="venda-left d-flex flex-column flex-lg-row align-items-lg-center">
                         <div class="venda-meta me-lg-3">
@@ -237,26 +206,38 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <a href="cursos_turmas.php?id=<?= e($encIdCursov); ?>">
                                 <i class="bi bi-journal-code me-1"></i><?= e($curso); ?>
                             </a>
+
                         </div>
                         <span class="dot d-none d-lg-inline"></span>
 
                         <div class="venda-aluno me-lg-3">
-                            <a href="alunoAtendimento.php?idUsuario=<?= e($encIdUsuario); ?>">
-                                <i class="bi bi-person-circle me-1"></i><?= e($aluno); ?>
-                            </a>
+
+                            <a href="alunoAtendimento.php?idUsuario=<?= e($encIdUsuario); ?>"><i class="bi bi-person-circle me-1"></i><?= e($aluno); ?></a>
+
                         </div>
                         <span class="dot d-none d-lg-inline"></span>
 
-                        <!-- Botão Mensagens (abre modal) -->
+                        <!-- ATENDIMENTO PERSONALIZADO -->
+
                         <?php
+                        // Variáveis usadas nos data-attributes do botão
+                        // garanta que seu SELECT tenha: a.email AS email_aluno
                         $nomeAlunoCompleto = (string)($row['nome_aluno'] ?? '');
                         $emailAluno        = (string)($row['email_aluno'] ?? '');
                         $nomeCurso         = (string)($row['nomecurso'] ?? '');
+                        // Se tiver plano/senha no contexto, preencha; caso contrário, ficam vazios mesmo
                         $nomePlano         = (string)($row['nome_plano'] ?? '');
                         $senhaAluno        = isset($row['senha_aluno']) ? (string)$row['senha_aluno'] : '';
                         ?>
+
                         <div class="venda-meta me-lg-3">
+
+
                             <?php if ($cel): ?>
+                                <!-- Link direto para abrir o chat do aluno -->
+
+
+                                <!-- Botão que abre o modal de mensagens prontas -->
                                 <button
                                     type="button"
                                     class="btn btn-outline-success btn-sm btn-wpp-msg"
@@ -269,12 +250,25 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     data-senha="<?= e($senhaAluno); ?>"
                                     data-plano="<?= e($nomePlano); ?>"
                                     title="Mensagens rápidas no WhatsApp">
-                                    <i class="bi bi-whatsapp me-1"></i><i class="bi bi-telephone-outbound ms-1 me-1"></i><?= e($cel); ?>
+                                    <i class="bi bi-whatsapp me-1"></i> <i class="bi bi-telephone-outbound me-1"></i> <?= e($cel); ?>
                                 </button>
                             <?php else: ?>
                                 <span class="text-muted">sem celular</span>
                             <?php endif; ?>
                         </div>
+
+
+
+
+
+                        <!-- <div class="venda-meta me-lg-3">
+                            <i class="bi bi-telephone-outbound me-1"></i>
+                            <?php if ($cel): ?>
+                                <a href="<?= e($whats); ?>" target="_blank" class="link-primary" title="Abrir WhatsApp"><?= e($cel); ?></a>
+                            <?php else: ?>
+                                <span class="text-muted">sem celular</span>
+                            <?php endif; ?>
+                        </div> -->
                         <span class="dot d-none d-lg-inline"></span>
 
                         <div class="venda-valor me-lg-3">
@@ -299,22 +293,12 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                     <!-- Lado Direito -->
-                    <div class="venda-right d-flex gap-2">
-                        <?php if ($view !== 'confirmados'): ?>
-                            <button
-                                type="button"
-                                class="btn btn-success btn-sm px-3 shadow-sm confirmar-pgto"
-                                data-idvenda="<?= (int)$row['codigovendas']; ?>">
-                                <i class="bi bi-check2-circle me-1"></i> CONFIRMAR PGTO
-                            </button>
-                        <?php endif; ?>
-
-                        <!-- Botão Excluir -->
+                    <div class="venda-right">
                         <button
                             type="button"
-                            class="btn btn-outline-danger btn-sm px-3 shadow-sm excluir-pgto"
+                            class="btn btn-success btn-sm px-3 shadow-sm confirmar-pgto"
                             data-idvenda="<?= (int)$row['codigovendas']; ?>">
-                            <i class="bi bi-trash3 me-1"></i> Excluir
+                            <i class="bi bi-check2-circle me-1"></i> CONFIRMAR PGTO
                         </button>
                     </div>
                 </div>
@@ -323,7 +307,8 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<!-- Modal Mensagens WhatsApp (único) -->
+
+<!-- Modal Mensagens WhatsApp -->
 <div class="modal fade" id="modalWppMensagens" tabindex="-1" aria-labelledby="modalWppMensagensLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -385,9 +370,9 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </style>
 
 <script>
-    /* ------------ WhatsApp Modal ------------ */
     (function() {
         const URL_LOGIN = 'https://professoreugenio.com/login_aluno.php';
+        // Ajuste para seus vídeos oficiais:
         const URL_DICAS_USO = 'https://youtube.com';
         const URL_ALTERAR_PWD = 'https://youtube.com';
 
@@ -433,9 +418,9 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             const pn = primeiroNome(nome || '');
             const pwd = senha || 'sua-senha';
 
-            const m1 = `${oi}, ${pn}!\nSeja bem-vindo(a) ao curso online do Professor Eugênio.\n\n` +
-                `Confirmamos que sua inscrição no curso de ${curso || 'seu curso'} foi registrada com sucesso.\n` +
-                `Acesse o portal e já pode começar suas aulas!`;
+            const m1 = `${oi}, ${pn}!\nSeja bem-vindo(a) ao curso online do Professor Eugênio.\n ` +
+                `\nConfirmamos que sua inscrição no curso de ${curso || 'seu curso'} foi registrada com sucesso. ` +
+                `\nAcesse o portal e já pode começar suas aulas!`;
 
             const m2 = `Seguem seus dados de acesso:\n` +
                 `Login: ${email || 'seu-email'}\n` +
@@ -443,7 +428,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 `Acesse: ${URL_LOGIN}`;
 
             const m3 = `${pn}, estamos aguardando a confirmação de pagamento do financeiro, ` +
-                `mas fique tranquilo(a): seu acesso ao portal já está garantido para hoje.\n` +
+                `mas fique tranquilo(a): seu acesso ao portal já está garantido para hoje. ` +
                 `Aproveite para iniciar seus estudos e, se precisar, estou à disposição!`;
 
             const m4 = `💡 Dicas de uso do sistema (vídeo):\n${URL_DICAS_USO}\n\n` +
@@ -452,8 +437,8 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             const m5 = `🔐 Como alterar sua senha de acesso (tutorial):\n${URL_ALTERAR_PWD}\n\n` +
                 `Escolha uma senha segura e pessoal.`;
 
-            const m6 = `🎉 Parabéns, ${pn}! Recebemos a confirmação do pagamento do seu curso *${curso || 'seu curso'}*.\n` +
-                `Seu acesso ao plano *${plano || 'Anual'}* foi liberado com sucesso.\n` +
+            const m6 = `🎉 Parabéns, ${pn}! Recebemos a confirmação do pagamento do seu curso *${curso || 'seu curso'}*. ` +
+                `Seu acesso ao plano *${plano || 'Anual'}* foi liberado com sucesso. ` +
                 `Aproveite para começar suas aulas agora mesmo — conte comigo no que precisar!`;
 
             return [{
@@ -506,9 +491,12 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <button type="button" class="btn btn-outline-secondary btn-sm btn-copy" data-text="${encodeURIComponent(m.texto)}">
             <i class="bi bi-clipboard-check me-1"></i> Copiar
           </button>
-        </div>`;
+        </div>
+      `;
                 listEl.appendChild(item);
             });
+
+            // handler copiar
             listEl.querySelectorAll('.btn-copy').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const txt = decodeURIComponent(btn.getAttribute('data-text') || '');
@@ -522,8 +510,10 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 });
             });
         }
+
+        // Abre modal já preenchido
         modalEl.addEventListener('show.bs.modal', function(ev) {
-            const btn = ev.relatedTarget;
+            const btn = ev.relatedTarget; // botão que abriu o modal
             if (!btn) return;
             const cel = btn.getAttribute('data-cel') || '';
             const nome = btn.getAttribute('data-nome') || '';
@@ -532,31 +522,35 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             const senha = btn.getAttribute('data-senha') || '';
             const plano = btn.getAttribute('data-plano') || '';
 
-            document.getElementById('wppAlunoNome').textContent = nome || '—';
-            document.getElementById('wppCurso').textContent = curso || '—';
-            document.getElementById('wppPlano').textContent = plano || '—';
+            nomeEl.textContent = nome || '—';
+            cursoEl.textContent = curso || '—';
+            planoEl.textContent = plano || '—';
 
-            let n = (cel || '').toString().replace(/\D+/g, '');
+            // Botão "Abrir chat" (sem mensagem) para iniciar conversa
+            let n = soNumeros(cel);
             if (n && !n.startsWith('55')) n = '55' + n;
-            document.getElementById('wppAbrirChat').href = n ? `https://wa.me/${n}` : '#';
+            abrirChatBtn.href = n ? `https://wa.me/${n}` : '#';
 
-            renderList(buildMensagens({
+            const mensagens = buildMensagens({
                 cel,
                 nome,
                 curso,
                 email,
                 senha,
                 plano
-            }), cel);
+            });
+            renderList(mensagens, cel);
         });
     })();
 </script>
 
+
 <script>
-    /* ------------ Toast helper ------------ */
     (function() {
+        const lista = document.getElementById('listaVendas');
         const toastArea = document.getElementById('toastArea');
-        window.__showToast = function(msg, ok = true) {
+
+        function showToast(msg, ok = true) {
             const id = 't' + Date.now();
             const cls = ok ? 'success' : 'danger';
             const el = document.createElement('div');
@@ -565,86 +559,50 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             el.innerHTML = msg + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
             toastArea.appendChild(el);
             setTimeout(() => {
-                bootstrap.Alert.getOrCreateInstance(el).close();
+                const myAlert = bootstrap.Alert.getOrCreateInstance(el);
+                myAlert.close();
             }, 3000);
-        };
-    })();
-</script>
-
-<script>
-    /* ------------ Ações: Confirmar Pagto & Excluir ------------ */
-    (function() {
-        const lista = document.getElementById('listaVendas');
+        }
 
         document.addEventListener('click', async function(e) {
-            /* Confirmar pagamento */
-            const btnConf = e.target.closest('.confirmar-pgto');
-            if (btnConf) {
-                const idvenda = btnConf.getAttribute('data-idvenda');
-                const item = btnConf.closest('.venda-item');
-                btnConf.disabled = true;
-                btnConf.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processando...';
+            const btn = e.target.closest('.confirmar-pgto');
+            if (!btn) return;
 
-                try {
-                    const form = new FormData();
-                    form.append('idvenda', idvenda);
-                    const resp = await fetch('vendas1.0/ajax_RegistrarPagamento.php', {
-                        method: 'POST',
-                        body: form,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
-                    const data = await resp.json();
-                    if (!resp.ok || !data || !data.ok) throw new Error(data?.msg || 'Falha ao confirmar pagamento.');
+            const idvenda = btn.getAttribute('data-idvenda');
+            const item = btn.closest('.venda-item');
 
-                    item.style.opacity = '0.2';
-                    setTimeout(() => item.remove(), 180);
-                    window.__showToast('Pagamento confirmado com sucesso!', true);
-                } catch (err) {
-                    btnConf.disabled = false;
-                    btnConf.innerHTML = '<i class="bi bi-check2-circle me-1"></i> CONFIRMAR PGTO';
-                    window.__showToast(err.message || 'Erro inesperado.', false);
-                    console.error(err);
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processando...';
+
+            try {
+                const form = new FormData();
+                form.append('idvenda', idvenda);
+
+                const resp = await fetch('vendas1.0/ajax_RegistrarPagamento.php', {
+                    method: 'POST',
+                    body: form,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const data = await resp.json();
+
+                if (!resp.ok || !data || !data.ok) {
+                    throw new Error(data?.msg || 'Falha ao confirmar pagamento.');
                 }
-                return;
-            }
 
-            /* EXCLUIR venda/pagamento */
-            const btnDel = e.target.closest('.excluir-pgto');
-            if (btnDel) {
-                const idvenda = btnDel.getAttribute('data-idvenda');
-                const item = btnDel.closest('.venda-item');
-
-                const ok = confirm('Confirma a exclusão deste registro de venda/pagamento? Esta ação não pode ser desfeita.');
-                if (!ok) return;
-
-                btnDel.disabled = true;
-                btnDel.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Excluindo...';
-
-                try {
-                    const form = new FormData();
-                    form.append('idvenda', idvenda);
-                    const resp = await fetch('vendas1.0/ajax_ExcluirPagamento.php', {
-                        method: 'POST',
-                        body: form,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
-                    const data = await resp.json();
-                    if (!resp.ok || !data || !data.ok) throw new Error(data?.msg || 'Falha ao excluir.');
-
-                    item.style.opacity = '0.2';
-                    setTimeout(() => item.remove(), 180);
-                    window.__showToast('Registro excluído com sucesso.', true);
-                } catch (err) {
-                    btnDel.disabled = false;
-                    btnDel.innerHTML = '<i class="bi bi-trash3 me-1"></i> Excluir';
-                    window.__showToast(err.message || 'Erro inesperado.', false);
-                    console.error(err);
-                }
-                return;
+                // Remover visualmente a venda (já não deveria mais aparecer por statussv = 1)
+                item.style.opacity = '0.2';
+                setTimeout(() => {
+                    item.remove();
+                }, 180);
+                showToast('Pagamento confirmado com sucesso!', true);
+            } catch (err) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> CONFIRMAR PGTO';
+                showToast(err.message || 'Erro inesperado.', false);
+                console.error(err);
             }
         });
     })();
