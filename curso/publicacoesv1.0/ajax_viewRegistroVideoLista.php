@@ -85,7 +85,7 @@ try {
             if ($nome):
         ?>
                 <span
-                    class="badge rounded-pill bg-secondary-subtle text-dark border"
+                    class="badge rounded-pill bg-secondary-subtle border"
                     data-bs-toggle="tooltip"
                     data-bs-title="<?= e($title) ?>">
                     <?= e($nome) ?>

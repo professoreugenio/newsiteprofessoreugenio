@@ -1,0 +1,1 @@
+[24-Sep-2025 16:39:41 America/Fortaleza] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY000]: General error: 2013 Lost connection to MySQL server during query in /home/appsrcc/public_html/curso/config_Atividade1.0/ajax_loadAtividade.php on line 40
