@@ -6,7 +6,7 @@
         <?= $cta ?? '' ?>
 
 
-        <a href="<?= $linkInscricao ?? 'pagina_vendasInscricao.php?t=' . time() . '&nav=' . $_GET['nav']; ?>" class="btn btn-gradient btn-lg">
+        <a href="<?= $linkInscricao ?? 'pagina_vendasInscricao.php?t=' . time() . '&nav=' . $_GET['nav']; ?>&af=<?= $_GET['af'] ?? '0' ?>" class="btn btn-gradient btn-lg">
             Fazer Minha Inscrição
         </a>
 

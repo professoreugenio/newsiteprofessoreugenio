@@ -4,6 +4,12 @@ require_once __DIR__ . '/conexao/class.conexao.php';
 require_once __DIR__ . '/autenticacao.php';
 
 $nav = $_GET['nav'] ?? ($_COOKIE['nav'] ?? '');
+
+$_SESSION['af'] = $_GET['af'] ?? ($_COOKIE['af'] ?? ''); // Novo parâmetro afiliado
+
+
+
+
 function isCrawler(): bool
 {
     $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';

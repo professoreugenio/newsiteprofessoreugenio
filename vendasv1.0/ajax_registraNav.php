@@ -39,5 +39,13 @@ setcookie('nav', $enc, [
     'httponly' => true,              // bloqueia acesso via JS
     'samesite' => 'Lax'              // None, Lax ou Strict
 ]);
+setcookie('af', $af, [
+    'expires'  => time() + $duracao, // validade
+    'path'     => '/',               // disponível em todo o site
+    'domain'   => '',                // vazio = domínio atual
+    'secure'   => false,             // true se só HTTPS
+    'httponly' => true,              // bloqueia acesso via JS
+    'samesite' => 'Lax'              // None, Lax ou Strict
+]);
 
 echo json_encode(['status' => 'ok', 'cookie' => $enc]);

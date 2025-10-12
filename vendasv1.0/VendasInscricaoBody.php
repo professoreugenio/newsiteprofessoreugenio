@@ -23,7 +23,7 @@
 
  <?php $dec = encrypt($_COOKIE['nav'], $action = 'd');
     $exp = explode("&", $dec);
-    $chaveAf = $exp[6]; ?>
+    $chaveAf =  $_GET['af'] ?? '-'; ?>
  <form id="formInscricao" class="p-4 border rounded bg-secondary bg-opacity-10" novalidate>
      <div class="mb-3">
          <label for="nome" class="form-label">Nome completo</label>
@@ -32,8 +32,8 @@
          <input type="hidden" name="idCurso" value="<?= htmlspecialchars($enIdCurso) ?>">
          <div class="invalid-feedback">Informe seu nome completo.</div>
      </div>
-   
-     <input type="hidden" name="chaveAf" id="chaveAf" value="<?= htmlspecialchars($chaveAf) ?>">
+
+     <input type="hidden" name="chaveAf" id="chaveAf" value="<?= htmlspecialchars($chaveAf ?? '1000') ?>">
 
      <div class="mb-3">
          <label for="email" class="form-label">E-mail</label>
