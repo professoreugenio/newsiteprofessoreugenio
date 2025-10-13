@@ -41,3 +41,21 @@
   `bgcolor` varchar(10) DEFAULT '#cccccc',
   `nomecurso` varchar(50) DEFAULT NULL,
   `pasta` varchar(30) DEFAULT NULL,
+
+
+
+`new_sistema_cursos_turmas`
+  `codigoturma` int(11) NOT NULL,
+  `codcursost` int(11) DEFAULT NULL,
+  `nometurma` varchar(250) DEFAULT NULL,
+ `comercial_stc` int(11) DEFAULT '0',
+ `visivelst` float(10,2) DEFAULT NULL,
+ `valorvenda` float(10,2) DEFAULT NULL
+
+quando 
+
+ `new_sistema_cursos`
+  `codigocursos` int(11) NOT NULL,
+  `comercialsc` int(11) NOT NULL,
+  `visivelhome` int(11) NOT NULL,
+ 

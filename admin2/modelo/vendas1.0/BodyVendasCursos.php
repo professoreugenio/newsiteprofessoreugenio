@@ -71,6 +71,7 @@ SELECT
   a.email AS email_aluno,
   c.bgcolor,
   a.codigocadastro,
+  a.senha,
   a.nome         AS nome_aluno,
   a.celular      AS cel_aluno,
 
@@ -201,6 +202,11 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     $horaFmt = !empty($row['horacomprasv']) ? date('H:i', strtotime($row['horacomprasv'])) : '00:00';
                     $dataHora = $dataFmt . ' ' . $horaFmt;
                 }
+
+                $decSenha = encrypt($row['senha'], $action = 'd');
+                $exp = explode('&', $decSenha);
+                $email = $exp[0];
+                $senha = $exp[1];
                 $curso  = $row['nomecurso'] ?? '—';
                 $aluno  = primeiroESobrenome($row['nome_aluno'] ?? '—');
                 $cel    = $row['cel_aluno'] ?? '';
@@ -241,7 +247,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <span class="dot d-none d-lg-inline"></span>
 
                         <div class="venda-aluno me-lg-3">
-                            <a href="alunoAtendimento.php?idUsuario=<?= e($encIdUsuario); ?>">
+                            <a href="alunoTurmas.php?idUsuario=<?= e($encIdUsuario); ?>">
                                 <i class="bi bi-person-circle me-1"></i><?= e($aluno); ?>
                             </a>
                         </div>
@@ -253,7 +259,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         $emailAluno        = (string)($row['email_aluno'] ?? '');
                         $nomeCurso         = (string)($row['nomecurso'] ?? '');
                         $nomePlano         = (string)($row['nome_plano'] ?? '');
-                        $senhaAluno        = isset($row['senha_aluno']) ? (string)$row['senha_aluno'] : '';
+                        $senhaAluno        = $senha ?? '';
                         ?>
                         <div class="venda-meta me-lg-3">
                             <?php if ($cel): ?>

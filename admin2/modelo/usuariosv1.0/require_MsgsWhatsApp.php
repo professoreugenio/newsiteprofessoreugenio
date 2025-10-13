@@ -18,7 +18,7 @@ if (!empty($row)) {
     $expSenha = explode("&", $decsenha);
     $senha = $expSenha[1] ?? 'não registrado';
     $email = htmlspecialchars($row['email']);
-    echo $idAluno     = $row['idAluno'] ?? '';
+    $idAluno     = $row['idAluno'] ?? '';
     $celular     = preg_replace('/[^0-9]/', '', $row['celular'] ?? '');
     $nomeArr = explode(' ', trim($row['nome']));
     $nomeAluno = htmlspecialchars($nomeArr[0] . ' ' . ($nomeArr[1] ?? ''));
@@ -114,76 +114,92 @@ function linkWhats(string $cel, string $msg): string
 ?>
 
 
-<div class="col-md-4 text-end mb-3">
-    <div class="dropdown">
-        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuBtn<?= $idAluno ?>" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-send"></i> Enviar Mensagem
-        </button>
+<div class="d-flex align-items-center gap-2">
+    <div>
+       
+        <div class="dropdown">
+            <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuBtn<?= $idAluno ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-send"></i> Enviar Mensagem
+            </button>
 
-        <button class="btn btn-outline-success btn-sm abrirPagamentoBtn ms-2"
-            data-idusuario="<?= $idAluno ?>"
-            data-idturma="<?= htmlspecialchars($_GET['idturma'] ?? '') ?>"
-            data-nomealuno="<?= htmlspecialchars($nomeAluno) ?>">
-            <i class="bi bi-currency-dollar"></i> Pagamento
-        </button>
 
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuBtn<?= $idAluno ?>">
-            <?php if ($temWhats): ?>
 
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuBtn<?= $idAluno ?>">
+                <?php if ($temWhats): ?>
+
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgSaudacao) ?>">
+                            <i class="bi bi-whatsapp text-success"></i> WhatsApp Saudação
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgNovidades) ?>">
+                            <i class="bi bi-whatsapp text-success"></i> Novidades
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgAcessoGratuito) ?>">
+                            <i class="bi bi-whatsapp text-success"></i> WhatsApp Acesso Gratuito
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgAcolimento) ?>">
+                            <i class="bi bi-whatsapp text-success"></i> WhatsApp Acolhimento
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgSenha) ?>">
+                            <i class="bi bi-key"></i> WhatsApp Recuperar Senha
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgRedes) ?>">
+                            <i class="bi bi-instagram"></i> WhatsApp Siga nas Redes
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgOfertaPowerBI) ?>">
+                            <i class="bi bi-instagram"></i> WhatsApp Oferta Power BI
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" target="_blank" href="<?= $linkAcessoWhats ?>">
+                            <i class="bi bi-clock-history text-warning"></i> Último Acesso / Motivação
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                <?php endif; ?>
                 <li>
-                    <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgSaudacao) ?>">
-                        <i class="bi bi-whatsapp text-success"></i> WhatsApp Saudação
+                    <a class="dropdown-item" href="<?= $emailPromo ?>">
+                        <i class="bi bi-envelope-paper"></i> E-mail Promoção
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgNovidades) ?>">
-                        <i class="bi bi-whatsapp text-success"></i> Novidades
+                    <a class="dropdown-item" href="<?= $emailMotiv ?>">
+                        <i class="bi bi-emoji-smile"></i> E-mail Motivacional
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgAcessoGratuito) ?>">
-                        <i class="bi bi-whatsapp text-success"></i> WhatsApp Acesso Gratuito
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgAcolimento) ?>">
-                        <i class="bi bi-whatsapp text-success"></i> WhatsApp Acolhimento
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgSenha) ?>">
-                        <i class="bi bi-key"></i> WhatsApp Recuperar Senha
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgRedes) ?>">
-                        <i class="bi bi-instagram"></i> WhatsApp Siga nas Redes
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" target="_blank" href="<?= linkWhats('55' . $row['celular'], $msgOfertaPowerBI) ?>">
-                        <i class="bi bi-instagram"></i> WhatsApp Oferta Power BI
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" target="_blank" href="<?= $linkAcessoWhats ?>">
-                        <i class="bi bi-clock-history text-warning"></i> Último Acesso / Motivação
-                    </a>
-                </li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-            <?php endif; ?>
-            <li>
-                <a class="dropdown-item" href="<?= $emailPromo ?>">
-                    <i class="bi bi-envelope-paper"></i> E-mail Promoção
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="<?= $emailMotiv ?>">
-                    <i class="bi bi-emoji-smile"></i> E-mail Motivacional
-                </a>
-            </li>
-        </ul>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <span class="fw-semibold">
+            <button class="btn btn-outline-success btn-sm abrirPagamentoBtn ms-2"
+                data-idusuario="<?= $idAluno ?>"
+                data-idturma="<?= htmlspecialchars($_GET['idturma'] ?? '') ?>"
+                data-nomealuno="<?= htmlspecialchars($nomeAluno) ?>">
+                <i class="bi bi-currency-dollar"></i> Pagamento
+            </button>
+        </span>
+    </div>
+</div>
+
+<div class="row">
+
+
+    <div class="col-md-4 text-end mb-3">
+
     </div>
 </div>

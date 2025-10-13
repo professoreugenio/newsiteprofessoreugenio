@@ -83,65 +83,50 @@ $total = $turmas ? count($turmas) : 0;
 <div class="card mb-3 shadow-sm">
     <div class="card-body">
         <div class="row g-2 align-items-end">
+            <div class="col-md-8">
 
+                <?php require 'usuariosv1.0/require_MsgsWhatsApp.php'; ?>
+                <label class="form-label">Selecionar turma</label>
+                <select id="selectTurma" class="form-select">
+                    <option value="">— escolha uma turma —</option>
+                    <?php foreach ($todasTurmas as $opt):
+                        $titulo = $opt['titulo_turma'] ?? 'Turma sem título';
+                        $chave  = $opt['chave_turma']  ?? '';
+                        $idTurma = (string)($opt['idturma'] ?? '');
+                        $idCurso = (string)($opt['idcurso'] ?? '');
+                        $jaInscrito = $chavesInscritas[$chave] ?? false;
 
+                        // Vamos enviar pelo AJAX a chave (única) e ids criptografados (opcionalmente úteis)
+                        $encIdTurma = encrypt($idTurma, $action = 'e');
+                        $encIdCurso = encrypt($idCurso, $action = 'e');
 
-
-            <?php require 'usuariosv1.0/require_MsgsWhatsApp.php'; ?>
-
-            <div class="form-text">
-                <span class="badge bg-primary"><?= (int)$total ?> turma<?= $total === 1 ? '' : 's' ?></span>
-                Turmas já inscritas aparecem desabilitadas.
+                        $rotulo = $titulo . (!empty($chave) ? " — {$chave}" : '');
+                    ?>
+                        <option value="<?= htmlspecialchars($chave) ?>"
+                            data-idturma="<?= htmlspecialchars($encIdTurma) ?>"
+                            data-idcurso="<?= htmlspecialchars($encIdCurso) ?>"
+                            <?= $jaInscrito ? 'disabled' : '' ?>>
+                            <?= htmlspecialchars($rotulo) ?><?= $jaInscrito ? ' (já inscrito)' : '' ?>
+                            <?= htmlspecialchars($idTurma); ?>-<?= htmlspecialchars($idCurso); ?> </option>
+                    <?php endforeach; ?>
+                </select>
+                <div class="form-text">Turmas já inscritas aparecem desabilitadas.</div>
             </div>
-            <div class="d-flex align-items-center gap-2">
-
-                <div>
-                    <select id="selectTurma" class="form-select">
-                        <option value="">— escolha uma turma —</option>
-                        <?php foreach ($todasTurmas as $opt):
-                            $titulo = $opt['titulo_turma'] ?? 'Turma sem título';
-                            $chave  = $opt['chave_turma']  ?? '';
-                            $idTurma = (string)($opt['idturma'] ?? '');
-                            $idCurso = (string)($opt['idcurso'] ?? '');
-                            $jaInscrito = $chavesInscritas[$chave] ?? false;
-
-                            // Vamos enviar pelo AJAX a chave (única) e ids criptografados (opcionalmente úteis)
-                            $encIdTurma = encrypt($idTurma, $action = 'e');
-                            $encIdCurso = encrypt($idCurso, $action = 'e');
-
-                            $rotulo = $titulo . (!empty($chave) ? " — {$chave}" : '');
-                        ?>
-                            <option value="<?= htmlspecialchars($chave) ?>"
-                                data-idturma="<?= htmlspecialchars($encIdTurma) ?>"
-                                data-idcurso="<?= htmlspecialchars($encIdCurso) ?>"
-                                <?= $jaInscrito ? 'disabled' : '' ?>>
-                                <?= htmlspecialchars($rotulo) ?><?= $jaInscrito ? ' (já inscrito)' : '' ?>
-                                <?= htmlspecialchars($idTurma); ?>-<?= htmlspecialchars($idCurso); ?> </option>
-                        <?php endforeach; ?>
-                    </select>
-
-                </div>
-                <div>
-                    <button id="btnInscrever" class="btn btn-success">
-                        <i class="bi bi-person-plus me-1"></i> Inscrever aluno
-                    </button>
-                </div>
+            <div class="col-md-4 d-grid d-md-flex justify-content-md-end">
+                <button id="btnInscrever" class="btn btn-success">
+                    <i class="bi bi-person-plus me-1"></i> Inscrever aluno
+                </button>
             </div>
-
-
-
-
-
-
-
         </div>
     </div>
 </div>
 
 <!-- Cabeçalho da lista -->
 <div class="d-flex justify-content-between align-items-center mb-3">
-
-
+    <h5 class="mb-0">
+        <i class="bi bi-people-fill me-2"></i> Turmas do Aluno
+    </h5>
+    <span class="badge bg-primary"><?= (int)$total ?> turma<?= $total === 1 ? '' : 's' ?></span>
 </div>
 
 <?php if (!$turmas): ?>

@@ -25,7 +25,7 @@ $id = (int)($decParts[0] ?? $decId);
 
 try {
     $q = $con->prepare("
-      SELECT codigoprodutoafiliado, nomeap, valorap, comissaoap, urlprodutoap,visivelap, pastaap, dataap, horaap,
+      SELECT codigoprodutoafiliado, idturmaap, nomeap, valorap, comissaoap, urlprodutoap,visivelap, pastaap, dataap, horaap,
              img1080x1920, img1024x1024
         FROM a_site_afiliados_produto
        WHERE codigoprodutoafiliado = :id
@@ -46,6 +46,7 @@ try {
     $comis = $fmt($p['comissaoap'] ?? 0);
     $vis   = (int)($p['visivelap'] ?? 0) === 1;
     $pasta = (string)($p['pastaap'] ?? '');
+    $idturma = (string)($p['idturmaap'] ?? '');
     $pasta = (string)($p['pastaap'] ?? '');
     $img1  = (string)($p['img1080x1920'] ?? '');
     $img2  = (string)($p['img1024x1024'] ?? '');
@@ -116,6 +117,46 @@ try {
                             </div>
                         </div>
 
+                        <!-- SELECT DE TURMAS COMERCIAIS (curso comercial + visível na home) -->
+                        <div class="mt-3">
+                            <label for="idturmaafiliado" class="form-label">Turma Comercial Vinculada</label>
+                            <select class="form-select" id="idturmaafiliado" name="idturmaafiliado">
+                                <option value="">Selecione uma turma comercial...</option>
+                                <?php
+                                try {
+                                    $sql = "
+                SELECT 
+                    t.codigoturma,
+                    t.nometurma,
+                    t.valorvenda,
+                    t.codcursost
+                FROM new_sistema_cursos_turmas AS t
+                INNER JOIN new_sistema_cursos AS c
+                        ON c.codigocursos = t.codcursost
+                WHERE 
+                    c.comercialsc = 1
+                   
+                ORDER BY t.nometurma ASC
+            ";
+                                    $stmt = $con->prepare($sql);
+                                    $stmt->execute();
+
+                                    while ($t = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                        $selected = ($t['codigoturma'] == ($p['idturmaap'] ?? '')) ? 'selected' : '';
+                                        $valorFmt = number_format((float)($t['valorvenda'] ?? 0), 2, ',', '.');
+                                        echo '<option value="' . htmlspecialchars($t['codigoturma']) . '" ' . $selected . '>'
+                                            . htmlspecialchars($t['nometurma']) . ' — R$ ' . $valorFmt
+                                            . ' (Curso #' . (int)$t['codcursost'] . ')</option>';
+                                    }
+                                } catch (Exception $e) {
+                                    echo '<option value="">Erro ao carregar turmas</option>';
+                                }
+                                ?>
+                            </select>
+                            <div class="form-text">Listei somente turmas de cursos comerciais e visíveis na home.</div>
+                        </div>
+
+
                         <div class="mt-3">
                             <label class="form-label">Pasta do produto</label>
                             <input type="text" class="form-control" value="<?php echo htmlspecialchars($pasta); ?>" readonly>
@@ -136,6 +177,8 @@ try {
                             </button>
                         </div>
                     </form>
+
+
 
                 </div>
             </div>
