@@ -149,6 +149,7 @@ include '../autenticacao.php'; ?>
         <div class="row g-3 align-items-center">
             <div class="col-lg-8" data-aos="fade-up">
                 <div class="d-flex align-items-center gap-3">
+                    
                     <span class="badge badge-soft px-3 py-2 fs-6">Lição <strong><?= $ordemAtualSafe ?></strong></span>
                     <h2 class="h4 m-0"><?= $tituloSafe ?></h2>
                     <?php $encIdCurso = $enc = encrypt($codigocurso, $action = 'e'); ?>
@@ -506,7 +507,9 @@ include '../autenticacao.php'; ?>
 
     <?php require 'config_aulas1.0/require_javascript.html'; ?>
 
-    <script src="regixv2.0/acessopaginas.js?<?= time(); ?>"></script>
+    <script src="config_turmas1.0/JS_accessturma.js"></script>
+    <script src="acessosv1.0/ajax_registraAcesso.js"></script>
+    <!-- <script src="regixv2.0/acessopaginas.js?<?= time(); ?>"></script> -->
     <script src="config_curso1.0/JS_liberaLicao.js?<? time(); ?>"></script>
     <script src="config_curso1.0/JS_copiarPre.js?<? time(); ?>"></script>
     <div id="copyTooltip">✅ Texto copiado!</div>
