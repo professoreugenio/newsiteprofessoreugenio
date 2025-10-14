@@ -1,6 +1,6 @@
 <?php
 define('BASEPATH', true);
-define('APP_ROOT', dirname(__DIR__, 2));
+define('APP_ROOT', dirname(__DIR__, 3));
 require_once APP_ROOT . '/conexao/class.conexao.php';
 require_once APP_ROOT . '/autenticacao.php';
 ?>
@@ -21,7 +21,7 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> PAGINAS ADMIN</h3>
+                <h3><i class="bi bi-journal-text me-2"></i> ACESSOS</h3>
             </div>
             <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
         </div>

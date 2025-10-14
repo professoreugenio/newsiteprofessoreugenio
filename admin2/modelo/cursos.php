@@ -21,24 +21,8 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> CURSOS/TURMAS</h3>
-                <?php
-                $queryUpdate = $con->prepare("
-    UPDATE new_sistema_inscricao_PJA 
-    SET data_ins = data_ci 
-    WHERE data_ins IS NULL
-");
-                $queryUpdate->execute();
-
-                $rows = $queryUpdate->rowCount();
-
-                if ($rows > 0) {
-                    echo "Foram atualizadas $rows linhas.";
-                } else {
-                    echo "Nenhuma linha precisou ser atualizada.";
-                }
-
-                ?>
+                <h3><i class="bi bi-journal-text me-2"></i> NOME PÁGINA</h3>
+                
             </div>
             <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
         </div>

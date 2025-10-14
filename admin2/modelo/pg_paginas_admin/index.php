@@ -1,6 +1,6 @@
 <?php
 define('BASEPATH', true);
-define('APP_ROOT', dirname(__DIR__, 2));
+define('APP_ROOT', dirname(__DIR__, 3));
 require_once APP_ROOT . '/conexao/class.conexao.php';
 require_once APP_ROOT . '/autenticacao.php';
 ?>
@@ -9,6 +9,9 @@ require_once APP_ROOT . '/autenticacao.php';
 
 <head>
     <?php require_once APP_ROOT . '/admin2/v1.0/head.php'; ?>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="/admin2/v1.0/CSS_config.css?<?= time(); ?>">
     <?php require_once APP_ROOT . '/admin2/v1.0/dadosuser.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -21,14 +24,14 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> PAGINAS ADMIN</h3>
+                <h3><i class="bi bi-journal-text me-2"></i> pg_paginas_admin</h3>
             </div>
-            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
+            <?php require_once APP_ROOT . '/admin2/modelo/pg_paginas_admin/pg_paginas_admin1.0/Subnav.php'; ?>
         </div>
-        <?php require_once APP_ROOT . '/admin2/modelo/vendas1.0/BodyVendasCursos1.0.php'; ?>
+        <?php require_once APP_ROOT . '/admin2/modelo/pg_paginas_admin/pg_paginas_admin1.0/Bodypg_paginas_admin1.0.php'; ?>
     </div>
     <!-- Scripts -->
-    <script src="../v1.0/PainelLateral.js"></script>
+
     <?php require_once APP_ROOT . '/admin2/v1.0/footer.php'; ?>
 </body>
 
