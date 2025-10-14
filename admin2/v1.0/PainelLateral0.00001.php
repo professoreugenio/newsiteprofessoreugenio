@@ -168,7 +168,7 @@ PHP;
                         /* ==========================================================
        ✅ 6. Confirmação visual
     ========================================================== */
-                         "<div class='alert alert-success mt-3'>
+                        echo "<div class='alert alert-success mt-3'>
             <strong>Módulo criado com sucesso!</strong><br>
             Estrutura: /modelo/{$nomePagina}/{$nomePagina}1.0/<br>
             <ul class='mb-0'>
@@ -182,7 +182,7 @@ PHP;
 
 
                     <?php $encPage = encrypt($rwPagina['codigopaginasadmin'], $action = 'e'); ?>
-                    <a href="../actions.php?ses=<?php echo $encSessao; ?>&page=<?php echo $encPage; ?>&ts=<?= time() ?>" class="d-block text-muted mb-1">:: <?php echo $rwPagina['nomepaginapa']; ?></a>
+                    <a href="<?php echo $nomePagina; ?>/?ses=<?php echo $encSessao; ?>&page=<?php echo $encPage; ?>&ts=<?= time() ?>" class="d-block text-muted mb-1">:: <?php echo $rwPagina['nomepaginapa']; ?></a>
                 <?php } ?>
             </div>
         </div>
