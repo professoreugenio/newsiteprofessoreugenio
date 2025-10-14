@@ -19,7 +19,7 @@
                     <a class="nav-link active" aria-current="page" href="index.php"><i class="bi bi-house-door-fill me-1"></i>Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="alunos.php?todos=1"><i class="bi bi-people-fill me-1"></i>Usuários</a>
+                    <a class="nav-link" href="alunos_Geral.php?status=1"><i class="bi bi-people-fill me-1"></i>Usuários</a>
                 </li>
                 <!-- 
                 <li class="nav-item">

@@ -128,3 +128,663 @@
 [10-Oct-2025 09:48:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
 [10-Oct-2025 09:48:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
 [10-Oct-2025 09:48:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:03:09 America/Fortaleza] PHP Warning:  Undefined array key "codigocadastro" in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 181
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:04:41 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:02 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:03 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:04 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:05:37 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:07:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:19:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:21:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 10:22:40 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:32:18 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:31 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[10-Oct-2025 11:34:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 09:53:55 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 12:38:17 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:10:09 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[11-Oct-2025 13:32:32 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 11:50:33 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/appsrcc/public_html/admin2/v1.0/nav.php:47) in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadosListaUsuarios.php on line 9
+[12-Oct-2025 11:50:33 America/Fortaleza] PHP Warning:  Constant BASEPATH already defined in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadosListaUsuarios.php on line 13
+[12-Oct-2025 11:50:33 America/Fortaleza] PHP Warning:  Constant APP_ROOT already defined in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadosListaUsuarios.php on line 14
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $idUsuario in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 8
+[12-Oct-2025 13:47:50 America/Fortaleza] PHP Warning:  Undefined variable $nomeAluno in /home/appsrcc/public_html/admin2/modelo/cursosv1.0/require_EnviarMensagens.php on line 10
+[12-Oct-2025 13:55:20 America/Fortaleza] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idcurso' in 'field list' in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadoformProdutoEditar.php on line 131
+[12-Oct-2025 14:04:31 America/Fortaleza] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idcurso' in 'field list' in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadoformProdutoEditar.php on line 131
+[12-Oct-2025 14:05:32 America/Fortaleza] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'idcurso' in 'field list' in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadoformProdutoEditar.php on line 132
+[12-Oct-2025 14:41:46 America/Fortaleza] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.visivelhome' in 'where clause' in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadoformProdutoEditar.php on line 142
+[12-Oct-2025 14:42:27 America/Fortaleza] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.visivelhome' in 'where clause' in /home/appsrcc/public_html/admin2/modelo/afiliados1.0/BodyAfiliadoformProdutoEditar.php on line 142
+[13-Oct-2025 09:25:08 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:25:08 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:25:08 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:25:08 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:26:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:55:53 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:55:53 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:55:53 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:55:53 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:56:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:56:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:56:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 09:56:14 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:13:36 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:13:36 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:13:36 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:13:36 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:15:32 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:15:32 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:15:32 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:15:32 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:18:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:18:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:18:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:18:56 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:34 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:34 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:34 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:21:34 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:22:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:22:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:22:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:22:12 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:20 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:20 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:20 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:20 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:30 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:30 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:30 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:30 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:59 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:59 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:59 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:23:59 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:25:18 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:25:18 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:25:18 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:25:18 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:28:49 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:28:49 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:28:49 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:28:49 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:32:54 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:32:54 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:32:54 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:32:54 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:34:27 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:34:27 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:34:27 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:34:27 America/Fortaleza] PHP Warning:  Undefined array key 1 in /home/appsrcc/public_html/admin2/modelo/vendas1.0/BodyVendasCursos.php on line 209
+[13-Oct-2025 10:45:08 America/Fortaleza] PHP Warning:  Undefined variable $where in /home/appsrcc/public_html/admin2/v1.0/require_Vendas.php on line 33
+[13-Oct-2025 10:45:08 America/Fortaleza] PHP Warning:  PDOStatement::execute(): SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY v.datacomprasv DESC, v.horacomprasv DESC
+LIMIT 300' at line 30 in /home/appsrcc/public_html/admin2/v1.0/require_Vendas.php on line 40

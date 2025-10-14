@@ -41,14 +41,14 @@ if (!function_exists('whatsLink')) {
 /* ------------------ Filtros de visualização ------------------ */
 $view = isset($_GET['view']) ? strtolower(trim($_GET['view'])) : 'pendentes';
 $titulo = 'Vendas pendentes de confirmação';
-$where  = '(v.statussv IS NULL OR v.statussv <> 1)'; // padrão
+$where  = '(v.statussv IS NULL OR v.statussv = 0)'; // padrão
 
 if ($view === 'confirmados') {
     $titulo = 'Pagamentos confirmados';
     $where  = 'v.statussv = 1';
 } elseif ($view === 'atuais') {
     $titulo = 'Vendas de hoje';
-    $where  = 'DATE(v.datacomprasv) = CURDATE()';
+    $where  = 'DATE(v.datacomprasv) = CURDATE() and (v.statussv IS NULL OR v.statussv = 0)';
 }
 
 /* ------------------ Consulta ------------------ */
@@ -170,11 +170,11 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Toolbar de filtros -->
     <div class="toolbar d-flex flex-wrap align-items-center gap-2 mb-3">
-        <a href="?view=confirmados" class="btn btn-outline-success <?= $view === 'confirmados' ? 'active' : '' ?>">
-            <i class="bi bi-check2-circle me-1"></i> Pagamentos confirmados
-        </a>
         <a href="?view=atuais" class="btn btn-outline-primary <?= $view === 'atuais' ? 'active' : '' ?>">
             <i class="bi bi-calendar-date me-1"></i> Vendas atuais (hoje)
+        </a>
+        <a href="?view=confirmados" class="btn btn-outline-success <?= $view === 'confirmados' ? 'active' : '' ?>">
+            <i class="bi bi-check2-circle me-1"></i> Pagamentos confirmados
         </a>
         <a href="?view=pendentes" class="btn btn-outline-warning <?= $view === 'pendentes' ? 'active' : '' ?>">
             <i class="bi bi-hourglass-split me-1"></i> Pendentes
@@ -206,12 +206,14 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $decSenha = encrypt($row['senha'], $action = 'd');
                 $exp = explode('&', $decSenha);
                 $email = $exp[0];
-                $senha = $exp[1];
+                $senha = $exp[1]?? '***';
                 $curso  = $row['nomecurso'] ?? '—';
+                $iddoCadastro  = $row['codigocadastro'] ?? '—';
                 $aluno  = primeiroESobrenome($row['nome_aluno'] ?? '—');
                 $cel    = $row['cel_aluno'] ?? '';
                 $whats  = whatsLink($cel);
                 $idCursov   = $row['idcursosv'] ?? '';
+                $status   = $row['statussv'] ?? '';
                 $encIdCursov = encrypt($idCursov, $action = 'e');
                 $encIdUsuario = encrypt($row['codigocadastro'], $action = 'e');
 
@@ -247,7 +249,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <span class="dot d-none d-lg-inline"></span>
 
                         <div class="venda-aluno me-lg-3">
-                            <a href="alunoTurmas.php?idUsuario=<?= e($encIdUsuario); ?>">
+                            <a href="alunoTurmas.php?idUsuario=<?= e($encIdUsuario); ?>" title="<?= $iddoCadastro;?>">
                                 <i class="bi bi-person-circle me-1"></i><?= e($aluno); ?>
                             </a>
                         </div>
@@ -297,7 +299,7 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="venda-afiliado">
                                 <i class="bi bi-people-fill me-1"></i>
                                 Afiliado:
-                                <a href="<?= e($linkAfiliado); ?>" class="link-dark fw-semibold" title="Ver perfil do afiliado">
+                                <a tit href="<?= e($linkAfiliado); ?>" class="link-dark fw-semibold" title="Ver perfil do afiliado">
                                     <?= e(primeiroESobrenome($afNome)); ?>
                                 </a>
                             </div>
@@ -316,12 +318,20 @@ $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php endif; ?>
 
                         <!-- Botão Excluir -->
-                        <button
-                            type="button"
-                            class="btn btn-outline-danger btn-sm px-3 shadow-sm excluir-pgto"
-                            data-idvenda="<?= (int)$row['codigovendas']; ?>">
-                            <i class="bi bi-trash3 me-1"></i> Excluir
-                        </button>
+                      
+
+                        <?php if ($status != 1): ?>
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger btn-sm px-3 shadow-sm excluir-pgto"
+                                data-idvenda="<?= (int)$row['codigovendas']; ?>">
+                                <i class="bi bi-trash3 me-1"></i> Excluir
+                            </button>
+                        <?php else: ?>
+                            <span class="badge bg-success-subtle text-success align-self-center">
+                                <i class="bi bi-check2-circle me-1"></i> Pago
+                            </span>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>

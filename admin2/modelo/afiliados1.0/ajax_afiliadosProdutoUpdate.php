@@ -65,7 +65,6 @@ try {
     $comissaoBr   = (string)($_POST['comissaoap'] ?? '0,00');
     $visivelapStr = (string)($_POST['visivelap'] ?? '0');
     $urlproduto   = (string)($_POST['urlproduto'] ?? '');
-    $idturmaafiliado   = (string)($_POST['idturmaafiliado'] ?? '');
 
     if ($idParam === '') {
         throw new InvalidArgumentException('ID não informado.');
@@ -115,8 +114,7 @@ try {
     // Atualiza
     $sql = "
         UPDATE a_site_afiliados_produto
-           SET nomeap = :nomeap, 
-               idturmaap = :idturmaafiliado,
+           SET nomeap = :nomeap,
                valorap = :valorap,
                urlprodutoap = :urlproduto,
                comissaoap = :comissaoap,
