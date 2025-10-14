@@ -148,10 +148,8 @@ include '../autenticacao.php'; ?>
     <?php endif; ?>
 
 
-
-
-    <script src="acessosv1.0/ajax_registraAcesso.js?<?= time() ?>"></script>
-    <script src="config_turmas1.0/JS_accessturma.js?<?= time() ?>"></script>
+    <script src="config_turmas1.0/JS_accessturma.js"></script>
+    <script src="acessosv1.0/ajax_registraAcesso.js"></script>
 
 </body>
 

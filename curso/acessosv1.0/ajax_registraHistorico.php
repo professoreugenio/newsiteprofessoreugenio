@@ -81,9 +81,6 @@ try {
 
     $data = readJsonBody();
     $url = trim((string)($data['url'] ?? ''));
-
-    // Segurança básica de URL (apenas path+query). Se vier absoluta, reduzimos:
-    // Ex.: https://dominio.com/pagina?a=1 => /pagina?a=1
     if (preg_match('#https?://[^/]+(/.*)$#i', $url, $m)) {
         $url = $m[1];
     }
@@ -97,37 +94,24 @@ try {
         $url = mb_substr($url, 0, 300);
     }
 
-    // Se quiser ignorar urls vazias, descomente:
-    // if ($url === '') {
-    //     echo json_encode(['ok' => false, 'error' => 'UrlVazia']);
-    //     exit;
-    // }
+
+    if (strpos($url, 'modulo_licao.php') !== false) {
+        $navCookie = isset($_COOKIE['nav']) ? $_COOKIE['nav'] : '';
+
+        // Acrescenta o parâmetro logo após "modulo_licao.php"
+        // Exemplo: modulo_licao.php → modulo_licao.php&NAVCOOKIE&
+        $url = preg_replace(
+            '/(modulo_licao\.php)(?!&)/',     // encontra "modulo_licao.php" que não tem & logo após
+            'modulo_licao.php?var=' . $navCookie . '&',
+            $url,
+            1
+        );
+    }
 
     $dataHoje  = date('Y-m-d');
     $horaAgora = date('H:i:s');
 
-    // ------- (Opcional) Anti-flood/Throttle -------
-    // Ex.: pular inserção se a MESMA url foi gravada para esta chavera há menos de N segundos
-    // $THROTTLE_SECONDS = 0; // 0 = desativado
-    // if ($THROTTLE_SECONDS > 0) {
-    //     $sqlChk = "SELECT horarah, datarah
-    //                FROM a_site_registraacessoshistorico
-    //                WHERE chaverah = :ch AND urlrah = :u
-    //                ORDER BY datarah DESC, horarah DESC
-    //                LIMIT 1";
-    //     $stChk = $con->prepare($sqlChk);
-    //     $stChk->bindParam(':ch', $chavera);
-    //     $stChk->bindParam(':u', $url);
-    //     $stChk->execute();
-    //     $last = $stChk->fetch(PDO::FETCH_ASSOC);
-    //     if ($last) {
-    //         $lastTs = strtotime(($last['datarah'] ?? $dataHoje) . ' ' . ($last['horarah'] ?? $horaAgora));
-    //         if (time() - $lastTs < $THROTTLE_SECONDS) {
-    //             echo json_encode(['ok' => true, 'status' => 'throttled', 'url' => $url]);
-    //             exit;
-    //         }
-    //     }
-    // }
+    
 
     // Inserção
     $sqlIns = "INSERT INTO a_site_registraacessoshistorico

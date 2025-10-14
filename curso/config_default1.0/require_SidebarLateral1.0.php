@@ -64,7 +64,7 @@
         <button onclick="window.location.href='../curso/';" class="btn btn-outline-secondary text-start w-100">
             <i class="bi bi-people-fill me-2"></i>Cursos
         </button>
-        <?php if ($codigoUser == '1' || $codigoUser == '115507' || $codigoUser == '115488'): ?>
+        <?php if ($codigoUser == '1' || $codigoUser == '115498' || $codigoUser == '115509'): ?>
             <button id="btnChaveAfiliado" class="btn btn-success">
                 <i class="bi bi-link-45deg me-1"></i> Afiliados
             </button>
