@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="indexv1.0/css/configCards.css?<?= time(); ?>">
 <?php require_once 'head/head_midiassociais.php'; ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" href="config_index/Index.css">
+<link rel="stylesheet" href="indexv1.0/css/Index.css">
 <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -42,3 +42,21 @@
     gtag('js', new Date());
     gtag('config', 'AW-11538602776');
 </script>
+
+<style>
+    .bg-images {
+       
+    }
+
+    .bg-img {
+       
+        filter: brightness(40%);
+        /* 🔹 Escurece a imagem (0% = preto, 100% = normal) */
+        transition: filter 0.3s ease;
+    }
+
+    .bg-img:hover {
+        filter: brightness(60%);
+        /* 🔹 Um leve clareamento ao passar o mouse */
+    }
+</style>

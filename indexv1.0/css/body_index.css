@@ -81,9 +81,14 @@ section {
 
 .lead {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-size: 18px;
+    font-weight: 400;
 
 }
 
+strong {
+    font-weight: 800;
+}
 
 .titulocarousel-home {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);

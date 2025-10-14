@@ -27,7 +27,7 @@ endif; ?>
 <?php include 'indexv1.0/body_section_sobre.php'; ?>
 
 <section class="container py-5">
-    <h4 style="color: #ffffff;" class="text-center">Parcerias</h4>
+    <h2 style="color: #ffffff;" class="text-center mt-4 mb-4">Parcerias</h2>
     <div class="row">
         <div class="d-flex justify-content-center flex-wrap">
             <?php require 'anunciov1.0/carousel_um.php' ?>
@@ -39,7 +39,7 @@ endif; ?>
     </div>
 </section>
 
-
+<script src="regixv2.0/acessopaginas.js?t=<? time(); ?>"></script>
 <?php if (!empty($_COOKIE['registracessos'])): echo "Registro OK";
 else: echo "Não Registrado";
 endif; ?>

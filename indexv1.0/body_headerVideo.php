@@ -10,9 +10,9 @@
     <!-- Conteúdo -->
     <div class="container position-relative py-5 z-1">
         <h1 class="display-4 fw-bold">Curso de Excel </h1>
-        <p class="lead mb-1">Excel + IA</p>
-        <p class="lead mt-2"><i class="bi bi-people-fill me-2"></i> Mais de <strong>250 alunos</strong> satisfeitos</p>
-        <p class="lead mt-2"><i class="bi bi-bar-chart-fill me-2"></i> <strong>Acessos hoje</strong></p>
+        <p class="lead mb-1" style="font-size: 30px;">Excel + IA</p>
+        <p class="lead mt-2"><i class="bi bi-people-fill me-2"></i> Mais de <strong>250 alunos</strong> prontos para o mercado de trabalho.</p>
+        <!--  <p class="lead mt-2"><i class="bi bi-bar-chart-fill me-2"></i> <strong>Acessos hoje</strong></p> -->
         <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
             <a href="https://professoreugenio.com/action.php?curso=WTFGcUFCRHFnakMycTduYzl0UlpNdz09&ts=<?= time(); ?>"
                 class="btn btn-animated-gradient btn-lg px-4">

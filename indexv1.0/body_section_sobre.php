@@ -9,9 +9,12 @@
         <div class="row">
             <div class="col-md-6">
 
-                <p style="font-weight: 600; font-size: 24px;color:#ffffff">Somos uma plataforma dedicada a oferecer cursos de alta qualidade, desenvolvidos por
-                    especialistas em suas áreas. Nossa missão é capacitar pessoas e ajudá-las a alcançar seus
-                    objetivos profissionais e pessoais.</p>
+                <p style="font-weight: 500; font-size: 24px;color:#ffffff">
+                    O Curso Online Professor Eugênio é uma plataforma de cursos livres na área de tecnologia, oferecendo aulas ao vivo e gravadas, certificação digital, e material didático completo com acesso direto às atividades.
+                    Além disso, você conta com meu suporte pessoal durante toda a jornada de aprendizado.
+
+                    Minha missão é ampliar seus conhecimentos, desenvolver suas habilidades e prepará-lo para o mercado de trabalho e para os desafios do dia a dia.
+                </p>
                 <a href="https://professoreugenio.com/action.php?idpage=b2EvaDhuSHo2TCsrNTR3YlZQOXc2Zz09" class="btn btn-warning mt-3" style="font-size:22px">Veja mais</a>
             </div>
             <div class="col-md-6">

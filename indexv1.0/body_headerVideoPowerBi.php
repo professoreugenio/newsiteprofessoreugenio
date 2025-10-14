@@ -11,8 +11,8 @@
     <div class="container position-relative py-5 z-1">
         <h1 class="display-4 fw-bold">Curso de Power BI</h1>
         <p class="lead mb-1">Aprenda Power BI do básico ao avançado, com foco em dashboards, inteligência artificial e relatórios profissionais</p>
-        <p class="lead mt-2"><i class="bi bi-people-fill me-2"></i> Mais de <strong>380 alunos</strong> satisfeitos</p>
-        <p class="lead mt-2"><i class="bi bi-bar-chart-fill me-2"></i> <strong>Acessos hoje</strong></p>
+        <p class="lead mt-2"><i class="bi bi-people-fill me-2"></i> Mais de <strong>380 alunos</strong> prontos para o mercado de trabalho.</p>
+        <!-- <p class="lead mt-2"><i class="bi bi-bar-chart-fill me-2"></i> <strong>Acessos hoje</strong></p> -->
         <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
             <a href="https://professoreugenio.com/pagina_vendas.php?nav=SnlySmlkTXI2NTBVQzJPRGtxYU9UWWVMSUl2bjRkOTY2aFNkMjBKT0ViST0=&ts=<?= time(); ?>"
                 class="btn btn-animated-gradient btn-lg px-4">
