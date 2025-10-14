@@ -1,3 +1,8 @@
+<?php
+$idUsuario = $idUsuario ?? $idAluno;
+$nomeAluno = $nomeAluno ?? $idAluno;
+?>
+
 <div class="col-md-3 text-end">
     <div class="dropdown">
         <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuBtn<?= $idAluno ?>" data-bs-toggle="dropdown" aria-expanded="false">

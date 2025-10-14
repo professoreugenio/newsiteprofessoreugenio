@@ -256,6 +256,7 @@ function linkWhats($cel, $msg)
         $encIdAluno = $enc = encrypt($row['codigocadastro'], $action = 'e');
         $nomeArr = explode(' ', trim($row['nome']));
         $nomeExib = htmlspecialchars($nomeArr[0] . ' ' . ($nomeArr[1] ?? ''));
+        $nomeAluno = $nomeExib;
         $foto = fotoAlunoUrl($row['pastasc'], $row['imagem200']);
         list($ultimoAcesso, $diasAcesso) = getUltimoAcesso($con, $idAluno, $idTurma);
         $emailBloq = intval($row['emailbloqueio']);
