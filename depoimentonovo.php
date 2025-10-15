@@ -3,7 +3,32 @@
 define('BASEPATH', true);
 require_once __DIR__ . '/conexao/class.conexao.php';
 require_once __DIR__ . '/autenticacao.php'; // para encrypt()/decrypt()
-@date_default_timezone_set('America/Fortaleza');
+@date_default_timezone_set('America/Fortaleza'); ?>
+
+<?php
+function app_base_url(): string
+{
+    $https = (
+        (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+        (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) ||
+        (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+    );
+    $scheme = $https ? 'https' : 'http';
+    $host   = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost');
+    $path   = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+    return rtrim($scheme . '://' . $host . $path, '/') . '/';
+}
+
+if (!defined('BASE_URL')) {
+    define('BASE_URL', app_base_url()); // ex.: https://professoreugenio.com/
+}
+
+
+$baseUrl  = BASE_URL . 'meudepoimento.php?idUser=' . $_GET['idUser'];
+
+?>
+
+<?php
 
 // ---------- Helpers ----------
 function decryptUserFromGet(): array

@@ -1,3 +1,4 @@
+
 <script>
     // Disponibiliza o ID do administrador no JS
     const COD_ADM = <?= (int)$codadm ?>;
