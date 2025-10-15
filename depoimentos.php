@@ -104,7 +104,7 @@ if (!empty($mensagens)) {
         $ogDesc = mb_substr(strip_tags($primeiroTexto), 0, 140, 'UTF-8') . (mb_strlen($primeiroTexto, 'UTF-8') > 140 ? '…' : '');
     }
 }
-$ogImage = "https://professoreugenio.com/img/logosite.png";
+$ogImage = "https://professoreugenio.com/img/depoimentos.jpg";
 $siteName = "Professor Eugênio";
 ?>
 <!DOCTYPE html>
@@ -346,7 +346,12 @@ $siteName = "Professor Eugênio";
             <div class="depo-grid">
                 <?php foreach ($mensagens as $m):
                     $img    = fotoUsuario50($m);
-                    $nome   = trim((string)($m['nome'] ?? 'Usuário'));
+                    $nomeCompleto = trim((string)($m['nome'] ?? 'Usuário'));
+                    $partesNome = preg_split('/\s+/', $nomeCompleto);
+                    $nome = isset($partesNome[0]) ? $partesNome[0] : '';
+                    if (isset($partesNome[0])) {
+                        $nome = ' ' . $partesNome[0];
+                    }
                     $texto  = trim((string)($m['textoCF'] ?? ''));
                     $data   = brData($m['dataCF'] ?? '');
                     $hora   = $m['horaCF'] ?? '';

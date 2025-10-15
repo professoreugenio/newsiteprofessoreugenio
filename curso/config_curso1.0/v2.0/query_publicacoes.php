@@ -28,7 +28,7 @@ $queryModulo->execute();
 $rwModulo = $queryModulo->fetch(PDO::FETCH_ASSOC);
 if ($rwModulo) {
     $nmmodulo = $rwModulo['modulo'];
-    $bgcolor = $rwModulo['bgcolor'];
+    $bgcolor = $rwModulo['bgcolorsm'];
 } else {
     $nmmodulo = 'Módulo não encontrado';
     $bgcolor = '#ccc';

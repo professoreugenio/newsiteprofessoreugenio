@@ -40,7 +40,7 @@ function detectDevice(string $ua): string
 function ensureCookieChavera(): string
 {
     $cookieName = 'chavera';
-    $expires = time() + 60 * 60 * 24 * 90; // 90 dias
+    $expires = time() + 60 * 60 * 24; // 90 dias
     $opts = [
         'expires'  => $expires,
         'path'     => '/',
@@ -106,6 +106,43 @@ try {
     ");
     $st->execute([':ch' => $chavera]);
     $ultimaData = (string)($st->fetchColumn() ?: '');
+
+
+    // Verifica última data registrada para essa chave
+    $st = $con->prepare("
+    SELECT MAX(datara) AS ultima_data
+    FROM a_site_registraacessos
+    WHERE chavera = :ch
+");
+    $st->execute([':ch' => $chavera]);
+    $ultimaData = (string)($st->fetchColumn() ?: '');
+
+    // ===============================
+    // LIMPA COOKIE CHAVERA SE DATA EXPIRADA
+    // ===============================
+    if ($ultimaData !== '' && $ultimaData < date('Y-m-d')) {
+        $cookieName = 'chavera';
+        // Remove cookie do navegador (define expiração no passado)
+        setcookie($cookieName, '', time() - 3600, '/');
+        unset($_COOKIE[$cookieName]);
+
+        // Também pode, opcionalmente, apagar registros antigos dessa chave:
+        // $del = $con->prepare("DELETE FROM a_site_registraacessos WHERE chavera = :ch");
+        // $del->execute([':ch' => $chavera]);
+
+        // Cria nova chave imediatamente
+        $chavera = 'RA' . uniqid('', true);
+        setcookie($cookieName, $chavera, [
+            'expires'  => time() + 60 * 60 * 24,
+            'path'     => '/',
+            'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'),
+            'httponly' => false,
+            'samesite' => 'Lax'
+        ]);
+        $_COOKIE[$cookieName] = $chavera;
+    }
+    // ===============================
+
 
     // Só insere se não houver registro hoje
     $podeInserir = ($ultimaData === '' || $dataHoje > $ultimaData);
