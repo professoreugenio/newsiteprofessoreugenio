@@ -4,26 +4,58 @@
 </script>
 
 <?php
+// ========================== CONFIG & HELPERS ==========================
+date_default_timezone_set('America/Fortaleza');
+
 // Filtro: 0 = não acessadas; 1 = acessadas
 $filtroAcessado = isset($_GET['acessado']) && $_GET['acessado'] == '1' ? 1 : 0;
 
-// Helper para montar foto com fallback relativo ao módulo
+// Helper: foto do usuário (módulo admin)
 function montarFotoUsuario(?string $pasta, ?string $img): string
 {
     $pasta = trim((string)$pasta);
     $img   = trim((string)$img);
+    if ($img === 'usuario.jpg' || $img === '' || $img === null) {
+        return '../../fotos/usuarios/usuario.jpg';
+    }
     if ($pasta !== '' && $img !== '') {
         return '../../fotos/usuarios/' . $pasta . '/' . $img;
     }
     return '../../fotos/usuarios/usuario.jpg';
 }
 
-// Consulta principal com JOINs (usuário + publicação)
+// Saudação simples
+$h = (int)date('G');
+$saudacao = ($h < 12) ? 'Bom dia' : (($h < 18) ? 'Boa tarde' : 'Boa noite');
+
+// Normaliza celular (usa DDI 55 como padrão Brasil)
+function normalizarCelularBR(?string $cel): string
+{
+    $d = preg_replace('/\D+/', '', (string)$cel);
+    if ($d === '') return '';
+    // Se já começar com 55, mantém; do contrário, prefixa 55
+    if (strpos($d, '55') === 0) return $d;
+    return '55' . $d;
+}
+
+// Monta link do WhatsApp já com número e texto
+function montarLinkWhatsapp(?string $celular, string $mensagem): string
+{
+    $num = normalizarCelularBR($celular);
+    if ($num === '') {
+        // sem número: abre só com o texto
+        return 'https://wa.me/?text=' . rawurlencode($mensagem);
+    }
+    return 'https://wa.me/' . $num . '?text=' . rawurlencode($mensagem);
+}
+
+// ============================ CONSULTA PRINCIPAL ============================
 $stmt = config::connect()->prepare("
     SELECT 
         f.codigoForum, f.idusuarioCF, f.idartigoCF, f.idcodforumCF,
         f.textoCF, f.visivelCF, f.acessadoCF, f.dataCF, f.destaqueCF, f.horaCF,
-        u.nome AS nomeUsuario, u.imagem50 AS img50, u.pastasc AS pastaUsuario,
+        f.permissaoCF, u.codigocadastro,
+        u.nome AS nomeUsuario, u.imagem50 AS img50, u.pastasc AS pastaUsuario, u.celular,
         p.titulo AS tituloAula
     FROM a_curso_forum f
     LEFT JOIN new_sistema_cadastro u 
@@ -37,7 +69,7 @@ $stmt->bindParam(':acessado', $filtroAcessado, PDO::PARAM_INT);
 $stmt->execute();
 $itens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Construção de links dos botões (mantém outros parâmetros)
+// ============================ LINKS DO TOPO ============================
 $urlBase = strtok($_SERVER['REQUEST_URI'], '?');
 $qsA = $_GET;
 $qsA['acessado'] = 0;
@@ -73,6 +105,26 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
     #forumConteudoEdit {
         display: none;
     }
+
+    /* Badges suaves para permissão */
+    .badge-soft {
+        border: 1px solid rgba(0, 0, 0, .08);
+        padding: .35rem .6rem;
+        border-radius: 999px;
+        font-size: .78rem;
+    }
+
+    .badge-soft-success {
+        background: #e9f9f5;
+        color: #0f5132;
+        border-color: rgba(16, 185, 129, .25);
+    }
+
+    .badge-soft-warning {
+        background: #fff7e6;
+        color: #664d03;
+        border-color: rgba(255, 159, 67, .25);
+    }
 </style>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -84,7 +136,7 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
             <i class="bi bi-envelope-check"></i> Acessadas
         </a>
         <a href="https://professoreugenio.com/depoimentos.php" target="_blank" class="btn btn-success">
-            <i class="bi bi-envelope-check"></i> Abrir Depoimentos
+            <i class="bi bi-chat-quote"></i> Abrir Depoimentos
         </a>
     </div>
     <h5 class="mb-0">
@@ -101,28 +153,49 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
 <?php else: ?>
     <div class="list-group shadow-sm">
         <?php foreach ($itens as $rw):
-            $id    = (int)$rw['codigoForum'];
-            $txt   = trim((string)$rw['textoCF']);
-            $prev  = mb_strimwidth(strip_tags($txt), 0, 180, '...');
-            $dt    = htmlspecialchars($rw['dataCF'] ?? '');
-            $hr    = htmlspecialchars($rw['horaCF'] ?? '');
-            $vis   = (int)$rw['visivelCF'] === 1;
-            $nome  = htmlspecialchars($rw['nomeUsuario'] ?? 'Aluno');
+            $id     = (int)$rw['codigoForum'];
+            $txt    = trim((string)$rw['textoCF']);
+            $prev   = mb_strimwidth(strip_tags($txt), 0, 180, '...');
+            $dt     = htmlspecialchars($rw['dataCF'] ?? '');
+            $hr     = htmlspecialchars($rw['horaCF'] ?? '');
+            $vis    = (int)$rw['visivelCF'] === 1;
+            $encIdUsuario    =  encrypt($rw['codigocadastro'], $action = 'e');
+            $nome   = htmlspecialchars($rw['nomeUsuario'] ?? 'Aluno');
+            $nomePartes = explode(' ', $nome);
+            $nomeCurto = $nomePartes[0];
             $titulo = htmlspecialchars($rw['tituloAula'] ?? 'Aula sem título');
 
-            // Regra da foto conforme solicitado
+            // Foto
             if (($rw['img50'] ?? '') === 'usuario.jpg'):
-                $foto = '../../fotos/usuarios/' . ($rw['img50'] ?? '');
+                $foto = '../../fotos/usuarios/' . ($rw['img50'] ?? 'usuario.jpg');
             else:
                 $foto = montarFotoUsuario($rw['pastaUsuario'] ?? '', $rw['img50'] ?? '');
             endif;
+
+            // Permissão
+            $permOK = ((int)($rw['permissaoCF'] ?? 0) === 1);
+
+            // idUser encryptado para incluir no link
+            $idUser = (string)($rw['idusuarioCF'] ?? '');
+            $idEnc  = encrypt($idUser, 'e'); // ajuste o segundo parâmetro se sua função usar outro padrão
+
+            // Link de liberação (conforme solicitado, domínio/path fornecido)
+            $linkLiberacao = "https://professoreugenio.com/depoimentonovo.php?idUser={$idEnc}";
+
+            // Mensagem do WhatsApp conforme pedido
+            $mensagemWA = "{$saudacao} {$nomeCurto}. Aqui é o professor Eugênio. Verifique seus depoimentos enviados para Liberação. Clique no link : {$linkLiberacao}";
+
+            // Número do aluno (new_sistema_cadastro.celular) -> monta o link do WhatsApp
+            $hrefWA = montarLinkWhatsapp($rw['celular'] ?? '', $mensagemWA);
         ?>
             <div class="list-group-item list-group-item-action py-3">
                 <div class="d-flex w-100 align-items-start gap-3">
                     <img src="<?= htmlspecialchars($foto) ?>" class="avatar-40 shadow-sm border" alt="Foto">
                     <div class="flex-grow-1">
                         <div class="d-flex flex-wrap align-items-center gap-2 small text-muted mb-1">
-                            <span class="fw-semibold text-body"><?= $nome ?></span>
+                            <a href="alunoAcessos.php?idUsuario=<?= $encIdUsuario ?>" target="_blank">
+                                <span class="fw-semibold text-body"><?= $nome ?></span>
+                            </a>
                             <span class="badge bg-light text-secondary border badge-dot">
                                 <i class="bi bi-journal-text me-1"></i><?= $titulo ?>
                             </span>
@@ -136,6 +209,23 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
                                     </span>
                                 <?php endif; ?>
                             </span>
+                        </div>
+
+                        <!-- Indicador de permissão + botão WhatsApp (se necessário) -->
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <?php if ($permOK): ?>
+                                <span class="badge-soft badge-soft-success">
+                                    <i class="bi bi-unlock me-1"></i> Permissão concedida
+                                </span>
+                            <?php else: ?>
+                                <span class="badge-soft badge-soft-warning">
+                                    <i class="bi bi-lock me-1"></i> Sem permissão
+                                </span>
+                                <a class="btn btn-sm btn-success d-inline-flex align-items-center"
+                                    href="<?= htmlspecialchars($hrefWA) ?>" target="_blank" rel="noopener">
+                                    <i class="bi bi-whatsapp me-1"></i> WhatsApp
+                                </a>
+                            <?php endif; ?>
                         </div>
 
                         <a href="#"
@@ -229,7 +319,7 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
                     <div class="d-flex justify-content-end gap-2 mt-3">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
 
-                        <!-- NOVO botão -->
+                        <!-- Botão: liberar e fechar -->
                         <button type="button" class="btn btn-success" id="btnLiberarFechar">
                             <i class="bi bi-unlock me-1"></i> Liberar e fechar
                         </button>
@@ -243,7 +333,6 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         </div>
     </div>
 </div>
-
 
 <!-- Toasts -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080">
@@ -269,7 +358,7 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         t.show();
     }
 
-    // Escape e formatação simples (equivalente a nl2br(htmlspecialchars()))
+    // Helpers de texto
     function escapeHtml(str) {
         return String(str)
             .replace(/&/g, '&amp;')
@@ -287,7 +376,6 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         return nl2br(escapeHtml(str));
     }
 
-    // Atualiza o preview na lista (usado quando estamos no filtro "Acessadas")
     function truncarPreview(s, max = 180) {
         const txt = s.replace(/\s+/g, ' ').trim();
         return (txt.length > max) ? txt.slice(0, max) + '...' : txt;
@@ -298,7 +386,6 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         if (el) el.textContent = truncarPreview(textoNovo, 180);
     }
 
-    // Alterna modos de exibição/edição
     function entrarModoEdicao() {
         document.getElementById('btnEditarTexto').style.display = 'none';
         document.getElementById('grupoEditarTexto').style.display = 'inline-flex';
@@ -314,20 +401,16 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         document.getElementById('forumConteudoEdit').style.display = 'none';
     }
 
-    // Abre modal: carrega conteúdo + dados; marca acessadoCF=1; remove da lista se "não acessadas"
-
-
+    // Abrir modal e carregar conteúdo
     $(document).on('click', '.abrir-modal-forum', function(e) {
         e.preventDefault();
         const idForum = $(this).data('id');
 
-        // estado inicial
         sairModoEdicao();
 
-        // placeholders iniciais
         $('#forumConteudoView').html('<div class="text-muted"><i class="bi bi-info-circle me-1"></i>Carregando conteúdo...</div>');
-        $('#respCodigoForum').val(idForum); // codigoforum
-        $('#idusuarioDe').val(COD_ADM || 0); // id do administrador (remetente)
+        $('#respCodigoForum').val(idForum);
+        $('#idusuarioDe').val(COD_ADM || 0);
 
         $.ajax({
             url: 'avaliacoes1.0/ajax_forumAbrir.php',
@@ -338,26 +421,22 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
             dataType: 'json',
             success: function(r) {
                 if (r && r.ok) {
-                    // conteúdo
                     $('#forumConteudoView').html(r.html || '<em>Sem conteúdo.</em>');
                     $('#textoAlunoRaw').val(r.textoRaw || '');
                     $('#textoEditAluno').val(r.textoRaw || '');
 
-                    // cabeçalho
                     $('#modalNomeUsuario').text(r.nome || 'Aluno');
                     $('#modalTituloAula').text(r.titulo || '-');
                     if (r.foto && r.foto !== '') {
                         $('#modalAvatar').attr('src', r.foto);
                     }
 
-                    // >>> Destinatário: idusuarioCF vindo do backend
                     if (typeof r.idusuarioCF !== 'undefined') {
-                        $('#idusuarioPara').val(r.idusuarioCF); // idusuariopara
+                        $('#idusuarioPara').val(r.idusuarioCF);
                     } else {
-                        // fallback: se não vier do backend, mantenha vazio (ou busque via outro endpoint)
                         $('#idusuarioPara').val('');
                     }
-                    // Se a lista atual é "não acessadas", remover item...
+
                     if (typeof filtroAcessado !== 'undefined' && filtroAcessado === 0) {
                         $(`.abrir-modal-forum[data-id="${idForum}"]`).closest('.list-group-item').slideUp(200, function() {
                             $(this).remove();
@@ -374,13 +453,9 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         });
     });
 
-
-    // Botões de edição
-    $('#btnEditarTexto').on('click', function() {
-        entrarModoEdicao();
-    });
+    // Edição do texto do aluno
+    $('#btnEditarTexto').on('click', entrarModoEdicao);
     $('#btnCancelarEdicao').on('click', function() {
-        // Restaura o texto do hidden
         const raw = $('#textoAlunoRaw').val() || '';
         $('#textoEditAluno').val(raw);
         sairModoEdicao();
@@ -399,16 +474,11 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
             dataType: 'json',
             success: function(r) {
                 if (r && r.ok) {
-                    // Atualiza texto bruto e visualização
                     $('#textoAlunoRaw').val(novoTexto);
                     $('#forumConteudoView').html(formatHtmlFromText(novoTexto));
                     sairModoEdicao();
                     showToast('Texto do aluno atualizado.');
-
-                    // Se estamos na lista de "Acessadas", atualiza o preview
-                    if (filtroAcessado === 1) {
-                        atualizarPreviewLista(id, novoTexto);
-                    }
+                    if (filtroAcessado === 1) atualizarPreviewLista(id, novoTexto);
                 } else {
                     showToast(r?.msg || 'Erro ao salvar edição.');
                 }
@@ -482,7 +552,7 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         });
     });
 
-
+    // Liberar e fechar (visível = 1)
     $('#btnLiberarFechar').on('click', function() {
         const id = $('#respCodigoForum').val();
         if (!id) {
@@ -490,14 +560,27 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
             return;
         }
 
-
-        showToast('Mensagem liberada.');
-
-        // Fechar modal (Bootstrap 5)
-        const modalEl = document.getElementById('modalForum');
-        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-        modal.hide();
-
+        $.ajax({
+            url: 'avaliacoes1.0/ajax_forumLiberar.php',
+            type: 'POST',
+            data: {
+                codigoForum: id
+            },
+            dataType: 'json',
+            success: function(r) {
+                if (r && r.ok) {
+                    showToast('Mensagem liberada.');
+                    const modalEl = document.getElementById('modalForum');
+                    const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                    modal.hide();
+                } else {
+                    showToast(r?.msg || 'Não foi possível liberar a mensagem.');
+                }
+            },
+            error: function() {
+                showToast('Falha na requisição.');
+            }
+        });
     });
 
     // Enviar resposta do professor

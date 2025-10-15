@@ -80,10 +80,46 @@ if (!$erroUser) {
 ?>
 <!doctype html>
 <html lang="pt-br">
+<?php
+
+$pageTitle = "Depoimentos de Alunos • Professor Eugênio";
+if (!empty($nomeModulo)) $pageTitle = "Depoimentos – {$nomeModulo} • Professor Eugênio";
+if (!empty($tituloAula)) $pageTitle = "Depoimentos – {$tituloAula} • Professor Eugênio";
+
+$ogDesc   = "Veja depoimentos reais dos alunos do curso do Professor Eugênio. Qualidade, suporte e resultados.";
+
+$ogImage = "https://professoreugenio.com/img/depoimentos.jpg";
+$siteName = "Professor Eugênio";
+
+
+$currPath = strtok(($_SERVER['REQUEST_URI'] ?? '/depoimentonovo.php'), '?');
+$canonical = $baseUrl . $currPath . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+?>
+
+
 
 <head>
     <meta charset="utf-8">
-    <title>Meu Depoimento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><?= htmlspecialchars($pageTitle) ?></title>
+    <meta name="description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<?= htmlspecialchars($siteName) ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
+    <meta property="og:image:alt" content="Depoimentos de alunos do Professor Eugênio">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($pageTitle) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Use seus assets globais; abaixo CDN apenas se precisar -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

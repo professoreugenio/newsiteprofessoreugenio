@@ -561,6 +561,7 @@ $siteName = "Professor Eugênio";
                     $texto  = trim((string)($m['textoCF'] ?? ''));
                     $data   = brData($m['dataCF'] ?? '');
                     $hora   = $m['horaCF'] ?? '';
+                    $encIdUsuario   = $enc= encrypt($m['codigocadastro'], $action = 'e' );;
                     $fav    = (int)($m['destaqueCF'] ?? 0) === 1;
                     $curso  = trim((string)($m['nomecurso_recente'] ?? '')); // [NOVO]
                 ?>
@@ -569,7 +570,10 @@ $siteName = "Professor Eugênio";
                             <img class="avatar" src="<?= htmlspecialchars($img) ?>" alt="Foto de <?= htmlspecialchars($nome) ?>">
                             <div>
                                 <div class="depo-name d-flex align-items-center gap-2 flex-wrap">
-                                    <span><?= htmlspecialchars($nome) ?></span>
+
+                                    
+                                        <span><?= htmlspecialchars($nome) ?></span>
+                                    
                                     <?php if ($curso !== ''): ?>
                                         <span class="badge badge-curso rounded-pill"><?= htmlspecialchars($curso) ?></span> <!-- [NOVO] -->
                                     <?php endif; ?>
