@@ -9,9 +9,6 @@ require_once APP_ROOT . '/autenticacao.php';
 
 <head>
     <?php require_once APP_ROOT . '/admin2/v1.0/head.php'; ?>
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="/admin2/v1.0/CSS_config.css?<?= time(); ?>">
     <?php require_once APP_ROOT . '/admin2/v1.0/dadosuser.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -31,7 +28,7 @@ require_once APP_ROOT . '/autenticacao.php';
         <?php require_once APP_ROOT . '/admin2/modelo/pg_paginas_admin/pg_paginas_admin1.0/Bodypg_paginas_admin1.0.php'; ?>
     </div>
     <!-- Scripts -->
-
+    <script src="<?php require_once APP_ROOT . "/admin2/v1.0/PainelLateral.js"; ?>"></script>
     <?php require_once APP_ROOT . '/admin2/v1.0/footer.php'; ?>
 </body>
 

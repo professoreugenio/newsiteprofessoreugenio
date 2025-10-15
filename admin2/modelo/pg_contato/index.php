@@ -1,6 +1,6 @@
 <?php
 define('BASEPATH', true);
-define('APP_ROOT', dirname(__DIR__, 2));
+define('APP_ROOT', dirname(__DIR__, 3));
 require_once APP_ROOT . '/conexao/class.conexao.php';
 require_once APP_ROOT . '/autenticacao.php';
 ?>
@@ -21,31 +21,14 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> CURSOS/TURMAS</h3>
-                <?php
-                $queryUpdate = $con->prepare("
-    UPDATE new_sistema_inscricao_PJA 
-    SET data_ins = data_ci 
-    WHERE data_ins IS NULL
-");
-                $queryUpdate->execute();
-
-                $rows = $queryUpdate->rowCount();
-
-                if ($rows > 0) {
-                    echo "Foram atualizadas $rows linhas.";
-                } else {
-                    echo "Nenhuma linha precisou ser atualizada.";
-                }
-
-                ?>
+                <h3><i class="bi bi-journal-text me-2"></i> pg_contato</h3>
             </div>
-            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
+            <?php require_once APP_ROOT . '/admin2/modelo/pg_contato/pg_contato1.0/Subnav.php'; ?>
         </div>
-        <?php require_once APP_ROOT . '/admin2/modelo/vendas1.0/BodyVendasCursos1.0.php'; ?>
+        <?php require_once APP_ROOT . '/admin2/modelo/pg_contato/pg_contato1.0/Bodypg_contato1.0.php'; ?>
     </div>
     <!-- Scripts -->
-    <script src="../v1.0/PainelLateral.js"></script>
+    <script src="<?php require_once APP_ROOT . "/admin2/v1.0/PainelLateral.js"; ?>"></script>
     <?php require_once APP_ROOT . '/admin2/v1.0/footer.php'; ?>
 </body>
 

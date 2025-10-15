@@ -21,14 +21,14 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> ACESSOS</h3>
+                <h3><i class="bi bi-journal-text me-2"></i> pg_acessos</h3>
             </div>
-            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
+            <?php require_once APP_ROOT . '/admin2/modelo/pg_acessos/pg_acessos1.0/Subnav.php'; ?>
         </div>
-        <?php require_once APP_ROOT . '/admin2/modelo/vendas1.0/BodyVendasCursos1.0.php'; ?>
+        <?php require_once APP_ROOT . '/admin2/modelo/pg_acessos/pg_acessos1.0/Bodypg_acessos1.0.php'; ?>
     </div>
     <!-- Scripts -->
-    <script src="../v1.0/PainelLateral.js"></script>
+    <script src="<?php require_once APP_ROOT . "/admin2/v1.0/PainelLateral.js"; ?>"></script>
     <?php require_once APP_ROOT . '/admin2/v1.0/footer.php'; ?>
 </body>
 

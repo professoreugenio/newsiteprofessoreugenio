@@ -276,8 +276,17 @@ function linkWhats($cel, $msg)
         }
 
         $msgSaudacao = "*Olá {$nomeExib}*, aqui é o professor Eugênio! Tudo bem?";
+
+
         $msgSenha = "*{$saudacao} {$nomeExib}*, \nsegue seus dados de acesso ao portal *professoreugenio.com*: \n\nE-*mail*:{$email}\n*Senha*:{$senha}\n\n Página de login:\n https://professoreugenio.com/login_aluno.php?ts=" . time();
+        
+        $msgDepoimento = "*{$saudacao} {$nomeExib}*, \nSeu depimento é muito importante para avaliação e valorização de meu trabalho *professoreugenio.com*: \n\nE-*mail*:{$email}\n*Senha*:{$senha}\n\n Página de depoimento:\n https://professoreugenio.com/depoimentonovo.php?idUser=" . $encIdAluno;
+
+
+
         $msgRedes = "*{$saudacao} {$nomeExib}, tudo bem?
+
+
 Aproveite para me acompanhar nas redes sociais e ficar por dentro das novidades, dicas e conteúdos gratuitos!
 📺 YouTube:
 https://www.youtube.com/@professoreugenio

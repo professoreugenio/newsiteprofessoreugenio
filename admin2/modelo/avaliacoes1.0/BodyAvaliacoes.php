@@ -1,3 +1,8 @@
+<script>
+    // Disponibiliza o ID do administrador no JS
+    const COD_ADM = <?= (int)$codadm ?>;
+</script>
+
 <?php
 // Filtro: 0 = não acessadas; 1 = acessadas
 $filtroAcessado = isset($_GET['acessado']) && $_GET['acessado'] == '1' ? 1 : 0;
@@ -77,6 +82,9 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         </a>
         <a href="<?= $linkAcessadas ?>" class="btn <?= $filtroAcessado === 1 ? 'btn-primary' : 'btn-outline-primary' ?>">
             <i class="bi bi-envelope-check"></i> Acessadas
+        </a>
+        <a href="https://professoreugenio.com/depoimentos.php" target="_blank" class="btn btn-success">
+            <i class="bi bi-envelope-check"></i> Abrir Depoimentos
         </a>
     </div>
     <h5 class="mb-0">
@@ -201,13 +209,17 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
                     <textarea class="form-control" id="textoEditAluno" rows="7" placeholder="Edite o texto do aluno..."></textarea>
                 </div>
 
-                <!-- Guarda o texto bruto e o id -->
-                <input type="hidden" id="respCodigoForum" value="">
+                <!-- Guarda o texto bruto -->
                 <input type="hidden" id="textoAlunoRaw" value="">
 
                 <hr class="my-4">
 
                 <form id="formRespostaForum" class="mt-3">
+                    <!-- Hiddens solicitados -->
+                    <input type="hidden" name="codigoForum" id="respCodigoForum" value="">
+                    <input type="hidden" name="idusuarioPara" id="idusuarioPara" value="">
+                    <input type="hidden" name="idusuarioDe" id="idusuarioDe" value="">
+
                     <label for="respostaProfessor" class="form-label fw-semibold">
                         Resposta do professor
                     </label>
@@ -216,6 +228,12 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
 
                     <div class="d-flex justify-content-end gap-2 mt-3">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
+
+                        <!-- NOVO botão -->
+                        <button type="button" class="btn btn-success" id="btnLiberarFechar">
+                            <i class="bi bi-unlock me-1"></i> Liberar e fechar
+                        </button>
+
                         <button type="submit" class="btn btn-primary">
                             <i class="bi bi-send me-1"></i>Enviar resposta
                         </button>
@@ -225,6 +243,7 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
         </div>
     </div>
 </div>
+
 
 <!-- Toasts -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080">
@@ -296,42 +315,51 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
     }
 
     // Abre modal: carrega conteúdo + dados; marca acessadoCF=1; remove da lista se "não acessadas"
+
+
     $(document).on('click', '.abrir-modal-forum', function(e) {
         e.preventDefault();
-        const id = $(this).data('id');
+        const idForum = $(this).data('id');
 
-        // Estado inicial dos modos
+        // estado inicial
         sairModoEdicao();
 
+        // placeholders iniciais
         $('#forumConteudoView').html('<div class="text-muted"><i class="bi bi-info-circle me-1"></i>Carregando conteúdo...</div>');
-        $('#respCodigoForum').val(id);
+        $('#respCodigoForum').val(idForum); // codigoforum
+        $('#idusuarioDe').val(COD_ADM || 0); // id do administrador (remetente)
 
         $.ajax({
             url: 'avaliacoes1.0/ajax_forumAbrir.php',
             type: 'POST',
             data: {
-                codigoForum: id
+                codigoForum: idForum
             },
             dataType: 'json',
             success: function(r) {
                 if (r && r.ok) {
-                    // Preenche visualização
+                    // conteúdo
                     $('#forumConteudoView').html(r.html || '<em>Sem conteúdo.</em>');
-
-                    // Guarda o texto bruto para edição
                     $('#textoAlunoRaw').val(r.textoRaw || '');
                     $('#textoEditAluno').val(r.textoRaw || '');
 
-                    // Cabeçalho do modal
+                    // cabeçalho
                     $('#modalNomeUsuario').text(r.nome || 'Aluno');
                     $('#modalTituloAula').text(r.titulo || '-');
                     if (r.foto && r.foto !== '') {
                         $('#modalAvatar').attr('src', r.foto);
                     }
 
-                    // Se a lista atual é "não acessadas", remover item após marcar como acessado
-                    if (filtroAcessado === 0) {
-                        $(`.abrir-modal-forum[data-id="${id}"]`).closest('.list-group-item').slideUp(200, function() {
+                    // >>> Destinatário: idusuarioCF vindo do backend
+                    if (typeof r.idusuarioCF !== 'undefined') {
+                        $('#idusuarioPara').val(r.idusuarioCF); // idusuariopara
+                    } else {
+                        // fallback: se não vier do backend, mantenha vazio (ou busque via outro endpoint)
+                        $('#idusuarioPara').val('');
+                    }
+                    // Se a lista atual é "não acessadas", remover item...
+                    if (typeof filtroAcessado !== 'undefined' && filtroAcessado === 0) {
+                        $(`.abrir-modal-forum[data-id="${idForum}"]`).closest('.list-group-item').slideUp(200, function() {
                             $(this).remove();
                         });
                     }
@@ -345,6 +373,7 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
             }
         });
     });
+
 
     // Botões de edição
     $('#btnEditarTexto').on('click', function() {
@@ -451,6 +480,24 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
                 showToast('Falha na requisição.');
             }
         });
+    });
+
+
+    $('#btnLiberarFechar').on('click', function() {
+        const id = $('#respCodigoForum').val();
+        if (!id) {
+            showToast('ID do fórum não encontrado.');
+            return;
+        }
+
+
+        showToast('Mensagem liberada.');
+
+        // Fechar modal (Bootstrap 5)
+        const modalEl = document.getElementById('modalForum');
+        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        modal.hide();
+
     });
 
     // Enviar resposta do professor

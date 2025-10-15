@@ -1,6 +1,8 @@
 <?php
 $idUsuario = $idUsuario ?? $idAluno;
 $nomeAluno = $nomeAluno ?? $idAluno;
+
+
 ?>
 
 <div class="col-md-3 text-end">
@@ -18,6 +20,12 @@ $nomeAluno = $nomeAluno ?? $idAluno;
 
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuBtn<?= $idAluno ?>">
             <?php if ($temWhats): ?>
+                <li>
+                    <a class="dropdown-item" target="_blank"
+                        href="<?= linkWhats($row['celular'], $msgDepoimento) ?>">
+                        <i class="bi bi-whatsapp text-success"></i> Depoimento
+                    </a>
+                </li>
                 <li>
                     <a class="dropdown-item" target="_blank"
                         href="<?= linkWhats($row['celular'], $msgSaudacao) ?>">
