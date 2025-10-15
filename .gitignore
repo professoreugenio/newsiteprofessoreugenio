@@ -20,10 +20,9 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
-<<<<<<< HEAD
+
 /config_view
 /pdf
-
-=======
+/img
 error_log
->>>>>>> 8932cfb0df74809938d9e59e0fd74e26dc3e20c7
+

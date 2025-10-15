@@ -20,7 +20,64 @@ include 'autenticacao.php'; ?>
 <link rel="stylesheet" href="config_default/whatsapp.css">
 <link rel="stylesheet" href="config_contato/contato.css">
 <style>
+    /* ---- Formulário escuro, compacto e com floating labels ---- */
+    .dark-form .form-control,
+    .dark-form .form-select,
+    .dark-form textarea {
+        background-color: #0f1b2d;
+        border-color: #2b3a55;
+        color: #fff;
+    }
 
+    .dark-form .form-control::placeholder,
+    .dark-form textarea::placeholder {
+        color: rgba(255, 255, 255, .35);
+    }
+
+    .dark-form .form-control:focus,
+    .dark-form .form-select:focus,
+    .dark-form textarea:focus {
+        border-color: #00BB9C;
+        box-shadow: 0 0 0 .2rem rgba(0, 187, 156, .18);
+        background-color: #12203a;
+        color: #fff;
+    }
+
+    .dark-form .form-floating>label {
+        color: rgba(255, 255, 255, .6);
+    }
+
+    .form-compact .form-floating {
+        margin-bottom: .55rem;
+    }
+
+    /* menos espaço entre campos */
+    .form-compact .btn {
+        padding: .6rem 1rem;
+    }
+
+    /* botão mais enxuto */
+
+    /* Alturas dos campos (compactas) */
+    .form-compact .form-control,
+    .form-compact .form-select {
+        min-height: 2.8rem;
+        padding-top: .9rem;
+        padding-bottom: .9rem;
+    }
+
+    /* Altura do textarea em floating */
+    .form-compact .form-floating textarea.form-control {
+        height: 140px;
+        /* ajuste fino de altura */
+        min-height: 140px;
+    }
+
+    /* Container do form */
+    .form-container {
+        background: #0b152b;
+        border: 1px solid rgba(255, 255, 255, .06);
+    }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -43,17 +100,17 @@ include 'autenticacao.php'; ?>
                     <div class="col-md-12 mb-4">
                         <a href="https://wa.me/5585996537577?text=Olá,<?= $saudacao; ?>. Sobre *Designer Gráfico*: %20gostaria%20de%20mais%20informações!" class="whatsapp-button" target="_blank">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
-                            Designer Gráfico <i class="bi bi-chevron-compact-right"></i>
+                            Serviços Designer Gráfico <i class="bi bi-chevron-compact-right"></i>
                         </a>
                     </div>
                     <div class="col-md-12 mb-4">
                         <a href="https://wa.me/5585996537577?text=Olá,<?= $saudacao; ?>. *Sobre Power Bi*:%20gostaria%20de%20mais%20informações!" class="whatsapp-button" target="_blank">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
-                            Power BI <i class="bi bi-chevron-compact-right"></i>
+                            Consultoria em Planilhas e Power BI <i class="bi bi-chevron-compact-right"></i>
                         </a>
                     </div>
                     <div class="col-md-12 mb-4">
-                        <a href="https://wa.me/5585996537577?text=Olá, . *Sobre anunciar no site*:%20gostaria%20de%20mais%20informações!" class="whatsapp-button" target="_blank">
+                        <a href="https://wa.me/5585996537577?text=Olá,<?= $saudacao; ?>. *Desejo infromações sobre anunciar no site*:%20gostaria%20de%20mais%20informações!" class="whatsapp-button" target="_blank">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
                             Anunciar no Site <i class="bi bi-chevron-compact-right"></i>
                         </a>
@@ -72,45 +129,58 @@ include 'autenticacao.php'; ?>
                     <?php require 'config_contato/tratamento_get.php'; ?>
                     <div id="mensagemStatus" class="mb-3"></div>
 
-                    <h2 class="mb-4 text-center">Fale com a Gente</h2>
+                    <h2 class="mb-4 text-center">Fale com o professor</h2>
 
-                    <form method="post" id="formcontato" role="form">
-                        <div class="mb-3">
-                            <label for="assunto" class="form-label">📌 Assunto *</label>
-                            <input type="text" class="form-control form-control-lg" name="assunto" id="assunto" placeholder="Assunto do contato" value="<?php echo $assunto; ?>" required>
+                    <form method="post" id="formcontato" role="form" class="dark-form form-compact">
+                        <!-- Assunto -->
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="assunto" name="assunto"
+                                placeholder="" value="<?php echo $assunto; ?>" required>
+                            <label for="assunto">📌 Assunto *</label>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">👤 Nome *</label>
-                            <input type="text" class="form-control form-control-lg" name="nome" id="nome" placeholder="Seu nome completo" value="<?php echo $nome; ?>" required>
+                        <!-- Nome -->
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="nome" name="nome"
+                                placeholder="" value="<?php echo $nome; ?>" required>
+                            <label for="nome">👤 Nome *</label>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">✉️ E-mail *</label>
-                            <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="seuemail@exemplo.com" value="<?php echo $email; ?>" required>
+                        <!-- E-mail -->
+                        <div class="form-floating mb-2">
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="" value="<?php echo $email; ?>" required>
+                            <label for="email">✉️ E-mail *</label>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="celular" class="form-label">📱 Celular (opcional)</label>
-                            <input type="text" class="form-control form-control-lg" name="celular" id="celular" placeholder="(DDD) 99999-9999" value="<?php echo $celular; ?>">
+                        <!-- Celular (opcional) -->
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="celular" name="celular"
+                                placeholder="" value="<?php echo $celular; ?>">
+                            <label for="celular">📱 (DDD) 999999999</label>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="dadospc" class="form-label">💻 Dados do PC para aulas on-line *</label>
-                            <input type="text" class="form-control form-control-lg" name="dadospc" id="dadospc" placeholder="Ex: Windows 10, 8GB RAM..." required>
+                        <!-- Dados do PC -->
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="dadospc" name="dadospc"
+                                placeholder="" required>
+                            <label for="dadospc">💻 Dados do PC para aulas on-line *</label>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="mensagem" class="form-label">📝 Mensagem *</label>
-                            <textarea class="form-control form-control-lg" name="mensagem" id="mensagem" rows="4" placeholder="Escreva sua mensagem aqui..." required><?php echo $msg; ?></textarea>
+                        <!-- Mensagem -->
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="mensagem" name="mensagem"
+                                placeholder="" required><?php echo $msg; ?></textarea>
+                            <label for="mensagem">📝 Mensagem *</label>
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg" id="btContato">
-                                <span id="retorno">📨 Enviar Contato</span>
+                            <button type="submit" class="btn btn-primary" id="btContato">
+                                <span id="retorno">📨 Enviar</span>
                             </button>
                         </div>
                     </form>
+
                 </div>
             </div>
 

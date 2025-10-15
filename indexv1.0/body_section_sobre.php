@@ -1,6 +1,6 @@
 <section id="sobre" class="text-center black text-white">
     <div class="container">
-        <h2>Sobre Nós</h2>
+        <h2>Sobre o Professor</h2>
 
     </div>
 </section>

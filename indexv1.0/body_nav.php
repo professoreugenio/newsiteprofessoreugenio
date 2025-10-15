@@ -104,7 +104,10 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#sobre">Sobre</a>
+                    <a class="nav-link" href="#sobre">Sobre o Professor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="action.php?idpage=ZFZDdkVwN2RDa0plVWdienNUQTRqdz09">Contato</a>
                 </li>
                 <!-- 
 
