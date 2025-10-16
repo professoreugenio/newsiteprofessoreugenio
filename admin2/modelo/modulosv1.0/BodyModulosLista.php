@@ -1,6 +1,7 @@
 <?php $id = "1"; ?>
 <?php $ordem = "1"; ?>
 <?php $status = "1"; ?>
+<?= $idCurso; ?>
 <?php
 $stmt = config::connect()->prepare("SELECT codcursos,modulo,ordemm,visivelm,codigomodulos   FROM new_sistema_modulos_PJA WHERE codcursos =:idcurso ORDER BY ordemm");
 $stmt->bindParam(":idcurso", $idCurso);

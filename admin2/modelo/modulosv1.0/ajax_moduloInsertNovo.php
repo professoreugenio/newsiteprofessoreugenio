@@ -75,7 +75,7 @@ try {
     // SQL de inserção
     $sql = "
         INSERT INTO new_sistema_modulos_PJA
-            (codcursos, nomemodulosm, bgcolorsm, imagem, descricao,
+            (codcursos, modulo, bgcolorsm, imagem, descricao,
              valordocursosm, valordahorasm, cargahorariasm, ordem m,
              visivelm, visivelhome, datam, horam)
         VALUES

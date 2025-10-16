@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BodyModuloFormNovo.php
  * Requisitos: $con (PDO) disponível, Bootstrap 5+, Bootstrap Icons, jQuery (para a máscara).
@@ -10,23 +11,23 @@ if (!isset($con) || !$con instanceof PDO) {
     return;
 }
 
-                    /* --------- Carregar cursos para o select --------- */
-                    try {
-                        $sqlCursos = "
+/* --------- Carregar cursos para o select --------- */
+try {
+    $sqlCursos = "
         SELECT 
             codigocategorias  AS id,
             nome AS nome
         FROM new_sistema_categorias_PJA
-        WHERE nome IS NOT NULL AND nome <> ''
+        WHERE nome IS NOT NULL AND nome <> '' AND visivelsc = 1 AND comercialsc = 1
         ORDER BY nome ASC
     ";
-                        $stmtCursos = $con->query($sqlCursos);
-                        $listaCursos = $stmtCursos ? $stmtCursos->fetchAll(PDO::FETCH_ASSOC) : [];
-                    } catch (Throwable $e) {
-                        $listaCursos = [];
-                    }
+    $stmtCursos = $con->query($sqlCursos);
+    $listaCursos = $stmtCursos ? $stmtCursos->fetchAll(PDO::FETCH_ASSOC) : [];
+} catch (Throwable $e) {
+    $listaCursos = [];
+}
 
-                    ?>
+?>
 
 <div class="card shadow-sm" data-aos="fade-up">
     <div class="card-header bg-white border-0">
@@ -158,66 +159,75 @@ if (!isset($con) || !$con instanceof PDO) {
 </div>
 
 <script>
-(function() {
-    // Carregar jquery.mask se necessário
-    function ensureMask(callback){
-        if (typeof jQuery === 'undefined') { callback && callback(); return; }
-        if (typeof jQuery.fn.mask !== 'function') {
-            var s = document.createElement('script');
-            s.src = 'https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js';
-            s.onload = callback;
-            document.head.appendChild(s);
-        } else { callback && callback(); }
-    }
-
-    ensureMask(function(){
-        if (typeof jQuery !== 'undefined' && typeof jQuery.fn.mask === 'function') {
-            jQuery(function($){
-                $('.money').mask('000.000.000,00', {reverse: true});
-            });
-        }
-    });
-
-    const form = document.getElementById('formModuloNovo');
-    const toastEl = document.getElementById('toastModulo');
-    const toastBody = document.getElementById('toastModuloBody');
-    const bsToast = (window.bootstrap && window.bootstrap.Toast) ? new bootstrap.Toast(toastEl) : null;
-
-    function showToast(msg, ok){
-        if (toastBody) toastBody.textContent = msg;
-        if (toastEl){
-            toastEl.classList.remove('text-bg-success','text-bg-danger','text-bg-secondary');
-            toastEl.classList.add(ok ? 'text-bg-success' : 'text-bg-danger');
-        }
-        if (bsToast) bsToast.show();
-        else alert(msg);
-    }
-
-    form.addEventListener('submit', async function(e){
-        e.preventDefault();
-
-        const fd = new FormData(form);
-        // Switch -> 0/1
-        fd.set('visivelm', (document.getElementById('visivelm').checked ? '1' : '0'));
-        fd.set('visivelhome', (document.getElementById('visivelhome').checked ? '1' : '0'));
-
-        try {
-            const resp = await fetch('modulosv1.0/ajax_moduloInsertNovo.php', {
-                method: 'POST',
-                body: fd,
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            });
-            const data = await resp.json();
-
-            if (data && data.success) {
-                showToast(data.message || 'Módulo criado com sucesso!', true);
-                form.reset();
-            } else {
-                showToast((data && data.message) ? data.message : 'Falha ao criar o módulo.', false);
+    (function() {
+        // Carregar jquery.mask se necessário
+        function ensureMask(callback) {
+            if (typeof jQuery === 'undefined') {
+                callback && callback();
+                return;
             }
-        } catch (err) {
-            showToast('Erro de comunicação. ' + err, false);
+            if (typeof jQuery.fn.mask !== 'function') {
+                var s = document.createElement('script');
+                s.src = 'https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js';
+                s.onload = callback;
+                document.head.appendChild(s);
+            } else {
+                callback && callback();
+            }
         }
-    });
-})();
+
+        ensureMask(function() {
+            if (typeof jQuery !== 'undefined' && typeof jQuery.fn.mask === 'function') {
+                jQuery(function($) {
+                    $('.money').mask('000.000.000,00', {
+                        reverse: true
+                    });
+                });
+            }
+        });
+
+        const form = document.getElementById('formModuloNovo');
+        const toastEl = document.getElementById('toastModulo');
+        const toastBody = document.getElementById('toastModuloBody');
+        const bsToast = (window.bootstrap && window.bootstrap.Toast) ? new bootstrap.Toast(toastEl) : null;
+
+        function showToast(msg, ok) {
+            if (toastBody) toastBody.textContent = msg;
+            if (toastEl) {
+                toastEl.classList.remove('text-bg-success', 'text-bg-danger', 'text-bg-secondary');
+                toastEl.classList.add(ok ? 'text-bg-success' : 'text-bg-danger');
+            }
+            if (bsToast) bsToast.show();
+            else alert(msg);
+        }
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const fd = new FormData(form);
+            // Switch -> 0/1
+            fd.set('visivelm', (document.getElementById('visivelm').checked ? '1' : '0'));
+            fd.set('visivelhome', (document.getElementById('visivelhome').checked ? '1' : '0'));
+
+            try {
+                const resp = await fetch('modulosv1.0/ajax_moduloInsertNovo.php', {
+                    method: 'POST',
+                    body: fd,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                const data = await resp.json();
+
+                if (data && data.success) {
+                    showToast(data.message || 'Módulo criado com sucesso!', true);
+                    form.reset();
+                } else {
+                    showToast((data && data.message) ? data.message : 'Falha ao criar o módulo.', false);
+                }
+            } catch (err) {
+                showToast('Erro de comunicação. ' + err, false);
+            }
+        });
+    })();
 </script>
