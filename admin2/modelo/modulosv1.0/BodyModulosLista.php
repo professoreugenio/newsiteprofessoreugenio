@@ -1,10 +1,17 @@
 <?php $id = "1"; ?>
 <?php $ordem = "1"; ?>
-<?php $status = "1"; ?>
+<?php
+if (!isset($_GET['filtro'])) {
+    $filtro = '1';
+} else {
+    $filtro = $_GET['filtro'];
+}
+?>
 <?= $idCurso; ?>
 <?php
-$stmt = config::connect()->prepare("SELECT codcursos,modulo,ordemm,visivelm,codigomodulos   FROM new_sistema_modulos_PJA WHERE codcursos =:idcurso ORDER BY ordemm");
+$stmt = config::connect()->prepare("SELECT codcursos,modulo,ordemm,visivelm,codigomodulos   FROM new_sistema_modulos_PJA WHERE codcursos =:idcurso AND visivelm = :filtro ORDER BY ordemm");
 $stmt->bindParam(":idcurso", $idCurso);
+$stmt->bindParam(":filtro", $filtro);
 $stmt->execute();
 ?>
 <?php if ($stmt->rowCount() > 0): ?>

@@ -6,10 +6,10 @@ $pagina = basename($_SERVER['PHP_SELF']);
 
     <?php if (temPermissao($niveladm, [1])): ?>
         <!-- conteudoCategorias.php?id=UFZVTFV4Wms5MTFXV0o2VFAwMGs1Zz09&md=RmYvUlB4dktNTDlkaGhDMHp0TUZFdz09 -->
-        <a href="conteudoCategorias.php?id=<?= $_GET['id'] ?>&md=<?= $_GET['md'] ?>"
-            class="btn btn-flat btn-sm <?= $pagina == 'conteudoCategorias.php' ? 'btn-laranja' : '' ?>"
+        <a href="cursos.php?id=<?= $_GET['id'] ?>&md=<?= $_GET['md'] ?>"
+            class="btn btn-flat btn-sm <?= $pagina == 'cursos.php' ? 'btn-laranja' : '' ?>"
             title="Ver publicações">
-            TURMAS
+            CURSOS
         </a>
         <a href="conteudoCategorias.php?id=<?= $_GET['id'] ?>&md=<?= $_GET['md'] ?>"
             class="btn btn-flat btn-sm <?= $pagina == 'conteudoCategorias.php' ? 'btn-laranja' : '' ?>"
