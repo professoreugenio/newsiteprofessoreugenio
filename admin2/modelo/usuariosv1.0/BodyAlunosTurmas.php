@@ -80,6 +80,7 @@ $total = $turmas ? count($turmas) : 0;
 ?>
 
 <!-- Barra de inscrição em turma -->
+            <?php require 'usuariosv1.0/require_MsgsWhatsApp.php'; ?>
 <div class="card mb-3 shadow-sm">
     <div class="card-body">
         <div class="row g-2 align-items-end">
@@ -87,7 +88,6 @@ $total = $turmas ? count($turmas) : 0;
 
 
 
-            <?php require 'usuariosv1.0/require_MsgsWhatsApp.php'; ?>
 
             <div class="form-text">
                 <span class="badge bg-primary"><?= (int)$total ?> turma<?= $total === 1 ? '' : 's' ?></span>
