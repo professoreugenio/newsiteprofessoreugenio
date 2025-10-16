@@ -11,14 +11,14 @@ $stmtAcessos = config::connect()->prepare("
         a.idturmara,
         a.datara,
         MIN(a.horara) as primeira_hora,
-        c.nome,
+        c.nomecurso,
         t.nometurma
     FROM a_site_registraacessos a
     INNER JOIN new_sistema_cadastro c ON a.idusuariora = c.codigocadastro
     LEFT JOIN new_sistema_cursos_turmas t ON t.chave = a.idturmara
     WHERE a.datara = :dataSel
     GROUP BY a.idusuariora, a.datara
-    ORDER BY primeira_hora ASC, c.nome
+    ORDER BY primeira_hora ASC, c.nomecurso
 ");
 $stmtAcessos->bindParam(':dataSel', $dataSel);
 $stmtAcessos->execute();

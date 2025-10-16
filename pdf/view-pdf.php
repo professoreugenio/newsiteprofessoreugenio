@@ -40,11 +40,11 @@ $qModulo = $con->prepare("
         m.codigomodulos,
         m.modulo,
         m.bgcolorsm,
-        c.nome,
+        c.nomecurso,
         COALESCE(c.bgcolor, '#e5eef5') AS bgcolor
     FROM new_sistema_modulos_PJA AS m
-    INNER JOIN new_sistema_categorias_PJA AS c 
-        ON m.codcursos = c.codigocategorias
+    INNER JOIN new_sistema_cursos AS c 
+        ON m.codcursos = c.codigocursos 
     WHERE m.codigomodulos = :idmodulo
     LIMIT 1
 ");

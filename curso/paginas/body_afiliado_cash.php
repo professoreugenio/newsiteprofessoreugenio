@@ -363,8 +363,8 @@ $afUrl      = $temProduto ? with_aff_param($urlBase, $afKey) : '';
         FROM a_site_afiliados_cache ac
         LEFT JOIN new_sistema_cursos_turmas t
               ON t.chave = CAST(ac.idprodutoac AS CHAR)
-        LEFT JOIN new_sistema_categorias_PJA cat
-              ON cat.codigocategorias = t.codcursost
+        LEFT JOIN new_sistema_cursos cat
+              ON cat.codigocursos = t.codcursost
         LEFT JOIN a_site_afiliados_produto prod
               ON prod.codigoprodutoafiliado = ac.idprodutoac
         WHERE (ac.pagamentoac IS NULL OR ac.pagamentoac = '' OR ac.pagamentoac = 0)

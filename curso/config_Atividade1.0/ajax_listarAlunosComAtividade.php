@@ -8,12 +8,12 @@ $idTurma = intval($_POST['idturma'] ?? 0);
 $idPublicacao = intval($_POST['idpublicacao'] ?? 0);
 
 $stmt = $con->prepare("
-    SELECT c.codigocadastro, c.nome, c.pastasc, c.imagem50,
+    SELECT c.codigocadastro, c.nomecurso, c.pastasc, c.imagem50,
         (SELECT COUNT(*) FROM a_curso_AtividadeAnexos 
          WHERE idalulnoAA = c.codigocadastro AND idpublicacacaoAA = :idpublicacao) as total
     FROM new_sistema_cadastro c
     INNER JOIN new_sistema_inscricao_PJA i ON i.codigousuario = c.codigocadastro
-    WHERE i.chaveturma = :chave ORDER BY c.nome ASC
+    WHERE i.chaveturma = :chave ORDER BY c.nomecurso ASC
 ");
 
 $stmt->execute([

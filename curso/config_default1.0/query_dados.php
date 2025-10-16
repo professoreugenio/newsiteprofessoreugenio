@@ -102,7 +102,7 @@ $dataHoje = date('m-d');
 
 $sql = "
     SELECT 
-        c.nome AS nome_aluno, 
+        c.nomecurso AS nome_aluno, 
         t.nometurma AS nome_turma
     FROM new_sistema_cadastro c
     INNER JOIN new_sistema_inscricao_PJA i 
@@ -123,7 +123,7 @@ $aniversariantes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $sqlAviso = "
     SELECT 
-        c.nome AS nome_aluno, 
+        c.nomecurso AS nome_aluno, 
         t.nometurma AS nome_turma
     FROM new_sistema_cadastro c
     INNER JOIN new_sistema_inscricao_PJA i 

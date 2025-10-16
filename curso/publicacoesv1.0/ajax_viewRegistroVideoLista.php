@@ -46,7 +46,7 @@ try {
           v.chaveturmavc,
           v.datavc,
           v.horavc,
-          c.nome AS nome_aluno,
+          c.nomecurso AS nome_aluno,
           t.nometurma AS nome_turma
       FROM a_site_view_conteudo v
       LEFT JOIN new_sistema_cadastro c 

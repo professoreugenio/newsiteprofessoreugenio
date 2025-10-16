@@ -1,116 +1,223 @@
-<form id="formModuloNovo" method="post" class="row g-4 mt-3 needs-validation" novalidate>
-    <!-- Chave do curso vinculada -->
-    <input type="text" name="chavem" value="<?= gerarChaveFormulario(); ?>">
+<?php
+/**
+ * BodyModuloFormNovo.php
+ * Requisitos: $con (PDO) disponível, Bootstrap 5+, Bootstrap Icons, jQuery (para a máscara).
+ * Não incluir HTML/HEAD ou conexões aqui (segue seu padrão de módulos).
+ */
 
-    <!-- Nome do Módulo -->
-    <div class="col-md-6">
-        <label for="modulo" class="form-label">Nome do Módulo</label>
-        <input type="text" class="form-control" id="modulo" name="modulo" required>
+if (!isset($con) || !$con instanceof PDO) {
+    echo '<div class="alert alert-danger">Conexão indisponível.</div>';
+    return;
+}
+
+                    /* --------- Carregar cursos para o select --------- */
+                    try {
+                        $sqlCursos = "
+        SELECT 
+            codigocategorias  AS id,
+            nome AS nome
+        FROM new_sistema_categorias_PJA
+        WHERE nome IS NOT NULL AND nome <> ''
+        ORDER BY nome ASC
+    ";
+                        $stmtCursos = $con->query($sqlCursos);
+                        $listaCursos = $stmtCursos ? $stmtCursos->fetchAll(PDO::FETCH_ASSOC) : [];
+                    } catch (Throwable $e) {
+                        $listaCursos = [];
+                    }
+
+                    ?>
+
+<div class="card shadow-sm" data-aos="fade-up">
+    <div class="card-header bg-white border-0">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-view-stacked fs-5 text-primary"></i>
+            <div class="fw-semibold fs-5 m-0">Cadastrar novo módulo</div>
+        </div>
+        <small class="text-muted">Preencha os dados do módulo e salve. Campos com * são obrigatórios.</small>
     </div>
 
-    <!-- Descrição -->
-    <div class="col-md-6">
-        <label for="descricao" class="form-label">Descrição</label>
-        <input type="text" class="form-control" id="descricao" name="descricao">
-    </div>
+    <div class="card-body pt-2">
+        <form id="formModuloNovo" class="row g-3">
+            <!-- Curso -->
+            <div class="col-md-6">
+                <label for="codcursos" class="form-label fw-semibold">Curso *</label>
+                <select class="form-select" id="codcursos" name="codcursos" required>
+                    <option value="">— selecione —</option>
+                    <?php foreach ($listaCursos as $c): ?>
+                        <option value="<?= (int)$c['id'] ?>">
+                            <?= htmlspecialchars($c['nome'] ?? ('Curso ' . (int)$c['id'])) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-    <!-- Valor -->
-    <div class="col-md-3">
-        <label for="valorm" class="form-label">Valor (R$)</label>
-        <input type="number" step="0.01" class="form-control" id="valorm" name="valorm">
-    </div>
+            <!-- Nome do módulo -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="nomemodulosm" name="nomemodulosm" placeholder="Nome do módulo" required>
+                    <label for="nomemodulosm">Nome do módulo *</label>
+                </div>
+            </div>
 
-    <!-- Valor Hora -->
-    <div class="col-md-3">
-        <label for="valorh" class="form-label">Valor Hora (R$)</label>
-        <input type="number" step="0.01" class="form-control" id="valorh" name="valorh">
-    </div>
+            <!-- Descrição -->
+            <div class="col-12">
+                <div class="form-floating">
+                    <textarea class="form-control" id="descricao" name="descricao" placeholder="Descrição" style="height: 110px"></textarea>
+                    <label for="descricao">Descrição</label>
+                </div>
+            </div>
 
-    <!-- Nº de Aulas -->
-    <div class="col-md-3">
-        <label for="nraulasm" class="form-label">Quantidade de Aulas</label>
-        <input type="number" class="form-control" id="nraulasm" name="nraulasm">
-    </div>
+            <!-- Cor de fundo e imagem -->
+            <div class="col-md-3">
+                <label for="bgcolorsm" class="form-label fw-semibold">Cor de fundo</label>
+                <input type="color" class="form-control form-control-color" id="bgcolorsm" name="bgcolorsm" value="#00bb9c" title="Escolha a cor">
+            </div>
+            <div class="col-md-9">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="imagem" name="imagem" placeholder="Nome do arquivo da imagem" value="padrao.jpg">
+                    <label for="imagem">Imagem (arquivo ou caminho)</label>
+                </div>
+                <small class="text-muted">Padrão: <code>padrao.jpg</code>. (Upload pode ser tratado em endpoint dedicado.)</small>
+            </div>
 
-    <!-- Ordem -->
-    <div class="col-md-3">
-        <label for="ordemm" class="form-label">Ordem</label>
-        <input type="number" class="form-control" id="ordemm" name="ordemm" value="1">
-    </div>
+            <!-- Valores -->
+            <div class="col-md-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control money" id="valordocursosm" name="valordocursosm" placeholder="Valor do curso">
+                    <label for="valordocursosm">Valor do curso</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control money" id="valordahorasm" name="valordahorasm" placeholder="Valor da hora">
+                    <label for="valordahorasm">Valor da hora</label>
+                </div>
+            </div>
 
-    <!-- Cor -->
-    <div class="col-md-3">
-        <label for="bgcolor" class="form-label">Cor de Fundo</label>
-        <input type="color" class="form-control form-control-color" id="bgcolor" name="bgcolor" value="#ffffff">
-    </div>
+            <!-- Carga horária e ordem -->
+            <div class="col-md-2">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="cargahorariasm" name="cargahorariasm" placeholder="CH" min="0">
+                    <label for="cargahorariasm">Carga horária</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="ordemm" name="ordemm" placeholder="Ordem" min="0" value="1">
+                    <label for="ordemm">Ordem</label>
+                </div>
+            </div>
 
-    <!-- Visível no curso -->
-    <div class="col-md-3 d-flex align-items-center">
-        <div class="form-check form-switch mt-4">
-            <input class="form-check-input" type="checkbox" id="visivelm" name="visivelm" checked>
-            <label class="form-check-label" for="visivelm">Visível no Curso</label>
+            <!-- Visibilidades -->
+            <div class="col-md-3">
+                <label class="form-label fw-semibold d-block">Visível?</label>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="visivelm" name="visivelm">
+                    <label class="form-check-label" for="visivelm">Exibir módulo</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold d-block">Visível na Home?</label>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="visivelhome" name="visivelhome">
+                    <label class="form-check-label" for="visivelhome">Exibir na página inicial</label>
+                </div>
+            </div>
+
+            <!-- Data/Hora -->
+            <div class="col-md-3">
+                <label for="datam" class="form-label fw-semibold">Data</label>
+                <input type="date" class="form-control" id="datam" name="datam">
+            </div>
+            <div class="col-md-3">
+                <label for="horam" class="form-label fw-semibold">Hora</label>
+                <input type="time" class="form-control" id="horam" name="horam">
+            </div>
+
+            <div class="col-12 d-flex gap-2 pt-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save"></i> Salvar módulo
+                </button>
+                <button type="reset" class="btn btn-outline-secondary">Limpar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Toast centralizado -->
+<div class="position-fixed top-50 start-50 translate-middle p-3" style="z-index: 1080;">
+    <div id="toastModulo" class="toast align-items-center border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div id="toastModuloBody" class="toast-body">
+                Processando...
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
         </div>
     </div>
+</div>
 
-    <!-- Visível na Home -->
-    <div class="col-md-3 d-flex align-items-center">
-        <div class="form-check form-switch mt-4">
-            <input class="form-check-input" type="checkbox" id="visivelhome" name="visivelhome">
-            <label class="form-check-label" for="visivelhome">Destaque na Home</label>
-        </div>
-    </div>
-
-    <!-- Botão de envio -->
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">
-            <i class="bi bi-plus-circle me-1"></i> Adicionar Módulo
-        </button>
-    </div>
-</form>
-
-<!-- Toast container -->
-<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1080;" id="toastContainerModulo"></div>
-
-<!-- Script AJAX -->
 <script>
-    document.getElementById('formModuloNovo').addEventListener('submit', function(e) {
+(function() {
+    // Carregar jquery.mask se necessário
+    function ensureMask(callback){
+        if (typeof jQuery === 'undefined') { callback && callback(); return; }
+        if (typeof jQuery.fn.mask !== 'function') {
+            var s = document.createElement('script');
+            s.src = 'https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js';
+            s.onload = callback;
+            document.head.appendChild(s);
+        } else { callback && callback(); }
+    }
+
+    ensureMask(function(){
+        if (typeof jQuery !== 'undefined' && typeof jQuery.fn.mask === 'function') {
+            jQuery(function($){
+                $('.money').mask('000.000.000,00', {reverse: true});
+            });
+        }
+    });
+
+    const form = document.getElementById('formModuloNovo');
+    const toastEl = document.getElementById('toastModulo');
+    const toastBody = document.getElementById('toastModuloBody');
+    const bsToast = (window.bootstrap && window.bootstrap.Toast) ? new bootstrap.Toast(toastEl) : null;
+
+    function showToast(msg, ok){
+        if (toastBody) toastBody.textContent = msg;
+        if (toastEl){
+            toastEl.classList.remove('text-bg-success','text-bg-danger','text-bg-secondary');
+            toastEl.classList.add(ok ? 'text-bg-success' : 'text-bg-danger');
+        }
+        if (bsToast) bsToast.show();
+        else alert(msg);
+    }
+
+    form.addEventListener('submit', async function(e){
         e.preventDefault();
 
-        const form = this;
-        const botao = form.querySelector('button[type="submit"]');
-        const originalText = botao.innerHTML;
+        const fd = new FormData(form);
+        // Switch -> 0/1
+        fd.set('visivelm', (document.getElementById('visivelm').checked ? '1' : '0'));
+        fd.set('visivelhome', (document.getElementById('visivelhome').checked ? '1' : '0'));
 
-        botao.disabled = true;
-        botao.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Salvando...';
+        try {
+            const resp = await fetch('modulosv1.0/ajax_moduloInsertNovo.php', {
+                method: 'POST',
+                body: fd,
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            const data = await resp.json();
 
-        $.ajax({
-            type: 'POST',
-            url: 'modulosv1.0/ajax_moduloInsertform.php',
-            data: $(form).serialize(),
-            dataType: 'json',
-            success: function(res) {
-                botao.disabled = false;
-                botao.innerHTML = originalText;
-
-                const cor = res.sucesso ? 'bg-success' : 'bg-danger';
-                const toast = `
-                <div class="toast align-items-center text-white ${cor} border-0 show" role="alert">
-                    <div class="d-flex">
-                        <div class="toast-body">${res.mensagem}</div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-                    </div>
-                </div>`;
-                $('#toastContainerModulo').html(toast);
-
-                if (res.sucesso) {
-                    setTimeout(() => location.reload(), 1500);
-                }
-            },
-            error: function() {
-                botao.disabled = false;
-                botao.innerHTML = originalText;
-                alert('Erro ao comunicar com o servidor.');
+            if (data && data.success) {
+                showToast(data.message || 'Módulo criado com sucesso!', true);
+                form.reset();
+            } else {
+                showToast((data && data.message) ? data.message : 'Falha ao criar o módulo.', false);
             }
-        });
+        } catch (err) {
+            showToast('Erro de comunicação. ' + err, false);
+        }
     });
+})();
 </script>

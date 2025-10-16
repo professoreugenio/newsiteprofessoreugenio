@@ -17,7 +17,7 @@
         cat.nome AS nomecurso,
         prod.comissaoap
     FROM a_site_afiliados_cache ac
-    LEFT JOIN new_sistema_categorias_PJA cat
+    LEFT JOIN new_sistema_cursos cat
            ON cat.chaveturmasc = ac.idprodutoac
     LEFT JOIN a_site_afiliados_produto prod
            ON prod.codigoprodutoafiliado = ac.idprodutoac

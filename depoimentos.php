@@ -39,7 +39,7 @@ $sql = "
         f.dataCF,
         f.horaCF,
         f.destaqueCF,
-        c.nome,
+        c.nomecurso,
         c.pastasc,
         c.imagem50,
         cur.nomecurso AS nomecurso_recente  -- [NOVO]
@@ -561,7 +561,7 @@ $siteName = "Professor Eugênio";
                     $texto  = trim((string)($m['textoCF'] ?? ''));
                     $data   = brData($m['dataCF'] ?? '');
                     $hora   = $m['horaCF'] ?? '';
-                    $encIdUsuario   = $enc= encrypt($m['codigocadastro'], $action = 'e' );;
+                    $encIdUsuario   = $enc = encrypt($m['codigocadastro'], $action = 'e');;
                     $fav    = (int)($m['destaqueCF'] ?? 0) === 1;
                     $curso  = trim((string)($m['nomecurso_recente'] ?? '')); // [NOVO]
                 ?>
@@ -571,9 +571,9 @@ $siteName = "Professor Eugênio";
                             <div>
                                 <div class="depo-name d-flex align-items-center gap-2 flex-wrap">
 
-                                    
-                                        <span><?= htmlspecialchars($nome) ?></span>
-                                    
+
+                                    <span><?= htmlspecialchars($nome) ?></span>
+
                                     <?php if ($curso !== ''): ?>
                                         <span class="badge badge-curso rounded-pill"><?= htmlspecialchars($curso) ?></span> <!-- [NOVO] -->
                                     <?php endif; ?>

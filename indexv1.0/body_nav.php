@@ -24,7 +24,7 @@
                         <!-- <li><a class="dropdown-item" href="#masterclass">Cursos Master Class</a></li> -->
                         <?php
                         $quant = "1";
-                        $query = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE visivelhomesc = :var ");
+                        $query = $con->prepare("SELECT * FROM new_sistema_cursos WHERE visivelhomesc = :var ");
                         $query->bindParam(":var", $quant);
                         $query->execute();
                         $fetch = $query->fetchALL();
@@ -43,9 +43,9 @@
                             if ($rwImagem) {
                                 $imgMidia = $raizSite . "/fotos/categorias/" . $rwImagem['pasta'] . "/" . $rwImagem['foto'];
                                 $idpublic = $rwImagem['codigomidiasfotos'];
-                                $enc = encrypt("327&" . $value['codigocategorias'] . "&" . $idpublic, $action = 'e');
+                                $enc = encrypt("327&" . $value['codigocursos '] . "&" . $idpublic, $action = 'e');
                             } else {
-                                $enc = encrypt("327&" . $value['codigocategorias'] . "&" . $idpublic, $action = 'e');
+                                $enc = encrypt("327&" . $value['codigocursos '] . "&" . $idpublic, $action = 'e');
                                 $imgMidia = $raizSite . "/fotos/categorias/semfoto.png";
                             }
 

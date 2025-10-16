@@ -4,6 +4,7 @@
 <?php require_once APP_ROOT . '/autenticacao.php'; ?>
 
 <!-- Campo de busca -->
+<?php echo $idCurso;  ?>
 <form method="get" class="mb-3">
     <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id']); ?>">
     <input type="hidden" name="md" value="<?= htmlspecialchars($_GET['md']); ?>">
@@ -206,6 +207,7 @@ $stmt->execute();
                         <?php foreach ($cursos as $c): ?>
                             <option value="<?= (int)$c['codigocategorias'] ?>">
                                 <?= htmlspecialchars($c['nome']) ?>
+                                <?= (int)$c['codigocategorias']; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>

@@ -28,7 +28,7 @@
         ?>
         <?php
         $tipoc = "0";
-        $queryCat = $con->prepare("SELECT codigocategorias,pasta,nome,externosc,descricaosc,bgcolor,ordemsc FROM new_sistema_categorias_PJA WHERE codpagesadminsc = :var AND visivelhomesc ='1' AND comercialsc=:tipoc ORDER BY ordemsc ");
+        $queryCat = $con->prepare("SELECT codigocursos ,pasta,nome,externosc,descricaosc,bgcolor,ordemsc FROM new_sistema_cursos WHERE codpagesadminsc = :var AND visivelhomesc ='1' AND comercialsc=:tipoc ORDER BY ordemsc ");
         $queryCat->bindParam(":var", $decPagina);
         $queryCat->bindParam(":tipoc", $tipoc);
         $queryCat->execute();
@@ -45,10 +45,10 @@
             $query->bindParam(":tipo", $tipo);
             $query->execute();
             $rwImagem = $query->fetch(PDO::FETCH_ASSOC);
-            $foto = $rwImagem['foto']?? '';
-            $tipof = $rwImagem['tipo']?? '';
-            $idpublic = $rwImagem['codigomidiasfotos']?? '';
-            $enc = encrypt($decPagina . "&" . $value['codigocategorias'] . "&" . $idpublic, $action = 'e');
+            $foto = $rwImagem['foto'] ?? '';
+            $tipof = $rwImagem['tipo'] ?? '';
+            $idpublic = $rwImagem['codigomidiasfotos'] ?? '';
+            $enc = encrypt($decPagina . "&" . $value['codigocursos '] . "&" . $idpublic, $action = 'e');
             $arquivo = $raizSite . "/" . $diretorio . "/" . $foto;
             if ($foto == "") {
                 $arquivo = $raizSite . "/" . $dir0 . "/bgmidia.jpg";

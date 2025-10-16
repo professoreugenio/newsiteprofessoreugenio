@@ -1,0 +1,15 @@
+`new_sistema_modulos_PJA` 
+  `codigomodulos` int(11) NOT NULL,
+  `codcursos` int(11) DEFAULT NULL,
+  `nomemodulosm` varchar(50) DEFAULT NULL,
+  `bgcolorsm` varchar(10) DEFAULT NULL,
+  `imagem` varchar(200) DEFAULT 'padrao.jpg',
+  `descricao` text,
+  `valordocursosm` float(9,2) DEFAULT NULL,
+  `valordahorasm` float(9,2) DEFAULT NULL,
+  `cargahorariasm` int(11) DEFAULT NULL,
+  `ordemm` int(11) DEFAULT NULL,
+  `visivelm` varchar(1) DEFAULT '0',
+  `visivelhome` int(11) DEFAULT '0',
+  `datam` date DEFAULT NULL,
+  `horam` time DEFAULT NULL

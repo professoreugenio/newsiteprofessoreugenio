@@ -8,7 +8,7 @@
         <?php $decVar;  ?>
         <?php
         $quant = "100";
-        $query = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE  visivelhomesc = :var ");
+        $query = $con->prepare("SELECT * FROM new_sistema_cursos WHERE  visivelhomesc = :var ");
         // $query->bindParam(":idcategoria", $idCurso);
         $query->bindParam(":var", $quant);
         $query->execute();
@@ -16,7 +16,7 @@
         $quant = count($fetch);
         foreach ($fetch as $key => $value) {
 
-            $idcategoria = $value['codigocategorias'];
+            $idcategoria = $value['codigocursos '];
             $pasta = $value['pasta'];
             $tipo = "1";
 
@@ -30,9 +30,9 @@
             if ($rwImagem) {
                 $imgMidia = $raizSite . "/fotos/categorias/" . $rwImagem['pasta'] . "/" . $rwImagem['foto'];
                 $idpublic = $rwImagem['codigomidiasfotos'];
-                $enc = encrypt("327&" . $value['codigocategorias'] . "&" . $idpublic, $action = 'e');
+                $enc = encrypt("327&" . $value['codigocursos '] . "&" . $idpublic, $action = 'e');
             } else {
-                $enc = encrypt("327&" . $value['codigocategorias'] . "&" . $idpublic, $action = 'e');
+                $enc = encrypt("327&" . $value['codigocursos '] . "&" . $idpublic, $action = 'e');
                 $imgMidia = $raizSite . "/fotos/categorias/semfoto.png";
             }
 

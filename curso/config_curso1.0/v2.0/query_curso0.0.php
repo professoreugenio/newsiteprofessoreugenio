@@ -20,7 +20,7 @@ if (isset($_COOKIE['nav'])) {
 
 
 
-    $queryCurso = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE codigocategorias = :idcurso ");
+    $queryCurso = $con->prepare("SELECT * FROM new_sistema_cursos WHERE codigocursos = :idcurso ");
     $queryCurso->bindParam(":idcurso", $codigocurso);
     $queryCurso->execute();
     $rwCurso = $queryCurso->fetch(PDO::FETCH_ASSOC);

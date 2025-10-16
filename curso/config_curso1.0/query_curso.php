@@ -11,7 +11,7 @@ if (isset($_COOKIE['nav'])) {
         $codigomodulo = $partes[3] ?? null;
         $codigoaula = $partes[4] ?? null;
         if (!$codigousuario || !$codigocurso) {
-            die('Dados do curso incompletos*'. $dadosDecodificados .'.');
+            die('Dados do curso incompletos*' . $dadosDecodificados . '.');
         }
     } else {
         die('Falha ao descriptografar o cookie.');
@@ -20,7 +20,7 @@ if (isset($_COOKIE['nav'])) {
 
 
 
-    $queryCurso = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE codigocategorias = :idcurso ");
+    $queryCurso = $con->prepare("SELECT * FROM new_sistema_cursos WHERE codigocursos = :idcurso ");
     $queryCurso->bindParam(":idcurso", $codigocurso);
     $queryCurso->execute();
     $rwCurso = $queryCurso->fetch(PDO::FETCH_ASSOC);

@@ -59,7 +59,7 @@
                 // Busca imagem do módulo
                 $arquivo = $raizSite . "/img/nomodulo.png";
                 $queryFoto = $con->prepare("
-                SELECT categorias.pasta, fotos.foto FROM new_sistema_categorias_PJA AS categorias
+                SELECT categorias.pasta, fotos.foto FROM new_sistema_cursos AS categorias
                 INNER JOIN new_sistema_midias_fotos_PJA AS fotos ON categorias.pasta = fotos.pasta
                 WHERE fotos.tipo = 7 AND fotos.codmodulomfp = :idmodulo
             ");

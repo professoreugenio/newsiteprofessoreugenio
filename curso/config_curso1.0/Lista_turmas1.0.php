@@ -179,7 +179,7 @@ $quant  = count($turmas);
         $tipo = 3;
         $stmtFoto = $con->prepare("
         SELECT f.*, c.*
-        FROM new_sistema_categorias_PJA c
+        FROM new_sistema_cursos c
         INNER JOIN new_sistema_midias_fotos_PJA f ON c.pasta = f.pasta
         WHERE f.codpublicacao = :id AND f.tipo = :tipo
         LIMIT 1

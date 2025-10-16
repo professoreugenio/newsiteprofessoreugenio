@@ -8,7 +8,7 @@ $idTurma = intval($_POST['idturma'] ?? 0);
 $idPublicacao = intval($_POST['idpublicacao'] ?? 0);
 
 $stmt = $con->prepare("
-    SELECT c.codigocadastro, c.nome, c.pastasc, c.imagem50,
+    SELECT c.codigocadastro, c.nomecurso, c.pastasc, c.imagem50,
         (SELECT COUNT(*) FROM a_curso_AtividadeAnexos 
          WHERE idalulnoAA = c.codigocadastro AND idpublicacacaoAA = :idpublicacao) as total
     FROM new_sistema_cadastro c

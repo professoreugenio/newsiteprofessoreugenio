@@ -1,12 +1,12 @@
 <?php
 // ----------------- Alunos da turma -----------------
 $queryAlunos = $con->prepare("
-    SELECT c.codigocadastro, c.nome, c.pastasc, c.imagem50
+    SELECT c.codigocadastro, c.nomecurso, c.pastasc, c.imagem50
     FROM new_sistema_cadastro c
     INNER JOIN new_sistema_inscricao_PJA i 
         ON i.codigousuario = c.codigocadastro
     WHERE i.chaveturma = :chaveturma
-    ORDER BY c.nome ASC
+    ORDER BY c.nomecurso ASC
 ");
 $queryAlunos->bindParam(":chaveturma", $chaveturmaUser);
 $queryAlunos->execute();

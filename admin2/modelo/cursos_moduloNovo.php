@@ -58,8 +58,8 @@ require_once APP_ROOT . '/autenticacao.php';
             // Aqui você pode usar AJAX para atualizar no banco sem recarregar a página
         }
     </script>
-    
-    <script src="modulosv1.0/JS_cursoEditarExcluir.js?<?= time(); ?>"></script>
+
+
 
 
     <div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1080;" id="toastContainer">

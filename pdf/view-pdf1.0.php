@@ -19,7 +19,7 @@ $idmodulo = isset($exp[2]) ? $exp[2] : null;
 
 // Conexão e busca do módulo
 $con = config::connect();
-$query = $con->prepare("SELECT * FROM new_sistema_modulos_PJA, new_sistema_categorias_PJA WHERE codigomodulos = :idmodulo AND new_sistema_modulos_PJA.codcursos = new_sistema_categorias_PJA.codigocategorias");
+$query = $con->prepare("SELECT * FROM new_sistema_modulos_PJA, new_sistema_cursos WHERE codigomodulos = :idmodulo AND new_sistema_modulos_PJA.codcursos = new_sistema_cursos.codigocursos ");
 $query->bindParam(":idmodulo", $idmodulo);
 $query->execute();
 $rwNome = $query->fetch(PDO::FETCH_ASSOC);

@@ -32,7 +32,7 @@ $titulomodulo = "";
 <?php
 $idCurso = $expVar[1];
 if (!empty($expVar[1])) {
-    $queryCatPJA = $con->prepare("SELECT nome,descricaosc,bgcolor,valorsc,pasta,codpagesadminsc FROM new_sistema_categorias_PJA WHERE codigocategorias = :cod  ");
+    $queryCatPJA = $con->prepare("SELECT nome,descricaosc,bgcolor,valorsc,pasta,codpagesadminsc FROM new_sistema_cursos WHERE codigocursos = :cod  ");
     $queryCatPJA->bindParam(":cod", $expVar[1]);
     $queryCatPJA->execute();
     $rwPageCurso = $queryCatPJA->fetch(PDO::FETCH_ASSOC);

@@ -1,12 +1,12 @@
 <?php
 // Consulta alunos da turma
 $queryAlunos = $con->prepare("
-    SELECT c.codigocadastro, c.nome, c.pastasc, c.imagem50
+    SELECT c.codigocadastro, c.nomecurso, c.pastasc, c.imagem50
     FROM new_sistema_cadastro c
     INNER JOIN new_sistema_inscricao_PJA i 
         ON i.codigousuario = c.codigocadastro
     WHERE i.chaveturma = :chaveturma
-    ORDER BY c.nome ASC
+    ORDER BY c.nomecurso ASC
 ");
 $queryAlunos->bindParam(":chaveturma", $chaveturmaUser);
 $queryAlunos->execute();
@@ -19,12 +19,12 @@ $alunos = $queryAlunos->fetchAll(PDO::FETCH_ASSOC);
     <!-- Avatares centralizados -->
     <div class="d-flex justify-content-center gap-4 flex-wrap mb-4">
         <?php foreach ($alunos as $aluno):
-            
-                if($aluno['imagem50']=='usuario.jpg') :
+
+            if ($aluno['imagem50'] == 'usuario.jpg') :
                 $foto = "/fotos/usuarios/usuario.png";
-                else:
+            else:
                 $foto = "/fotos/usuarios/{$aluno['pastasc']}/{$aluno['imagem50']}";
-                endif;
+            endif;
             $primeiroNome = explode(" ", trim($aluno['nome']))[0];
         ?>
             <button type="button"

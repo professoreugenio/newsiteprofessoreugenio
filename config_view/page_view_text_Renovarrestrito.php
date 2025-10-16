@@ -13,15 +13,15 @@
         if ($codigoUser == 115322) {
             $dec = encrypt($_GET['var'], $action = 'd');
             $exp = explode("&", $dec);
-            echo $exp[0] . "&" . $exp[1]. "&" . $exp[2];
+            echo $exp[0] . "&" . $exp[1] . "&" . $exp[2];
             $tipoc = "1";
             $decPagina = "0";
-            $queryCat = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE codpagesadminsc = :var AND visivelhomesc ='1' AND comercialsc=:tipoc");
+            $queryCat = $con->prepare("SELECT * FROM new_sistema_cursos WHERE codpagesadminsc = :var AND visivelhomesc ='1' AND comercialsc=:tipoc");
             $queryCat->bindParam(":var", $exp[0]);
             $queryCat->bindParam(":tipoc", $tipoc);
             $queryCat->execute();
             $rwCat = $queryCat->fetch(PDO::FETCH_ASSOC);
-           echo $post = $rwCat['codigocategorias'];
+            echo $post = $rwCat['codigocursos '];
             $idcurso;
             echo "<hr>";
             echo $dec = encrypt("UGNBRHBKdHU1T1E2bEgyMld6a3A4Zz09", $action = 'd');

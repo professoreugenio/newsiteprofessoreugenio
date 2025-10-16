@@ -44,7 +44,7 @@ $sql = "
         f.dataCF,
         f.horaCF,
         f.destaqueCF,
-        c.nome,
+        c.nomecurso,
         c.pastasc,
         c.imagem50
     FROM a_curso_forum f
