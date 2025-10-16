@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Inserção no banco
         $sql = "INSERT INTO new_sistema_modulos_PJA 
-                    (chavem, modulo, descricao, valorm, valorh, nraulasm, ordemm, bgcolor, visivelm, visivelhome, chavemodulo)
+                    (chavem, modulo, descricao, valorm, valorh, nraulasm, ordemm, bgcolorsm, visivelm, visivelhome, chavemodulo)
                 VALUES
                     (:chavem, :modulo, :descricao, :valorm, :valorh, :nraulasm, :ordemm, :bgcolor, :visivelm, :visivelhome, :chavemodulo)";
 
