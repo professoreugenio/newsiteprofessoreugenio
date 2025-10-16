@@ -22,7 +22,7 @@ if (!$rwModulo) {
 }
 $encIdModulo= encrypt($idModulo, $action = 'e' );
 // Atribuição segura dos valores
-$Bocolor = $rwModulo['bgcolor'];
+$Bocolor = $rwModulo['bgcolorsm'];
 $Nomemodulo = $rwModulo['modulo'] . $idModulo;
 $Descricao = $rwModulo['descricao'];
 $Valor = $rwModulo['valorm'];

@@ -12,6 +12,7 @@
  */
 
 $idCurso = isset($_GET['id']) ? trim((string)$_GET['id']) : '';
+$decIdCurso = $dec= encrypt($_GET['id'], $action = 'd' );
 if ($idCurso === '') {
     echo '<div class="alert alert-warning mb-3">ID do curso não informado.</div>';
     return;
@@ -46,7 +47,7 @@ try {
         <form id="formNovaTurma" class="row g-3">
 
             <!-- ID do Curso (hidden) -->
-            <input type="hidden" name="codcursost" value="<?= htmlspecialchars($idCurso) ?>">
+            <input type="hidden" name="codcursost" value="<?= htmlspecialchars($decIdCurso) ?>">
 
             <!-- CHAVE (gerada no submit) -->
             <input type="hidden" name="chave" id="chaveAuto">
@@ -78,7 +79,7 @@ try {
             <!-- Link do WhatsApp -->
             <div class="col-12 col-md-6">
                 <div class="form-floating">
-                    <input type="url" class="form-control" id="linkwhatsapp" name="linkwhatsapp" placeholder="Link do WhatsApp" value="#">
+                    <input type="text" class="form-control" id="linkwhatsapp" name="linkwhatsapp" placeholder="Link do WhatsApp" value="#">
                     <label for="linkwhatsapp">Link do WhatsApp</label>
                 </div>
             </div>
