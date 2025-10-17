@@ -4,7 +4,7 @@ $paginaAtual = basename($_SERVER['PHP_SELF']);
 ?>
 
 <div class="d-flex flex-wrap gap-2 mb-4">
-    <a href="alunoAcessos.php?idUsuario=<?= $_GET['idUsuario'] ?>" class="btn <?= $paginaAtual === 'alunoAcessos.php' ? 'btn-primary' : 'btn-outline-primary' ?>">
+    <a href="alunoTurmas.php?idUsuario=<?= $_GET['idUsuario'] ?>" class="btn <?= $paginaAtual === 'alunoAcessos.php' ? 'btn-primary' : 'btn-outline-primary' ?>">
         <i class="bi bi-clock-history me-1"></i> Acessos
     </a>
 

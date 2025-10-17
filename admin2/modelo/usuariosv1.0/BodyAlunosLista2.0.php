@@ -186,7 +186,7 @@ function fotoAlunoUrl($pasta, $imagem)
                     <img src="<?= $foto ?>" width="50" height="50" class="rounded-circle shadow border me-3" style="object-fit:cover;" alt="Foto">
                     <div class="flex-grow-1">
                         <div class="d-flex align-items-center">
-                            <a href="alunoAcessos.php?idUsuario=<?= $encIdUsuario ?>" class="fw-bold fs-5 text-decoration-none text-dark">
+                            <a href="alunoTurmas.php?idUsuario=<?= $encIdUsuario ?>" class="fw-bold fs-5 text-decoration-none text-dark">
                                 <?= $nomeExib ?>
                             </a>
                             <?php if ($idade): ?>

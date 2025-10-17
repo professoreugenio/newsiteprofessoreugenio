@@ -11,7 +11,7 @@ $todos = isset($_GET['todos']) ? $_GET['todos'] : null;
             class="btn btn-flat btn-sm <?= ($pagina == 'vendas.php') ? 'btn-laranja' : '' ?>">
             <i class="bi bi-shop"></i> Alunos
         </a>
-        <a href="alunoAcessos.php?idUsuario=<?= $_GET['idUsuario'] ?? '' ?>&id=<?= $_GET['id'] ?? '' ?>&tm=<?= $_GET['tm'] ?? '' ?>"
+        <a href="alunoTurmas.php?idUsuario=<?= $_GET['idUsuario'] ?? '' ?>&id=<?= $_GET['id'] ?? '' ?>&tm=<?= $_GET['tm'] ?? '' ?>"
             class="btn btn-flat btn-sm <?= ($pagina == 'alunoAcessos.php') ? 'btn-laranja' : '' ?>">
             <i class="bi bi-shop"></i> Acessos
         </a>

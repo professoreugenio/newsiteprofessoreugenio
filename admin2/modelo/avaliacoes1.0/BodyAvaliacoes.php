@@ -1,4 +1,3 @@
-
 <script>
     // Disponibiliza o ID do administrador no JS
     const COD_ADM = <?= (int)$codadm ?>;
@@ -194,7 +193,7 @@ $linkAcessadas = htmlspecialchars($urlBase . '?' . http_build_query($qsB));
                     <img src="<?= htmlspecialchars($foto) ?>" class="avatar-40 shadow-sm border" alt="Foto">
                     <div class="flex-grow-1">
                         <div class="d-flex flex-wrap align-items-center gap-2 small text-muted mb-1">
-                            <a href="alunoAcessos.php?idUsuario=<?= $encIdUsuario ?>" target="_blank">
+                            <a href="alunoTurmas.php?idUsuario=<?= $encIdUsuario ?>" target="_blank">
                                 <span class="fw-semibold text-body"><?= $nome ?></span>
                             </a>
                             <span class="badge bg-light text-secondary border badge-dot">

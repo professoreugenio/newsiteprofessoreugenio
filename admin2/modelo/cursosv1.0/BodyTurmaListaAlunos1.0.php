@@ -314,7 +314,7 @@ _Prof. Eugênio_
     </span>';
                             }
                             ?>
-                            <a href="alunoAcessos.php?idUsuario=<?= $encIdAluno ?>&id=<?= $_GET['id']; ?>&tm=<?= $_GET['tm']; ?>" class="fw-bold fs-6 text-decoration-none">
+                            <a href="alunoTurmas.php?idUsuario=<?= $encIdAluno ?>&id=<?= $_GET['id']; ?>&tm=<?= $_GET['tm']; ?>" class="fw-bold fs-6 text-decoration-none">
                                 <?php if ($possuipc): ?>
                                     <i class="bi bi-pc-display" style="color:#19c37d;" title="Possui computador"></i>
                                 <?php else: ?>

@@ -18,7 +18,7 @@
                     <img src="<?= $foto ?>" class="rounded-circle me-3" style="width:56px; height:56px; object-fit:cover; border:2px solid #eee;">
                     <div>
                         <div>
-                            <a href="alunoAcessos.php?idUsuario=<?= $encIdUser ?>"> <span class="fw-bold fs-6"><?= $nomeExib ?></span></a>
+                            <a href="alunoTurmas.php?idUsuario=<?= $encIdUser ?>"> <span class="fw-bold fs-6"><?= $nomeExib ?></span></a>
                             <span class="badge bg-warning text-dark ms-2">
                                 <i class="bi bi-cake"></i>
                                 <?= date('d/m/Y', strtotime($row['datanascimento_sc'])) ?> - Aniversário!
