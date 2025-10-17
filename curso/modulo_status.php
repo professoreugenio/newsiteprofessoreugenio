@@ -422,32 +422,8 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
 <body>
     <?php require_once 'config_default1.0/sidebarLateral.php'; ?>
     <?php include 'v2.0/nav.php'; ?>
-    <!-- NAVBAR -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <img src="<?= $__fotoAluno; ?>" alt="Foto do aluno" class="avatar">
-                <span class="fw-semibold"><?= htmlspecialchars($__nomeAluno); ?></span>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nv"
-                aria-controls="nv" aria-expanded="false" aria-label="Menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div id="nv" class="collapse navbar-collapse justify-content-end">
-                <ul class="navbar-nav align-items-lg-center gap-lg-2">
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i>Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-mortarboard me-1"></i>Curso</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-1"></i>Contato</a></li>
-                    <li class="nav-item"><a class="nav-link text-danger" href="#"><i class="bi bi-x-circle me-1"></i>Fechar</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-
-    <!-- CABEÇALHO / TÍTULO DO MÓDULO -->
-    <div style="height:70px"></div>
+    
+   
     <header class="container section-gap">
         <div class="row align-items-center g-3">
             <div class="col-lg-8" data-aos="fade-right">

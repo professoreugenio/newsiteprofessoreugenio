@@ -133,6 +133,14 @@ include '../autenticacao.php'; ?>
             scroll-margin-top: 90px;
         }
     </style>
+
+    <style>
+        #lista-modulos a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+
     <link rel="stylesheet" href="config_curso1.0/CSS_sidebarLateral.css?<?php echo time(); ?>">
 </head>
 
