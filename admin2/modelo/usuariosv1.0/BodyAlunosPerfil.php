@@ -12,6 +12,7 @@
     </div>
 
     <!-- Principal: Dados do Aluno -->
+    <?php require 'usuariosv1.0/require_MsgsWhatsApp.php'; ?>
     <div class="col-lg-8 order-lg-1">
         <div class="card card-elegant">
             <div class="card-body p-4">

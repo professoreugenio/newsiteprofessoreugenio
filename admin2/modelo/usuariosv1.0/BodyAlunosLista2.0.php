@@ -9,6 +9,8 @@ $stmtTurmas = config::connect()->query("
     INNER JOIN new_sistema_inscricao_PJA i ON i.chaveturma = t.chave
     GROUP BY t.chave, t.nometurma
     ORDER BY t.nometurma
+
+    DESC LIMIT 0,30
 ");
 $turmas = $stmtTurmas->fetchAll(PDO::FETCH_ASSOC);
 

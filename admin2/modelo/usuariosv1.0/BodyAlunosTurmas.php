@@ -65,6 +65,7 @@ try {
             nometurma  AS titulo_turma,
             chave         AS chave_turma
         FROM new_sistema_cursos_turmas
+        WHERE andamento = '0'
         ORDER BY dataturma DESC, nometurma ASC
     ";
     $stAll = $pdo->prepare($sqlAll);
@@ -78,9 +79,9 @@ try {
 // 4) Cabeçalho
 $total = $turmas ? count($turmas) : 0;
 ?>
-
+<?php require 'usuariosv1.0/require_MsgsWhatsApp.php'; ?>
 <!-- Barra de inscrição em turma -->
-            <?php require 'usuariosv1.0/require_MsgsWhatsApp.php'; ?>
+
 <div class="card mb-3 shadow-sm">
     <div class="card-body">
         <div class="row g-2 align-items-end">
@@ -116,7 +117,7 @@ $total = $turmas ? count($turmas) : 0;
                                 data-idcurso="<?= htmlspecialchars($encIdCurso) ?>"
                                 <?= $jaInscrito ? 'disabled' : '' ?>>
                                 <?= htmlspecialchars($rotulo) ?><?= $jaInscrito ? ' (já inscrito)' : '' ?>
-                                <?= htmlspecialchars($idTurma); ?>-<?= htmlspecialchars($idCurso); ?> </option>
+                            </option>
                         <?php endforeach; ?>
                     </select>
 
