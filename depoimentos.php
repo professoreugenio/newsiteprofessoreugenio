@@ -41,6 +41,7 @@ $sql = "
         f.destaqueCF,
         c.nome,
         c.pastasc,
+        c.codigocadastro,
         c.imagem50,
         cur.nomecurso AS nomecurso_recente  -- [NOVO]
     FROM a_curso_forum f
@@ -104,7 +105,7 @@ if (!empty($mensagens)) {
         $ogDesc = mb_substr(strip_tags($primeiroTexto), 0, 140, 'UTF-8') . (mb_strlen($primeiroTexto, 'UTF-8') > 140 ? '…' : '');
     }
 }
-$ogImage = "https://professoreugenio.com/img/logosite.png";
+$ogImage = "https://professoreugenio.com/img/depoimentos.jpg";
 $siteName = "Professor Eugênio";
 ?>
 <!DOCTYPE html>
@@ -148,10 +149,17 @@ $siteName = "Professor Eugênio";
     <style>
         :root {
             --brand-1: #00BB9C;
+            /* h1 / destaques */
             --brand-2: #FF9C00;
+            /* h2 / badges curso */
             --bg-card: #112240;
+            /* fundo de cards */
+            --bg-page: #0c1833;
+            /* fundo da página */
             --text: #ffffff;
             --muted: #A3B1C2;
+            --ring: rgba(0, 187, 156, .35);
+            --border: rgba(255, 255, 255, .08);
         }
 
         html,
@@ -161,56 +169,64 @@ $siteName = "Professor Eugênio";
 
         body {
             font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-            background: radial-gradient(1200px 600px at 20% -10%, rgba(0, 187, 156, .20), transparent 60%), #0c1833;
+            background: radial-gradient(1200px 600px at 20% -10%, rgba(0, 187, 156, .20), transparent 60%), var(--bg-page);
             color: var(--text);
         }
 
+        /* Navbar */
         .navbar {
             backdrop-filter: saturate(130%) blur(8px);
             background: rgba(17, 34, 64, .8) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            border-bottom: 1px solid var(--border);
+            -webkit-backdrop-filter: saturate(130%) blur(8px);
+            /* iOS */
         }
 
         .navbar-brand img {
             height: 34px;
         }
 
+        /* Cabeçalho */
         .section-head h1 {
             color: var(--brand-1);
             font-weight: 800;
             letter-spacing: .2px;
+            margin: 0;
         }
 
         .section-head .lead {
             color: var(--muted);
         }
 
+        /* Grid de depoimentos */
         .depo-grid {
             display: grid;
             gap: 18px;
             grid-template-columns: repeat(12, 1fr);
         }
 
-        @media (max-width: 575.98px) {
+        @media (max-width:575.98px) {
             .depo-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
 
-        @media (min-width: 576px) and (max-width: 991.98px) {
+        @media (min-width:576px) and (max-width:991.98px) {
             .depo-grid {
                 grid-template-columns: repeat(8, 1fr);
             }
         }
 
-        @media (min-width: 992px) {
+        @media (min-width:992px) {
             .depo-grid {
                 grid-template-columns: repeat(12, 1fr);
             }
         }
 
+        /* Card */
         .depo-card {
             grid-column: span 4;
+            /* 3 por linha ≥ 992px */
             background: linear-gradient(145deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
             border: 1px solid rgba(255, 255, 255, .06);
             border-radius: 16px;
@@ -218,24 +234,28 @@ $siteName = "Professor Eugênio";
             transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
         }
 
-        @media (max-width: 991.98px) {
+        @media (max-width:991.98px) {
             .depo-card {
                 grid-column: span 4;
             }
         }
 
-        @media (max-width: 575.98px) {
+        /* 2 por linha em tablets */
+        @media (max-width:575.98px) {
             .depo-card {
                 grid-column: span 4;
             }
         }
+
+        /* 1 por linha em mobile */
 
         .depo-card:hover {
             transform: translateY(-1px);
             box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
-            border-color: rgba(0, 187, 156, .35);
+            border-color: var(--ring);
         }
 
+        /* Cabeçalho do card */
         .depo-head {
             display: flex;
             align-items: center;
@@ -245,9 +265,9 @@ $siteName = "Professor Eugênio";
         .depo-head .avatar {
             width: 50px;
             height: 50px;
+            flex: 0 0 50px;
             border-radius: 50%;
             object-fit: cover;
-            flex: 0 0 50px;
             border: 2px solid rgba(255, 255, 255, .15);
         }
 
@@ -267,34 +287,225 @@ $siteName = "Professor Eugênio";
             color: #ffcc66;
         }
 
-        .depo-text {
-            background: #0f203f;
-            border: 1px solid rgba(255, 255, 255, .06);
-            color: #e6f3ff;
-            border-radius: 12px;
-            padding: 14px;
-            margin-top: 12px;
-            line-height: 1.5;
-            white-space: pre-wrap;
+        /* Badge Curso (contraste melhorado) */
+        .badge-curso {
+            background: rgba(255, 156, 0, .18);
+            color: #ffd28a;
+            /* melhora legibilidade no fundo escuro */
+            border: 1px solid rgba(255, 156, 0, .35);
+            font-weight: 600;
+            line-height: 1;
         }
 
+        /* Badge topo da seção */
         .badge-soft {
             background: rgba(0, 187, 156, .14);
             color: var(--brand-1);
             border: 1px solid rgba(0, 187, 156, .25);
         }
 
-        .badge-curso {
-            /* [NOVO] Destaque para o nome do curso */
-            background: rgba(255, 156, 0, .18);
-            color: var(--brand-2);
-            border: 1px solid rgba(255, 156, 0, .35);
-            font-weight: 600;
+        /* Texto do depoimento — versão com aspas destacadas */
+        .depo-text {
+            position: relative;
+            background: linear-gradient(180deg, #0f203f 0%, #0b1a33 100%);
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: #e6f3ff;
+            border-radius: 14px;
+            padding: 18px 18px 18px 56px;
+            /* espaço para a aspa grande */
+            margin-top: 12px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            box-shadow: inset 0 0 0 1px rgba(0, 187, 156, .08);
         }
 
+        .depo-text::before {
+            content: "“";
+            position: absolute;
+            left: 16px;
+            top: 10px;
+            font-size: 48px;
+            line-height: 1;
+            color: rgba(255, 255, 255, .25);
+            font-weight: 800;
+            font-family: Georgia, 'Times New Roman', serif;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+        }
+
+        .depo-text::after {
+            content: "”";
+            position: absolute;
+            right: 14px;
+            bottom: -6px;
+            font-size: 40px;
+            line-height: 1;
+            color: rgba(255, 255, 255, .14);
+            font-weight: 800;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .depo-text.is-highlight {
+            border-color: var(--ring);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .25), inset 0 0 0 1px rgba(0, 187, 156, .25);
+        }
+
+        .depo-text .depo-phrase {
+            display: block;
+            font-size: 1.02rem;
+            letter-spacing: .15px;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .depo-text p,
+        .depo-text br+br {
+            margin-top: 8px;
+        }
+
+        .depo-text em {
+            color: #dff8ff;
+            font-style: italic;
+        }
+
+        .depo-text strong {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* Selo “Depoimento” no balão */
+        .depo-badge {
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: linear-gradient(90deg, rgba(0, 187, 156, .2), rgba(255, 156, 0, .25));
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .18);
+            font-size: .72rem;
+            padding: 2px 8px;
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Rodapé */
         .site-footer {
             color: var(--muted);
-            border-top: 1px solid rgba(255, 255, 255, .08);
+            border-top: 1px solid var(--border);
+        }
+
+        /* Acessibilidade: reduzir animação se o usuário preferir */
+        @media (prefers-reduced-motion: reduce) {
+            .depo-card {
+                transition: none;
+            }
+
+            .depo-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+    </style>
+
+    <style>
+        /* --- COMPACTAÇÃO DO BALÃO DE TEXTO --- */
+        .depo-text {
+            /* menos respiro geral */
+            padding: 12px 14px 12px 44px;
+            /* antes: 18px 18px 18px 56px */
+            line-height: 1.45;
+            /* antes: 1.6 */
+        }
+
+        /* ajusta a aspa grande para caber no novo padding */
+        .depo-text::before {
+            left: 12px;
+            top: 6px;
+            /* antes: 10px */
+            font-size: 40px;
+            /* antes: 48px */
+        }
+
+        .depo-text::after {
+            right: 10px;
+            bottom: -4px;
+            /* antes: -6px */
+            font-size: 34px;
+            /* antes: 40px */
+        }
+
+        /* tipografia interna mais “colada” */
+        .depo-text .depo-phrase {
+            font-size: 0.98rem;
+            /* antes: 1.02rem */
+            letter-spacing: .1px;
+            /* antes: .15px */
+        }
+
+        /* reduz espaçamentos entre parágrafos e quebras */
+        .depo-text p {
+            margin: 4px 0;
+            /* antes: navegador define ~16px */
+        }
+
+        .depo-text p:first-child {
+            margin-top: 0;
+        }
+
+        .depo-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* duas quebras seguidas => menos espaço */
+        .depo-text br+br {
+            margin-top: 4px;
+            /* antes: 8px */
+            display: block;
+            /* garante o espaçamento reduzido */
+            content: "";
+        }
+
+        /* listas dentro do depoimento mais enxutas */
+        .depo-text ul,
+        .depo-text ol {
+            margin-top: 6px;
+            margin-bottom: 6px;
+            padding-left: 18px;
+            /* recuo menor */
+        }
+
+        .depo-text li {
+            margin: 2px 0;
+        }
+
+        /* badge “Depoimento” menor e mais perto do topo */
+        .depo-badge {
+            top: -8px;
+            /* antes: -10px */
+            left: 10px;
+            /* antes: 12px */
+            font-size: .68rem;
+            /* antes: .72rem */
+            padding: 1px 6px;
+            /* antes: 2px 8px */
+        }
+
+        /* opção extra: aplique .depo-tight para ainda mais compacto (se precisar) */
+        .depo-text.depo-tight {
+            padding: 10px 12px 10px 40px;
+            line-height: 1.38;
+        }
+
+        .depo-text.depo-tight::before {
+            top: 4px;
+            font-size: 36px;
+        }
+
+        .depo-text.depo-tight::after {
+            bottom: -2px;
+            font-size: 30px;
+        }
+
+        .depo-text.depo-tight .depo-phrase {
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -346,10 +557,12 @@ $siteName = "Professor Eugênio";
             <div class="depo-grid">
                 <?php foreach ($mensagens as $m):
                     $img    = fotoUsuario50($m);
-                    $nome   = trim((string)($m['nome'] ?? 'Usuário'));
+                    $nomeCompleto = trim((string)($m['nome'] ?? 'Usuário'));
+                    $nome = explode(' ', $nomeCompleto)[0];
                     $texto  = trim((string)($m['textoCF'] ?? ''));
                     $data   = brData($m['dataCF'] ?? '');
                     $hora   = $m['horaCF'] ?? '';
+                    $encIdUsuario   = $enc = encrypt($m['codigocadastro'], $action = 'e');;
                     $fav    = (int)($m['destaqueCF'] ?? 0) === 1;
                     $curso  = trim((string)($m['nomecurso_recente'] ?? '')); // [NOVO]
                 ?>
@@ -358,7 +571,10 @@ $siteName = "Professor Eugênio";
                             <img class="avatar" src="<?= htmlspecialchars($img) ?>" alt="Foto de <?= htmlspecialchars($nome) ?>">
                             <div>
                                 <div class="depo-name d-flex align-items-center gap-2 flex-wrap">
+
+
                                     <span><?= htmlspecialchars($nome) ?></span>
+
                                     <?php if ($curso !== ''): ?>
                                         <span class="badge badge-curso rounded-pill"><?= htmlspecialchars($curso) ?></span> <!-- [NOVO] -->
                                     <?php endif; ?>
@@ -369,7 +585,10 @@ $siteName = "Professor Eugênio";
                                 <i class="bi bi-star-fill depo-star" title="Depoimento em destaque"></i>
                             <?php endif; ?>
                         </header>
-                        <div class="depo-text"><?= nl2br(htmlspecialchars($texto)) ?></div>
+                        <!-- <div class="depo-text"><?= nl2br(htmlspecialchars($texto)) ?></div> -->
+                        <div class="depo-text<?= $fav ? ' is-highlight' : '' ?> depo-tight">
+                            <span class="depo-phrase"><?= nl2br(htmlspecialchars($texto)) ?></span>
+                        </div>
                     </article>
                 <?php endforeach; ?>
             </div>
