@@ -36,18 +36,23 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> Módulo <?= $Nomecurso ?></h3>
-                <small><?= $saudacao; ?></small><br>
-                <small><?= diadasemana($data, 2); ?></small>
+                <h3><i class="bi bi-journal-text me-2"></i> Curso <?= $Nomecurso ?> Com:<?= $comercial  ?></h3>
+
 
             </div>
+            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
 
-
-            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/SubnavCursosEditar.php'; ?>
+            <?php // require_once APP_ROOT . '/admin2/modelo/cursosv1.0/SubnavCursosEditar.php'; 
+            ?>
         </div>
         <!-- CORPO PÁGINA -->
-        <?php require_once APP_ROOT . '/admin2/modelo/modulosv1.0/SubnavSecundarioModulo.php'; ?>
+        
+
+        
+
         <?php require_once APP_ROOT . '/admin2/modelo/modulosv1.0/BodyModuloFormNovo.php'; ?>
+        <hr>
+        <?php require_once APP_ROOT . '/admin2/modelo/adm/idcursomodulo.php'; ?>
     </div>
     <!-- Scripts -->
     <script src="../v1.0/PainelLateral.js"></script>

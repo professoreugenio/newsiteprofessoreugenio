@@ -27,5 +27,5 @@ try {
     $opcoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode(['sucesso' => true, 'opcoes' => $opcoes]);
 } catch (Throwable $e) {
-    echo json_encode(['sucesso' => false, 'mensagem' => 'Erro ao carregar módulos.']);
+    echo json_encode(['sucesso' => false, 'mensagem' => 'Erro ao carregar módulos. Curso ID: ' . $idcurso]);
 }

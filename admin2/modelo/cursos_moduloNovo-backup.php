@@ -36,29 +36,17 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i> Curso <?= $Nomecurso ?> Com:<?= $comercial  ?></h3>
+                <h3><i class="bi bi-journal-text me-2"></i> Módulo <?= $Nomecurso ?></h3>
 
 
             </div>
-            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/Subnav.php'; ?>
 
-            <?php // require_once APP_ROOT . '/admin2/modelo/cursosv1.0/SubnavCursosEditar.php'; 
-            ?>
+
+            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/SubnavCursosEditar.php'; ?>
         </div>
         <!-- CORPO PÁGINA -->
         <?php require_once APP_ROOT . '/admin2/modelo/modulosv1.0/SubnavSecundarioModulo.php'; ?>
-
-        <!-- CORPO PÁGINA -->
-        <div class="mb-3 d-flex gap-2">
-            <a href="cursos_modulos.php?id=<?= $_GET['id']?? '' ?>&md=<?= $_GET['md']?? '' ?>&filtro=visivel" class="btn btn-outline-success btn-sm <?= $filtro == 'visivel' ? 'active' : '' ?>"><i class="bi bi-eye"></i> Visíveis</a>
-            <a href="cursos_modulos.php?id=<?= $_GET['id']?? '' ?>&md=<?= $_GET['md']?? '' ?>&filtro=oculto" class="btn btn-outline-secondary btn-sm <?= $filtro == 'oculto' ? 'active' : '' ?>"><i class="bi bi-eye-slash"></i> Ocultas</a>
-            <a href="cursos_modulos.php?id=<?= $_GET['id']?? '' ?>&md=<?= $_GET['md']?? '' ?>&filtro=lixeira" class="btn btn-outline-danger  btn-sm <?= $filtro == 'lixeira' ? 'active' : '' ?>"><i class="bi bi-trash"></i> Lixeira</a>
-            <a href="cursos_modulos.php?id=<?= $_GET['id']?? '' ?>&md=<?= $_GET['md']?? '' ?>&filtro=copias" class="btn btn-outline-default  btn-sm <?= $filtro == 'copias' ? 'active' : '' ?>"><i class="bi bi-files"></i> Copias</a>
-        </div>
-
-        <?php require_once APP_ROOT . '/admin2/modelo/modulosv1.0/BodyModulosLista.php'; ?>
-        <hr>
-        <?php require_once APP_ROOT . '/admin2/modelo/adm/idcursomodulo.php'; ?>
+        <?php require_once APP_ROOT . '/admin2/modelo/modulosv1.0/BodyModuloFormNovo.php'; ?>
     </div>
     <!-- Scripts -->
     <script src="../v1.0/PainelLateral.js"></script>

@@ -5,7 +5,7 @@
  * Requisitos: $con (PDO) disponível, Bootstrap 5+, Bootstrap Icons, jQuery (para a máscara).
  * Não incluir HTML/HEAD ou conexões aqui (segue seu padrão de módulos).
  */
-
+$idCurso = $dec = encrypt($_GET['id'], $action = 'd');
 if (!isset($con) || !$con instanceof PDO) {
     echo '<div class="alert alert-danger">Conexão indisponível.</div>';
     return;
@@ -31,10 +31,14 @@ try {
 
 <div class="card shadow-sm" data-aos="fade-up">
     <div class="card-header bg-white border-0">
-        <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-view-stacked fs-5 text-primary"></i>
-            <div class="fw-semibold fs-5 m-0">Cadastrar novo módulo</div>
+        <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-view-stacked fs-5 text-primary"></i>
+                <div class="fw-semibold fs-5 m-0">Cadastrar novo módulo</div>
+            </div>
+            <div><?php require_once APP_ROOT . '/admin2/modelo/modulosv1.0/SubnavSecundarioModulo.php'; ?></div>
         </div>
+
         <small class="text-muted">Preencha os dados do módulo e salve. Campos com * são obrigatórios.</small>
     </div>
 
@@ -42,15 +46,16 @@ try {
         <form id="formModuloNovo" class="row g-3">
             <!-- Curso -->
             <div class="col-md-6">
-                <label for="codcursos" class="form-label fw-semibold">Curso *</label>
+
                 <select class="form-select" id="codcursos" name="codcursos" required>
-                    <option value="">— selecione —</option>
+                    <option value="">— selecione Um Curso —</option>
                     <?php foreach ($listaCursos as $c): ?>
-                        <option value="<?= (int)$c['id'] ?>">
+                        <option value="<?= (int)$c['id'] ?>" <?= (isset($idCurso) && (int)$c['id'] === (int)$idCurso) ? 'selected' : '' ?>>
                             <?= htmlspecialchars($c['nome'] ?? ('Curso ' . (int)$c['id'])) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
+
             </div>
 
             <!-- Nome do módulo -->

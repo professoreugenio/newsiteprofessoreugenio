@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <?php
+    // Valores padrão (substitua dinamicamente por página)
+    $pageTitle        = $pageTitle        ?? 'Professor Eugênio — Cursos Online de Excel, Power BI e Design';
+    $pageDescription  = $pageDescription  ?? 'Aulas ao vivo e gravadas, materiais para download, certificação digital e suporte direto.';
+    $pageUrl          = $pageUrl          ?? 'https://professoreugenio.com/';
+    $pageImage        = $pageImage        ?? 'https://professoreugenio.com/img/bgnovo.jpg'; // 1200x630
+    $siteName         = $siteName         ?? 'Professor Eugênio';
+    $twitterUser      = $twitterUser      ?? '@prof_eugenio'; // seu @, se existir
+    $fbAppId          = $fbAppId          ?? ''; // opcional: ID do App do FB
+    ?>
+
+    <!-- Básico -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <?= htmlspecialchars($pageTitle) ?>
+    </title>
+    <meta name="description" content="<?= htmlspecialchars($pageDescription) ?>">
+    <link rel="canonical" href="<?= htmlspecialchars($pageUrl) ?>">
+
+    <!-- SEO / Robots -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Professor Eugênio">
+    <meta name="theme-color" content="#112240">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<?= htmlspecialchars($siteName) ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($pageDescription) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($pageUrl) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($pageImage) ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="pt_BR">
+    <?php if (!empty($fbAppId)): ?>
+        <meta property="fb:app_id" content="<?= htmlspecialchars($fbAppId) ?>">
+    <?php endif; ?>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($pageTitle) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($pageDescription) ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($pageImage) ?>">
+    <meta name="twitter:site" content="<?= htmlspecialchars($twitterUser) ?>">
+    <meta name="twitter:creator" content="<?= htmlspecialchars($twitterUser) ?>">
+
+    <!-- Favicon (exemplo) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://professoreugenio.com/img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://professoreugenio.com/img/favicon-16.png">
+
+    <!-- JSON-LD (Organization) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Professor Eugênio",
+            "url": "https://professoreugenio.com/",
+            "logo": "https://professoreugenio.com/img/logosite.png",
+            "sameAs": [
+                "https://www.facebook.com/seu-perfil",
+                "https://www.instagram.com/seu-perfil",
+                "https://www.youtube.com/@seu-canal",
+                "https://www.linkedin.com/in/seu-perfil"
+            ]
+        }
+    </script>
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --cor-h1: #00BB9C;
+            --cor-h2: #FF9C00;
+            --cor-bg: #112240;
+            --cor-texto: #ffffff;
+            --cor-card: #112240;
+        }
+
+        /* ==================== BASE ==================== */
+        body {
+            background: #0f1b33;
+            color: #e6eefc;
+        }
+
+        /* ==================== TOPBAR ==================== */
+        .topbar {
+            background: #0b1326;
+            color: #bcd0ff;
+            font-size: .9rem;
+        }
+
+        .topbar a {
+            color: #bcd0ff;
+            text-decoration: none;
+        }
+
+        .topbar i {
+            opacity: .9;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: .4px;
+        }
+
+        .btn-promocoes {
+            background: #ffc107;
+            color: #000;
+            font-weight: 700;
+            border: none;
+        }
+
+        .btn-promocoes:hover {
+            filter: brightness(.95);
+        }
+
+        /* ==================== TÍTULOS ==================== */
+        h1 {
+            color: var(--cor-h1);
+        }
+
+        h2 {
+            color: var(--cor-h2);
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            padding-bottom: 56px;
+            /* espaço para botões */
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .2)0%, rgba(17, 34, 64, 0)100%);
+            z-index: 1;
+        }
+
+        .hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(1.02);
+            z-index: 0;
+        }
+
+        .hero .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-pills {
+            z-index: 3;
+        }
+
+        /* micro animação no hover + performance */
+        .cta-pills a {
+            will-change: transform, box-shadow;
+            transition: all 0.3s ease;
+        }
+
+        .cta-pills a:hover {
+            transform: translateY(-2px) scale(2.02);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+            transition: all 0.1s ease;
+        }
+
+
+        .btn-outline-light {
+            color: #404040ff;
+            border: 2px solid #fff;
+            background: #fffff3ff;
+            border-radius: 50px;
+            transition: all .3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background: #f9f100ff;
+            color: #0b1326;
+            transform: translateY(-20px);
+        }
+
+        .btn-ebook {
+            background: #ff5a2a;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            transition: all .3s ease;
+        }
+
+        .btn-ebook:hover {
+            background: #ff763f;
+            transform: translateY(-2px);
+        }
+
+        /* ==================== SERVIÇOS / CARDS ==================== */
+        .service-card {
+            background: var(--cor-card);
+            color: var(--cor-texto);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 1rem;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+
+        .service-icon {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            margin: auto;
+            background: #0e1e3f;
+            border: 1px solid rgba(255, 255, 255, .12);
+            font-size: 2rem;
+        }
+
+        .service-card .btn {
+            border-radius: .6rem;
+        }
+
+        /* ==================== SEÇÕES ==================== */
+        section {
+            padding: 64px 0;
+        }
+
+        .section-dark {
+            background: var(--cor-bg);
+        }
+
+        /* ==================== PARALLAX SECTION ==================== */
+        .parallax-section {
+            background-image: url('https://professoreugenio.com/img/bgsectioncontato.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+            padding: 100px 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .parallax-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .55);
+            z-index: 0;
+        }
+
+        .parallax-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-box {
+            max-width: 320px;
+            margin: auto;
+            border: 2px solid rgba(0, 187, 156, .3);
+            transition: all .3s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-5px);
+            border-color: #00BB9C;
+            box-shadow: 0 10px 30px rgba(0, 187, 156, .25);
+        }
+
+        @media(max-width:768px) {
+            .parallax-section {
+                background-attachment: scroll;
+                padding: 80px 0;
+            }
+
+            .contact-box {
+                max-width: 100%;
+            }
+        }
+
+        /* ==================== RODAPÉ ==================== */
+        .footer-area {
+            background: #0b1326;
+            padding-bottom: 60px;
+            position: relative;
+        }
+
+        .footer-logo img {
+            height: 38px;
+        }
+
+        .btn-social {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #fff;
+            transition: all .3s ease;
+        }
+
+        .btn-social.facebook {
+            background-color: #3b5998;
+        }
+
+        .btn-social.twitter {
+            background-color: #1da1f2;
+        }
+
+        .btn-social.linkedin {
+            background-color: #0077b5;
+        }
+
+        .btn-social.instagram {
+            background-color: #e4405f;
+        }
+
+        .btn-social:hover {
+            opacity: .85;
+            transform: translateY(-2px);
+        }
+
+        /* ===== BOTÃO VOLTAR AO TOPO ===== */
+        .btn-topo {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #00BB9C;
+            background: transparent;
+            color: #00BB9C;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all .3s ease;
+        }
+
+        .btn-topo:hover {
+            background: #00BB9C;
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <div class="topbar py-2">
+        <div class="container d-flex justify-content-between align-items-center small">
+            <div class="d-flex gap-3 align-items-center">
+                <span><i class="bi bi-telephone me-1"></i> 1800 801 920</span>
+                <span class="d-none d-sm-inline">|</span>
+                <a href="mailto:contato@sitename.com" class="d-none d-sm-inline">
+                    <i class="bi bi-envelope me-1"></i> contato@sitename.com
+                </a>
+            </div>
+            <div class="d-flex gap-3">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background:#12264d;"
+        data-aos="fade-down" data-aos-duration="700" data-aos-easing="ease-out-cubic">
+        <div class="container">
+            <a class="navbar-brand" href="#home">PROFESSOR EUGÊNIO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#cursos" role="button"
+                            data-bs-toggle="dropdown">Cursos</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#servicos">Excel + IA</a></li>
+                            <li><a class="dropdown-item" href="#servicos">Power BI</a></li>
+                            <li><a class="dropdown-item" href="#servicos">Design Gráfico</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre o Professor</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-promocoes btn-sm" href="#promocoes">
+                            <i class="bi bi-megaphone me-1"></i> Promoções
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <!-- HERO -->
+    <!-- HERO -->
+    <header id="home" class="hero position-relative">
+        <!-- Imagem com AOS -->
+        <img src="https://professoreugenio.com/img/bgnovo.jpg"
+            alt="Cursos Online - Professor Eugênio"
+            loading="lazy"
+            data-aos="zoom-in" data-aos-duration="900" data-aos-easing="ease-in-out" />
+
+        <!-- Texto do hero com AOS -->
+        <div class="container hero-content text-center"
+            data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+
+        </div>
+
+        <!-- Botões com AOS e delays diferentes -->
+        <div class="cta-pills d-flex justify-content-center gap-3 position-absolute start-50 translate-middle-x"
+            style="bottom:-10px;">
+            <a href="#login"
+                class="btn btn-outline-light px-4 py-2 fw-semibold d-flex align-items-center gap-2"
+                data-aos="fade-up" data-aos-delay="300" data-aos-duration="700">
+                <i class="bi bi-person-circle fs-5"></i> LOGIN
+            </a>
+
+            <a href="#ebook"
+                class="btn btn-ebook px-4 py-2 fw-semibold"
+                data-aos="fade-up" data-aos-delay="450" data-aos-duration="700">
+                <i class="bi bi-gift me-1"></i> GANHE UM E-BOOK
+            </a>
+        </div>
+    </header>
+
+
+
+
+    <!-- Seção Serviços / Cards -->
+    <section id="servicos" class="section-dark">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold mb-2">Você Vai Dominar</h2>
+                <p class="text-light-50 mb-0">Consultoria, automações e desenvolvimento de soluções em planilhas e BI.
+                </p>
+            </div>
+
+
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                    <div class="p-4 text-center service-card h-100">
+                        <div class="service-icon mb-3"><i class="bi bi-people"></i></div>
+                        <h5 class="mb-2">Consultoria</h5>
+                        <p class="small mb-4">Suporte para desenvolvimento de Planilhas e Power BI.</p>
+                        <a href="#" class="btn btn-outline-light btn-sm">Read more</a>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-4 text-center service-card h-100">
+                        <div class="service-icon mb-3"><i class="bi bi-speedometer2"></i></div>
+                        <h5 class="mb-2">Automação em Excel</h5>
+                        <p class="small mb-4">Macros e IA para acelerar tarefas e reduzir erros.</p>
+                        <a href="#" class="btn btn-outline-light btn-sm">Read more</a>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-4 text-center service-card h-100">
+                        <div class="service-icon mb-3"><i class="bi bi-phone"></i></div>
+                        <h5 class="mb-2">Beautiful Mobile App</h5>
+                        <p class="small mb-4">Layouts responsivos e UI moderna para web.</p>
+                        <a href="#" class="btn btn-outline-light btn-sm">Read more</a>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-4 text-center service-card h-100">
+                        <div class="service-icon mb-3"><i class="bi bi-laptop"></i></div>
+                        <h5 class="mb-2">Responsive Design</h5>
+                        <p class="small mb-4">Experiência perfeita em desktop, tablet e celular.</p>
+                        <a href="#" class="btn btn-outline-light btn-sm">Read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="fw-bold mb-3">Sobre o Curso</h2>
+                    <p class="mb-2">
+                        O curso online Professor Eugênio é uma plataforma de cursos livres focada em tecnologia,
+                        com aulas ao vivo e gravadas, certificação digital e materiais práticos.
+                    </p>
+                    <ul class="mb-0">
+                        <li>Acesso anual ou vitalício</li>
+                        <li>Material PDF e projetos reais</li>
+                        <li>Certificação digital</li>
+                        <li>Suporte via WhatsApp</li>
+                        <li>Bônus e atualizações</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Apresentação do Curso"
+                            allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Depoimentos (placeholder) -->
+    <section id="depoimentos" class="section-dark">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="zoom-in">
+                <h2 class="fw-bold mb-2">Depoimentos</h2>
+                <p class="mb-0">O que os alunos dizem sobre os cursos.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="p-4 service-card h-100">
+                        <p class="mb-1">“Curso muito prático e direto ao ponto.”</p>
+                        <span class="small opacity-75">— Ana P.</span>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-4 service-card h-100">
+                        <p class="mb-1">“Consegui automatizar relatórios em Excel rapidamente.”</p>
+                        <span class="small opacity-75">— Carlos M.</span>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-4 service-card h-100">
+                        <p class="mb-1">“Didática excelente e materiais completos.”</p>
+                        <span class="small opacity-75">— Juliana R.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Promoções / CTA -->
+    <section id="promocoes">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <h2 class="fw-bold mb-2">Inscreva-se Agora</h2>
+                    <p class="mb-0">Vagas limitadas — Acesso imediato às aulas e materiais.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end" data-aos="fade-left">
+                    <a href="#inscricao" class="btn btn-ebook btn-lg">
+                        <i class="bi bi-cart-check me-1"></i> Fazer Minha Inscrição
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- SECTION PARALLAX DE CONTATO -->
+    <section id="cta-parallax" class="parallax-section text-white position-relative">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Texto principal -->
+                <div class="col-lg-7 mb-4 mb-lg-0" data-aos="fade-right">
+                    <p class="text-uppercase fw-semibold small mb-2 text-info">CONSULTORIA </p>
+                    <h2 class="display-5 fw-bold mb-3">Precisa de ajuda com seu curso ou negócio?</h2>
+                    <p class="lead mb-4">Fale diretamente com o Professor Eugênio e descubra soluções personalizadas para seu desenvolvimento.</p>
+                    <a href="https://wa.me/558596537577" target="_blank" class="btn btn-lg btn-success px-4 py-2">
+                        <i class="bi bi-whatsapp me-2"></i>Entrar em contato
+                    </a>
+                </div>
+
+                <!-- Bloco de telefone -->
+                <div class="col-lg-5" data-aos="fade-left">
+                    <div class="contact-box text-center bg-white text-dark p-4 rounded-4 shadow-lg">
+                        <p class="text-uppercase small mb-1 fw-semibold text-secondary">LIGUE AGORA</p>
+                        <h3 class="fw-bold mb-0">
+                            <a href="tel:+558596353757" class="text-decoration-none text-primary">+55 (85) 9635-3757</a>
+                        </h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <!-- RODAPÉ -->
+    <footer class="footer-area py-3 position-relative">
+        <div class="container">
+            <div
+                class="footer-inner d-flex flex-column flex-lg-row align-items-center justify-content-between bg-white rounded-4 shadow-sm px-4 py-3">
+
+                <!-- LOGO -->
+                <div class="footer-logo d-flex align-items-center gap-2 mb-3 mb-lg-0">
+                    <img src="https://professoreugenio.com/img/logosite.png" alt="Professor Eugênio" height="38">
+                    <span class="fw-bold text-dark fs-5">Professor Eugênio</span>
+                </div>
+
+                <!-- COPYRIGHT -->
+                <div class="text-center small text-secondary mb-3 mb-lg-0">
+                    © <span id="ano"></span> Todos os direitos reservados —
+                    Design by <a href="https://professoreugenio.com"
+                        class="text-decoration-none text-primary fw-semibold">Professor Eugênio</a>
+                </div>
+
+                <!-- REDES SOCIAIS -->
+                <div class="footer-social d-flex gap-2">
+                    <a href="#" class="btn btn-social facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-social twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="btn btn-social linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="btn btn-social instagram"><i class="bi bi-instagram"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BOTÃO VOLTAR AO TOPO -->
+        <button id="btnTopo" class="btn btn-topo rounded-circle">
+            <i class="bi bi-chevron-up"></i>
+        </button>
+    </footer>
+
+
+    <script>
+        // Atualiza ano
+        document.getElementById('ano').textContent = new Date().getFullYear();
+
+        // Exibir botão topo ao rolar
+        const btnTopo = document.getElementById('btnTopo');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) btnTopo.style.display = 'flex';
+            else btnTopo.style.display = 'none';
+        });
+
+        // Rolar suavemente ao topo
+        btnTopo.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 80,
+            easing: 'ease-out-cubic'
+        });
+        document.getElementById('ano').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

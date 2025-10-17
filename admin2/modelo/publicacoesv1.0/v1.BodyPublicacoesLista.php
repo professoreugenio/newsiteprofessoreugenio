@@ -337,6 +337,7 @@ $stmt->execute();
     if (selCursoDestino) {
         selCursoDestino.addEventListener('change', () => {
             const idCurso = selCursoDestino.value;
+            console.log('Curso destino selecionado:', idCurso);
             selModuloDestino.innerHTML = '<option value="">Carregando...</option>';
             selModuloDestino.disabled = true;
             toggleBtnConfirmar();
@@ -367,7 +368,7 @@ $stmt->execute();
                     toggleBtnConfirmar();
                 })
                 .catch(() => {
-                    selModuloDestino.innerHTML = '<option value="">Erro ao carregar módulos</option>';
+                    selModuloDestino.innerHTML = '<option value="">Erro ao carregar módulos ' + idCurso + '</option>';
                     selModuloDestino.disabled = true;
                 });
         });
