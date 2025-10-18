@@ -9,6 +9,10 @@ $todos = isset($_GET['todos']) ? $_GET['todos'] : null;
 
     <?php if (temPermissao($niveladm, [1])): ?>
         <!-- Alunos -->
+        <a href="cursos.php?status=1"
+            class="btn btn-outline-primary btn-sm fw-semibold px-3 d-flex align-items-center gap-1 shadow-sm <?= ($pagina == 'cursos.php') ? 'active-link' : '' ?>">
+            <i class="bi bi-people-fill"></i> Cursos
+        </a>
         <a href="alunos_Geral.php?status=1"
             class="btn btn-outline-primary btn-sm fw-semibold px-3 d-flex align-items-center gap-1 shadow-sm <?= ($pagina == 'alunos_Geral.php') ? 'active-link' : '' ?>">
             <i class="bi bi-people-fill"></i> Alunos
