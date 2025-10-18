@@ -558,15 +558,7 @@ $siteName = "Professor Eugênio";
                 <?php foreach ($mensagens as $m):
                     $img    = fotoUsuario50($m);
                     $nomeCompleto = trim((string)($m['nome'] ?? 'Usuário'));
-<<<<<<< HEAD
                     $nome = explode(' ', $nomeCompleto)[0];
-=======
-                    $partesNome = preg_split('/\s+/', $nomeCompleto);
-                    $nome = isset($partesNome[0]) ? $partesNome[0] : '';
-                    if (isset($partesNome[0])) {
-                        $nome = ' ' . $partesNome[0];
-                    }
->>>>>>> 232351309d3c79e0b4415c59156387067a829324
                     $texto  = trim((string)($m['textoCF'] ?? ''));
                     $data   = brData($m['dataCF'] ?? '');
                     $hora   = $m['horaCF'] ?? '';

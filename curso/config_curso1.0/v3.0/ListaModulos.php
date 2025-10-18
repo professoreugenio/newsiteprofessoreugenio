@@ -25,7 +25,7 @@
             $fetchmdl = $query->fetchALL();
             foreach ($fetchmdl as $key => $valDropDown) :
                 $enc = encrypt($idUser . "&" . $idCurso . "&" . $idTurma . "&" . $valDropDown['codigomodulos'], 'e');
-                $bgcolor = $valDropDown['bgcolorsm'];
+                $bgcolor = $valDropDown['bgcolor'];
                 $cor = 'bg-success'; // Exemplo fixo
                 $idModulo = $valDropDown['codigomodulos'];
             ?>

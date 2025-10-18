@@ -105,8 +105,8 @@ foreach ($modulos as $m) {
     $modulosResumo[] = [
         'id'         => (int)$m['codigomodulos'],
         'nome'       => $m['modulo'],
-        'bg'         => $m['bgcolorsm'],
-        'txt'        => textColorForBg($m['bgcolorsm']),
+        'bg'         => $m['bgcolor'],
+        'txt'        => textColorForBg($m['bgcolor']),
         'total'      => $total,
         'assistidas' => $assistidas,
         'percent'    => $percent,

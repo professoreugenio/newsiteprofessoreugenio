@@ -11,7 +11,7 @@
     $i = "1";
     foreach ($fetchmdl as $key => $valDropDown) :
         $enc = encrypt($idUser . "&" . $idCurso . "&" . $idTurma . "&" . $valDropDown['codigomodulos'], $action = 'e');
-        $bgcolor = $valDropDown['bgcolorsm']
+        $bgcolor = $valDropDown['bgcolor']
     ?>
 
 

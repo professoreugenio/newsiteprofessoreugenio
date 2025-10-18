@@ -393,7 +393,17 @@ $canonical = $baseUrl . $currPath . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_
             </div>
 
             <!-- Lista de depoimentos -->
-            <h5 class="mb-3"><i class="bi bi-list-stars me-2"></i>Meus depoimentos</h5>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">
+                    <i class="bi bi-list-stars me-2 text-warning"></i>
+                    Meus depoimentos <a href="#" class="btn btn-warning" id="btnNovoDepo">Novo</a>
+                </h5>
+
+                <a href="depoimentos.php" class="btn btn-success btn-sm d-flex align-items-center">
+                    <i class="bi bi-chat-left-text me-1"></i> Veja outros depoimentos
+                </a>
+            </div>
+
             <?php if (!$depos): ?>
                 <div class="alert alert-light border">
                     <i class="bi bi-info-circle me-1"></i>Você ainda não enviou depoimentos.
