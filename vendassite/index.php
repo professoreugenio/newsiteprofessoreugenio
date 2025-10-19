@@ -1,3 +1,14 @@
+<?php
+define('BASEPATH', true);
+define('APP_ROOT', dirname(__DIR__, 1));
+require_once APP_ROOT . '/conexao/class.conexao.php';
+require_once APP_ROOT . '/autenticacao.php';
+
+$nav = $_GET['nav'] ?? ($_COOKIE['nav'] ?? '');
+
+$_SESSION['af'] = $_GET['af'] ?? ($_COOKIE['af'] ?? ''); // Novo parâmetro afiliado
+require_once __DIR__ . '/vendasv1.0/query_vendas.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,7 +16,7 @@
     <!-- Metadados básicos -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Curso de Excel para Concursos — Professor Eugênio</title>
+    <title>Curso <?= $nomeTurma ?> — Professor Eugênio</title>
     <meta name="description"
         content="Domine Excel para gabaritar questões de concursos: funções, gráficos, tabelas, atalhos e simulados. Aulas online, material para download e certificação.">
     <link rel="canonical" href="https://professoreugenio.com/curso-excel-concursos">
@@ -563,7 +574,7 @@
                         <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ 39,90/mês</div>
                         <div class="small text-white-50 mb-3">ou Vitalício por R$ 85,00</div>
                         <div class="d-grid gap-2">
-                            <a class="btn btn-cta btn-lg" href="#inscricao">
+                            <a class="btn btn-cta btn-lg" href="vendas_inscricao.html">
                                 <i class="bi bi-cart-check me-2"></i> Fazer minha inscrição
                             </a>
                             <a class="btn btn-outline-soft btn-lg"
