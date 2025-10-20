@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Confirmação de Pagamento — Acesso Temporário | Professor Eugênio</title>
+    <meta name="description" content="Finalize sua ativação criando login e senha. Acesso temporário liberado até a confirmação do pagamento.">
+
+    <!-- CSS: Bootstrap / Icons / AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Estilos do tema -->
+    <style>
+        :root {
+            --c-h1: #00BB9C;
+            /* h1 */
+            --c-h2: #FF9C00;
+            /* títulos estilo <h2> (sem usar <h2>) */
+            --c-bg: #112240;
+            /* fundo */
+            --c-text: #ffffff;
+            /* texto */
+            --c-card: #0d1a34;
+            /* cards */
+            --c-muted: #9fb1d1;
+        }
+
+        body {
+            background: var(--c-bg);
+            color: var(--c-text);
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            backdrop-filter: saturate(140%) blur(6px);
+            background: rgba(17, 34, 64, .85);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .navbar .nav-link {
+            color: #e6f2ff;
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--c-h1);
+        }
+
+        .heading-1 {
+            color: var(--c-h1);
+            font-weight: 800;
+            letter-spacing: .2px;
+        }
+
+        .heading-2 {
+            color: var(--c-h2);
+            font-weight: 800;
+            letter-spacing: .2px;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            text-transform: uppercase;
+        }
+
+        .small-muted {
+            color: var(--c-muted);
+        }
+
+        section {
+            padding: 64px 0;
+        }
+
+        .card-dark {
+            background: var(--c-card);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 1rem;
+        }
+
+        .badge-soft {
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .1);
+            color: #e9f3ff;
+        }
+
+        /* Barra de etapas (100% - etapa 4 de 4) */
+        .steps {
+            height: 6px;
+            background: #1b2d55;
+            border-radius: 999px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .steps>.progress {
+            height: 100%;
+            background: var(--c-h1);
+            width: 100%;
+        }
+
+        /* Inputs */
+        .form-floating>label {
+            color: #cfe2ff;
+        }
+
+        .form-control {
+            background: #0f1f3d;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .15);
+        }
+
+        .form-control:focus {
+            background: #0f244a;
+            color: #fff;
+            border-color: #5bdac1;
+            box-shadow: 0 0 0 .2rem rgba(0, 187, 156, .15);
+        }
+
+        .is-invalid {
+            border-color: #ff6b6b !important;
+        }
+
+        .invalid-feedback {
+            color: #ffd0d0;
+        }
+
+        /* Força da senha */
+        .strength-bar {
+            height: 8px;
+            background: #1b2d55;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .strength-bar>div {
+            height: 100%;
+            width: 0%;
+            transition: width .25s ease;
+        }
+
+        .strength-weak {
+            background: #ff6b6b;
+        }
+
+        .strength-medium {
+            background: #f7b955;
+        }
+
+        .strength-strong {
+            background: #00BB9C;
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, #FF9C00, #ffb547);
+            color: #112240;
+            font-weight: 800;
+            border: none;
+            box-shadow: 0 10px 24px rgba(255, 156, 0, .25);
+        }
+
+        .btn-cta:hover {
+            filter: brightness(1.05);
+            color: #0b1730;
+        }
+
+        .btn-outline-soft {
+            border: 1px solid rgba(255, 255, 255, .25);
+            color: #e9f3ff;
+        }
+
+        .btn-outline-soft:hover {
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+        }
+
+        .list-check li {
+            margin-bottom: .4rem;
+        }
+
+        .list-check i {
+            color: #54e1c3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===================== NAV ===================== -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white" href="index.html"><i class="bi bi-microsoft me-1"></i> Professor Eugênio</a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navMain" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                    <li class="nav-item"><a class="nav-link" href="#ativacao">Ativação</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#seguranca">Segurança</a></li>
+                    <li class="nav-item"><a class="btn btn-sm btn-cta" href="#ativacao"><i class="bi bi-door-open me-1"></i> Entrar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HEADER ===================== -->
+    <section class="pt-5">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <span class="badge badge-soft rounded-pill px-3 py-2 small mb-3">
+                        <i class="bi bi-check2-circle me-1"></i> Etapa 4 de 4 — Confirmação
+                    </span>
+                    <div class="heading-1 mb-2">Pagamento Recebido</div>
+                    <p class="small-muted mb-0">
+                        Seu <strong>acesso temporário</strong> às aulas foi liberado e será convertido em acesso definitivo após a confirmação no sistema de pagamento.
+                    </p>
+                    <div class="steps mt-3">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left">
+                    <div class="card-dark p-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="small text-white-50">Status</div>
+                            <i class="bi bi-shield-check fs-4" style="color:#00BB9C"></i>
+                        </div>
+                        <div class="fs-6 fw-bold mt-1">Acesso temporário ativo</div>
+                        <p class="small text-white-50 mb-0">
+                            Você já pode assistir às aulas na plataforma. Quando o pagamento for confirmado, seu acesso será definitivo automaticamente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ATIVAÇÃO (LOGIN/SENHA) ===================== -->
+    <section id="ativacao">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-7" data-aos="fade-up">
+                    <div class="heading-2 mb-2">Crie seu login e senha</div>
+                    <p class="small-muted mb-3">
+                        Defina abaixo suas credenciais para entrar no sistema de aulas. Guarde essas informações com segurança.
+                    </p>
+
+                    <form id="formAtivacao" class="needs-validation" novalidate>
+                        <!-- Contexto (apenas UI; depois integraremos em PHP) -->
+                        <input type="hidden" id="idCurso" name="idCurso" value="">
+                        <input type="hidden" id="idTurma" name="idTurma" value="">
+                        <input type="hidden" id="plano" name="plano" value="">
+                        <input type="hidden" id="utm" name="utm" value="">
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="email@exemplo.com" required autocomplete="email">
+                                    <label for="email">E-mail (login)</label>
+                                    <div class="invalid-feedback">Informe um e-mail válido.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="seu usuário" required minlength="3" autocomplete="username">
+                                    <label for="usuario">Usuário</label>
+                                    <div class="invalid-feedback">Usuário deve ter pelo menos 3 caracteres.</div>
+                                </div>
+                                <small class="text-white-50">Sugestão automática baseada no seu e-mail.</small>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating position-relative">
+                                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Sua senha" required minlength="6" autocomplete="new-password">
+                                    <label for="senha">Senha</label>
+                                    <button type="button" class="btn btn-sm btn-outline-soft position-absolute top-50 end-0 translate-middle-y me-2" id="toggleSenha">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback">Senha mínima de 6 caracteres.</div>
+                                </div>
+                                <div class="mt-2 strength-bar" aria-hidden="true">
+                                    <div id="strengthFill" class="strength-weak" style="width:0%"></div>
+                                </div>
+                                <small id="strengthText" class="small text-white-50">Força da senha: —</small>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating position-relative">
+                                    <input type="password" class="form-control" id="senha2" name="senha2" placeholder="Repita a senha" required autocomplete="new-password">
+                                    <label for="senha2">Confirmar senha</label>
+                                    <button type="button" class="btn btn-sm btn-outline-soft position-absolute top-50 end-0 translate-middle-y me-2" id="toggleSenha2">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback">As senhas precisam coincidir.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="aceite" required>
+                                    <label class="form-check-label small" for="aceite">
+                                        Estou ciente de que meu <strong>acesso é temporário</strong> até a confirmação do pagamento no sistema.
+                                    </label>
+                                    <div class="invalid-feedback">Confirme o entendimento para continuar.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-grid">
+                                <button class="btn btn-cta btn-lg" type="submit">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i> Ativar e entrar nas aulas
+                                </button>
+                            </div>
+
+                            <div class="col-12">
+                                <p class="small small-muted mb-0">
+                                    Ao continuar, você concorda com os <a href="#" class="link-light link-underline-opacity-0">Termos</a> e a <a href="#" class="link-light link-underline-opacity-0">Política de Privacidade</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Lateral: lembretes e segurança -->
+                <div class="col-lg-5" data-aos="fade-left">
+                    <div class="card-dark p-4 mb-3">
+                        <div class="fw-bold mb-2"><i class="bi bi-info-circle me-2"></i>Sobre o acesso temporário</div>
+                        <ul class="list-unstyled list-check small mb-0">
+                            <li><i class="bi bi-check2-circle me-2"></i>Você já pode assistir às aulas imediatamente.</li>
+                            <li><i class="bi bi-check2-circle me-2"></i>Após a confirmação do pagamento, o acesso torna-se definitivo.</li>
+                            <li><i class="bi bi-check2-circle me-2"></i>Caso o pagamento não seja confirmado, o acesso temporário poderá ser interrompido.</li>
+                        </ul>
+                    </div>
+                    <div class="card-dark p-4">
+                        <div class="fw-bold mb-2"><i class="bi bi-shield-lock me-2"></i>Boas práticas de senha</div>
+                        <ul class="list-unstyled list-check small mb-0">
+                            <li><i class="bi bi-check2-circle me-2"></i>Use letras maiúsculas e minúsculas</li>
+                            <li><i class="bi bi-check2-circle me-2"></i>Números e caracteres especiais</li>
+                            <li><i class="bi bi-check2-circle me-2"></i>Evite datas e nomes simples</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== RODAPÉ ===================== -->
+    <footer class="py-4 border-top border-opacity-25" style="border-color: rgba(255,255,255,.06) !important;">
+        <div class="container small text-white-50 d-flex flex-wrap justify-content-between gap-2">
+            <div>© <span id="ano"></span> Professor Eugênio — Todos os direitos reservados.</div>
+            <div class="d-flex gap-3">
+                <a class="link-light link-underline-opacity-0" href="#">Termos</a>
+                <a class="link-light link-underline-opacity-0" href="#">Privacidade</a>
+                <a class="link-light link-underline-opacity-0" href="#">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 700,
+            once: true
+        });
+        document.getElementById('ano').textContent = new Date().getFullYear();
+
+        // ===== Utilidades Storage/Query =====
+        function getStore(k) {
+            try {
+                return localStorage.getItem('insc_' + k) || '';
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function setStore(k, v) {
+            try {
+                localStorage.setItem('insc_' + k, v);
+            } catch (e) {}
+        }
+        const params = new URLSearchParams(location.search);
+
+        function q(k) {
+            return params.get(k) || '';
+        }
+
+        // Prefere querystring > localStorage > default
+        const data = {
+            email: q('email') || getStore('email') || '',
+            nome: q('nome') || getStore('nome') || '',
+            usuario: q('usuario') || getStore('usuario') || '',
+            idCurso: q('idCurso') || getStore('idCurso') || 'excel-concursos',
+            idTurma: q('idTurma') || getStore('idTurma') || 'turma-2025-01',
+            plano: q('plano') || getStore('planoSelecionado') || 'vitalicio',
+            utm: q('utm') || getStore('utm') || ''
+        };
+
+        // Preenche campos
+        const elEmail = document.getElementById('email');
+        const elUser = document.getElementById('usuario');
+        const elIdC = document.getElementById('idCurso');
+        const elIdT = document.getElementById('idTurma');
+        const elPlano = document.getElementById('plano');
+        const elUtm = document.getElementById('utm');
+
+        elEmail.value = data.email;
+        elUser.value = data.usuario || (data.email ? data.email.split('@')[0] : '');
+        elIdC.value = data.idCurso;
+        elIdT.value = data.idTurma;
+        elPlano.value = data.plano;
+        elUtm.value = data.utm;
+
+        // ===== Mostrar/Ocultar senha =====
+        const senha = document.getElementById('senha');
+        const senha2 = document.getElementById('senha2');
+        document.getElementById('toggleSenha').addEventListener('click', () => {
+            senha.type = senha.type === 'password' ? 'text' : 'password';
+        });
+        document.getElementById('toggleSenha2').addEventListener('click', () => {
+            senha2.type = senha2.type === 'password' ? 'text' : 'password';
+        });
+
+        // ===== Medidor de força da senha =====
+        const strengthFill = document.getElementById('strengthFill');
+        const strengthText = document.getElementById('strengthText');
+
+        function scorePassword(pw) {
+            let s = 0;
+            if (pw.length >= 6) s += 1;
+            if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) s += 1;
+            if (/\d/.test(pw)) s += 1;
+            if (/[^A-Za-z0-9]/.test(pw)) s += 1;
+            if (pw.length >= 10) s += 1;
+            return Math.min(s, 4);
+        }
+
+        function renderStrength(pw) {
+            const sc = scorePassword(pw);
+            let pct = ['0%', '25%', '50%', '75%', '100%'][sc];
+            strengthFill.style.width = pct;
+            strengthFill.className = '';
+            strengthFill.classList.add(sc <= 1 ? 'strength-weak' : (sc === 2 || sc === 3 ? 'strength-medium' : 'strength-strong'));
+            strengthText.textContent = 'Força da senha: ' + (sc <= 1 ? 'Fraca' : (sc === 2 || sc === 3 ? 'Média' : 'Forte'));
+        }
+        document.getElementById('senha').addEventListener('input', e => renderStrength(e.target.value));
+
+        // ===== Validação e "ativar" (UI) =====
+        const form = document.getElementById('formAtivacao');
+        form.addEventListener('submit', (ev) => {
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            // HTML5 validation
+            if (!form.checkValidity()) {
+                form.classList.add('was-validated');
+                return;
+            }
+            if (senha.value !== senha2.value) {
+                senha2.classList.add('is-invalid');
+                alert('As senhas não coincidem.');
+                return;
+            }
+
+            // Persistência local (para próxima navegação / futura integração)
+            setStore('email', elEmail.value.trim());
+            setStore('usuario', elUser.value.trim());
+            setStore('senha_hint', senha.value.length.toString()); // não armazenamos a senha real no front
+
+            alert('Conta criada! Seu acesso temporário está ativo. Você será direcionado para a área do aluno (simulação).');
+            // Redirecionamento provisório (ajuste depois para sua rota protegida)
+            window.location.href = 'area_do_aluno.html';
+        });
+    </script>
+</body>
+
+</html>
