@@ -39,30 +39,7 @@ if ($ts !== '' && ctype_digit($ts)) {
 */
 require 'vendasv1.0/query_vendas.php';
 /* ===================== (Opcional) LOG DE ENTRADA NO BANCO ===================== */
-try {
-    /** @var PDO $con */
-    $con = config::connect();
 
-    // Exemplo de log leve (AJUSTE NOME/TABELA/CAMPOS). Comente se não for usar.
-    /*
-    $stmt = $con->prepare("
-        INSERT INTO logs_vendas_entradas
-            (ip, user_agent, nav, af, ts, created_at)
-        VALUES
-            (:ip, :ua, :nav, :af, :ts, NOW())
-    ");
-    $stmt->execute([
-        ':ip'  => $_SERVER['REMOTE_ADDR'] ?? '',
-        ':ua'  => $_SERVER['HTTP_USER_AGENT'] ?? '',
-        ':nav' => $nav,
-        ':af'  => $af,
-        ':ts'  => $ts,
-    ]);
-    */
-} catch (Throwable $e) {
-    // Em produção, troque por log silencioso
-    // error_log('Falha ao logar entrada no funil: ' . $e->getMessage());
-}
 
 /* ===================== REDIRECIONA (PRG) ===================== */
 // $next = 'vendas_Inscricao.php';
@@ -141,14 +118,7 @@ try {
                     <span class="badge badge-soft rounded-pill px-3 py-2 small mb-3">
                         <i class="bi bi-trophy me-1"></i> Curso de Excel para Concursos
                     </span>
-                    <h1 class="heading-1 display-5 mb-3">
-                        Gabarite Excel nas provas de concurso.
-                    </h1>
-                    <p class="lead lead-muted mb-4">
-                        Aprenda exatamente o que cai nas provas: funções mais cobradas (SOMA, MÉDIA, SE, PROCV/PROCX,
-                        CONT.SE, MÁX/MÍN), formatações, gráficos, atalhos e interpretação de questões — com simulados e
-                        material para download.
-                    </p>
+                    <?= $hero?>
                     <div class="d-flex flex-wrap gap-2">
                         <a href="#cta" class="btn btn-cta btn-lg">
                             <i class="bi bi-star-fill me-2"></i> Garantir minha vaga

@@ -98,7 +98,7 @@ $query = $con->prepare("
     SELECT 
         categorias.*, fotos.*
     FROM 
-        new_sistema_categorias_PJA AS categorias
+        new_sistema_cursos AS categorias
     INNER JOIN 
         new_sistema_midias_fotos_PJA AS fotos
     ON 
@@ -121,7 +121,7 @@ if ($rwFotoCurso) {
     $imgMidiaCurso = "https://professoreugenio.com/fotos/midias/$pastaMidia/$fotoMidia";
 }
 
-$queryCurso = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE codigocategorias  = :id ");
+$queryCurso = $con->prepare("SELECT * FROM new_sistema_cursos WHERE codigocursos  = :id ");
 $queryCurso->bindParam(":id", $idCursoVenda);
 $queryCurso->execute();
 $rwCurso = $queryCurso->fetch(PDO::FETCH_ASSOC);
