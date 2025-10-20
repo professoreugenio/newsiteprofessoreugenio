@@ -7,7 +7,7 @@ require_once APP_ROOT . '/autenticacao.php';
 $id = intval($_POST['id']);
 $visivel = intval($_POST['visivel']);
 
-$stmt = $con->prepare("UPDATE new_sistema_categorias_PJA SET visivelsc = :visivel WHERE codigocategorias = :id");
+$stmt = $con->prepare("UPDATE new_sistema_cursos SET visivelsc = :visivel WHERE codigocursos = :id");
 $stmt->bindParam(':visivel', $visivel);
 $stmt->bindParam(':id', $id);
 $ok = $stmt->execute();

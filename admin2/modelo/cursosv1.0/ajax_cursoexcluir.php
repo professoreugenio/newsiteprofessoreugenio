@@ -20,7 +20,7 @@ try {
     }
 
     // Verifica se existe
-    $check = $con->prepare("SELECT COUNT(*) FROM new_sistema_categorias_PJA WHERE codigocategorias = :id");
+    $check = $con->prepare("SELECT COUNT(*) FROM new_sistema_cursos WHERE codigocursos = :id");
     $check->bindParam(':id', $idCurso, PDO::PARAM_INT);
     $check->execute();
 
@@ -29,7 +29,7 @@ try {
     }
 
     // Exclui o curso
-    $delete = $con->prepare("DELETE FROM new_sistema_categorias_PJA WHERE codigocategorias = :id");
+    $delete = $con->prepare("DELETE FROM new_sistema_cursos WHERE codigocursos = :id");
     $delete->bindParam(':id', $idCurso, PDO::PARAM_INT);
     $delete->execute();
     $delete = $con->prepare("DELETE FROM new_sistema_cursos_turmas WHERE codcursost = :id");

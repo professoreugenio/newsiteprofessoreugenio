@@ -23,7 +23,7 @@ try {
         throw new Exception("O nome do curso é obrigatório.");
     }
 
-    $sql = "INSERT INTO new_sistema_categorias_PJA (
+    $sql = "INSERT INTO new_sistema_cursos (
                 nome, pasta, youtubeurl, linkexterno, bgcolor,
                 onlinesc, comercialsc, visivelsc, visivelhomesc, datasc, horasc
             ) VALUES (

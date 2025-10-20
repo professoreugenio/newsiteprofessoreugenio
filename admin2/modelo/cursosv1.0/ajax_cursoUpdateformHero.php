@@ -26,7 +26,7 @@ try {
     }
 
     // Atualização
-    $query = $con->prepare("UPDATE new_sistema_categorias_PJA SET heroSC = :hero WHERE codigocategorias = :id");
+    $query = $con->prepare("UPDATE new_sistema_cursos SET heroSC = :hero WHERE codigocursos = :id");
     $query->bindParam(':hero', $hero);
     $query->bindParam(':id', $curso_id);
 

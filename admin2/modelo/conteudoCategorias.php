@@ -38,8 +38,8 @@ require_once APP_ROOT . '/autenticacao.php';
         <?php
 
         // Consulta as categorias para a página específica
-        $sql = "SELECT codigocategorias, nome, comercialsc, onlinesc, visivelsc
-        FROM new_sistema_categorias_PJA 
+        $sql = "SELECT codigocursos, nome, comercialsc, onlinesc, visivelsc
+        FROM new_sistema_cursos 
         WHERE codpagesadminsc = :codpagesadminsc AND visivelsc = 1 AND matriz = 1
         ORDER BY nome";
         $stmt = $con->prepare($sql);

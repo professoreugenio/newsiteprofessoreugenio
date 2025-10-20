@@ -26,7 +26,7 @@ try {
     }
 
     // Atualização
-    $query = $con->prepare("UPDATE new_sistema_categorias_PJA SET ctaSC = :lead WHERE codigocategorias = :id");
+    $query = $con->prepare("UPDATE new_sistema_cursos SET ctaSC = :lead WHERE codigocursos = :id");
     $query->bindParam(':lead', $lead);
     $query->bindParam(':id', $curso_id);
 

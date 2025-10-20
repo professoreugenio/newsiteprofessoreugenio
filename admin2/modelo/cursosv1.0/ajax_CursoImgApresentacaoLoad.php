@@ -11,7 +11,7 @@ $query = $con->prepare("
     SELECT 
         categorias.*, fotos.*
     FROM 
-        new_sistema_categorias_PJA AS categorias
+        new_sistema_cursos AS categorias
     INNER JOIN 
         new_sistema_midias_fotos_PJA AS fotos
     ON 

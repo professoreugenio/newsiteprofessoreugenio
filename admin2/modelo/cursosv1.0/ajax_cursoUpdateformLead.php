@@ -29,7 +29,7 @@ try {
     }
 
     // Atualização
-    $query = $con->prepare("UPDATE new_sistema_categorias_PJA SET lead = :lead, detalhes = :detalhes, sobreocurso = :sobre WHERE codigocategorias = :id");
+    $query = $con->prepare("UPDATE new_sistema_cursos SET lead = :lead, detalhes = :detalhes, sobreocurso = :sobre WHERE codigocursos = :id");
     $query->bindParam(':lead', $lead);
     $query->bindParam(':detalhes', $detalhes);
     $query->bindParam(':sobre', $sobreocurso);

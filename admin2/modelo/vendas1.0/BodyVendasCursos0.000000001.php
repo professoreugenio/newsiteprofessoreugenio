@@ -3,8 +3,8 @@ $online = isset($_GET['online']) ? $_GET['online'] : null;
 $matriz = isset($_GET['matriz']) ? $_GET['matriz'] : null;
 $status = isset($_GET['status']) ? $_GET['status'] : null;
 
-$stmt = config::connect()->prepare("SELECT codigocategorias, nome, visivelsc, ordemsc, datasc, horasc, comercialsc,onlinesc, matriz, lixeirasc  
-FROM new_sistema_categorias_PJA 
+$stmt = config::connect()->prepare("SELECT codigocursos, nome, visivelsc, ordemsc, datasc, horasc, comercialsc,onlinesc, matriz, lixeirasc  
+FROM new_sistema_cursos 
 WHERE 
 comercialsc =:status 
 AND onlinesc =:online 
@@ -21,7 +21,7 @@ $stmt->execute();
 <?php if ($stmt->rowCount() > 0): ?>
     <ul class="list-group">
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-            <?php $id = $row['codigocategorias'];  ?>
+            <?php $id = $row['codigocursos'];  ?>
             <?php $encId = encrypt($id, $action = 'e'); ?>
             <?php $nm = $row['nome'];  ?>
             <?php $ordem = $row['ordemsc'];  ?>
@@ -33,7 +33,7 @@ $stmt->execute();
             $query->execute();
             $quant = $query->rowCount();
             ?>
-            <?php $encTurm = encrypt($row['codigocategorias'], $action = 'e'); ?>
+            <?php $encTurm = encrypt($row['codigocursos'], $action = 'e'); ?>
             <li class="list-group-item flex-column mb-2 shadow-sm rounded">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">

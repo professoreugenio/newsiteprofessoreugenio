@@ -10,13 +10,13 @@ if (isset($_GET['status'])) {
     }
     // Se o valor for inválido (ex: vazio ou malicioso), $status permanece '1'
 }
-$stmt = config::connect()->prepare("SELECT codigocategorias, nome, visivelsc, ordemsc, datasc, horasc, comercialsc,onlinesc  FROM new_sistema_categorias_PJA  ORDER BY datasc DESC, horasc DESC");
+$stmt = config::connect()->prepare("SELECT codigocursos, nome, visivelsc, ordemsc, datasc, horasc, comercialsc,onlinesc  FROM new_sistema_cursos  ORDER BY datasc DESC, horasc DESC");
 $stmt->execute();
 ?>
 <?php if ($stmt->rowCount() > 0): ?>
     <ul class="list-group">
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-            <?php $id = $row['codigocategorias'];  ?>
+            <?php $id = $row['codigocursos'];  ?>
             <?php $encId = encrypt($id, $action = 'e'); ?>
             <?php $nm = $row['nome'];  ?>
             <?php $ordem = $row['ordemsc'];  ?>
@@ -28,7 +28,7 @@ $stmt->execute();
             $query->execute();
             $quant = $query->rowCount();
             ?>
-            <?php $encTurm = encrypt($row['codigocategorias'], $action = 'e'); ?>
+            <?php $encTurm = encrypt($row['codigocursos'], $action = 'e'); ?>
             <li class="list-group-item flex-column mb-2 shadow-sm rounded">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">

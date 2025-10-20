@@ -15,9 +15,9 @@ if (!isset($con) || !$con instanceof PDO) {
 try {
     $sqlCursos = "
         SELECT 
-            codigocategorias  AS id,
+            codigocursos  AS id,
             nome AS nome
-        FROM new_sistema_categorias_PJA
+        FROM new_sistema_cursos
         WHERE nome IS NOT NULL AND nome <> '' AND visivelsc = 1 AND comercialsc = 1
         ORDER BY nome ASC
     ";

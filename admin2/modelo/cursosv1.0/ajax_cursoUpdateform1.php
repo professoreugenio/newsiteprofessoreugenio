@@ -47,7 +47,7 @@ try {
     }
 
     // Atualização
-    $sql = "UPDATE new_sistema_categorias_PJA SET 
+    $sql = "UPDATE new_sistema_cursos SET 
                 nome = :nome,
                 horadem = :manha1,
                 horaparam = :manha2,
@@ -65,7 +65,7 @@ try {
                 institucionalsc = :institucional,
                 visivelsc = :visivelsc,
                 visivelhomesc = :visivelhomesc
-            WHERE codigocategorias = :id";
+            WHERE codigocursos = :id";
 
     $stmt = $con->prepare($sql);
     $stmt->bindParam(':nome', $nome);

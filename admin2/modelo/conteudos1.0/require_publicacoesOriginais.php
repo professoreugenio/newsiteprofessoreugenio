@@ -8,8 +8,8 @@ if ($filtro === 'oculto') $where .= " AND visivelsc = 0 AND matriz = 1 AND (lixe
 if ($filtro === 'lixeira') $where .= " AND lixeirasc = 1 AND matriz = 1 ";
 if ($filtro === 'copias') $where .= " AND comercialsc = 1 ";
 
-$sql = "SELECT codigocategorias, nome, comercialsc, onlinesc, visivelsc, lixeirasc
-FROM new_sistema_categorias_PJA
+$sql = "SELECT codigocursos, nome, comercialsc, onlinesc, visivelsc, lixeirasc
+FROM new_sistema_cursos
 WHERE $where
 ORDER BY nome";
 $stmt = $con->prepare($sql);
@@ -31,11 +31,11 @@ $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <ul class="list-group list-group-flush" id="listaCategorias">
         <?php foreach ($categorias as $cat): ?>
-            <?php $encId = encrypt($cat['codigocategorias'], $action = 'e'); ?>
+            <?php $encId = encrypt($cat['codigocursos'], $action = 'e'); ?>
             <?php
-            $quantPublicacoes = contaPublicacoes($con, $cat['codigocategorias']);
+            $quantPublicacoes = contaPublicacoes($con, $cat['codigocursos']);
             ?>
-            <li class="list-group-item d-flex justify-content-between align-items-center" id="cat_<?= $cat['codigocategorias'] ?>">
+            <li class="list-group-item d-flex justify-content-between align-items-center" id="cat_<?= $cat['codigocursos'] ?>">
                 <div>
                     <a href="cursos_modulos.php?id=<?= urlencode($encId) ?>" class="fw-semibold link-primary text-decoration-none">
                         <?= htmlspecialchars($cat['nome']) ?>
@@ -44,7 +44,7 @@ $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <div class="d-flex gap-3 align-items-center">
                     <!-- VISIBILIDADE -->
-                    <button class="btn btn-sm p-0 border-0 bg-transparent" title="<?= $cat['visivelsc'] ? 'Ocultar' : 'Tornar visível' ?>" onclick="toggleVisivel(<?= $cat['codigocategorias'] ?>, <?= $cat['visivelsc'] ? 0 : 1 ?>)">
+                    <button class="btn btn-sm p-0 border-0 bg-transparent" title="<?= $cat['visivelsc'] ? 'Ocultar' : 'Tornar visível' ?>" onclick="toggleVisivel(<?= $cat['codigocursos'] ?>, <?= $cat['visivelsc'] ? 0 : 1 ?>)">
                         <i class="bi <?= $cat['visivelsc'] ? 'bi-eye text-success' : 'bi-eye-slash text-secondary' ?>"></i>
                     </button>
                     <!-- ONLINE -->
@@ -59,12 +59,12 @@ $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php if (empty($cat['lixeirasc'])): ?>
 
 
-                        <button class="btn btn-sm p-0 border-0 bg-transparent" title="Enviar para Lixeira" onclick="enviarLixeira(<?= $cat['codigocategorias'] ?>)">
+                        <button class="btn btn-sm p-0 border-0 bg-transparent" title="Enviar para Lixeira" onclick="enviarLixeira(<?= $cat['codigocursos'] ?>)">
                             <i class="bi bi-trash text-danger"></i>
                         </button>
                     <?php else: ?>
                         <?php if ($filtro == 'lixeira'): ?>
-                            <button class="btn btn-sm p-0 border-0 bg-transparent" title="Restaurar Categoria" onclick="restaurarCategoria(<?= $cat['codigocategorias'] ?>)">
+                            <button class="btn btn-sm p-0 border-0 bg-transparent" title="Restaurar Categoria" onclick="restaurarCategoria(<?= $cat['codigocursos'] ?>)">
                                 <i class="bi bi-arrow-counterclockwise text-success"></i>
                             </button>
                         <?php endif; ?>

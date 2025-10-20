@@ -15,7 +15,7 @@ if (!is_numeric($idCurso)) {
     exit;
 }
 
-$queryCatEdit = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE codigocategorias = :idcurso");
+$queryCatEdit = $con->prepare("SELECT * FROM new_sistema_cursos WHERE codigocursos = :idcurso");
 $queryCatEdit->bindParam(":idcurso", $idCurso, PDO::PARAM_INT);
 $queryCatEdit->execute();
 $rwCurso = $queryCatEdit->fetch(PDO::FETCH_ASSOC);

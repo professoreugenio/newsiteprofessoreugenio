@@ -28,7 +28,7 @@
                 <label class="form-check-label" for="chkHoje"><strong>hoje</strong></label>
             </div>
         </div>
-        
+
     </div>
 </form>
 
@@ -195,7 +195,7 @@ $stmt->execute();
                 <?php
                 // Cursos destino
                 $pdo = config::connect();
-                $sqlCursos = "SELECT codigocategorias, nome FROM new_sistema_categorias_PJA WHERE lixeirasc != 1 ORDER BY nome";
+                $sqlCursos = "SELECT codigocursos, nome FROM new_sistema_cursos WHERE lixeirasc != 1 ORDER BY nome";
                 $cursosStmt = $pdo->query($sqlCursos);
                 $cursos = $cursosStmt ? $cursosStmt->fetchAll(PDO::FETCH_ASSOC) : [];
                 ?>
@@ -205,9 +205,9 @@ $stmt->execute();
                     <select id="selCursoDestino" class="form-select" required>
                         <option value="">Selecione...</option>
                         <?php foreach ($cursos as $c): ?>
-                            <option value="<?= (int)$c['codigocategorias'] ?>">
+                            <option value="<?= (int)$c['codigocursos'] ?>">
                                 <?= htmlspecialchars($c['nome']) ?>
-                                <?= (int)$c['codigocategorias']; ?>
+                                <?= (int)$c['codigocursos']; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>

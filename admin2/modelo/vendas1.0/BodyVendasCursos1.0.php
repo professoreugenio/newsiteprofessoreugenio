@@ -43,7 +43,7 @@ $whereSql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
 // -----------------------------------------
 $sql = "
     SELECT
-        c.codigocategorias,
+        c.codigocursos,
         c.nome,
         c.visivelsc,
         c.ordemsc,
@@ -55,9 +55,9 @@ $sql = "
         (
             SELECT COUNT(1)
             FROM new_sistema_cursos_turmas t
-            WHERE t.codcursost = c.codigocategorias
+            WHERE t.codcursost = c.codigocursos
         ) AS qtd_turmas
-    FROM new_sistema_categorias_PJA c
+    FROM new_sistema_cursos c
     $whereSql
     ORDER BY c.ordemsc ASC, c.datasc DESC, c.horasc DESC
 ";
@@ -73,7 +73,7 @@ $stmt->execute();
     <ul class="list-group">
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <?php
-            $id        = (int)($row['codigocategorias'] ?? 0);
+            $id        = (int)($row['codigocursos'] ?? 0);
             $encId     = encrypt($id, $action = 'e');
             $nome      = htmlspecialchars($row['nome'] ?? 'Sem título');
             $ordem     = (int)($row['ordemsc'] ?? 0);

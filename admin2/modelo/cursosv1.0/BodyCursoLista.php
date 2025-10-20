@@ -14,8 +14,8 @@ $anos = config::connect()->query($sqlAnos)->fetchAll(PDO::FETCH_COLUMN);
 
 // ====== Opções de Curso ======
 $sqlCursos = "
-    SELECT codigocategorias, nome
-    FROM new_sistema_categorias_PJA
+    SELECT codigocursos, nome
+    FROM new_sistema_cursos
     ORDER BY nome
 ";
 $cursos = config::connect()->query($sqlCursos)->fetchAll(PDO::FETCH_ASSOC);
@@ -49,8 +49,8 @@ $sqlTurmas = "
         c.nome AS curso_nome,
         COUNT(i.codigousuario) AS qtd_alunos
     FROM new_sistema_cursos_turmas t
-    LEFT JOIN new_sistema_categorias_PJA c
-           ON c.codigocategorias = t.codcursost
+    LEFT JOIN new_sistema_cursos c
+           ON c.codigocursos = t.codcursost
     LEFT JOIN new_sistema_inscricao_PJA i
            ON i.chaveturma = t.chave
     $whereSql
@@ -107,7 +107,7 @@ function mes_ptbr($data)
         <select name="curso" class="form-select" onchange="this.form.submit()">
             <option value="0">Todos os cursos</option>
             <?php foreach ($cursos as $cur): ?>
-                <option value="<?= (int)$cur['codigocategorias'] ?>" <?= $cursoSel == (int)$cur['codigocategorias'] ? 'selected' : '' ?>>
+                <option value="<?= (int)$cur['codigocursos'] ?>" <?= $cursoSel == (int)$cur['codigocursos'] ? 'selected' : '' ?>>
                     <?= htmlspecialchars($cur['nome']) ?>
                 </option>
             <?php endforeach; ?>
@@ -157,7 +157,7 @@ function mes_ptbr($data)
                     ?>
                     <tr>
                         <td class="fw-semibold">
-                            <a  href="<?= htmlspecialchars($urlTurma) ?>" class="text-decoration-none">
+                            <a href="<?= htmlspecialchars($urlTurma) ?>" class="text-decoration-none">
                                 <i class="bi bi-collection-play me-2 text-primary"></i>
                                 <?= htmlspecialchars($t['nometurma'] ?: '—') ?>
                             </a>

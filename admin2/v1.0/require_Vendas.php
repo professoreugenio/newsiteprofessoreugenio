@@ -15,7 +15,7 @@ v.horacomprasv,
 v.statussv,
 v.tipopagamentosv,
 
-c.nomecursocurso,
+c.nomecurso,
 a.email AS email_aluno,
 c.bgcolor,
 a.codigocadastro,
@@ -24,7 +24,7 @@ a.nome AS nome_aluno,
 a.celular AS cel_aluno,
 
 af.idusuarioSA AS id_afiliado,
-afc.nomecurso AS nome_afiliado
+afc.nome AS nome_afiliado
 FROM a_site_vendas v
 LEFT JOIN new_sistema_cursos c ON c.codigocursos = v.idcursosv
 LEFT JOIN new_sistema_cadastro a ON a.codigocadastro = v.idalunosv
