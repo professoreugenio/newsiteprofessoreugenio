@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 define('BASEPATH', true);
@@ -9,7 +10,7 @@ define('APP_ROOT', dirname(__DIR__, 1)); // ajuste se necessário
 /* ===================== INCLUDES DO PROJETO ===================== */
 require_once APP_ROOT . '/conexao/class.conexao.php';   // $con = config::connect();
 require_once APP_ROOT . '/autenticacao.php';            // se precisar (ex.: utilitários de sessão/login)
- // consultas de curso (mantido conforme seu padrão)
+// consultas de curso (mantido conforme seu padrão)
 
 /* ===================== CONFIG DE SESSÃO (4 HORAS) ===================== */
 const SESSION_TTL = 4 * 3600; // 4 horas em segundos
@@ -118,7 +119,7 @@ require 'vendasv1.0/query_vendas.php';
                     <span class="badge badge-soft rounded-pill px-3 py-2 small mb-3">
                         <i class="bi bi-trophy me-1"></i> Curso de Excel para Concursos
                     </span>
-                    <?= $hero?>
+                    <?= $hero ?>
                     <div class="d-flex flex-wrap gap-2">
                         <a href="#cta" class="btn btn-cta btn-lg">
                             <i class="bi bi-star-fill me-2"></i> Garantir minha vaga
@@ -154,98 +155,12 @@ require 'vendasv1.0/query_vendas.php';
 
     <!-- ===================== BENEFÍCIOS ===================== -->
     <section id="beneficios">
-        <div class="container">
-            <div class="text-center mb-4" data-aos="fade-up">
-                <div class="heading-2">Você vai dominar</div>
-                <p class="lead lead-muted mb-0">Conteúdo focado no que as bancas mais cobram, com prática orientada.</p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="0">
-                    <div class="card-dark p-4 h-100">
-                        <div class="icon-badge mb-3"><i class="bi bi-123 fs-4"></i></div>
-                        <div class="fw-bold mb-1">Funções Essenciais</div>
-                        <p class="small text-white-50 mb-0">SOMA, MÉDIA, SE, CONT.SE, MÁX, MÍN, PROCV/XLOOKUP e muito
-                            mais.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
-                    <div class="card-dark p-4 h-100">
-                        <div class="icon-badge mb-3"><i class="bi bi-bar-chart-fill fs-4"></i></div>
-                        <div class="fw-bold mb-1">Gráficos & Tabelas</div>
-                        <p class="small text-white-50 mb-0">Tabelas, Tabela Dinâmica, filtros e gráficos cobrados em
-                            editais.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card-dark p-4 h-100">
-                        <div class="icon-badge mb-3"><i class="bi bi-lightning fs-4"></i></div>
-                        <div class="fw-bold mb-1">Atalhos & Velocidade</div>
-                        <p class="small text-white-50 mb-0">Ganhe tempo nas questões com os atalhos certos na hora
-                            certa.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="card-dark p-4 h-100">
-                        <div class="icon-badge mb-3"><i class="bi bi-mortarboard-fill fs-4"></i></div>
-                        <div class="fw-bold mb-1">Simulados & Certificado</div>
-                        <p class="small text-white-50 mb-0">Simulados com correção comentada e certificado ao concluir.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?= $beneficios ?>
     </section>
 
     <!-- ===================== SOBRE ===================== -->
     <section id="sobre">
-        <div class="container">
-            <div class="row align-items-center gy-4">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <div class="heading-2 mb-2">Sobre o Curso</div>
-                    <p class="mb-3">
-                        O <strong>Curso de Excel para Concursos</strong> foi construído especificamente para o contexto
-                        das bancas mais recorrentes. Você irá do essencial ao avançado que efetivamente aparece nas
-                        provas, com <strong>exercícios direcionados</strong>, bancos de questões e
-                        <strong>simulados</strong> que simulam o tempo e o estilo dos exames.
-                    </p>
-                    <ul class="list-unstyled small mb-0">
-                        <li class="mb-2"><i class="bi bi-check2-circle check me-2"></i>Acesso anual ou vitalício (defina
-                            no seu checkout)</li>
-                        <li class="mb-2"><i class="bi bi-check2-circle check me-2"></i>Material PDF e planilhas para
-                            download</li>
-                        <li class="mb-2"><i class="bi bi-check2-circle check me-2"></i>Aulas ao vivo + gravadas na
-                            plataforma</li>
-                        <li class="mb-2"><i class="bi bi-check2-circle check me-2"></i>Suporte direto com o professor
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="card-dark p-4 h-100">
-                        <div class="d-flex align-items-start gap-3">
-                            <div class="icon-badge"><i class="bi bi-person-video3 fs-4"></i></div>
-                            <div>
-                                <div class="fw-bold">Para quem é:</div>
-                                <p class="small text-white-50 mb-3">
-                                    Concurseiros iniciantes ou intermediários que querem <strong>acertar mais
-                                        questões</strong> de Excel nas provas e reduzir o tempo de resolução.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-start gap-3">
-                            <div class="icon-badge"><i class="bi bi-flag fs-4"></i></div>
-                            <div>
-                                <div class="fw-bold">Objetivo:</div>
-                                <p class="small text-white-50 mb-0">
-                                    Fazer você dominar as <strong>funções e recursos mais cobrados</strong>, interpretar
-                                    enunciados com segurança e resolver questões com método.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?= $sobreocurso ?>
     </section>
 
     <!-- ===================== GRADE DO CURSO ===================== -->
@@ -264,7 +179,7 @@ require 'vendasv1.0/query_vendas.php';
                     <h2 class="accordion-header">
                         <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse"
                             data-bs-target="#m1">
-                            Módulo 1 — Fundamentos que Mais Caem ,<?= $_SESSION['nav']?><?= $idCursoVenda?>
+                            Módulo 1 — Fundamentos que Mais Caem ,<?= $_SESSION['nav'] ?><?= $idCursoVenda ?>
                         </button>
                     </h2>
                     <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#accGrade">

@@ -1,48 +1,64 @@
 <?php
 
-/**
- * Controla expiração global da sessão do funil.
- * Ao expirar, limpa chaves do funil e regenera ID.
- */
 if (!isset($_SESSION['session_started_at'])) {
     $_SESSION['session_started_at'] = time();
 } elseif ((time() - (int)$_SESSION['session_started_at']) > SESSION_TTL) {
-    unset($_SESSION['nav'], $_SESSION['nav_set_at'], $_SESSION['af'], $_SESSION['af_set_at'], $_SESSION['ts']);
+    unset($_SESSION['nav'], $_SESSION['nav_set_at'], $_SESSION['af'], $_SESSION['af_set_at'], $_SESSION['ts'], $_SESSION['prg_redirect_done']);
     session_regenerate_id(true);
     $_SESSION['session_started_at'] = time();
 }
 
-/* ===================== CAPTURA / SANITIZAÇÃO ===================== */
-function get_param(string $key): ?string
+/* ===== Util ===== */
+function get_param(string $k): ?string
 {
-    if (!isset($_GET[$key])) return null;
-    $val = trim((string)$_GET[$key]);
-    if ($val === '') return null;
-    if (strlen($val) > 8192) $val = substr($val, 0, 8192); // limiter anti-abuso
-    return $val;
+    if (!array_key_exists($k, $_GET)) return null;        // <- não enviado
+    $v = trim((string)$_GET[$k]);
+    if ($v === '') return null;                           // <- enviado porém vazio
+    if (strlen($v) > 8192) $v = substr($v, 0, 8192);
+    return $v;
 }
 
-$paramNav = get_param('nav'); // dados do curso (p.ex. base64)
-$paramAf  = get_param('af');  // afiliado
-$paramTs  = get_param('ts');  // timestamp opcional
+/* ===== Captura condicional ===== */
+$paramNav = get_param('nav');   // pode vir
+$paramAf  = get_param('af');    // pode NÃO vir e tá tudo bem
+$paramTs  = get_param('ts');    // opcional
 
-// Persistência apenas se chegarem pela URL
+// Persistir APENAS quando vier na URL (não sobrescreve sessão com vazio)
 if ($paramNav !== null) {
-    $_SESSION['nav']        = $paramNav;
+    $_SESSION['nav'] = $paramNav;
     $_SESSION['nav_set_at'] = time();
 }
-if ($paramAf !== null) {
-    $_SESSION['af']         = $paramAf;
+if ($paramAf  !== null) {
+    $_SESSION['af']  = $paramAf;
     $_SESSION['af_set_at']  = time();
 }
-if ($paramTs !== null) {
-    $_SESSION['ts']         = $paramTs;
+if ($paramTs  !== null) {
+    $_SESSION['ts']  = $paramTs;
 }
 
-// Exposição no padrão solicitado (GET > SESSION > '')
+// Exposição: GET > SESSION > '' (sem notices se 'af' não vier)
 $nav = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
 $af  = $_GET['af']  ?? ($_SESSION['af']  ?? '');
 $ts  = $_GET['ts']  ?? ($_SESSION['ts']  ?? '');
+
+/* ===== Redirect condicional (PRG) =====
+   Redireciona só quando chegaram novos parâmetros (mesmo que 'af' não venha).
+   Evita looping usando uma flag de “já redirecionado”.
+   Debug: adicione ?noredir=1 para ficar na index.
+*/
+$hasNewParams   = ($paramNav !== null) || ($paramAf !== null) || ($paramTs !== null);
+$prgAlreadyDone = !empty($_SESSION['prg_redirect_done']);
+$noredir        = isset($_GET['noredir']) && $_GET['noredir'] == '1';
+
+if ($hasNewParams && !$prgAlreadyDone && !$noredir) {
+    $_SESSION['prg_redirect_done'] = time();
+    if (!headers_sent()) {
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Location: vendas_Inscricao.php');
+        exit;
+    }
+}
 
 $decNavCurso = encrypt($_SESSION['nav'], 'd');
 $exp = explode("&", $decNavCurso);
