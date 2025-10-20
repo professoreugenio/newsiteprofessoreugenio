@@ -60,13 +60,13 @@ require 'vendasv1.0/query_vendas.php';
     <!-- Metadados básicos -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Curso <?= $nomeTurma ?> — Professor Eugênio</title>
+    <title>Curso <?= $nomeCurso ?> — Professor Eugênio</title>
     <meta name="description"
         content="Domine Excel para gabaritar questões de concursos: funções, gráficos, tabelas, atalhos e simulados. Aulas online, material para download e certificação.">
     <link rel="canonical" href="https://professoreugenio.com/curso-excel-concursos">
 
     <!-- Open Graph / Twitter (compartilhamento) -->
-    <meta property="og:title" content="Curso de Excel para Concursos — Professor Eugênio">
+    <meta property="og:title" content="<?= $nomeCurso ?> — Professor Eugênio">
     <meta property="og:description"
         content="Domine Excel para gabaritar questões de concursos. Aulas online, simulados e material para download.">
     <meta property="og:type" content="website">
@@ -172,89 +172,132 @@ require 'vendasv1.0/query_vendas.php';
                 </p>
             </div>
 
+            <?php
+            // Pré-requisitos: $con (PDO) e $idCursoVenda (int) já definidos.
+            // Segurança: garantimos inteiro
+            $idCursoVenda = (int)($idCursoVenda ?? 0);
+
+            // Helper para escapar HTML
+            if (!function_exists('h')) {
+                function h(string $s): string
+                {
+                    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+                }
+            }
+
+            // Consulta única com JOINs para reduzir roundtrips
+            $sql = "
+SELECT
+  m.codigomodulos          AS mod_id,
+  m.codcursos              AS mod_curso,
+  m.modulo                 AS mod_ordem,
+  m.nomemodulo             AS mod_nome,
+  m.visivelm               AS mod_visivel,
+  pc.idpublicacaopc        AS pub_id,
+  pc.ordempc               AS pub_ordem,
+  pc.visivelpc             AS pub_visivel,
+  p.titulo                 AS pub_titulo
+FROM new_sistema_modulos_PJA            m
+LEFT JOIN a_aluno_publicacoes_cursos    pc
+       ON pc.idmodulopc = m.codigomodulos
+      AND (pc.visivelpc IS NULL OR pc.visivelpc = 1)
+LEFT JOIN new_sistema_publicacoes_PJA   p
+       ON p.codigopublicacoes = pc.idpublicacaopc
+WHERE m.codcursos = :curso
+  AND m.visivelm = '1'
+ORDER BY 
+  -- 1) ordem do módulo (campo 'modulo' costuma ser ordinal numérico; se for string, ainda ordena ok)
+  CASE WHEN m.modulo REGEXP '^[0-9]+$' THEN CAST(m.modulo AS UNSIGNED) ELSE 999999 END,
+  m.modulo,
+  -- 2) ordem do conteúdo (nulo vai pro fim)
+  CASE WHEN pc.ordempc IS NULL THEN 999999 ELSE pc.ordempc END,
+  p.titulo
+";
+
+            $stmt = $con->prepare($sql);
+            $stmt->bindValue(':curso', $idCursoVenda, PDO::PARAM_INT);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Agrupa por módulo
+            $modules = [];
+            foreach ($rows as $r) {
+                $modId    = (int)$r['mod_id'];
+                $modNome  = (string)($r['mod_nome'] ?? '');
+                $modOrdem = (string)($r['mod_ordem'] ?? ''); // pode ser número/ordem textual
+                if (!isset($modules[$modId])) {
+                    $modules[$modId] = [
+                        'id'     => $modId,
+                        'ordem'  => $modOrdem,
+                        'nome'   => $modNome,
+                        'items'  => []
+                    ];
+                }
+                // Se houver publicação/título, adiciona item
+                if (!empty($r['pub_id']) && !empty($r['pub_titulo'])) {
+                    $modules[$modId]['items'][] = [
+                        'id'    => (int)$r['pub_id'],
+                        'ordem' => $r['pub_ordem'] !== null ? (int)$r['pub_ordem'] : 999999,
+                        'title' => (string)$r['pub_titulo'],
+                    ];
+                }
+            }
+
+            // Se não tiver módulos visíveis, mostra fallback
+            if (empty($modules)) {
+                echo '<div class="card-dark p-4"><div class="small text-white-50 mb-0">Conteúdo em atualização. Volte em breve.</div></div>';
+                return;
+            }
+
+            // Ordena módulos pela chave 'ordem' (numérica quando possível)
+            uasort($modules, function ($a, $b) {
+                $ai = ctype_digit((string)$a['ordem']) ? (int)$a['ordem'] : PHP_INT_MAX;
+                $bi = ctype_digit((string)$b['ordem']) ? (int)$b['ordem'] : PHP_INT_MAX;
+                if ($ai === $bi) return strnatcasecmp((string)$a['ordem'], (string)$b['ordem']);
+                return $ai <=> $bi;
+            });
+
+            // Render do accordion
+            ?>
             <div class="accordion mod-acc" id="accGrade">
-
-                <!-- Módulo 1 -->
-                <div class="accordion-item card-dark mb-3" data-aos="fade-up">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#m1">
-                            Módulo 1 — Fundamentos que Mais Caem ,<?= $_SESSION['nav'] ?><?= $idCursoVenda ?>
-                        </button>
-                    </h2>
-                    <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#accGrade">
-                        <div class="accordion-body">
-                            <ul class="mb-0 small">
-                                <li>Introdução, interface e atalhos básicos</li>
-                                <li>Formatação de células, números e datas</li>
-                                <li>Funções SOMA, MÉDIA, MÍN, MÁX e CONT.SE</li>
-                                <li>Preenchimento rápido e referências absolutas/relativas</li>
-                            </ul>
+                <?php
+                $idx = 0;
+                $delayStep = 50;
+                foreach ($modules as $mod) {
+                    $idx++;
+                    $collapseId = 'm' . $mod['id'];                 // id único estável
+                    $isFirst    = ($idx === 1);
+                    $showClass  = $isFirst ? ' show' : '';
+                    $collapsed  = $isFirst ? '' : ' collapsed';
+                    $aosDelay   = ($idx - 1) * $delayStep;
+                    $tituloMod  = 'Módulo ' . h((string)$mod['ordem']) . ' — ' . h($mod['nome']);
+                ?>
+                    <div class="accordion-item card-dark mb-3" data-aos="fade-up" <?= $aosDelay ? ' data-aos-delay="' . $aosDelay . '"' : '' ?>>
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-semibold<?= $collapsed ?>" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#<?= h($collapseId) ?>">
+                                <?= $tituloMod ?>
+                            </button>
+                        </h2>
+                        <div id="<?= h($collapseId) ?>" class="accordion-collapse collapse<?= $showClass ?>" data-bs-parent="#accGrade">
+                            <div class="accordion-body">
+                                <?php if (!empty($mod['items'])): ?>
+                                    <ul class="mb-0 small">
+                                        <?php foreach ($mod['items'] as $item): ?>
+                                            <li><?= h($item['title']) ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <div class="small text-white-50">Conteúdo deste módulo será liberado em breve.</div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Módulo 2 -->
-                <div class="accordion-item card-dark mb-3" data-aos="fade-up" data-aos-delay="50">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#m2">
-                            Módulo 2 — Lógica, Procura e Contagem
-                        </button>
-                    </h2>
-                    <div id="m2" class="accordion-collapse collapse" data-bs-parent="#accGrade">
-                        <div class="accordion-body">
-                            <ul class="mb-0 small">
-                                <li>SE, SE aninhado e IFS (equivalentes)</li>
-                                <li>PROCV / XLOOKUP (PROC.X) e CORRESP</li>
-                                <li>CONT.SES, SOMA.SE/SOMA.SES</li>
-                                <li>Erros comuns e pegadinhas de banca</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Módulo 3 -->
-                <div class="accordion-item card-dark mb-3" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#m3">
-                            Módulo 3 — Tabelas, Gráficos e Tabela Dinâmica
-                        </button>
-                    </h2>
-                    <div id="m3" class="accordion-collapse collapse" data-bs-parent="#accGrade">
-                        <div class="accordion-body">
-                            <ul class="mb-0 small">
-                                <li>Construção de tabelas e filtros</li>
-                                <li>Gráficos mais cobrados em edital</li>
-                                <li>Introdução à Tabela Dinâmica</li>
-                                <li>Interpretação de questões com figuras</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Módulo 4 -->
-                <div class="accordion-item card-dark mb-3" data-aos="fade-up" data-aos-delay="150">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#m4">
-                            Módulo 4 — Simulados e Estratégias de Prova
-                        </button>
-                    </h2>
-                    <div id="m4" class="accordion-collapse collapse" data-bs-parent="#accGrade">
-                        <div class="accordion-body">
-                            <ul class="mb-0 small">
-                                <li>Simulado 1 (comentado)</li>
-                                <li>Simulado 2 (comentado)</li>
-                                <li>Técnicas para ganhar tempo em questões de Excel</li>
-                                <li>Checklist pré-prova</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                }
+                ?>
             </div>
+
 
             <!-- Extras -->
             <div class="row g-4 mt-1">
@@ -278,6 +321,14 @@ require 'vendasv1.0/query_vendas.php';
                     </div>
                 </div>
             </div>
+
+            <div class="row g-4 mt-1">
+                <div class="col-md-4" data-aos="fade-up"></div>
+                <a href="#cta" class="btn btn-cta btn-lg">
+                    <i class="bi bi-star-fill me-2"></i> Garantir minha vaga
+                </a>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -287,34 +338,31 @@ require 'vendasv1.0/query_vendas.php';
             <div class="row align-items-center gy-4">
                 <div class="col-lg-7" data-aos="fade-right">
                     <div class="heading-2 mb-2">Inscreva-se Agora</div>
-                    <p class="mb-1">
-                        Garanta seu acesso ao conteúdo completo, participe das aulas ao vivo e pratique com nossos
-                        simulados.
-                    </p>
-                    <ul class="list-unstyled small mb-0">
-                        <li class="mb-1"><i class="bi bi-check2-circle check me-2"></i>Acesso imediato à plataforma</li>
-                        <li class="mb-1"><i class="bi bi-check2-circle check me-2"></i>Atualizações inclusas</li>
-                        <li class="mb-1"><i class="bi bi-check2-circle check me-2"></i>7 dias de garantia</li>
-                    </ul>
+                    <?= $cta ?>
                 </div>
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="card-dark p-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <div class="small text-white-50 mb-1">Plano recomendado</div>
-                                <div class="fs-3 fw-bold">Excel para Concursos</div>
+                                <div class="fs-3 fw-bold"><?= $nomeCurso ?></div>
                             </div>
                             <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas
                                 Limitadas</span>
                         </div>
-                        <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ 39,90/mês</div>
-                        <div class="small text-white-50 mb-3">ou Vitalício por R$ 85,00</div>
+
+                        <?php if ($valoranual > 0): ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= $valoranual; ?>/anual</div>
+                            <div class="small text-white-50 mb-3">ou Vitalício por R$ <?= $valorvendavitalicia; ?></div>
+                        <?php else: ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= $valorvendavitalicia; ?></div>
+                        <?php endif; ?>
                         <div class="d-grid gap-2">
-                            <a class="btn btn-cta btn-lg" href="vendas_inscricao.html">
+                            <a class="btn btn-cta btn-lg" href="vendas_inscricao.php">
                                 <i class="bi bi-cart-check me-2"></i> Fazer minha inscrição
                             </a>
                             <a class="btn btn-outline-soft btn-lg"
-                                href="https://wa.me/5585XXXXXXXX?text=Tenho%20d%C3%BAvidas%20sobre%20o%20Curso%20de%20Excel%20para%20Concursos"
+                                href="<?= $linkwhatsapp ?> *<?= $nomeCurso ?>*"
                                 target="_blank" rel="noopener">
                                 <i class="bi bi-whatsapp me-2"></i> Tirar dúvidas no WhatsApp
                             </a>

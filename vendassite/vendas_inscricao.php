@@ -1,3 +1,31 @@
+<?php
+
+declare(strict_types=1);
+define('BASEPATH', true);
+define('APP_ROOT', dirname(__DIR__, 1)); // ajuste se necessário
+/* ===================== INCLUDES DO PROJETO ===================== */
+require_once APP_ROOT . '/conexao/class.conexao.php';   // $con = config::connect();
+require_once APP_ROOT . '/autenticacao.php';            // se precisar (ex.: utilitários de sessão/login)
+
+
+/* ===================== CONFIG DE SESSÃO (4 HORAS) ===================== */
+const SESSION_TTL = 4 * 3600; // 4 horas em segundos
+
+// Definir cookie de sessão ANTES do start
+session_set_cookie_params([
+    'lifetime' => SESSION_TTL,
+    'path'     => '/',
+    'domain'   => '', // ex.: 'professoreugenio.com' se necessário
+    'secure'   => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
+session_start();
+
+
+require 'vendasv1.0/query_vendas.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,15 +33,13 @@
     <!-- Metadados -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscrição — Curso de Excel para Concursos | Professor Eugênio</title>
+    <title>Inscrição — Curso <?= $nomeCurso ?>| Professor Eugênio</title>
     <meta name="description"
-        content="Faça sua inscrição para o Curso de Excel para Concursos. Aulas ao vivo e gravadas, material para download e certificação.">
-
+        content="Faça sua inscrição para o Curso de <?= $nomeCurso ?>. Aulas ao vivo e gravadas, material para download e certificação.">
     <!-- Bootstrap / Icons / AOS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
     <!-- Estilos do tema -->
     <style>
         :root {
@@ -95,7 +121,6 @@
         }
 
         /* Etapa 1 de 4 */
-
         /* Floating labels com menos altura vertical */
         .form-floating>label {
             color: #cfe2ff;
@@ -144,7 +169,6 @@
 </head>
 
 <body>
-
     <!-- ===================== NAV ===================== -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
@@ -163,14 +187,13 @@
             </div>
         </div>
     </nav>
-
     <!-- ===================== HERO RESUMO ===================== -->
     <section class="pt-5">
         <div class="container">
             <div class="row gy-4 align-items-center">
                 <div class="col-lg-7" data-aos="fade-right">
                     <span class="badge badge-soft rounded-pill px-3 py-2 small mb-3">
-                        <i class="bi bi-trophy me-1"></i> Curso de Excel para Concursos
+                        <i class="bi bi-trophy me-1"></i> Curso de <?= $nomeCurso ?>
                     </span>
                     <h1 class="heading-1 mb-2">Faça sua Inscrição</h1>
                     <p class="small-muted mb-0">
@@ -191,33 +214,36 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <div class="small text-white-50 mb-1">Plano recomendado</div>
-                                <div class="fs-4 fw-bold">Excel para Concursos</div>
+                                <div class="fs-4 fw-bold"><?= $nomeCurso ?></div>
                             </div>
                             <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas
                                 Limitadas</span>
                         </div>
-                        <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ 39,90/mês</div>
-                        <div class="small text-white-50">ou Vitalício por R$ 85,00</div>
+                        <?php if ($valoranual > 0): ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= $valoranual; ?>/anual</div>
+                            <div class="small text-white-50">Vitalício por R$ <?= $valorvendavitalicia; ?> </div>
+                        <?php else: ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">
+                                R$ <?= $valorvendavitalicia; ?>
+                            </div>
+                            <div class="small text-white-50">Vitalício </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- ===================== FORMULÁRIO DE INSCRIÇÃO ===================== -->
     <section id="inscricao">
         <div class="container">
             <div class="row gy-4">
                 <div class="col-lg-7" data-aos="fade-up">
-
                     <div class="heading-2 mb-2">Dados do Aluno</div>
-
                     <form id="formInscricao" class="needs-validation" novalidate>
                         <!-- Hidden context (preencha dinamicamente conforme seu fluxo) -->
                         <input type="hidden" name="idCurso" id="idCurso" value="excel-concursos">
                         <input type="hidden" name="idTurma" id="idTurma" value="turma-2025-01">
                         <input type="hidden" name="utm" id="utm" value="">
-
                         <div class="row g-3">
                             <div class="col-12">
                                 <div class="form-floating">
@@ -227,7 +253,6 @@
                                     <div class="invalid-feedback">Informe seu nome (mín. 3 caracteres).</div>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input type="email" class="form-control" id="email" name="email"
@@ -236,7 +261,6 @@
                                     <div class="invalid-feedback">Digite um e-mail válido.</div>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input type="tel" class="form-control" id="telefone" name="telefone"
@@ -246,7 +270,6 @@
                                     <div class="invalid-feedback">Informe um celular válido (ex.: 85 99999-0000).</div>
                                 </div>
                             </div>
-
                             <div class="col-12">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="objetivo" name="objetivo"
@@ -254,7 +277,6 @@
                                     <label for="objetivo">Seu concurso-alvo (opcional)</label>
                                 </div>
                             </div>
-
                             <!-- Aceite LGPD -->
                             <div class="col-12">
                                 <div class="form-check">
@@ -265,13 +287,11 @@
                                     <div class="invalid-feedback">Você precisa aceitar para continuar.</div>
                                 </div>
                             </div>
-
                             <div class="col-12 d-grid">
                                 <a class="btn btn-cta btn-lg" href="vendas_plano.html">
                                     <i class="bi bi-arrow-right-circle me-2"></i> Continuar
                                 </a>
                             </div>
-
                             <div class="col-12">
                                 <p class="small small-muted mb-0">
                                     Ao continuar, você concorda com os <a href="#"
@@ -282,7 +302,6 @@
                         </div>
                     </form>
                 </div>
-
                 <!-- Lateral com lembretes de valor -->
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="card-dark p-4 mb-3">
@@ -295,21 +314,27 @@
                             <li class="mb-1">Suporte direto</li>
                         </ul>
                     </div>
-
                     <div class="card-dark p-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="small text-white-50">Sua pré-reserva</div>
                             <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Garantida por
                                 24h</span>
                         </div>
-                        <div class="fs-2 fw-bold my-2" style="color:#00BB9C;">R$ 39,90/mês</div>
-                        <div class="small text-white-50">ou Vitalício por R$ 85,00</div>
+                        <?php if ($valoranual > 0): ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= $valoranual; ?>/anual</div>
+                            <div class="small text-white-50">Vitalício por R$ <?= $valorvendavitalicia; ?> </div>
+                        <?php else: ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">
+                                R$ <?= $valorvendavitalicia; ?>/
+
+                            </div>
+                            <div class="small text-white-50">Vitalício </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- ===================== SEGURANÇA / SUPORTE ===================== -->
     <section id="seguranca">
         <div class="container">
@@ -334,7 +359,7 @@
                         <div class="fw-bold mb-2"><i class="bi bi-whatsapp me-2"></i>Dúvidas?</div>
                         <p class="small small-muted mb-3">Fale diretamente com o professor para orientação rápida.</p>
                         <a class="btn btn-outline-light w-100" target="_blank" rel="noopener"
-                            href="https://wa.me/5585XXXXXXXX?text=Tenho%20d%C3%BAvidas%20sobre%20minha%20inscri%C3%A7%C3%A3o%20no%20Curso%20de%20Excel%20para%20Concursos">
+                            href="<?= $linkwhatsapp ?> *<?= $nomeCurso ?>*">
                             Chamar no WhatsApp
                         </a>
                     </div>
@@ -342,7 +367,6 @@
             </div>
         </div>
     </section>
-
     <!-- ===================== RODAPÉ ===================== -->
     <footer class="py-4 border-top border-opacity-25" style="border-color: rgba(255,255,255,.06) !important;">
         <div class="container small text-white-50 d-flex flex-wrap justify-content-between gap-2">
@@ -354,7 +378,6 @@
             </div>
         </div>
     </footer>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -364,7 +387,6 @@
             once: true
         });
         document.getElementById('ano').textContent = new Date().getFullYear();
-
         // -------- Persistência local (localStorage) --------
         const FIELDS = ['nome', 'email', 'telefone', 'objetivo'];
 
@@ -391,21 +413,17 @@
                 el.addEventListener('input', saveToStorage);
             }
         });
-
         // -------- Validação + Próxima etapa --------
         const form = document.getElementById('formInscricao');
         form.addEventListener('submit', (ev) => {
             ev.preventDefault();
             ev.stopPropagation();
-
             // HTML5 validation
             if (!form.checkValidity()) {
                 form.classList.add('was-validated');
                 return;
             }
-
             saveToStorage();
-
             // Monte o payload (pode enviar via fetch/AJAX ao seu endpoint)
             const data = {
                 idCurso: document.getElementById('idCurso').value,
@@ -417,7 +435,6 @@
                 aceite: document.getElementById('aceite').checked ? 1 : 0,
                 utm: document.getElementById('utm').value
             };
-
             // >>> Integração:
             // 1) Se quiser enviar via AJAX ao backend e depois redirecionar:
             // fetch('inscricoesv1.0/ajax_registrarInscricao.php', {
@@ -430,12 +447,10 @@
             //     alert(res?.msg || 'Não foi possível registrar. Tente novamente.');
             //   }
             // }).catch(()=> alert('Falha de rede. Tente novamente.'));
-
             // 2) Se preferir apenas redirecionar com querystring (simples):
             const qs = new URLSearchParams(data).toString();
             window.location.href = 'selecionar_plano.php?' + qs; // ajuste para vendaPagamento.php se preferir
         });
-
         // Capta UTM se existir
         const p = new URLSearchParams(location.search);
         const utm = p.get('utm') || '';
