@@ -1,0 +1,173 @@
+/* Floating Action Button */
+.fab-container {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    z-index: 1050;
+
+}
+
+/* .fab-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1ABC9C;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s;
+} */
+
+.fab-btn:hover {
+    transform: scale(1.1);
+}
+
+.fab-options {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 190px;
+}
+
+.fab-options .fab-option {
+
+    background-color: #34495E;
+    color: #FFFFFF;
+    border-radius: 30px;
+    padding: 5px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.fab-options .fab-option:hover {
+    background-color: #1ABC9C;
+    transform: translateX(-5px);
+}
+
+.fab-options .fab-option-atividade {
+
+    background-color: #800aba;
+    color: #FFFFFF;
+    border-radius: 30px;
+    padding: 5px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.fab-options .fab-option-atividade:hover {
+    background-color: #60048e;
+    transform: translateX(-5px);
+}
+.fab-options .fab-option-user {
+
+    background-color: #d47406;
+    color: #FFFFFF;
+    border-radius: 30px;
+    padding: 5px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.fab-options .fab-option-atividade:hover {
+    background-color: #a75b04;
+    transform: translateX(-5px);
+}
+
+.fab-options.active {
+    display: flex;
+}
+
+
+/**
+ * Floating Action Button
+ * @end
+ */
+
+/* Estilo geral */
+.fab-section {
+    position: relative;
+    min-height: 100vh;
+    background-color: #2C3E50;
+}
+
+.fab-container {
+    position: fixed;
+    bottom: 15px;
+    right: 30px;
+}
+
+/* Botão principal do FAB */
+.fab-btn {
+    background-color: #E74C3C;
+    color: #FFF;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fab-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Opções do FAB */
+.fab-options {
+    background-color: #0d151e;
+    border: solid 2px #233d5b;
+    border-radius: 25px;
+    padding: 30px 20px;
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.fab-option {
+    background-color: #34495E;
+    color: #FFF;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.fab-option:hover {
+    background-color: #1ABC9C;
+    transform: translateY(-2px);
+}
+
+/* Ativar as opções */
+.fab-options.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
