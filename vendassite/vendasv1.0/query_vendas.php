@@ -1,20 +1,50 @@
 <?php
-if (!isset($_GET['nav']) && empty($_COOKIE['nav'])) {
-    header('Location: index.php'); // ou outra página segura
-    exit;
+
+/**
+ * Controla expiração global da sessão do funil.
+ * Ao expirar, limpa chaves do funil e regenera ID.
+ */
+if (!isset($_SESSION['session_started_at'])) {
+    $_SESSION['session_started_at'] = time();
+} elseif ((time() - (int)$_SESSION['session_started_at']) > SESSION_TTL) {
+    unset($_SESSION['nav'], $_SESSION['nav_set_at'], $_SESSION['af'], $_SESSION['af_set_at'], $_SESSION['ts']);
+    session_regenerate_id(true);
+    $_SESSION['session_started_at'] = time();
 }
 
+/* ===================== CAPTURA / SANITIZAÇÃO ===================== */
+function get_param(string $key): ?string
+{
+    if (!isset($_GET[$key])) return null;
+    $val = trim((string)$_GET[$key]);
+    if ($val === '') return null;
+    if (strlen($val) > 8192) $val = substr($val, 0, 8192); // limiter anti-abuso
+    return $val;
+}
 
-// 1) Captura com prioridade GET > COOKIE
-$navGet    = isset($_GET['nav'])    ? trim((string)$_GET['nav'])    : null;
-$navCookie = isset($_COOKIE['nav']) ? trim((string)$_COOKIE['nav']) : null;
+$paramNav = get_param('nav'); // dados do curso (p.ex. base64)
+$paramAf  = get_param('af');  // afiliado
+$paramTs  = get_param('ts');  // timestamp opcional
 
-$chaveNavegacao = $navGet !== null && $navGet !== '' ? $navGet : ($navCookie ?? '');
-$navCriptografada = trim($chaveNavegacao);
+// Persistência apenas se chegarem pela URL
+if ($paramNav !== null) {
+    $_SESSION['nav']        = $paramNav;
+    $_SESSION['nav_set_at'] = time();
+}
+if ($paramAf !== null) {
+    $_SESSION['af']         = $paramAf;
+    $_SESSION['af_set_at']  = time();
+}
+if ($paramTs !== null) {
+    $_SESSION['ts']         = $paramTs;
+}
 
+// Exposição no padrão solicitado (GET > SESSION > '')
+$nav = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
+$af  = $_GET['af']  ?? ($_SESSION['af']  ?? '');
+$ts  = $_GET['ts']  ?? ($_SESSION['ts']  ?? '');
 
-
-$decNavCurso = encrypt($chaveNavegacao, 'd');
+$decNavCurso = encrypt($_SESSION['nav'], 'd');
 $exp = explode("&", $decNavCurso);
 
 $idCursoVenda = $exp[1] ?? "0";

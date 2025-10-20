@@ -1,8 +1,78 @@
 <?php
+declare(strict_types=1);
+
 define('BASEPATH', true);
-define('APP_ROOT', dirname(__DIR__, 1));
-require_once APP_ROOT . '/conexao/class.conexao.php';
-require_once APP_ROOT . '/autenticacao.php';
+define('APP_ROOT', dirname(__DIR__, 1)); // ajuste se necessário
+
+
+
+/* ===================== INCLUDES DO PROJETO ===================== */
+require_once APP_ROOT . '/conexao/class.conexao.php';   // $con = config::connect();
+require_once APP_ROOT . '/autenticacao.php';            // se precisar (ex.: utilitários de sessão/login)
+ // consultas de curso (mantido conforme seu padrão)
+
+/* ===================== CONFIG DE SESSÃO (4 HORAS) ===================== */
+const SESSION_TTL = 4 * 3600; // 4 horas em segundos
+
+// Definir cookie de sessão ANTES do start
+session_set_cookie_params([
+    'lifetime' => SESSION_TTL,
+    'path'     => '/',
+    'domain'   => '', // ex.: 'professoreugenio.com' se necessário
+    'secure'   => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
+session_start();
+
+
+
+// (Opcional) Validação simples de ts (±48h) — apenas exemplo
+/*
+if ($ts !== '' && ctype_digit($ts)) {
+    $delta = abs(time() - (int)$ts);
+    if ($delta > 172800) { // 48h
+        // ts inconsistente; você pode ignorar, limpar ou logar
+    }
+}
+*/
+require 'vendasv1.0/query_vendas.php';
+/* ===================== (Opcional) LOG DE ENTRADA NO BANCO ===================== */
+try {
+    /** @var PDO $con */
+    $con = config::connect();
+
+    // Exemplo de log leve (AJUSTE NOME/TABELA/CAMPOS). Comente se não for usar.
+    /*
+    $stmt = $con->prepare("
+        INSERT INTO logs_vendas_entradas
+            (ip, user_agent, nav, af, ts, created_at)
+        VALUES
+            (:ip, :ua, :nav, :af, :ts, NOW())
+    ");
+    $stmt->execute([
+        ':ip'  => $_SERVER['REMOTE_ADDR'] ?? '',
+        ':ua'  => $_SERVER['HTTP_USER_AGENT'] ?? '',
+        ':nav' => $nav,
+        ':af'  => $af,
+        ':ts'  => $ts,
+    ]);
+    */
+} catch (Throwable $e) {
+    // Em produção, troque por log silencioso
+    // error_log('Falha ao logar entrada no funil: ' . $e->getMessage());
+}
+
+/* ===================== REDIRECIONA (PRG) ===================== */
+// $next = 'vendas_Inscricao.php';
+// if (!headers_sent()) {
+//     header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+//     header('Pragma: no-cache');
+//     header('Location: ' . $next);
+//     exit;
+// }
+
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +102,7 @@ require_once APP_ROOT . '/autenticacao.php';
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link href="https://professoreugenio.com/vendassite/vendasv1.0/CSS_vendas.css" rel="stylesheet">
 
-    
+
 
 </head>
 
@@ -224,7 +294,7 @@ require_once APP_ROOT . '/autenticacao.php';
                     <h2 class="accordion-header">
                         <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse"
                             data-bs-target="#m1">
-                            Módulo 1 — Fundamentos que Mais Caem
+                            Módulo 1 — Fundamentos que Mais Caem ,<?= $_SESSION['nav']?><?= $idCursoVenda?>
                         </button>
                     </h2>
                     <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#accGrade">
