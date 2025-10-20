@@ -8,10 +8,10 @@ if ($filtro === 'oculto') $where .= " AND visivelsc = 0 AND matriz = 1 AND (lixe
 if ($filtro === 'lixeira') $where .= " AND lixeirasc = 1 AND matriz = 1 ";
 if ($filtro === 'copias') $where .= " AND comercialsc = 1 ";
 
-$sql = "SELECT codigocursos, nome, comercialsc, onlinesc, visivelsc, lixeirasc
+$sql = "SELECT codigocursos, nomecurso, comercialsc, onlinesc, visivelsc, lixeirasc
 FROM new_sistema_cursos
 WHERE $where
-ORDER BY nome";
+ORDER BY nomecurso";
 $stmt = $con->prepare($sql);
 $stmt->execute([':codpagesadminsc' => 327]);
 $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -38,7 +38,7 @@ $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li class="list-group-item d-flex justify-content-between align-items-center" id="cat_<?= $cat['codigocursos'] ?>">
                 <div>
                     <a href="cursos_modulos.php?id=<?= urlencode($encId) ?>" class="fw-semibold link-primary text-decoration-none">
-                        <?= htmlspecialchars($cat['nome']) ?>
+                        <?= htmlspecialchars($cat['nomecurso']) ?>
                     </a>
                     <span class="badge bg-secondary ms-2"><?= $quantPublicacoes ?> publicação<?= $quantPublicacoes != 1 ? 's' : '' ?></span>
                 </div>

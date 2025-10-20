@@ -48,7 +48,7 @@ try {
 
     // Atualização
     $sql = "UPDATE new_sistema_cursos SET 
-                nome = :nome,
+                nomecurso = :nome,
                 horadem = :manha1,
                 horaparam = :manha2,
                 horadet = :tarde1,

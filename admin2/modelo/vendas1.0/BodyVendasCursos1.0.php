@@ -44,7 +44,7 @@ $whereSql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
 $sql = "
     SELECT
         c.codigocursos,
-        c.nome,
+        c.nomecurso,
         c.visivelsc,
         c.ordemsc,
         c.datasc,
@@ -75,7 +75,7 @@ $stmt->execute();
             <?php
             $id        = (int)($row['codigocursos'] ?? 0);
             $encId     = encrypt($id, $action = 'e');
-            $nome      = htmlspecialchars($row['nome'] ?? 'Sem título');
+            $nome      = htmlspecialchars($row['nomecurso'] ?? 'Sem título');
             $ordem     = (int)($row['ordemsc'] ?? 0);
             $visivel   = (int)($row['visivelsc'] ?? 0);
             $comercial = (int)($row['comercialsc'] ?? 0);

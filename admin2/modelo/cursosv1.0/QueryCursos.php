@@ -29,7 +29,7 @@ if (!$rwCurso) {
 // Atribuição segura dos valores
 $Bocolor = $rwCurso['bgcolor'];
 $Pasta = $rwCurso['pasta'];
-$Nomecurso = $rwCurso['nome'];
+$Nomecurso = $rwCurso['nomecurso'];
 $Descricao = $rwCurso['descricaosc'];
 $Videoyoutube = $rwCurso['youtubeurl'];
 $urlterno = $rwCurso['linkexterno'];
