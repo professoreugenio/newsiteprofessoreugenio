@@ -190,6 +190,8 @@ if ($rwTurma) {
     $chavepixvitalicia      = $rwTurma['chavepixvitalicia'] ?? '';
     $linkpagseguro          = $rwTurma['linkpagseguro'] ?? '';
     $linkwhatsapp          = $rwTurma['linkwhatsapp'] ?? '';
+    $celularprofessor          = $rwTurma['celularprofessorct'] ?? '';
+    $linkwhatsapp ="https://wa.me/55".$celularprofessor."?text=Gostaria de mais informações sobre o curso";
     $linkpagsegurovitalicia = $rwTurma['linkpagsegurovitalicia'] ?? '';
     $linkmercadopago        = $rwTurma['linkmercadopago'] ?? '';
     $linkmercadopagovitalicio = $rwTurma['linkmercadopagovitalicio'] ?? '';

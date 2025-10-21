@@ -26,6 +26,27 @@ session_start();
 
 require 'vendasv1.0/query_vendas.php';
 ?>
+
+<?php
+// ----- Helpers de horário e destaque -----
+$aovivo     = (int)($aovivo     ?? 0);
+$horamanha  = (string)($horamanha ?? '');
+$horatarde  = (string)($horatarde ?? '');
+$horanoite  = (string)($horanoite ?? '');
+
+function fmtHora(?string $h): ?string
+{
+    if (!$h || $h === '00:00:00') return null;
+    if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $h)) return substr($h, 0, 5);
+    return $h;
+}
+
+$hasManha  = (bool)fmtHora($horamanha);
+$hasTarde  = (bool)fmtHora($horatarde);
+$hasNoite  = (bool)fmtHora($horanoite);
+$hasAnyTime = $hasManha || $hasTarde || $hasNoite;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -166,6 +187,42 @@ require 'vendasv1.0/query_vendas.php';
             color: var(--c-muted);
         }
     </style>
+
+
+    <style>
+        /* Destaque "AULA AO VIVO" no cabeçalho do formulário */
+        .badge-live {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem .75rem;
+            border-radius: 999px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #14ccab, #0bb598);
+            color: #0b1832;
+            box-shadow: 0 6px 20px rgba(20, 204, 171, .25);
+            border: 1px solid rgba(20, 204, 171, .35);
+            text-transform: uppercase;
+            letter-spacing: .2px;
+        }
+
+        .opt-time {
+            background: #0f1f3d;
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: .75rem;
+            padding: .75rem;
+        }
+
+        .opt-time input {
+            accent-color: #FF9C00;
+        }
+
+        .form-hint {
+            color: #9fb1d1;
+            font-size: .92rem;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -238,7 +295,20 @@ require 'vendasv1.0/query_vendas.php';
         <div class="container">
             <div class="row gy-4">
                 <div class="col-lg-7" data-aos="fade-up">
-                    <div class="heading-2 mb-2">Dados do Aluno</div>
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <div class="heading-2">Dados do Aluno</div>
+                        <?php if ($aovivo === 1): ?>
+                            <span class="badge-live"><i class="bi bi-broadcast"></i> AULA AO VIVO</span>
+                        <?php endif; ?>
+                    </div>
+                    <p class="form-hint mb-3">
+                        <?php if ($aovivo === 1): ?>
+                            Participe das transmissões ao vivo e tenha acesso às gravações.
+                        <?php else: ?>
+                            Acesso imediato ao conteúdo gravado; aulas ao vivo quando programadas.
+                        <?php endif; ?>
+                    </p>
+
                     <form id="formInscricao" class="needs-validation" novalidate>
                         <!-- Hidden context (preencha dinamicamente conforme seu fluxo) -->
                         <input type="hidden" name="idCurso" id="idCurso" value="excel-concursos">
@@ -277,10 +347,49 @@ require 'vendasv1.0/query_vendas.php';
                                     <label for="objetivo">Seu concurso-alvo (opcional)</label>
                                 </div>
                             </div>
+                            <?php if ($hasAnyTime): ?>
+                                <div class="col-12">
+                                    <label class="form-label">Escolha seu horário preferido (ao vivo)</label>
+                                    <div class="row g-2">
+                                        <?php if ($hasManha): ?>
+                                            <div class="col-md-4">
+                                                <div class="opt-time d-flex align-items-center justify-content-between">
+                                                    <label class="me-2 mb-0" for="horario_manha">
+                                                        <i class="bi bi-sunrise me-1"></i> Manhã às <?= htmlspecialchars(fmtHora($horamanha)) ?>
+                                                    </label>
+                                                    <input class="form-check-input" type="radio" name="horario" id="horario_manha" value="manha">
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if ($hasTarde): ?>
+                                            <div class="col-md-4">
+                                                <div class="opt-time d-flex align-items-center justify-content-between">
+                                                    <label class="me-2 mb-0" for="horario_tarde">
+                                                        <i class="bi bi-sunset me-1"></i> Tarde às <?= htmlspecialchars(fmtHora($horatarde)) ?>
+                                                    </label>
+                                                    <input class="form-check-input" type="radio" name="horario" id="horario_tarde" value="tarde">
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if ($hasNoite): ?>
+                                            <div class="col-md-4">
+                                                <div class="opt-time d-flex align-items-center justify-content-between">
+                                                    <label class="me-2 mb-0" for="horario_noite">
+                                                        <i class="bi bi-moon-stars me-1"></i> Noite às <?= htmlspecialchars(fmtHora($horanoite)) ?>
+                                                    </label>
+                                                    <input class="form-check-input" type="radio" name="horario" id="horario_noite" value="noite">
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="form-text text-white-50">Isso ajuda a organizar sua turma ao vivo. Você poderá mudar depois.</div>
+                                </div>
+                            <?php endif; ?>
+
                             <!-- Aceite LGPD -->
                             <div class="col-12">
                                 <div class="form-check">
-                                  <!--   <input class="form-check-input" type="checkbox" value="1" id="aceite" required>
+                                    <!--   <input class="form-check-input" type="checkbox" value="1" id="aceite" required>
                                     <label class="form-check-label small" for="aceite">
                                         Concordo em receber comunicações sobre minha inscrição e uso da plataforma.
                                     </label> -->

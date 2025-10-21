@@ -39,20 +39,63 @@ if ($ts !== '' && ctype_digit($ts)) {
 }
 */
 require 'vendasv1.0/query_vendas.php';
-/* ===================== (Opcional) LOG DE ENTRADA NO BANCO ===================== */
 
-
-/* ===================== REDIRECIONA (PRG) ===================== */
-// $next = 'vendas_Inscricao.php';
-// if (!headers_sent()) {
-//     header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-//     header('Pragma: no-cache');
-//     header('Location: ' . $next);
-//     exit;
-// }
 
 
 ?>
+
+<?php
+// Defaults seguros (caso variáveis não venham da query):
+$aovivo     = (int)($aovivo     ?? 0);
+$horamanha  = (string)($horamanha ?? '');
+$horatarde  = (string)($horatarde ?? '');
+$horanoite  = (string)($horanoite ?? '');
+
+// Formata "HH:MM:SS" -> "HH:MM" e ignora "00:00:00"
+function fmtHora(?string $h): ?string
+{
+    if (!$h || $h === '00:00:00') return null;
+    // aceita HH:MM ou HH:MM:SS
+    if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $h) === 1) {
+        return substr($h, 0, 5);
+    }
+    return $h; // fallback bruto, se vier em outro formato
+}
+
+// Monta os chips (badges) de destaque
+$chips = [];
+if ($aovivo === 1) {
+    $chips[] = [
+        'icon' => 'bi-broadcast',
+        'label' => 'ONLINE AO VIVO',
+        'class' => 'badge-live'
+    ];
+}
+if ($m = fmtHora($horamanha)) {
+    $chips[] = [
+        'icon' => 'bi-sunrise',
+        'label' => 'MANHÃ às ' . $m,
+        'class' => 'badge-time'
+    ];
+}
+if ($t = fmtHora($horatarde)) {
+    $chips[] = [
+        'icon' => 'bi-sunset',
+        'label' => 'TARDE às ' . $t,
+        'class' => 'badge-time'
+    ];
+}
+if ($n = fmtHora($horanoite)) {
+    $chips[] = [
+        'icon' => 'bi-moon-stars',
+        'label' => 'NOITE às ' . $n,
+        'class' => 'badge-time'
+    ];
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -120,6 +163,19 @@ require 'vendasv1.0/query_vendas.php';
                         <i class="bi bi-trophy me-1"></i> Curso de <?= $nomeCurso ?>
                     </span>
                     <?= $hero ?>
+                    <?php if (!empty($chips)): ?>
+                        <div class="chip-line mt-4 mb-4" data-aos="fade-up" data-aos-delay="50">
+                            <?php foreach ($chips as $c): ?>
+                                <span class="badge <?= htmlspecialchars($c['class'], ENT_QUOTES) ?>">
+                                    <i class="bi <?= htmlspecialchars($c['icon'], ENT_QUOTES) ?>"></i>
+                                    <?= htmlspecialchars($c['label'], ENT_QUOTES) ?>
+                                </span>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+
+
                     <div class="d-flex flex-wrap gap-2">
                         <a href="#cta" class="btn btn-cta btn-lg">
                             <i class="bi bi-star-fill me-2"></i> Garantir minha vaga

@@ -210,3 +210,77 @@
      border: 1px solid rgba(255, 255, 255, .06);
      border-radius: 1rem;
  }
+
+
+ /*horários*/
+
+ .chip-line {
+     display: flex;
+     flex-wrap: wrap;
+     gap: .5rem;
+     margin: .75rem 0 1.25rem;
+
+     padding: 5px;
+ }
+
+ .chip-line .badge {
+     display: inline-flex;
+     align-items: center;
+     gap: .4rem;
+     padding: .5rem .75rem;
+     border-radius: 999px;
+     font-weight: 700;
+     letter-spacing: .2px;
+     border: 1px solid rgba(220, 10, 202, 0.974);
+     background: #4b1e81;
+     color: #e9f3ff;
+ }
+
+ .chip-line .badge i {
+     font-size: 1rem;
+ }
+
+ .chip-line .badge-live {
+     background: linear-gradient(135deg, #14ccab, #0bb598);
+     color: #0b1832;
+     border-color: rgba(20, 204, 171, .35);
+     box-shadow: 0 6px 20px rgba(20, 204, 171, .25);
+ }
+
+ .chip-line .badge-time {
+     background: #0e2144;
+ }
+
+/*AO VIVO *
+
+/* Destaque "AULA AO VIVO" no cabeçalho do formulário */
+.badge-live {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .4rem .75rem;
+    border-radius: 999px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #14ccab, #0bb598);
+    color: #0b1832;
+    box-shadow: 0 6px 20px rgba(20, 204, 171, .25);
+    border: 1px solid rgba(20, 204, 171, .35);
+    text-transform: uppercase;
+    letter-spacing: .2px;
+}
+
+.opt-time {
+    background: #0f1f3d;
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: .75rem;
+    padding: .75rem;
+}
+
+.opt-time input {
+    accent-color: #FF9C00;
+}
+
+.form-hint {
+    color: #9fb1d1;
+    font-size: .92rem;
+}
