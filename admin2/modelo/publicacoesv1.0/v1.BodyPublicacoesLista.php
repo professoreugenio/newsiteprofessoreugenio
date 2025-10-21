@@ -195,7 +195,7 @@ $stmt->execute();
                 <?php
                 // Cursos destino
                 $pdo = config::connect();
-                $sqlCursos = "SELECT codigocursos, nome FROM new_sistema_cursos WHERE lixeirasc != 1 ORDER BY nome";
+                $sqlCursos = "SELECT codigocursos, nomecurso FROM new_sistema_cursos WHERE lixeirasc != 1 ORDER BY nomecurso";
                 $cursosStmt = $pdo->query($sqlCursos);
                 $cursos = $cursosStmt ? $cursosStmt->fetchAll(PDO::FETCH_ASSOC) : [];
                 ?>
@@ -206,7 +206,7 @@ $stmt->execute();
                         <option value="">Selecione...</option>
                         <?php foreach ($cursos as $c): ?>
                             <option value="<?= (int)$c['codigocursos'] ?>">
-                                <?= htmlspecialchars($c['nome']) ?>
+                                <?= htmlspecialchars($c['nomecurso']) ?>
                                 <?= (int)$c['codigocursos']; ?>
                             </option>
                         <?php endforeach; ?>
