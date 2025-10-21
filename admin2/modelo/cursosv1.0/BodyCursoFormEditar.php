@@ -1,4 +1,5 @@
 <?php require_once APP_ROOT . '/admin2/modelo/adm/idcursomodulo.php'; ?>
+
 <form action="" id="formEditarCurso" method="post" class="row g-4" data-aos="fade-up">
     <input type="hidden" name="idCurso" value="<?= $_GET['id'] ?>">
 

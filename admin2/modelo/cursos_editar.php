@@ -41,8 +41,13 @@ require_once APP_ROOT . '/autenticacao.php';
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
                 <h3><i class="bi bi-journal-text me-2"></i> Editar <?= $Nomecurso ?></h3>
-                <small><?= $saudacao; ?></small><br>
-                <small><?= diadasemana($data, 2); ?></small>
+                <p class="mt-2 mb-2">
+
+
+                    <?php $enc = encrypt("327&" . $idCurso . "&001&0&0", $action = 'e');  ?>
+                    <a target="_blank" class="btn btn-warning" href="https://professoreugenio.com/vendassite/?nav=<?= $enc; ?>&ts=<?= time(); ?>">
+                        PÁGINA VENDAS</a>
+                </p>
             </div>
             <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/SubnavCursosEditar.php'; ?>
         </div>
