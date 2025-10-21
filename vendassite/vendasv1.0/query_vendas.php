@@ -1,5 +1,4 @@
 <?php
-
 if (!isset($_SESSION['session_started_at'])) {
     $_SESSION['session_started_at'] = time();
 } elseif ((time() - (int)$_SESSION['session_started_at']) > SESSION_TTL) {
@@ -7,7 +6,6 @@ if (!isset($_SESSION['session_started_at'])) {
     session_regenerate_id(true);
     $_SESSION['session_started_at'] = time();
 }
-
 /* ===== Util ===== */
 function get_param(string $k): ?string
 {
@@ -17,12 +15,10 @@ function get_param(string $k): ?string
     if (strlen($v) > 8192) $v = substr($v, 0, 8192);
     return $v;
 }
-
 /* ===== Captura condicional ===== */
 $paramNav = get_param('nav');   // pode vir
 $paramAf  = get_param('af');    // pode NÃO vir e tá tudo bem
 $paramTs  = get_param('ts');    // opcional
-
 // Persistir APENAS quando vier na URL (não sobrescreve sessão com vazio)
 if ($paramNav !== null) {
     $_SESSION['nav'] = $paramNav;
@@ -35,12 +31,10 @@ if ($paramAf  !== null) {
 if ($paramTs  !== null) {
     $_SESSION['ts']  = $paramTs;
 }
-
 // Exposição: GET > SESSION > '' (sem notices se 'af' não vier)
 $nav = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
 $af  = $_GET['af']  ?? ($_SESSION['af']  ?? '');
 $ts  = $_GET['ts']  ?? ($_SESSION['ts']  ?? '');
-
 /* ===== Redirect condicional (PRG) =====
    Redireciona só quando chegaram novos parâmetros (mesmo que 'af' não venha).
    Evita looping usando uma flag de “já redirecionado”.
@@ -49,7 +43,6 @@ $ts  = $_GET['ts']  ?? ($_SESSION['ts']  ?? '');
 $hasNewParams   = ($nav !== null) || ($af !== null) || ($ts !== null);
 $prgAlreadyDone = !empty($_SESSION['prg_redirect_done']);
 $noredir        = isset($_GET['noredir']) && $_GET['noredir'] == '1';
-
 if ($hasNewParams && !$prgAlreadyDone && !$noredir) {
     $_SESSION['prg_redirect_done'] = time();
     if (!headers_sent()) {
@@ -59,7 +52,6 @@ if ($hasNewParams && !$prgAlreadyDone && !$noredir) {
         exit;
     }
 }
-
 // ==== 1) Validar a sessão/nav e decodificar com segurança ====
 $navRaw = $_SESSION['nav'] ?? '';
 if ($navRaw === '') {
@@ -73,10 +65,8 @@ if ($navRaw === '') {
         // error_log('NAV decrypt error: ' . $e->getMessage());
         $decNavCurso = '';
     }
-
     // Tentar extrair $idCursoVenda
     $idCursoVenda = 0;
-
     if ($decNavCurso !== '') {
         /**
          * CENÁRIO A: se o nav decodificado foi algo como "a=foo&id=123&foto=456"
@@ -86,7 +76,6 @@ if ($navRaw === '') {
         if (isset($navParams['id'])) {
             $idCursoVenda = (int)$navParams['id'];
         }
-
         /**
          * CENÁRIO B (fallback): manter compat. com explode("&") nas posições 1/2
          * decNavCurso = "qualquercoisa&123&456"
@@ -99,10 +88,8 @@ if ($navRaw === '') {
         }
     }
 }
-
 // Garantia de tipo
 $idCursoVenda = max(0, (int)$idCursoVenda);
-
 // ==== 2) Defaults para todas as variáveis (evita undefined posteriormente) ====
 $idCurso = '';
 $enIdCurso = '';
@@ -110,11 +97,9 @@ $nomeTurma = '';
 $descricao = '';
 $lead = '';
 $chaveTurma = '';
-
 $horamanha = '';
 $horatarde = '';
 $horanoite = '';
-
 $vendaliberada = '';
 $horasaulast = '';
 $valorvenda = '';
@@ -131,23 +116,18 @@ $valorhoraaula = '';
 $imgqrcodecurso = '';
 $imgqrcodeanual = '';
 $imgqrcodevitalicio = '';
-
 $imgMidiaCurso = 'https://professoreugenio.com/img/cat-2.jpg';
-
 $nomeCurso = '';
 $hero = '';
 $sobreocurso = '';
 $beneficios = '';
 $cta = '';
-
 $Codigochave = '';
-
 // ==== 3) Se não houver curso id válido, encerre cedo com defaults ====
 if ($idCursoVenda === 0) {
     // Nada a consultar — mantém defaults e encerra.
     return;
 }
-
 // ==== 4) Buscar TURMA (JOIN com chave) ====
 $query = $con->prepare("
     SELECT 
@@ -185,7 +165,6 @@ $query = $con->prepare("
 $query->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
 $query->execute();
 $rwTurma = $query->fetch(PDO::FETCH_ASSOC);
-
 if ($rwTurma) {
     // Variáveis principais
     $idCurso      = (string)($rwTurma['codcursost'] ?? '');
@@ -194,12 +173,10 @@ if ($rwTurma) {
     $descricao    = $rwTurma['previa'] ?? '';
     $lead         = $rwTurma['lead'] ?? '';
     $chaveTurma   = $rwTurma['chave'] ?? '';
-
     // horários
     $horamanha    = $rwTurma['horadem'] ?? '';
     $horatarde    = $rwTurma['horadet'] ?? '';
     $horanoite    = $rwTurma['horaden'] ?? '';
-
     // comercial
     $vendaliberada          = $rwTurma['visivelst'] ?? '';
     $horasaulast            = $rwTurma['horasaulast'] ?? '';
@@ -219,7 +196,6 @@ if ($rwTurma) {
     $imgqrcodeanual         = $rwTurma['imgqrcodeanual'] ?? '';
     $imgqrcodevitalicio     = $rwTurma['imgqrcodevitalicio'] ?? '';
 }
-
 // ==== 5) Buscar FOTO do curso (midias) ====
 $tipo = 1;
 $query = $con->prepare("
@@ -235,18 +211,16 @@ $query = $con->prepare("
 $query->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
 $query->bindValue(':tipo', $tipo, PDO::PARAM_INT);
 $query->execute();
-
 $rwFotoCurso = $query->fetch(PDO::FETCH_ASSOC);
 if ($rwFotoCurso && !empty($rwFotoCurso['pasta']) && !empty($rwFotoCurso['foto'])) {
     $pastaMidia = $rwFotoCurso['pasta'];
     $fotoMidia  = $rwFotoCurso['foto'];
     $imgMidiaCurso = "https://professoreugenio.com/fotos/midias/{$pastaMidia}/{$fotoMidia}";
 }
-
 // ==== 6) Buscar DADOS do curso (nome/hero/sobre/beneficios/cta) ====
 $queryCurso = $con->prepare("
     SELECT 
-        nome,
+        nomecurso,
         heroSC,
         sobreSC,
         beneficiosSC,
@@ -257,16 +231,18 @@ $queryCurso = $con->prepare("
 ");
 $queryCurso->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
 $queryCurso->execute();
-
 $rwCurso = $queryCurso->fetch(PDO::FETCH_ASSOC);
 if ($rwCurso) {
-    $nomeCurso   = $rwCurso['nome'] ?? '';
+    $nomeCurso   = $rwCurso['nomecurso'] ?? '';
     $hero        = $rwCurso['heroSC'] ?? '';
     $sobreocurso = $rwCurso['sobreSC'] ?? '';
     $beneficios  = $rwCurso['beneficiosSC'] ?? '';
     $cta         = $rwCurso['ctaSC'] ?? '';
+    $youtubeurl         = $rwCurso['youtubeurl'] ?? '';
+    parse_str(parse_url($youtubeurl, PHP_URL_QUERY), $params);
+    // Obter o valor do parâmetro "v"
+    $videoyoutube = $params['v'] ?? ''.  $hero.'';
 }
-
 // ==== 7) Buscar CÓDIGO da chave (se houver chaveTurma) ====
 if (!empty($chaveTurma)) {
     $querychave = $con->prepare("

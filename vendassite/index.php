@@ -136,9 +136,9 @@ require 'vendasv1.0/query_vendas.php';
                 </div>
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="hero-card p-3 p-md-4">
-                        <!-- Substitua o poster pelo seu thumb -->
+                        <!-- Substitua o poster pelo seu thumb --> <strong>Aula gratúita.<?= $videoyoutube ?></strong>
                         <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-1 border-light">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Apresentação do Curso"
+                            <iframe src="https://www.youtube.com/embed/<?= $v ?>" title="Apresentação do Curso"
                                 allowfullscreen loading="lazy"></iframe>
                         </div>
                         <div class="d-flex align-items-center gap-3 mt-3">
