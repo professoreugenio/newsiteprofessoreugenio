@@ -43,7 +43,7 @@ require_once APP_ROOT . '/autenticacao.php';
                 <h3><i class="bi bi-journal-text me-2"></i> Editar <?= $Nomecurso ?></h3>
                 <p class="mt-2 mb-2">
 
-
+                    <?php echo $dec = encrypt("Q3ZXU1JNakZmcno1RlNEYXhTcHN2UT09", $action = 'd'); ?>
                     <?php $enc = encrypt("327&" . $idCurso . "&001&0&0", $action = 'e');  ?>
                     <a target="_blank" class="btn btn-warning" href="https://professoreugenio.com/vendassite/?nav=<?= $enc; ?>&ts=<?= time(); ?>">
                         PÁGINA VENDAS</a>

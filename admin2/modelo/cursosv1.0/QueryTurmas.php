@@ -36,6 +36,7 @@ $Nometurma = $rwTurma['nometurma'] ?? '';
 $linkWhatsapp = $rwTurma['linkwhatsapp'] ?? '';
 $linkYoutube = $rwTurma['youtubesct'] ?? '';
 $NomeProfessor = $rwTurma['nomeprofessor'] ?? '';
+$CelularProfessor = $rwTurma['celularprofessorct'] ?? '';
 $ChaveTurma = $rwTurma['chave'] ?? '';
 $lead = $rwTurma['lead'] ?? '';
 $produtoafiliado = $rwTurma['idprodutoafiliadoct'] ?? '';
@@ -57,6 +58,7 @@ $institucional =  ($rwTurma['institucional'] == '1') ? "checked" : "";
 $chkon   = ($rwTurma['visivelst'] == '1') ? "checked" : "";
 $chkanda   = ($rwTurma['andamento'] == '1') ? "0" : "";
 $chcom   = ($rwTurma['comercialt'] == '1') ? "checked" : "";
+$chvivo   = ($rwTurma['aovivoct'] == '1') ? "checked" : "";
 $chkytube    = ($rwTurma['visiveltube'] == '1') ? "checked" : "";
 
 /*comercial*/

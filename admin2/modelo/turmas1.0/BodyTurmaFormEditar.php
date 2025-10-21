@@ -40,15 +40,17 @@
             <label class="form-check-label" for="visivelst">Visível no site</label>
         </div>
 
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="andamento" name="andamento" value="1" <?= $chkanda ?>>
-            <label class="form-check-label" for="andamento">Em andamento</label>
-        </div>
+
 
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="comercialt" name="comercialt" value="1" <?= $chcom ?>>
             <label class="form-check-label" for="comercialt">Comercial</label>
         </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="aovivo" name="aovivo" value="1" <?= $chvivo ?>>
+            <label class="form-check-label" for="comercialt">Ao vivo</label>
+        </div>
+
 
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="visiveltube" name="visiveltube" value="1" <?= $chkytube ?>>
@@ -57,6 +59,10 @@
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="institucional" name="institucional" value="1" <?= $institucional ?>>
             <label class="form-check-label" for="visiveltube">Institucional</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="andamento" name="andamento" value="1" <?= $chkanda ?>>
+            <label class="form-check-label" for="andamento">Em andamento</label>
         </div>
     </div>
     <input type="hidden" name="chave" value="<?= htmlspecialchars($ChaveTurma) ?>">
@@ -78,7 +84,7 @@
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $selected = ($row['codigoprodutoafiliado'] == $produtoafiliado) ? 'selected' : '';
-                    echo '<option value="' . $row['codigoprodutoafiliado'] . '" ' . $selected . '>' . htmlspecialchars($row['nomeap']) ." ". $row['codigoprodutoafiliado']. '</option>';
+                    echo '<option value="' . $row['codigoprodutoafiliado'] . '" ' . $selected . '>' . htmlspecialchars($row['nomeap']) . " " . $row['codigoprodutoafiliado'] . '</option>';
                 }
             } catch (Exception $e) {
                 echo '<option value="">Erro ao carregar produtos</option>';
@@ -101,6 +107,10 @@
     <div class="col-md-4">
         <label for="nomeProfessor" class="form-label">Nome do Professor</label>
         <input type="text" class="form-control" id="nomeProfessor" name="nomeprofessor" value="<?= htmlspecialchars($NomeProfessor) ?>">
+    </div>
+    <div class="col-md-4">
+        <label for="nomeProfessor" class="form-label">Celular do Professor</label>
+        <input type="text" class="form-control" id="celularprofessor" name="celularprofessor" value="<?= htmlspecialchars($CelularProfessor) ?>">
     </div>
 
     <!-- Horários -->

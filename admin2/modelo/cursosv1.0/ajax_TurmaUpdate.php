@@ -17,6 +17,7 @@ try {
     $produtoAfiliado = trim($_POST['produtoafiliado'] ?? '');
     $pasta = trim($_POST['pasta'] ?? '');
     $nomeProfessor = trim($_POST['nomeprofessor'] ?? '');
+    $celularProfessor = trim($_POST['celularprofessor'] ?? '');
     $bgcolor = trim($_POST['bgcolor_cs'] ?? '');
     $linkWhatsapp = trim($_POST['linkwhatsapp'] ?? '');
     $linkYoutube = trim($_POST['youtubesct'] ?? '');
@@ -36,6 +37,7 @@ try {
     $horaparan = trim($_POST['noite_as']) ?? '';
 
     // Checkboxes (se não marcados, não vêm no POST)
+    $aovivo = isset($_POST['aovivo']) ? 1 : 0;
     $visivelst = isset($_POST['visivelst']) ? 1 : 0;
     $andamento = isset($_POST['andamento']) ? 1 : 0;
     $comercialt = isset($_POST['comercialt']) ? 1 : 0;
@@ -57,6 +59,7 @@ try {
             pasta = :pasta,
             previa = :previa,
             nomeprofessor = :nomeprofessor,
+            celularprofessorct = :celularprofessor,
             bgcolor_cs = :bgcolor,
             linkwhatsapp = :linkwhatsapp,
             youtubesct = :youtubesct,
@@ -64,6 +67,7 @@ try {
             detalhes = :detalhes,
             sobreocurso = :sobre,
             visivelst = :visivelst,
+            aovivoct = :aovivo,
             andamento = :andamento,
             comercialt = :comercialt,
             visiveltube = :visiveltube,
@@ -83,6 +87,7 @@ try {
         ':pasta' => $pasta,
         ':previa' => $previa,
         ':nomeprofessor' => $nomeProfessor,
+        ':celularprofessor' => $celularProfessor,
         ':bgcolor' => $bgcolor,
         ':linkwhatsapp' => $linkWhatsapp,
         ':youtubesct' => $linkYoutube,
@@ -90,6 +95,7 @@ try {
         ':detalhes' => $detalhes,
         ':sobre' => $sobre,
         ':visivelst' => $visivelst,
+        ':aovivo' => $aovivo,
         ':andamento' => $andamento,
         ':comercialt' => $comercialt,
         ':visiveltube' => $visiveltube,
@@ -97,7 +103,7 @@ try {
         ':chave' => $chave
     ]);
 
-    echo json_encode(['status' => 'ok', 'mensagem' => 'Turma atualizada com sucesso'.$produtoAfiliado.!'.']);
+    echo json_encode(['status' => 'ok', 'mensagem' => 'Turma atualizada com sucesso' . $produtoAfiliado . !'.']);
 } catch (Exception $e) {
     echo json_encode(['status' => 'erro', 'mensagem' => $e->getMessage()]);
 }
