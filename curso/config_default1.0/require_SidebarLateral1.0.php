@@ -3,11 +3,37 @@
 <?php $aulaLiberada = $aulaLiberada ?? '0'; ?>
 <?php $encAula = encrypt($codigoaula . "&" . $codigomodulo . "&" . $aulaLiberada, $action = 'e'); ?>
 
+<style>
+    /* Posição e estilo base */
+    #btnAbrirSidebar {
+        background-color: #6f42c1;
+        /* Roxo Bootstrap */
+        color: #fff;
+        /* Letras brancas */
+        border: none;
+        right: -10px;
+        /* levemente escondido à direita */
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+    }
+
+    /* Efeito hover */
+    #btnAbrirSidebar:hover {
+        background-color: #198754;
+        /* Verde */
+        transform: translateY(-50%) scale(1.2) rotate(360deg);
+        color: #fff;
+    }
+</style>
+
 <!-- BOTÃO FLUTUANTE PARA ABRIR O MENU -->
-<button id="btnAbrirSidebar" class="btn btn-emerald shadow rounded-circle position-fixed top-50 end-0 translate-middle-y me-3"
+<button id="btnAbrirSidebar"
+    class="btn position-fixed rounded-circle shadow d-flex align-items-center justify-content-center"
     style="z-index:1050; width:48px; height:48px;">
     <i class="bi bi-list fs-4"></i>
 </button>
+
 
 <!-- BARRA LATERAL DIREITA -->
 <div id="sidebarLateral" class="sidebarLateral bg-dark text-light shadow-lg">
@@ -64,7 +90,7 @@
         <button onclick="window.location.href='../curso/';" class="btn btn-outline-secondary text-start w-100">
             <i class="bi bi-people-fill me-2"></i>Cursos
         </button>
-        <?php if ($codigoUser == '1' || $codigoUser == '115507' || $codigoUser == '115488'): ?>
+        <?php if ($codigoUser == '1' || $codigoUser == '115498' || $codigoUser == '115509'): ?>
             <button id="btnChaveAfiliado" class="btn btn-success">
                 <i class="bi bi-link-45deg me-1"></i> Afiliados
             </button>
@@ -75,6 +101,11 @@
         </button> -->
 
         <!-- Admin -->
+        <?php $encIdUser = encrypt($idUser, $action = 'e'); ?>
+        <button onclick="(function(){ const w = window.open('../depoimentonovo.php?idUser=<?= $encIdUser; ?>', '_blank'); if (w) w.opener = null; })()" class="btn btn-outline-secondary text-start w-100"><i class="bi bi-archive me-2"></i>Depoimentos
+        </button>
+
+
 
         <!-- Configurações -->
         <?php if (basename($_SERVER['PHP_SELF']) != 'turmas.php'): ?>

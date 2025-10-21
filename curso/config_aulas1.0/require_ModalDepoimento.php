@@ -33,22 +33,58 @@
 
                     <!-- Permissão -->
                     <div class="mb-2">
-                        <label class="form-label fw-semibold" style="color:#112240;">Permissão de exibição pública</label>
-                        <div class="d-block d-md-flex gap-2">
-                            <!-- estilo "btn-check" (radios modernos) -->
+                        <label class="form-label fw-semibold" style="color:#112240;">
+                            Permite que o professor possa divulgar sua opinião para valorizar seu trabalho?
+                        </label>
+                        <div class="d-flex gap-2">
+
+                            <!-- Autorizo -->
                             <input type="radio" class="btn-check" name="permissao" id="permSim" value="1" autocomplete="off" required>
-                            <label class="btn w-100 mb-2 mb-md-0 rounded-3 py-2 fw-semibold perm-option" for="permSim" style="border:2px solid #00BB9C; color:#00BB9C; background:#e7fbf7;">
-                                <i class="bi bi-unlock me-1"></i> Autorizo
+                            <label class="btn w-100 rounded-3 py-2 fw-semibold perm-option" for="permSim">
+                                <i class="bi bi-check-circle me-1"></i> Autorizo
                             </label>
 
+                            <!-- Não autorizo -->
                             <input type="radio" class="btn-check" name="permissao" id="permNao" value="0" autocomplete="off" required>
-                            <label class="btn w-100 rounded-3 py-2 fw-semibold perm-option" for="permNao" style="border:2px solid #FF9C00; color:#FF9C00; background:#fff7ec;">
-                                <i class="bi bi-shield-lock me-1"></i> Não autorizo
+                            <label class="btn w-100 rounded-3 py-2 fw-semibold perm-option" for="permNao">
+                                <i class="bi bi-x-circle me-1"></i> Não autorizo
                             </label>
                         </div>
+
                         <div class="form-text mt-1">Você pode alterar esta permissão posteriormente com o suporte.</div>
-                        <div class="invalid-feedback d-block" id="permAviso" style="display:none;">Confirme sua escolha de permissão para continuar.</div>
+                        <div class="invalid-feedback d-block" id="permAviso" style="display:none;">
+                            Confirme sua escolha de permissão para continuar.
+                        </div>
                     </div>
+
+                    <style>
+                        /* Aparência base */
+                        .perm-option {
+                            border: 2px solid #ccc;
+                            color: #555;
+                            background: #f8f9fa;
+                            transition: all .25s ease;
+                            text-align: center;
+                        }
+
+                        .form-text {
+                            font-size: 0.875em;
+                            color: #061016ff;
+                        }
+
+                        .perm-option:hover {
+                            filter: brightness(0.97);
+                        }
+
+                        /* Quando selecionado (verde destaque) */
+                        .btn-check:checked+.perm-option {
+                            background: #e9f9f1;
+                            border-color: #28a745;
+                            color: #28a745;
+                            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, .25);
+                        }
+                    </style>
+
 
 
                 </form>

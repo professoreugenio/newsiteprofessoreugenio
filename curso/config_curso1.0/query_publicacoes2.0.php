@@ -27,8 +27,8 @@ $queryModulo->bindParam(":codigomodulo", $codigomodulo);
 $queryModulo->execute();
 $rwModulo = $queryModulo->fetch(PDO::FETCH_ASSOC);
 if ($rwModulo) {
-    $nmmodulo = $rwModulo['modulo'];
-    $bgcolor = $rwModulo['bgcolor'];
+    $nmmodulo = $rwModulo['modulo'] ?? '';
+    $bgcolor = $rwModulo['bgcolorsm'] ?? '#ccc';
 } else {
     $nmmodulo = 'Módulo não encontrado';
     $bgcolor = '#ccc';
@@ -77,7 +77,9 @@ if ($comercialDados == '1' || $codigoUser == '1'):
     ORDER BY ordempc ASC");
 else:
     $queryLicoes = $con->prepare("SELECT * FROM a_aluno_publicacoes_cursos, new_sistema_publicacoes_PJA
-    WHERE idmodulopc = :idmodulo AND aulaliberadapc = :publico AND codigopublicacoes = idpublicacaopc
+    WHERE idmodulopc = :idmodulo 
+    AND aulaliberadapc = :publico 
+    AND codigopublicacoes = idpublicacaopc
     AND a_aluno_publicacoes_cursos.visivelpc = '1'
     ORDER BY ordempc ASC");
     $publico = '1';
@@ -93,7 +95,8 @@ $quantLicoes = $fetchTodasLicoes ? count($fetchTodasLicoes) : 0;
 if (!empty($codigoaula)) {
     $queryLicao = $con->prepare("SELECT * FROM a_aluno_publicacoes_cursos, new_sistema_publicacoes_PJA
         WHERE a_aluno_publicacoes_cursos.idmodulopc = :idmodulo AND a_aluno_publicacoes_cursos.idpublicacaopc = :idpublicacao
-        AND codigopublicacoes = idpublicacaopc AND a_aluno_publicacoes_cursos.visivelpc = '1'
+        AND codigopublicacoes = idpublicacaopc 
+        AND a_aluno_publicacoes_cursos.visivelpc = '1'
         ORDER BY ordem ASC");
     $queryLicao->bindParam(":idmodulo", $codigomodulo);
     $queryLicao->bindParam(":idpublicacao", $codigoaula);
@@ -194,7 +197,9 @@ if ($rwQuest) {
 <?php
 // Consulta atual
 $queryAtual = $con->prepare("SELECT * FROM a_aluno_publicacoes_cursos 
-    WHERE idpublicacaopc = :id AND idcursopc = :idturma AND idmodulopc = :idmodulo AND visivelpc = '1'");
+    WHERE idpublicacaopc = :id AND idcursopc = :idturma AND idmodulopc = :idmodulo 
+    AND visivelpc = '1'
+    ");
 $queryAtual->bindParam(":id", $codigoaula);
 $queryAtual->bindParam(":idturma", $codigocurso);
 $queryAtual->bindParam(":idmodulo", $codigomodulo);
@@ -208,7 +213,8 @@ if ($rwAtual) {
     $aulaLiberada = ($rwAtual['aulaliberadapc'] == '1') ? '1' : '0';
     // Consulta anterior
     $queryAnterior = $con->prepare("SELECT idpublicacaopc FROM a_aluno_publicacoes_cursos 
-        WHERE ordempc < :ordem AND idcursopc = :idturma AND idmodulopc = :idmodulo AND visivelpc = '1' 
+        WHERE ordempc < :ordem AND idcursopc = :idturma AND idmodulopc = :idmodulo 
+        AND visivelpc = '1' 
         ORDER BY ordempc DESC LIMIT 1");
     $queryAnterior->bindParam(":ordem", $ordemAtual);
     $queryAnterior->bindParam(":idturma", $codigocurso);

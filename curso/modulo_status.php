@@ -422,32 +422,8 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
 <body>
     <?php require_once 'config_default1.0/sidebarLateral.php'; ?>
     <?php include 'v2.0/nav.php'; ?>
-    <!-- NAVBAR -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <img src="<?= $__fotoAluno; ?>" alt="Foto do aluno" class="avatar">
-                <span class="fw-semibold"><?= htmlspecialchars($__nomeAluno); ?></span>
-            </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nv"
-                aria-controls="nv" aria-expanded="false" aria-label="Menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div id="nv" class="collapse navbar-collapse justify-content-end">
-                <ul class="navbar-nav align-items-lg-center gap-lg-2">
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i>Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-mortarboard me-1"></i>Curso</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-chat-dots me-1"></i>Contato</a></li>
-                    <li class="nav-item"><a class="nav-link text-danger" href="#"><i class="bi bi-x-circle me-1"></i>Fechar</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-
-    <!-- CABEÇALHO / TÍTULO DO MÓDULO -->
-    <div style="height:70px"></div>
     <header class="container section-gap">
         <div class="row align-items-center g-3">
             <div class="col-lg-8" data-aos="fade-right">
@@ -510,12 +486,13 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
         </div>
     </header>
 
+
     <!-- PRIMEIRAS 4 / ÚLTIMAS 4 EM CARDS -->
     <section class="container section-gap">
 
-        <?php require 'config_curso1.0/require_buscar.php'; ?>
+
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <h2 class="h5 m-0"><?= empty($ultimasAssistidas) ? 'Comece por aqui' : 'Continue de onde parou' . $test; ?> ou acesse <a href="#lista-licoes" class="text-decoration-none small btn btn-warning">Ver lista completa <i class="bi bi-arrow-down-short"></i></a></h2>
+            <h2 class="h5 m-0"><?= empty($ultimasAssistidas) ? 'Comece por aqui' : 'Continue de onde parou' . $test; ?> ou acesse <a href="#lista-licoes" class="text-decoration-none small btn btn-warning">lista completa <i class="bi bi-arrow-down-short"></i></a></h2>
 
         </div>
 
@@ -635,6 +612,10 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
+
+        <?php require 'config_curso1.0/require_buscar.php'; ?>
+
+        <?php require 'config_curso1.0/require_BannerAmazon.php' ?>
     </section>
 
     <!-- LISTA COMPLETA DE LIÇÕES -->
@@ -720,11 +701,11 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between align-items-center">
                             <strong class="text-white text-truncate"><?= htmlspecialchars($titulo); ?></strong>
-                            <small class="text-muted-2">
+                            <!-- <small class="text-muted-2">
                                 <?= $assistida
                                     ? 'Status: <span class="text-success fw-semibold">Assistida</span>'
                                     : 'Status: <span class="text-warning fw-semibold">Pendente</span>'; ?>
-                            </small>
+                            </small> -->
                         </div>
 
                         <?php if ($wasLocked && (int)($codigoUser ?? 0) === 1): ?>

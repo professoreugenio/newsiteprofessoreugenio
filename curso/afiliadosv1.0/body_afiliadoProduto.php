@@ -194,8 +194,9 @@ $qrcodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=' . 
     }
 
     .btn-copy:hover {
-        filter: brightness(1.06);
-        color: #112240;
+        filter: brightness(1.01);
+        background: #FF9C00;
+        color: #fff5e5ff;
     }
 
     .af-grid-3 {
@@ -321,7 +322,13 @@ $qrcodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=' . 
                             <i class="bi bi-clipboard-check"></i> Copiar link de afiliação
                         </button>
                         <a class="btn btn-success"
-                            href="https://api.whatsapp.com/send?text=<?= rawurlencode('Conheça este curso: ' . $nome . ' ' . $urlAf) ?>"
+                            href="https://api.whatsapp.com/send?text=<?= rawurlencode($saudacao . '
+💡 Apresento o curso ' . $nome . ' com o Professor Eugênio!
+Você vai aprender a potencializar suas planilhas de Excel com Inteligência Artificial, elevando seu nível de produtividade.
+
+🎓 As aulas são online e ao vivo — basta um computador e um fone de ouvido para participar e interagir em tempo real!
+Clique no link abaixo para se inscrever e garatir a sua vaga:
+' . $urlAf) ?>"
                             target="_blank" rel="noopener">
                             <i class="bi bi-whatsapp"></i> Abrir WhatsApp com mensagem
                         </a>

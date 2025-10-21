@@ -24,7 +24,7 @@ session_set_cookie_params([
 session_start();
 
 
-require 'vendasv1.0/query_vendas.php';
+
 ?>
 
 <?php
@@ -311,8 +311,12 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
 
                     <form id="formInscricao" class="needs-validation" novalidate>
                         <!-- Hidden context (preencha dinamicamente conforme seu fluxo) -->
-                        <input type="hidden" name="idCurso" id="idCurso" value="excel-concursos">
-                        <input type="hidden" name="idTurma" id="idTurma" value="turma-2025-01">
+                        <input type="hidden" name="idCurso" id="idCurso" value="<?= htmlspecialchars($enIdCurso); ?>">
+                        <input type="hidden" name="idTurma" id="idTurma" value="<?= htmlspecialchars($enIdTurma); ?>">
+                        <input type="hidden" name="Codigochave" value="<?= htmlspecialchars($Codigochave) ?>">
+                        <input type="hidden" name="CodigoAfiliado"
+                            value="<?= htmlspecialchars($_GET['af'] ?? ($_SESSION['af'] ?? '')) ?>">
+
                         <input type="hidden" name="utm" id="utm" value="">
                         <div class="row g-3">
                             <div class="col-12">
@@ -397,9 +401,12 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                                 </div>
                             </div>
                             <div class="col-12 d-grid">
-                                <a class="btn btn-cta btn-lg" href="vendas_plano.html">
-                                    <i class="bi bi-arrow-right-circle me-2"></i> Continuar
-                                </a>
+                                <div class="col-12 d-grid">
+                                    <button class="btn btn-cta btn-lg" type="submit">
+                                        <i class="bi bi-arrow-right-circle me-2"></i> Continuar
+                                    </button>
+                                </div>
+
                             </div>
                             <div class="col-12">
                                 <p class="small small-muted mb-0">
@@ -497,77 +504,191 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             once: true
         });
         document.getElementById('ano').textContent = new Date().getFullYear();
+
+        // ---------------- Util: Overlay de carregamento ----------------
+        let _loaderEl = null;
+
+        function showLoader(msg = 'Processando sua inscrição com segurança...') {
+            if (_loaderEl) return;
+            _loaderEl = document.createElement('div');
+            _loaderEl.id = 'overlayLoader';
+            _loaderEl.innerHTML = `
+      <div style="
+        position:fixed; inset:0; backdrop-filter: blur(4px);
+        background: rgba(17,34,64,.75); display:flex; align-items:center; justify-content:center; z-index:9999;
+      ">
+        <div style="
+          width:min(92vw,520px); background:#0d1a34; color:#e9f3ff;
+          border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px; text-align:center;
+          box-shadow:0 20px 60px rgba(0,0,0,.45);
+        ">
+          <div class="mb-2" style="font-weight:800; font-size:1.1rem;">
+            <i class="bi bi-shield-lock me-2"></i>Conexão segura
+          </div>
+          <div class="d-flex align-items-center justify-content-center mb-3" style="gap:.75rem;">
+            <div class="spinner-border" role="status" aria-hidden="true"></div>
+            <div style="opacity:.9;">${msg}</div>
+          </div>
+          <div class="small" style="color:#9fb1d1">
+            Seus dados são criptografados. Não armazenamos informações sensíveis do cartão neste site.
+          </div>
+        </div>
+      </div>`;
+            document.body.appendChild(_loaderEl);
+        }
+
+        function hideLoader() {
+            if (_loaderEl) {
+                _loaderEl.remove();
+                _loaderEl = null;
+            }
+        }
+
         // -------- Persistência local (localStorage) --------
-        const FIELDS = ['nome', 'email', 'telefone', 'objetivo'];
+        const FIELDS = ['nome', 'email', 'telefone', 'objetivo', 'horario'];
 
         function loadFromStorage() {
             FIELDS.forEach(id => {
-                const el = document.getElementById(id);
-                if (!el) return;
                 const v = localStorage.getItem('insc_' + id);
-                if (v) el.value = v;
+                if (!v) return;
+                const el = document.getElementById(id);
+                if (el) el.value = v;
+                if (id === 'horario') {
+                    const r = document.querySelector(`input[name="horario"][value="${v}"]`);
+                    if (r) r.checked = true;
+                }
             });
         }
 
         function saveToStorage() {
             FIELDS.forEach(id => {
                 const el = document.getElementById(id);
-                if (!el) return;
-                localStorage.setItem('insc_' + id, el.value.trim());
+                if (el) localStorage.setItem('insc_' + id, el.value.trim());
             });
+            // horário (rádio) é salvo por change; aqui garantimos fallback:
+            const r = document.querySelector('input[name="horario"]:checked');
+            if (r) localStorage.setItem('insc_horario', r.value);
         }
+
         loadFromStorage();
+
+        // Inputs de texto
         FIELDS.forEach(id => {
             const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', saveToStorage);
-            }
+            if (el) el.addEventListener('input', saveToStorage);
         });
-        // -------- Validação + Próxima etapa --------
+        // Rádios de horário
+        document.querySelectorAll('input[name="horario"]').forEach(r => {
+            r.addEventListener('change', () => {
+                localStorage.setItem('insc_horario', r.value);
+            });
+        });
+
+        // -------- Validação + AJAX + Próxima etapa --------
         const form = document.getElementById('formInscricao');
-        form.addEventListener('submit', (ev) => {
+        form.addEventListener('submit', async (ev) => {
             ev.preventDefault();
             ev.stopPropagation();
+
             // HTML5 validation
             if (!form.checkValidity()) {
                 form.classList.add('was-validated');
                 return;
             }
+
+            // Se existem opções de horário, exigir uma marcada
+            const horarioInputs = document.querySelectorAll('input[name="horario"]');
+            let horarioSel = '';
+            if (horarioInputs.length > 0) {
+                const r = document.querySelector('input[name="horario"]:checked');
+                if (!r) {
+                    alert('Selecione seu horário preferido.');
+                    return;
+                }
+                horarioSel = r.value;
+                localStorage.setItem('insc_horario', horarioSel);
+            }
+
+            // Salvar campos básicos
             saveToStorage();
-            // Monte o payload (pode enviar via fetch/AJAX ao seu endpoint)
+
+            // Monta payload
+            const aceiteEl = document.getElementById('aceite');
             const data = {
                 idCurso: document.getElementById('idCurso').value,
                 idTurma: document.getElementById('idTurma').value,
+                // 👇 ADICIONAR ESTAS DUAS LINHAS
+                Codigochave: (document.querySelector('input[name="Codigochave"]')?.value || ''),
+                CodigoAfiliado: (document.querySelector('input[name="CodigoAfiliado"]')?.value || ''),
                 nome: document.getElementById('nome').value.trim(),
                 email: document.getElementById('email').value.trim(),
                 telefone: document.getElementById('telefone').value.trim(),
                 objetivo: document.getElementById('objetivo').value.trim(),
-                aceite: document.getElementById('aceite').checked ? 1 : 0,
+                horario: horarioSel,
+                aceite: (aceiteEl && aceiteEl.checked) ? 1 : 0,
                 utm: document.getElementById('utm').value
             };
-            // >>> Integração:
-            // 1) Se quiser enviar via AJAX ao backend e depois redirecionar:
-            // fetch('inscricoesv1.0/ajax_registrarInscricao.php', {
-            //   method: 'POST', headers: {'Content-Type':'application/json'},
-            //   body: JSON.stringify(data)
-            // }).then(r=>r.json()).then(res=>{
-            //   if(res?.ok){
-            //     window.location.href = 'selecionar_plano.php?lead='+encodeURIComponent(res.lead); // Etapa 2
-            //   } else {
-            //     alert(res?.msg || 'Não foi possível registrar. Tente novamente.');
-            //   }
-            // }).catch(()=> alert('Falha de rede. Tente novamente.'));
-            // 2) Se preferir apenas redirecionar com querystring (simples):
-            const qs = new URLSearchParams(data).toString();
-            window.location.href = 'selecionar_plano.php?' + qs; // ajuste para vendaPagamento.php se preferir
+
+            // Mostra overlay de carregamento
+            showLoader('Salvando seus dados e preparando a próxima etapa...');
+
+            // Envia via AJAX (JSON) para seu endpoint
+            const controller = new AbortController();
+            const to = setTimeout(() => controller.abort(), 20000); // 20s timeout
+
+            try {
+                const resp = await fetch('vendasv1.0/ajax_inscricaocurso.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                    signal: controller.signal
+                });
+                clearTimeout(to);
+
+                if (!resp.ok) throw new Error('Falha de comunicação. Código ' + resp.status);
+                const res = await resp.json();
+
+                if (res && (res.ok === true || res.success === true)) {
+                    // Persistir mais coisas se vierem do backend
+                    if (res.idCurso) localStorage.setItem('insc_idCurso', res.idCurso);
+                    if (res.idTurma) localStorage.setItem('insc_idTurma', res.idTurma);
+                    if (res.lead) localStorage.setItem('insc_lead', String(res.lead));
+                    if (res.horario) localStorage.setItem('insc_horario', res.horario);
+
+                    // Próxima etapa
+                    const redirect = res.redirect || 'vendas_plano.php';
+                    // Carregar dados mínimos na querystring (evita depender só do storage)
+                    const qs = new URLSearchParams({
+                        lead: res.lead ? String(res.lead) : '',
+                        idCurso: data.idCurso,
+                        idTurma: data.idTurma,
+                        nome: data.nome,
+                        email: data.email,
+                        telefone: data.telefone,
+                        objetivo: data.objetivo,
+                        horario: data.horario,
+                        utm: data.utm
+                    }).toString();
+
+                    window.location.href = redirect + (qs ? ('?' + qs) : '');
+                } else {
+                    hideLoader();
+                    alert((res && (res.msg || res.message)) || 'Não foi possível registrar sua inscrição. Tente novamente.');
+                }
+            } catch (err) {
+                hideLoader();
+                alert('Não foi possível concluir a solicitação agora. Verifique sua conexão e tente novamente.\n\n' + (err && err.message ? err.message : ''));
+            }
         });
-        // Capta UTM se existir
+
+        // Capta UTM se existir na URL
         const p = new URLSearchParams(location.search);
         const utm = p.get('utm') || '';
-        if (utm) {
-            document.getElementById('utm').value = utm;
-        }
+        if (utm) document.getElementById('utm').value = utm;
     </script>
+
 </body>
 
 </html>
