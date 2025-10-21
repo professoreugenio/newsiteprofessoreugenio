@@ -117,7 +117,7 @@ require 'vendasv1.0/query_vendas.php';
             <div class="row align-items-center gy-4">
                 <div class="col-lg-7" data-aos="fade-right">
                     <span class="badge badge-soft rounded-pill px-3 py-2 small mb-3">
-                        <i class="bi bi-trophy me-1"></i> Curso de Excel para Concursos
+                        <i class="bi bi-trophy me-1"></i> Curso de <?= $nomeCurso ?>
                     </span>
                     <?= $hero ?>
                     <div class="d-flex flex-wrap gap-2">
@@ -136,9 +136,12 @@ require 'vendasv1.0/query_vendas.php';
                 </div>
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="hero-card p-3 p-md-4">
-                        <!-- Substitua o poster pelo seu thumb --> <strong>Aula gratúita.<?= $videoyoutube ?></strong>
+                        <div style="background-color: #ffa500; color: white; font-weight: bold; padding: 2px 16px; border-radius: 8px; display: inline-block;">
+                            Aula gratúita
+                        </div>
+
                         <div class="ratio ratio-16x9 rounded-4 overflow-hidden border border-1 border-light">
-                            <iframe src="https://www.youtube.com/embed/<?= $v ?>" title="Apresentação do Curso"
+                            <iframe src="https://www.youtube.com/embed/<?= $youtubeurl ?>" title="Apresentação do Curso"
                                 allowfullscreen loading="lazy"></iframe>
                         </div>
                         <div class="d-flex align-items-center gap-3 mt-3">
@@ -356,6 +359,7 @@ ORDER BY
                             <div class="small text-white-50 mb-3">ou Vitalício por R$ <?= $valorvendavitalicia; ?></div>
                         <?php else: ?>
                             <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= $valorvendavitalicia; ?></div>
+                            <div class="small text-white-50 mb-3">Acesso Vitalício com atualizações</div>
                         <?php endif; ?>
                         <div class="d-grid gap-2">
                             <a class="btn btn-cta btn-lg" href="vendas_inscricao.php">

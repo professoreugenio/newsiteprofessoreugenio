@@ -226,7 +226,7 @@ require 'vendasv1.0/query_vendas.php';
                             <div class="display-6 fw-bold my-2" style="color:#00BB9C;">
                                 R$ <?= $valorvendavitalicia; ?>
                             </div>
-                            <div class="small text-white-50">Vitalício </div>
+                            <div class="small text-white-50">Vitalício com atualizações</div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -280,10 +280,10 @@ require 'vendasv1.0/query_vendas.php';
                             <!-- Aceite LGPD -->
                             <div class="col-12">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="aceite" required>
+                                  <!--   <input class="form-check-input" type="checkbox" value="1" id="aceite" required>
                                     <label class="form-check-label small" for="aceite">
                                         Concordo em receber comunicações sobre minha inscrição e uso da plataforma.
-                                    </label>
+                                    </label> -->
                                     <div class="invalid-feedback">Você precisa aceitar para continuar.</div>
                                 </div>
                             </div>
@@ -325,10 +325,11 @@ require 'vendasv1.0/query_vendas.php';
                             <div class="small text-white-50">Vitalício por R$ <?= $valorvendavitalicia; ?> </div>
                         <?php else: ?>
                             <div class="display-6 fw-bold my-2" style="color:#00BB9C;">
-                                R$ <?= $valorvendavitalicia; ?>/
+                                R$ <?= $valorvendavitalicia; ?>
 
                             </div>
-                            <div class="small text-white-50">Vitalício </div>
+                            <div class="small text-white-50">Vitalício com atualizações</div>
+
                         <?php endif; ?>
                     </div>
                 </div>

@@ -133,6 +133,7 @@ $query = $con->prepare("
     SELECT 
         t.codcursost,
         t.nometurma,
+        t.aovivoct,
         t.previa,
         t.lead,
         t.chave AS chave,
@@ -173,6 +174,7 @@ if ($rwTurma) {
     $descricao    = $rwTurma['previa'] ?? '';
     $lead         = $rwTurma['lead'] ?? '';
     $chaveTurma   = $rwTurma['chave'] ?? '';
+    $aovivo   = $rwTurma['aovivoct'] ?? '';
     // horários
     $horamanha    = $rwTurma['horadem'] ?? '';
     $horatarde    = $rwTurma['horadet'] ?? '';
@@ -221,6 +223,7 @@ if ($rwFotoCurso && !empty($rwFotoCurso['pasta']) && !empty($rwFotoCurso['foto']
 $queryCurso = $con->prepare("
     SELECT 
         nomecurso,
+        youtubeurl,
         heroSC,
         sobreSC,
         beneficiosSC,
@@ -233,15 +236,15 @@ $queryCurso->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
 $queryCurso->execute();
 $rwCurso = $queryCurso->fetch(PDO::FETCH_ASSOC);
 if ($rwCurso) {
+    $youtubeurl         = $rwCurso['youtubeurl'] ?? '';
     $nomeCurso   = $rwCurso['nomecurso'] ?? '';
     $hero        = $rwCurso['heroSC'] ?? '';
     $sobreocurso = $rwCurso['sobreSC'] ?? '';
     $beneficios  = $rwCurso['beneficiosSC'] ?? '';
     $cta         = $rwCurso['ctaSC'] ?? '';
-    $youtubeurl         = $rwCurso['youtubeurl'] ?? '';
     parse_str(parse_url($youtubeurl, PHP_URL_QUERY), $params);
     // Obter o valor do parâmetro "v"
-    $videoyoutube = $params['v'] ?? ''.  $hero.'';
+    $youtubeurl = $params['v'] ?? '';
 }
 // ==== 7) Buscar CÓDIGO da chave (se houver chaveTurma) ====
 if (!empty($chaveTurma)) {
