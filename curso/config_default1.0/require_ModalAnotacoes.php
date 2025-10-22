@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header cursor-move" id="dragHandleCaderno">
         <h5 class="modal-title" id="modalCadernoLabel">
-          <i class="bi bi-journal-text me-2"></i> Caderno de anotações
+          <i class="bi bi-journal-text me-2"></i> Caderno de anotações*
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>

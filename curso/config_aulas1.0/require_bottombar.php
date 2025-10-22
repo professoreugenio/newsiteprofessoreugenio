@@ -43,6 +43,13 @@
                         title="Publicar conteúdo">
                         <i class="bi bi-person-badge-fill fs-5"></i>
                     </button>
+
+                    <button class="btn btn-outline-light d-flex align-items-center gap-2"
+                        title="Abrir em nova janela"
+                        onclick="window.open('<?= htmlspecialchars($url, ENT_QUOTES) ?>id=<?= $encIdCurso ?>&md=<?= $encIdModulo ?>&pub=<?= $encIdAula ?>', '_blank')">
+                        <i class="bi bi-pencil-square me-1"></i>
+                    </button>
+
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -62,10 +69,10 @@
                 data-bs-target="#modalCaderno"
                 title="Abrir caderno de anotações">
                 <i class="bi bi-journal-text fs-5"></i>
-                
+
             </button>
 
-            <a href="../depoimentonovo.php?idUser=<?= $encIdUser?>"
+            <a href="../depoimentonovo.php?idUser=<?= $encIdUser ?>"
                 target="_blank"
                 class="btn btn-light d-flex align-items-center gap-2 px-3"
                 title="Enviar seu depoimento">
