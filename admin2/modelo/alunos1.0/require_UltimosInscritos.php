@@ -8,22 +8,21 @@ function nomePrimeiroESegundo(string $nome): string
     $p = explode(' ', $nome);
     return trim(($p[0] ?? '') . ' ' . ($p[1] ?? ''));
 }
+
 function dtBR(?string $iso): string
 {
     if (!$iso || $iso === '0000-00-00') return '-';
     $d = DateTime::createFromFormat('Y-m-d', $iso);
     return $d ? $d->format('d/m/Y') : '-';
 }
+
 function enc($v)
 {
     return encrypt((string)$v, 'e');
-} // usa seu encrypt padrão
+}
 
 /**
  * Consulta: 4 últimas inscrições
- * Ligações:
- *  - i.codigousuario -> c.codigocadastro
- *  - i.chaveturma    -> t.chave
  */
 $sql = "
     SELECT 
@@ -54,6 +53,13 @@ $sql = "
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $ultimas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Total de inscrições de hoje
+$hoje = date('Y-m-d');
+$stmtHoje = $con->prepare("SELECT COUNT(*) FROM new_sistema_inscricao_PJA WHERE data_ins = :hoje");
+$stmtHoje->bindValue(':hoje', $hoje);
+$stmtHoje->execute();
+$totalHoje = (int)$stmtHoje->fetchColumn();
 ?>
 
 <style>
@@ -189,66 +195,81 @@ $ultimas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 </style>
 
-<div class="mt-3" data-aos="fade-up" data-aos-duration="700">
-    <div class="d-flex align-items-end justify-content-between mb-2">
-        <h5 class="mb-0">Últimas Inscrições</h5>
-        <small class="text-muted">Atualizado <?= date('d/m/Y H:i'); ?></small>
-    </div>
+<!-- BOTÃO DE ABRIR MODAL -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0">Painel</h5>
+    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalInscricoes">
+        📋 Últimas Inscrições (<?= $totalHoje; ?> hoje)
+    </button>
+</div>
 
-    <?php if (empty($ultimas)): ?>
-        <div class="alert alert-light border">Nenhuma inscrição encontrada.</div>
-    <?php else: ?>
-        <div class="insc-grid">
-            <?php foreach ($ultimas as $r):
-                $nome2  = nomePrimeiroESegundo($r['nome_aluno'] ?? '');
-                $dtIns  = dtBR($r['data_ins'] ?? null);
-                $prazo  = dtBR($r['dataprazosi'] ?? null);
-                $isCom  = (int)($r['comercialt'] ?? 0) === 1;
-                $isInst = (int)($r['institucional'] ?? 0) === 1;
+<!-- MODAL DE INSCRIÇÕES -->
+<div class="modal fade" id="modalInscricoes" tabindex="-1" aria-labelledby="modalInscricoesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="modalInscricoesLabel">📋 Últimas Inscrições</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
 
-                // Links com parâmetros criptografados
-                $encUser  = enc($r['codigocadastro'] ?? '');
-                $encCurso = enc($r['codcursost'] ?? '');
-                $encTurma = enc($r['codigoturma'] ?? '');
-
-                $linkAluno = 'alunoTurmas.php?idUsuario=' . rawurlencode($encUser);
-                $linkTurma = 'cursos_TurmasAlunos.php?id=' . rawurlencode($encCurso) . '&tm=' . rawurlencode($encTurma);
-            ?>
-                <div class="card-insc" title="Inscrição #<?= (int)$r['codigoinscricao']; ?>">
-                    <div class="inner">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="insc-title mb-0">
-                                <span class="insc-dot"></span>
-                                <a href="<?= $linkAluno; ?>"><?= htmlspecialchars($nome2); ?></a>
-                            </p>
-                            <div class="d-flex gap-1">
-                                <?php if ($isCom): ?>
-                                    <span class="badge-mini badge-comercial" title="Turma Comercial">Comercial</span>
-                                <?php endif; ?>
-                                <?php if ($isInst): ?>
-                                    <span class="badge-mini badge-instit" title="Turma Institucional">Institucional</span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-
-                        <p class="insc-sub">
-                            Turma: <a href="<?= $linkTurma; ?>"><?= htmlspecialchars($r['nometurma'] ?? '-'); ?></a>
-                        </p>
-
-                        <div class="insc-row">
-                            <span class="insc-date">
-                                <i class="bi bi-calendar2-check"></i> Inscrito em <?= $dtIns; ?>
-                            </span>
-
-                            <?php if ($prazo !== '-'): ?>
-                                <span class="badge-mini badge-prazo" title="Data de prazo">
-                                    <i class="bi bi-hourglass-split"></i> Prazo: <?= $prazo; ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-end justify-content-between mb-2">
+                    <small class="text-muted">Atualizado <?= date('d/m/Y H:i'); ?></small>
                 </div>
-            <?php endforeach; ?>
+
+                <?php if (empty($ultimas)): ?>
+                    <div class="alert alert-light border">Nenhuma inscrição encontrada.</div>
+                <?php else: ?>
+                    <div class="insc-grid">
+                        <?php foreach ($ultimas as $r):
+                            $nome2  = nomePrimeiroESegundo($r['nome_aluno'] ?? '');
+                            $dtIns  = dtBR($r['data_ins'] ?? null);
+                            $prazo  = dtBR($r['dataprazosi'] ?? null);
+                            $isCom  = (int)($r['comercialt'] ?? 0) === 1;
+                            $isInst = (int)($r['institucional'] ?? 0) === 1;
+
+                            $encUser  = enc($r['codigocadastro'] ?? '');
+                            $encCurso = enc($r['codcursost'] ?? '');
+                            $encTurma = enc($r['codigoturma'] ?? '');
+
+                            $linkAluno = 'alunoTurmas.php?idUsuario=' . rawurlencode($encUser);
+                            $linkTurma = 'cursos_TurmasAlunos.php?id=' . rawurlencode($encCurso) . '&tm=' . rawurlencode($encTurma);
+                        ?>
+                            <div class="card-insc" title="Inscrição #<?= (int)$r['codigoinscricao']; ?>">
+                                <div class="inner">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="insc-title mb-0">
+                                            <span class="insc-dot"></span>
+                                            <a href="<?= $linkAluno; ?>"><?= htmlspecialchars($nome2); ?></a>
+                                        </p>
+                                        <div class="d-flex gap-1">
+                                            <?php if ($isCom): ?>
+                                                <span class="badge-mini badge-comercial" title="Turma Comercial">Comercial</span>
+                                            <?php endif; ?>
+                                            <?php if ($isInst): ?>
+                                                <span class="badge-mini badge-instit" title="Turma Institucional">Institucional</span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+
+                                    <p class="insc-sub">
+                                        Turma: <a href="<?= $linkTurma; ?>"><?= htmlspecialchars($r['nometurma'] ?? '-'); ?></a>
+                                    </p>
+
+                                    <div class="insc-row">
+                                        <span class="insc-date">
+                                            <i class="bi bi-calendar2-check"></i> Inscrito em <?= $dtIns; ?>
+                                        </span>
+                                        <?php if ($prazo !== '-'): ?>
+                                            <span class="badge-mini badge-prazo"><?= $prazo; ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
-    <?php endif; ?>
+    </div>
 </div>
