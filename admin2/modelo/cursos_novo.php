@@ -4,7 +4,7 @@ define('APP_ROOT', dirname(__DIR__, 2));
 require_once APP_ROOT . '/conexao/class.conexao.php';
 require_once APP_ROOT . '/autenticacao.php';
 ?>
-<?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/QueryCursos.php'; ?>
+<?php //require_once APP_ROOT . '/admin2/modelo/cursosv1.0/QueryCursos.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 

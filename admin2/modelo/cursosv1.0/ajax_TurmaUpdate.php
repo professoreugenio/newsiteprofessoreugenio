@@ -27,6 +27,8 @@ try {
     $previa = trim($_POST['previa'] ?? '');
 
     // horários
+    $datainicio = trim($_POST['datainicio']) ?? '';
+    $datafim = trim($_POST['datafim']) ?? '';
     $horadem = trim($_POST['manha_de']) ?? '';
     $horaparam = trim($_POST['manha_as']) ?? '';
 
@@ -50,6 +52,8 @@ try {
         UPDATE new_sistema_cursos_turmas SET
             nometurma = :nome,
             idprodutoafiliadoct = :produtoafiliado,
+            datainiciost = :datainicio,
+            datafimst = :datafim,
             horadem = :manha1,
             horaparam = :manha2,
             horadet = :tarde1,
@@ -78,6 +82,8 @@ try {
     $stmt->execute([
         ':nome' => $nome,
         ':produtoafiliado' => $produtoAfiliado,
+        ':datainicio' => $datainicio,
+        ':datafim' => $datafim,
         ':manha1' => $horadem,
         ':manha2' => $horaparam,
         ':tarde1' => $horadet,

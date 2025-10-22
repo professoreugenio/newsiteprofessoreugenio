@@ -36,7 +36,7 @@ $todos = isset($_GET['todos']) ? $_GET['todos'] : null;
 
     <?php if (temPermissao($niveladm, [1, 3])): ?>
         <!-- Novo curso -->
-        <a href="cursos_novo.php"
+        <a href="cursos_novo.php?id=<?=time()?>"
             class="btn btn-success btn-sm px-3 py-2 rounded-3 shadow-sm border-0 <?= $pagina == 'cursos_novo.php' ? 'active' : '' ?>">
             <i class="bi bi-plus-circle-fill me-1"></i> Novo Curso
         </a>

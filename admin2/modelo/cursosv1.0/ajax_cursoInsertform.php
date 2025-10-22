@@ -24,7 +24,7 @@ try {
     }
 
     $sql = "INSERT INTO new_sistema_cursos (
-                nome, pasta, youtubeurl, linkexterno, bgcolor,
+                nomecurso, pasta, youtubeurl, linkexterno, bgcolor,
                 onlinesc, comercialsc, visivelsc, visivelhomesc, datasc, horasc
             ) VALUES (
                 :nome, :pasta, :youtube, :linkexterno, :bgcolor,
@@ -54,4 +54,4 @@ try {
     $response['mensagem'] = $e->getMessage();
 }
 
-echo json_encode($response);
+echo json_encode($response); 

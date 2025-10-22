@@ -16,10 +16,10 @@ try {
     $sqlCursos = "
         SELECT 
             codigocursos  AS id,
-            nome AS nome
+            nomecurso AS nome
         FROM new_sistema_cursos
-        WHERE nome IS NOT NULL AND nome <> '' AND visivelsc = 1 AND comercialsc = 1
-        ORDER BY nome ASC
+        WHERE nomecurso IS NOT NULL AND nomecurso <> '' AND visivelsc = 1 AND comercialsc = 1
+        ORDER BY nomecurso ASC
     ";
     $stmtCursos = $con->query($sqlCursos);
     $listaCursos = $stmtCursos ? $stmtCursos->fetchAll(PDO::FETCH_ASSOC) : [];
