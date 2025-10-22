@@ -170,9 +170,9 @@ if ($idCurso <= 0) {
     $idCurso = $cursoIdFromTurma;
 }
 $stmtCurso = $con->prepare("
-    SELECT nome
-    FROM new_sistema_curso
-    WHERE codigocurso = :idcurso
+    SELECT nomecurso
+    FROM new_sistema_cursos
+    WHERE codigocursos = :idcurso
     LIMIT 1
 ");
 $stmtCurso->bindValue(':idcurso', $idCurso, PDO::PARAM_INT);
@@ -181,7 +181,7 @@ $rowCurso = $stmtCurso->fetch(PDO::FETCH_ASSOC);
 if (!$rowCurso) {
     jfail('Curso inválido.');
 }
-$nmCurso = (string)$rowCurso['nome'];
+$nmCurso = (string)$rowCurso['nomecurso'];
 
 /* ========================= Verificações de existência ========================= */
 

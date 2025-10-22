@@ -1,21 +1,21 @@
 <?php
 
 declare(strict_types=1);
+
 define('BASEPATH', true);
 define('APP_ROOT', dirname(__DIR__, 1)); // ajuste se necessário
+
 /* ===================== INCLUDES DO PROJETO ===================== */
 require_once APP_ROOT . '/conexao/class.conexao.php';   // $con = config::connect();
 require_once APP_ROOT . '/autenticacao.php';            // se precisar (ex.: utilitários de sessão/login)
 
-
 /* ===================== CONFIG DE SESSÃO (4 HORAS) ===================== */
-const SESSION_TTL = 4 * 3600; // 4 horas em segundos
+const SESSION_TTL = 4 * 3600; // 4 horas
 
-// Definir cookie de sessão ANTES do start
 session_set_cookie_params([
     'lifetime' => SESSION_TTL,
     'path'     => '/',
-    'domain'   => '', // ex.: 'professoreugenio.com' se necessário
+    'domain'   => '',
     'secure'   => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
     'httponly' => true,
     'samesite' => 'Lax',
@@ -23,30 +23,171 @@ session_set_cookie_params([
 
 session_start();
 
+if (!isset($_SESSION['session_started_at'])) {
+    $_SESSION['session_started_at'] = time();
+} elseif ((time() - (int)$_SESSION['session_started_at']) > SESSION_TTL) {
+    unset($_SESSION['nav'], $_SESSION['nav_set_at'], $_SESSION['af'], $_SESSION['af_set_at'], $_SESSION['ts'], $_SESSION['prg_redirect_done']);
+    session_regenerate_id(true);
+    $_SESSION['session_started_at'] = time();
+}
 
-
-?>
-
-<?php
-// ----- Helpers de horário e destaque -----
-$aovivo     = (int)($aovivo     ?? 0);
-$horamanha  = (string)($horamanha ?? '');
-$horatarde  = (string)($horatarde ?? '');
-$horanoite  = (string)($horanoite ?? '');
-
+/* ===================== Helpers ===================== */
+function get_param(string $k): ?string
+{
+    if (!array_key_exists($k, $_GET)) return null;
+    $v = trim((string)$_GET[$k]);
+    if ($v === '') return null;
+    if (strlen($v) > 8192) $v = substr($v, 0, 8192);
+    return $v;
+}
+function h(string $s): string
+{
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
 function fmtHora(?string $h): ?string
 {
     if (!$h || $h === '00:00:00') return null;
-    if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $h)) return substr($h, 0, 5);
+    if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $h) === 1) return substr($h, 0, 5);
     return $h;
 }
 
+/* ===================== Captura GET -> Sessão (PRG) ===================== */
+$paramNav = get_param('nav');
+$paramAf  = get_param('af');
+$paramTs  = get_param('ts');
+
+if ($paramNav !== null) {
+    $_SESSION['nav'] = $paramNav;
+    $_SESSION['nav_set_at'] = time();
+}
+if ($paramAf  !== null) {
+    $_SESSION['af']  = $paramAf;
+    $_SESSION['af_set_at']  = time();
+}
+if ($paramTs  !== null) {
+    $_SESSION['ts']  = $paramTs;
+}
+
+$hasNewParams   = ($paramNav !== null) || ($paramAf !== null) || ($paramTs !== null);
+$prgAlreadyDone = !empty($_SESSION['prg_redirect_done']);
+$noredir        = isset($_GET['noredir']) && $_GET['noredir'] == '1';
+
+if ($hasNewParams && !$prgAlreadyDone && !$noredir) {
+    $_SESSION['prg_redirect_done'] = time();
+    if (!headers_sent()) {
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        $self = strtok($_SERVER['REQUEST_URI'], '?'); // esta mesma página, sem query
+        header('Location: ' . $self);
+        exit;
+    }
+}
+
+/* ===================== Decodifica NAV -> idCursoVenda ===================== */
+$idCursoVenda = 0;
+$navRaw = $_SESSION['nav'] ?? '';
+if ($navRaw !== '') {
+    try {
+        $decNavCurso = encrypt($navRaw, 'd'); // sua função de criptografia (d = decrypt)
+    } catch (Throwable $e) {
+        $decNavCurso = '';
+    }
+    if ($decNavCurso !== '') {
+        parse_str($decNavCurso, $navParams);
+        if (isset($navParams['id'])) {
+            $idCursoVenda = (int)$navParams['id'];
+        }
+        if ($idCursoVenda === 0) {
+            $exp = explode('&', $decNavCurso);
+            $idCursoVenda = isset($exp[1]) ? (int)preg_replace('/\D+/', '', $exp[1]) : 0;
+        }
+    }
+}
+$idCursoVenda = max(0, (int)$idCursoVenda);
+
+/* ===================== Defaults ===================== */
+$enIdCurso = $enIdTurma = $Codigochave = '';
+$nomeCurso = '';
+$aovivo = 0;
+$horamanha = $horatarde = $horanoite = '';
+$valoranual = $valorvendavitalicia = '';
+$linkwhatsapp = '';
+
+/* ===================== Buscas (somente se idCursoVenda válido) ===================== */
+if ($idCursoVenda > 0) {
+    // TURMA (inclui codigoturma!)
+    $q1 = $con->prepare("
+        SELECT 
+            t.codcursost,
+            t.codigoturma       AS idturma,
+            t.nometurma,
+            t.aovivoct,
+            t.horadem, t.horadet, t.horaden,
+            t.valoranual, t.valorvendavitalicia,
+            t.linkwhatsapp,
+            t.celularprofessorct,
+            t.chave AS chave
+        FROM new_sistema_cursos_turmas t
+        INNER JOIN new_sistema_chave c ON c.chaveturmasc = t.chave
+        WHERE t.codcursost = :id AND t.comercialt = '1'
+        LIMIT 1
+    ");
+    $q1->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
+    $q1->execute();
+    $turma = $q1->fetch(PDO::FETCH_ASSOC);
+
+    if ($turma) {
+        $idCurso   = (string)($turma['codcursost'] ?? '');
+        $idTurma   = (string)($turma['idturma'] ?? '');
+        $enIdCurso = $idCurso !== '' ? encrypt($idCurso, 'e') : '';
+        $enIdTurma = $idTurma !== '' ? encrypt($idTurma, 'e') : '';
+
+        $aovivo       = (int)($turma['aovivoct'] ?? 0);
+        $horamanha    = (string)($turma['horadem'] ?? '');
+        $horatarde    = (string)($turma['horadet'] ?? '');
+        $horanoite    = (string)($turma['horaden'] ?? '');
+        $valoranual   = (string)($turma['valoranual'] ?? '');
+        $valorvendavitalicia = (string)($turma['valorvendavitalicia'] ?? '');
+
+        // WhatsApp
+        $cel = preg_replace('/\D+/', '', (string)($turma['celularprofessorct'] ?? ''));
+        if ($cel === '') $cel = '5585995637577';
+        if (strpos($cel, '55') !== 0) $cel = '55' . $cel;
+        $linkwhatsapp = 'https://wa.me/' . $cel . '?text=' . rawurlencode('Gostaria de mais informações sobre o curso');
+
+        $chaveTurma = (string)($turma['chave'] ?? '');
+
+        // CHAVE
+        if ($chaveTurma !== '') {
+            $qCh = $con->prepare("SELECT chavesc FROM new_sistema_chave WHERE chaveturmasc = :campo LIMIT 1");
+            $qCh->bindValue(':campo', $chaveTurma, PDO::PARAM_STR);
+            $qCh->execute();
+            $rwCh = $qCh->fetch(PDO::FETCH_ASSOC);
+            if ($rwCh && !empty($rwCh['chavesc'])) {
+                $Codigochave = encrypt($rwCh['chavesc'], 'e');
+            }
+        }
+    }
+
+    // CURSO (nome)
+    $q2 = $con->prepare("SELECT nomecurso FROM new_sistema_cursos WHERE codigocursos = :id LIMIT 1");
+    $q2->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
+    $q2->execute();
+    $curso = $q2->fetch(PDO::FETCH_ASSOC);
+    if ($curso) {
+        $nomeCurso = (string)($curso['nomecurso'] ?? '');
+    }
+}
+
+/* ===================== Horários ===================== */
 $hasManha  = (bool)fmtHora($horamanha);
 $hasTarde  = (bool)fmtHora($horatarde);
 $hasNoite  = (bool)fmtHora($horanoite);
 $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
-?>
 
+/* ===================== Afiliado ===================== */
+$CodigoAfiliadoVal = $_GET['af'] ?? ($_SESSION['af'] ?? '');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -54,26 +195,20 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
     <!-- Metadados -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscrição — Curso <?= $nomeCurso ?>| Professor Eugênio</title>
-    <meta name="description"
-        content="Faça sua inscrição para o Curso de <?= $nomeCurso ?>. Aulas ao vivo e gravadas, material para download e certificação.">
+    <title>Inscrição — Curso <?= h($nomeCurso ?: 'Excel para Concursos') ?> | Professor Eugênio</title>
+    <meta name="description" content="Faça sua inscrição para o Curso de <?= h($nomeCurso ?: 'Excel para Concursos') ?>. Aulas ao vivo e gravadas, material para download e certificação.">
     <!-- Bootstrap / Icons / AOS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <!-- Estilos do tema -->
+
     <style>
         :root {
             --c-h1: #00BB9C;
-            /* h1 */
             --c-h2: #FF9C00;
-            /* títulos de seção (visual <h2>) */
             --c-bg: #112240;
-            /* fundo principal */
-            --c-text: #ffffff;
-            /* textos gerais */
+            --c-text: #fff;
             --c-card: #0d1a34;
-            /* fundo de cards */
             --c-muted: #9fb1d1;
         }
 
@@ -126,12 +261,10 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             color: #e9f3ff;
         }
 
-        /* Barra de etapas */
         .steps {
             height: 6px;
             background: #1b2d55;
             border-radius: 999px;
-            position: relative;
             overflow: hidden;
         }
 
@@ -141,8 +274,6 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             width: 25%;
         }
 
-        /* Etapa 1 de 4 */
-        /* Floating labels com menos altura vertical */
         .form-floating>label {
             color: #cfe2ff;
         }
@@ -186,11 +317,7 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
         .small-muted {
             color: var(--c-muted);
         }
-    </style>
 
-
-    <style>
-        /* Destaque "AULA AO VIVO" no cabeçalho do formulário */
         .badge-live {
             display: inline-flex;
             align-items: center;
@@ -222,15 +349,13 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             font-size: .92rem;
         }
     </style>
-
 </head>
 
 <body>
     <!-- ===================== NAV ===================== -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold text-white" href="index.html"><i class="bi bi-microsoft me-1"></i> Professor
-                Eugênio</a>
+            <a class="navbar-brand fw-bold text-white" href="index.php"><i class="bi bi-microsoft me-1"></i> Professor Eugênio</a>
             <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -238,25 +363,22 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
                     <li class="nav-item"><a class="nav-link" href="#inscricao">Inscrição</a></li>
                     <li class="nav-item"><a class="nav-link" href="#seguranca">Segurança</a></li>
-                    <li class="nav-item"><a class="btn btn-sm btn-cta" href="#inscricao"><i
-                                class="bi bi-lightning-charge-fill me-1"></i> Começar</a></li>
+                    <li class="nav-item"><a class="btn btn-sm btn-cta" href="#inscricao"><i class="bi bi-lightning-charge-fill me-1"></i> Começar</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <!-- ===================== HERO RESUMO ===================== -->
     <section class="pt-5">
         <div class="container">
             <div class="row gy-4 align-items-center">
                 <div class="col-lg-7" data-aos="fade-right">
                     <span class="badge badge-soft rounded-pill px-3 py-2 small mb-3">
-                        <i class="bi bi-trophy me-1"></i> Curso de <?= $nomeCurso ?>
+                        <i class="bi bi-trophy me-1"></i> Curso de <?= h($nomeCurso ?: 'Excel para Concursos') ?>
                     </span>
                     <h1 class="heading-1 mb-2">Faça sua Inscrição</h1>
-                    <p class="small-muted mb-0">
-                        Preencha seus dados para reservar sua vaga. Você poderá escolher o plano e finalizar o pagamento
-                        na próxima etapa.
-                    </p>
+                    <p class="small-muted mb-0">Preencha seus dados para reservar sua vaga. Você poderá escolher o plano e finalizar o pagamento na próxima etapa.</p>
                     <div class="steps mt-3">
                         <div class="progress"></div>
                     </div>
@@ -271,18 +393,15 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <div class="small text-white-50 mb-1">Plano recomendado</div>
-                                <div class="fs-4 fw-bold"><?= $nomeCurso ?></div>
+                                <div class="fs-4 fw-bold"><?= h($nomeCurso ?: 'Excel para Concursos') ?></div>
                             </div>
-                            <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas
-                                Limitadas</span>
+                            <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas Limitadas</span>
                         </div>
-                        <?php if ($valoranual > 0): ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= $valoranual; ?>/anual</div>
-                            <div class="small text-white-50">Vitalício por R$ <?= $valorvendavitalicia; ?> </div>
+                        <?php if ((float)$valoranual > 0): ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valoranual) ?>/anual</div>
+                            <div class="small text-white-50">Vitalício por R$ <?= h((string)$valorvendavitalicia) ?></div>
                         <?php else: ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">
-                                R$ <?= $valorvendavitalicia; ?>
-                            </div>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valorvendavitalicia ?: '0,00') ?></div>
                             <div class="small text-white-50">Vitalício com atualizações</div>
                         <?php endif; ?>
                     </div>
@@ -290,6 +409,7 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             </div>
         </div>
     </section>
+
     <!-- ===================== FORMULÁRIO DE INSCRIÇÃO ===================== -->
     <section id="inscricao">
         <div class="container">
@@ -297,12 +417,12 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                 <div class="col-lg-7" data-aos="fade-up">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <div class="heading-2">Dados do Aluno</div>
-                        <?php if ($aovivo === 1): ?>
+                        <?php if ((int)$aovivo === 1): ?>
                             <span class="badge-live"><i class="bi bi-broadcast"></i> AULA AO VIVO</span>
                         <?php endif; ?>
                     </div>
                     <p class="form-hint mb-3">
-                        <?php if ($aovivo === 1): ?>
+                        <?php if ((int)$aovivo === 1): ?>
                             Participe das transmissões ao vivo e tenha acesso às gravações.
                         <?php else: ?>
                             Acesso imediato ao conteúdo gravado; aulas ao vivo quando programadas.
@@ -310,47 +430,45 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                     </p>
 
                     <form id="formInscricao" class="needs-validation" novalidate>
-                        <!-- Hidden context (preencha dinamicamente conforme seu fluxo) -->
-                        <input type="hidden" name="idCurso" id="idCurso" value="<?= htmlspecialchars($enIdCurso); ?>">
-                        <input type="hidden" name="idTurma" id="idTurma" value="<?= htmlspecialchars($enIdTurma); ?>">
-                        <input type="hidden" name="Codigochave" value="<?= htmlspecialchars($Codigochave) ?>">
-                        <input type="hidden" name="CodigoAfiliado"
-                            value="<?= htmlspecialchars($_GET['af'] ?? ($_SESSION['af'] ?? '')) ?>">
-
+                        <!-- Contexto oculto -->
+                        <input type="hidden" name="idCurso" id="idCurso" value="<?= h($enIdCurso) ?>">
+                        <input type="hidden" name="idTurma" id="idTurma" value="<?= h($enIdTurma) ?>">
+                        <input type="hidden" name="Codigochave" value="<?= h($Codigochave) ?>">
+                        <input type="hidden" name="CodigoAfiliado" value="<?= h($CodigoAfiliadoVal) ?>">
                         <input type="hidden" name="utm" id="utm" value="">
+
                         <div class="row g-3">
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="nome" name="nome"
-                                        placeholder="Seu nome completo" required minlength="3" autocomplete="name">
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome completo" required minlength="3" autocomplete="name">
                                     <label for="nome">Nome completo</label>
                                     <div class="invalid-feedback">Informe seu nome (mín. 3 caracteres).</div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="email@exemplo.com" required autocomplete="email" inputmode="email">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="email@exemplo.com" required autocomplete="email" inputmode="email">
                                     <label for="email">E-mail</label>
                                     <div class="invalid-feedback">Digite um e-mail válido.</div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control" id="telefone" name="telefone"
-                                        placeholder="(00) 00000-0000" required autocomplete="tel" inputmode="numeric"
-                                        pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$">
+                                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(00) 00000-0000" required autocomplete="tel" inputmode="numeric" pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$">
                                     <label for="telefone">Celular (WhatsApp)</label>
                                     <div class="invalid-feedback">Informe um celular válido (ex.: 85 99999-0000).</div>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="objetivo" name="objetivo"
-                                        placeholder="Ex.: INSS, TJ, PF..." minlength="2">
+                                    <input type="text" class="form-control" id="objetivo" name="objetivo" placeholder="Ex.: INSS, TJ, PF..." minlength="2">
                                     <label for="objetivo">Seu concurso-alvo (opcional)</label>
                                 </div>
                             </div>
+
                             <?php if ($hasAnyTime): ?>
                                 <div class="col-12">
                                     <label class="form-label">Escolha seu horário preferido (ao vivo)</label>
@@ -359,9 +477,10 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                                             <div class="col-md-4">
                                                 <div class="opt-time d-flex align-items-center justify-content-between">
                                                     <label class="me-2 mb-0" for="horario_manha">
-                                                        <i class="bi bi-sunrise me-1"></i> Manhã às <?= htmlspecialchars(fmtHora($horamanha)) ?>
+                                                        <i class="bi bi-sunrise me-1"></i> Manhã às <?= h(fmtHora($horamanha)) ?>
                                                     </label>
-                                                    <input class="form-check-input" type="radio" name="horario" id="horario_manha" value="manha">
+                                                    <!-- value em HH:MM:SS -->
+                                                    <input class="form-check-input" type="radio" name="horario" id="horario_manha" value="<?= h($horamanha) ?>">
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -369,9 +488,9 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                                             <div class="col-md-4">
                                                 <div class="opt-time d-flex align-items-center justify-content-between">
                                                     <label class="me-2 mb-0" for="horario_tarde">
-                                                        <i class="bi bi-sunset me-1"></i> Tarde às <?= htmlspecialchars(fmtHora($horatarde)) ?>
+                                                        <i class="bi bi-sunset me-1"></i> Tarde às <?= h(fmtHora($horatarde)) ?>
                                                     </label>
-                                                    <input class="form-check-input" type="radio" name="horario" id="horario_tarde" value="tarde">
+                                                    <input class="form-check-input" type="radio" name="horario" id="horario_tarde" value="<?= h($horatarde) ?>">
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -379,9 +498,9 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                                             <div class="col-md-4">
                                                 <div class="opt-time d-flex align-items-center justify-content-between">
                                                     <label class="me-2 mb-0" for="horario_noite">
-                                                        <i class="bi bi-moon-stars me-1"></i> Noite às <?= htmlspecialchars(fmtHora($horanoite)) ?>
+                                                        <i class="bi bi-moon-stars me-1"></i> Noite às <?= h(fmtHora($horanoite)) ?>
                                                     </label>
-                                                    <input class="form-check-input" type="radio" name="horario" id="horario_noite" value="noite">
+                                                    <input class="form-check-input" type="radio" name="horario" id="horario_noite" value="<?= h($horanoite) ?>">
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -390,35 +509,32 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                                 </div>
                             <?php endif; ?>
 
-                            <!-- Aceite LGPD -->
+                            <!-- Aceite LGPD (desativado no seu layout, mantendo feedback) -->
                             <div class="col-12">
                                 <div class="form-check">
-                                    <!--   <input class="form-check-input" type="checkbox" value="1" id="aceite" required>
-                                    <label class="form-check-label small" for="aceite">
-                                        Concordo em receber comunicações sobre minha inscrição e uso da plataforma.
-                                    </label> -->
+                                    <!-- <input class="form-check-input" type="checkbox" value="1" id="aceite" required>
+                                    <label class="form-check-label small" for="aceite">Concordo em receber comunicações sobre minha inscrição e uso da plataforma.</label> -->
                                     <div class="invalid-feedback">Você precisa aceitar para continuar.</div>
                                 </div>
                             </div>
-                            <div class="col-12 d-grid">
-                                <div class="col-12 d-grid">
-                                    <button class="btn btn-cta btn-lg" type="submit">
-                                        <i class="bi bi-arrow-right-circle me-2"></i> Continuar
-                                    </button>
-                                </div>
 
+                            <div class="col-12 d-grid">
+                                <button class="btn btn-cta btn-lg" type="submit">
+                                    <i class="bi bi-arrow-right-circle me-2"></i> Continuar
+                                </button>
                             </div>
+
                             <div class="col-12">
                                 <p class="small small-muted mb-0">
-                                    Ao continuar, você concorda com os <a href="#"
-                                        class="link-light link-underline-opacity-0">Termos</a> e a <a href="#"
-                                        class="link-light link-underline-opacity-0">Política de Privacidade</a>.
+                                    Ao continuar, você concorda com os <a href="#" class="link-light link-underline-opacity-0">Termos</a> e a
+                                    <a href="#" class="link-light link-underline-opacity-0">Política de Privacidade</a>.
                                 </p>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!-- Lateral com lembretes de valor -->
+
+                <!-- Lateral -->
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="card-dark p-4 mb-3">
                         <div class="fw-bold mb-2"><i class="bi bi-stars me-2"></i>Você recebe</div>
@@ -433,50 +549,39 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                     <div class="card-dark p-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="small text-white-50">Sua pré-reserva</div>
-                            <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Garantida por
-                                24h</span>
+                            <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Garantida por 24h</span>
                         </div>
-                        <?php if ($valoranual > 0): ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= $valoranual; ?>/anual</div>
-                            <div class="small text-white-50">Vitalício por R$ <?= $valorvendavitalicia; ?> </div>
+                        <?php if ((float)$valoranual > 0): ?>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valoranual) ?>/anual</div>
+                            <div class="small text-white-50">Vitalício por R$ <?= h((string)$valorvendavitalicia) ?></div>
                         <?php else: ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">
-                                R$ <?= $valorvendavitalicia; ?>
-
-                            </div>
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valorvendavitalicia ?: '0,00') ?></div>
                             <div class="small text-white-50">Vitalício com atualizações</div>
-
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- ===================== SEGURANÇA / SUPORTE ===================== -->
     <section id="seguranca">
         <div class="container">
             <div class="row gy-4 align-items-start">
                 <div class="col-lg-7" data-aos="fade-up">
                     <div class="heading-2 mb-2">Segurança e Suporte</div>
-                    <p class="mb-2">
-                        Seus dados são utilizados exclusivamente para criar seu acesso e comunicar informações sobre
-                        suas aulas e pagamentos. Você pode solicitar a remoção a qualquer momento.
-                    </p>
+                    <p class="mb-2">Seus dados são utilizados exclusivamente para criar seu acesso e comunicar informações sobre suas aulas e pagamentos. Você pode solicitar a remoção a qualquer momento.</p>
                     <ul class="small mb-0">
-                        <li class="mb-1"><i class="bi bi-check2-circle me-2" style="color:#54e1c3"></i>Ambiente seguro e
-                            criptografado</li>
-                        <li class="mb-1"><i class="bi bi-check2-circle me-2" style="color:#54e1c3"></i>Conformidade com
-                            boas práticas de privacidade</li>
-                        <li class="mb-1"><i class="bi bi-check2-circle me-2" style="color:#54e1c3"></i>Atendimento pelo
-                            WhatsApp e e-mail</li>
+                        <li class="mb-1"><i class="bi bi-check2-circle me-2" style="color:#54e1c3"></i>Ambiente seguro e criptografado</li>
+                        <li class="mb-1"><i class="bi bi-check2-circle me-2" style="color:#54e1c3"></i>Conformidade com boas práticas de privacidade</li>
+                        <li class="mb-1"><i class="bi bi-check2-circle me-2" style="color:#54e1c3"></i>Atendimento pelo WhatsApp e e-mail</li>
                     </ul>
                 </div>
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="card-dark p-4">
                         <div class="fw-bold mb-2"><i class="bi bi-whatsapp me-2"></i>Dúvidas?</div>
                         <p class="small small-muted mb-3">Fale diretamente com o professor para orientação rápida.</p>
-                        <a class="btn btn-outline-light w-100" target="_blank" rel="noopener"
-                            href="<?= $linkwhatsapp ?> *<?= $nomeCurso ?>*">
+                        <a class="btn btn-outline-light w-100" target="_blank" rel="noopener" href="<?= h($linkwhatsapp) ?> *<?= h($nomeCurso ?: 'Excel para Concursos') ?>*">
                             Chamar no WhatsApp
                         </a>
                     </div>
@@ -484,6 +589,7 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             </div>
         </div>
     </section>
+
     <!-- ===================== RODAPÉ ===================== -->
     <footer class="py-4 border-top border-opacity-25" style="border-color: rgba(255,255,255,.06) !important;">
         <div class="container small text-white-50 d-flex flex-wrap justify-content-between gap-2">
@@ -495,6 +601,7 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             </div>
         </div>
     </footer>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -505,7 +612,7 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
         });
         document.getElementById('ano').textContent = new Date().getFullYear();
 
-        // ---------------- Util: Overlay de carregamento ----------------
+        // ---------------- Overlay de carregamento ----------------
         let _loaderEl = null;
 
         function showLoader(msg = 'Processando sua inscrição com segurança...') {
@@ -513,27 +620,27 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             _loaderEl = document.createElement('div');
             _loaderEl.id = 'overlayLoader';
             _loaderEl.innerHTML = `
-      <div style="
-        position:fixed; inset:0; backdrop-filter: blur(4px);
-        background: rgba(17,34,64,.75); display:flex; align-items:center; justify-content:center; z-index:9999;
-      ">
         <div style="
-          width:min(92vw,520px); background:#0d1a34; color:#e9f3ff;
-          border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px; text-align:center;
-          box-shadow:0 20px 60px rgba(0,0,0,.45);
+            position:fixed; inset:0; backdrop-filter: blur(4px);
+            background: rgba(17,34,64,.75); display:flex; align-items:center; justify-content:center; z-index:9999;
         ">
-          <div class="mb-2" style="font-weight:800; font-size:1.1rem;">
-            <i class="bi bi-shield-lock me-2"></i>Conexão segura
+          <div style="
+            width:min(92vw,520px); background:#0d1a34; color:#e9f3ff;
+            border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px; text-align:center;
+            box-shadow:0 20px 60px rgba(0,0,0,.45);
+          ">
+            <div class="mb-2" style="font-weight:800; font-size:1.1rem;">
+              <i class="bi bi-shield-lock me-2"></i>Conexão segura
+            </div>
+            <div class="d-flex align-items-center justify-content-center mb-3" style="gap:.75rem;">
+              <div class="spinner-border" role="status" aria-hidden="true"></div>
+              <div style="opacity:.9;">${msg}</div>
+            </div>
+            <div class="small" style="color:#9fb1d1">
+              Seus dados são criptografados. Não armazenamos informações sensíveis do cartão neste site.
+            </div>
           </div>
-          <div class="d-flex align-items-center justify-content-center mb-3" style="gap:.75rem;">
-            <div class="spinner-border" role="status" aria-hidden="true"></div>
-            <div style="opacity:.9;">${msg}</div>
-          </div>
-          <div class="small" style="color:#9fb1d1">
-            Seus dados são criptografados. Não armazenamos informações sensíveis do cartão neste site.
-          </div>
-        </div>
-      </div>`;
+        </div>`;
             document.body.appendChild(_loaderEl);
         }
 
@@ -544,7 +651,7 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             }
         }
 
-        // -------- Persistência local (localStorage) --------
+        // -------- Persistência local --------
         const FIELDS = ['nome', 'email', 'telefone', 'objetivo', 'horario'];
 
         function loadFromStorage() {
@@ -565,59 +672,48 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                 const el = document.getElementById(id);
                 if (el) localStorage.setItem('insc_' + id, el.value.trim());
             });
-            // horário (rádio) é salvo por change; aqui garantimos fallback:
             const r = document.querySelector('input[name="horario"]:checked');
             if (r) localStorage.setItem('insc_horario', r.value);
         }
-
         loadFromStorage();
-
-        // Inputs de texto
         FIELDS.forEach(id => {
             const el = document.getElementById(id);
             if (el) el.addEventListener('input', saveToStorage);
         });
-        // Rádios de horário
         document.querySelectorAll('input[name="horario"]').forEach(r => {
-            r.addEventListener('change', () => {
-                localStorage.setItem('insc_horario', r.value);
-            });
+            r.addEventListener('change', () => localStorage.setItem('insc_horario', r.value));
         });
 
-        // -------- Validação + AJAX + Próxima etapa --------
+        // -------- Validação + AJAX --------
         const form = document.getElementById('formInscricao');
         form.addEventListener('submit', async (ev) => {
             ev.preventDefault();
             ev.stopPropagation();
 
-            // HTML5 validation
             if (!form.checkValidity()) {
                 form.classList.add('was-validated');
                 return;
             }
 
-            // Se existem opções de horário, exigir uma marcada
-            const horarioInputs = document.querySelectorAll('input[name="horario"]');
+            // Se houver horários disponíveis, exigir seleção
+            const radios = document.querySelectorAll('input[name="horario"]');
             let horarioSel = '';
-            if (horarioInputs.length > 0) {
+            if (radios.length > 0) {
                 const r = document.querySelector('input[name="horario"]:checked');
                 if (!r) {
                     alert('Selecione seu horário preferido.');
                     return;
                 }
-                horarioSel = r.value;
+                horarioSel = r.value; // HH:MM:SS
                 localStorage.setItem('insc_horario', horarioSel);
             }
 
-            // Salvar campos básicos
             saveToStorage();
 
-            // Monta payload
             const aceiteEl = document.getElementById('aceite');
             const data = {
                 idCurso: document.getElementById('idCurso').value,
                 idTurma: document.getElementById('idTurma').value,
-                // 👇 ADICIONAR ESTAS DUAS LINHAS
                 Codigochave: (document.querySelector('input[name="Codigochave"]')?.value || ''),
                 CodigoAfiliado: (document.querySelector('input[name="CodigoAfiliado"]')?.value || ''),
                 nome: document.getElementById('nome').value.trim(),
@@ -629,12 +725,10 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                 utm: document.getElementById('utm').value
             };
 
-            // Mostra overlay de carregamento
             showLoader('Salvando seus dados e preparando a próxima etapa...');
 
-            // Envia via AJAX (JSON) para seu endpoint
             const controller = new AbortController();
-            const to = setTimeout(() => controller.abort(), 20000); // 20s timeout
+            const to = setTimeout(() => controller.abort(), 20000);
 
             try {
                 const resp = await fetch('vendasv1.0/ajax_inscricaocurso.php', {
@@ -651,15 +745,12 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
                 const res = await resp.json();
 
                 if (res && (res.ok === true || res.success === true)) {
-                    // Persistir mais coisas se vierem do backend
                     if (res.idCurso) localStorage.setItem('insc_idCurso', res.idCurso);
                     if (res.idTurma) localStorage.setItem('insc_idTurma', res.idTurma);
                     if (res.lead) localStorage.setItem('insc_lead', String(res.lead));
                     if (res.horario) localStorage.setItem('insc_horario', res.horario);
 
-                    // Próxima etapa
                     const redirect = res.redirect || 'vendas_plano.php';
-                    // Carregar dados mínimos na querystring (evita depender só do storage)
                     const qs = new URLSearchParams({
                         lead: res.lead ? String(res.lead) : '',
                         idCurso: data.idCurso,
@@ -683,12 +774,11 @@ $hasAnyTime = $hasManha || $hasTarde || $hasNoite;
             }
         });
 
-        // Capta UTM se existir na URL
+        // UTM da URL -> hidden
         const p = new URLSearchParams(location.search);
         const utm = p.get('utm') || '';
         if (utm) document.getElementById('utm').value = utm;
     </script>
-
 </body>
 
 </html>
