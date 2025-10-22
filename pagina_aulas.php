@@ -78,7 +78,7 @@ if (empty($_GET['var'])) {
 
     // Consulta categoria
     $queryCat = $con->prepare("SELECT codigocategorias, pasta, nome, descricaosc, bgcolor, ordemsc 
-                               FROM new_sistema_categorias_PJA 
+                               FROM new_sistema_cursos 
                                WHERE codigocategorias = :var AND visivelhomesc = '1'");
     $queryCat->bindParam(":var", $decPagina);
     $queryCat->execute();

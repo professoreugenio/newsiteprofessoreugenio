@@ -24,7 +24,7 @@
                         <!-- <li><a class="dropdown-item" href="#masterclass">Cursos Master Class</a></li> -->
                         <?php
                         $quant = "1";
-                        $query = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE visivelhomesc = :var ");
+                        $query = $con->prepare("SELECT * FROM new_sistema_cursos WHERE visivelhomesc = :var ");
                         $query->bindParam(":var", $quant);
                         $query->execute();
                         $fetch = $query->fetchALL();

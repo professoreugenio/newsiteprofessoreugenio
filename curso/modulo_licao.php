@@ -162,7 +162,9 @@ include '../autenticacao.php'; ?>
                         $url2 = "../admin2/modelo/cursos_TurmasAlunos.php?";
 
                     ?>
-                        
+                        <a style="color:#ffff00" target="_blank" href="<?= $url ?>id=<?= $encIdCurso ?>&md=<?= $encIdModulo ?>&pub=<?= $encIdAula ?>">
+                            <i class="bi bi-pencil-square me-1"></i>
+                        </a>
                         <a style="color:#ff8040" target="_blank" href="<?= $url2 ?>id=<?= $encIdCurso ?>&tm=<?= $encIdMTurma ?>"> Turma <i class="bi bi-pencil-square me-1"></i></a>
 
                     <?php endif; ?>

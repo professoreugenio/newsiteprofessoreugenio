@@ -50,11 +50,11 @@
 
 
 
-        $query = $con->prepare("SELECT * FROM new_sistema_categorias_PJA WHERE codigocategorias  = :idcurso ");
+        $query = $con->prepare("SELECT * FROM new_sistema_cursos WHERE codigocursos  = :idcurso ");
         $query->bindParam(":idcurso", $idCurso);
         $query->execute();
         $rwNome = $query->fetch(PDO::FETCH_ASSOC);
-        $nmCurso = $rwNome['nome'];
+        $nmCurso = $rwNome['nomecurso'];
 
         // Geração do token de acesso
         $tokenturma = implode("&", [$iduser, $nomeuser, $emailuser, $dataanv, $codTurma, $chaveTurma, $duracao, $dtprazo, $comercial]);
@@ -73,7 +73,7 @@
         $tipo = 3;
         $stmtFoto = $con->prepare("
         SELECT f.*, c.*
-        FROM new_sistema_categorias_PJA c
+        FROM new_sistema_cursos c
         INNER JOIN new_sistema_midias_fotos_PJA f ON c.pasta = f.pasta
         WHERE f.codpublicacao = :id AND f.tipo = :tipo
     ");
