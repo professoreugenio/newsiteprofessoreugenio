@@ -45,7 +45,7 @@ require_once APP_ROOT . '/autenticacao.php';
 
                     <?php echo $dec = encrypt("Q3ZXU1JNakZmcno1RlNEYXhTcHN2UT09", $action = 'd'); ?>
                     <?php $enc = encrypt("327&" . $idCurso . "&001&0&0", $action = 'e');  ?>
-                    <a target="_blank" class="btn btn-warning" href="https://professoreugenio.com/vendassite/?nav=<?= $enc; ?>&ts=<?= time(); ?>">
+                    <a target="_blank" class="btn btn-warning" href="https://professoreugenio.com/vendassite/?nav=<?= $enc; ?>&ts=<?= time(); ?>&af=afl_68ebd8bb4596f6.85173391">
                         PÁGINA VENDAS</a>
                 </p>
             </div>

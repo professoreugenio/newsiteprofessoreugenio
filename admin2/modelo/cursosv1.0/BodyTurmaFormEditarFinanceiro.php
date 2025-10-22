@@ -46,7 +46,7 @@
     </div>
     <div class="col-md-2">
         <label class="form-label">Valor Anual (R$)</label>
-        <input type="text" class="form-control valor-mask" name="valoranual" value="<?= number_format((float) $valoranual, 2, '.', ',') ?>">
+        <input type="text" class="form-control valor-mask" name="valoranual" value="<?= number_format((float) $valorcartao, 2, '.', ',') ?>">
     </div>
     <div class="col-md-4">
         <label class="form-label">Chave Pix Anual</label>

@@ -143,7 +143,7 @@ try {
 
                                     while ($t = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                         $selected = ($t['codigoturma'] == ($p['idturmaap'] ?? '')) ? 'selected' : '';
-                                        $valorFmt = number_format((float)($t['valorvenda'] ?? 0), 2, ',', '.');
+                                        $valorFmt = number_format((float)($t['valorbrutoct'] ?? 0), 2, ',', '.');
                                         echo '<option value="' . htmlspecialchars($t['codigoturma']) . '" ' . $selected . '>'
                                             . htmlspecialchars($t['nometurma']) . ' — R$ ' . $valorFmt
                                             . ' (Curso #' . (int)$t['codcursost'] . ')</option>';

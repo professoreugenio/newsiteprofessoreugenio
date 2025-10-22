@@ -26,12 +26,12 @@ try {
     $chave = $_POST['chave'];
 
     $campos = [
-        'valorvenda',
+        'valorbrutoct',
         'chavepixvalorvenda',
-        'valoranual',
+        'valorcartaoct',
         'horasaulast',
         'chavepix',
-        'valorvendavitalicia',
+        'valorpixct',
         'chavepixvitalicia',
         'linkpagseguro',
         'linkpagsegurovitalicia',
@@ -40,7 +40,7 @@ try {
         'valorhoraaula'
     ];
 
-    $campos_monetarios = ['valorvenda', 'valoranual', 'valorvendavitalicia', 'valorhoraaula'];
+    $campos_monetarios = ['valorbrutoct', 'valorcartaoct', 'valorpixct', 'valorhoraaula'];
 
     $dados = [];
     foreach ($campos as $campo) {
