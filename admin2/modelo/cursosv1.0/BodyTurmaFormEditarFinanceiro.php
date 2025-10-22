@@ -26,14 +26,45 @@
 
 <form id="formComercial" class="row g-4" enctype="multipart/form-data">
     <input type="hidden" name="chave" value="<?= htmlspecialchars($ChaveTurma) ?>">
+    <h4>Vitalício</h4>
     <div class="col-md-2">
-        <label class="form-label">Valor Venda (Presencial)</label>
+        <label class="form-label">Valor Venda (Bruto)</label>
         <input type="text" class="form-control valor-mask" name="valorvenda" value="<?= number_format((float) $valorvenda, 2, '.', ',') ?>">
     </div>
-    <div class="col-md-5">
-        <label class="form-label">Pix Valor Venda (Presencial)</label>
-        <input type="text" class="form-control" name="chavepixvalorvenda" value="<?= $chavepixvalorvenda ?>">
+
+    <div class="col-md-2">
+        <label class="form-label">Valor Cartão (R$)</label>
+        <input type="text" class="form-control valor-mask" name="valorcartao" value="<?= number_format((float) $valorcartao, 2, '.', ',') ?>">
     </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Valor à vista (R$)</label>
+        <input type="text" class="form-control valor-mask" name="valoravista" value="<?= number_format((float) $valoravista, 2, '.', ',') ?>">
+    </div>
+
+    <h4>Anual</h4>
+    <div class="col-md-2">
+        <label class="form-label">Valor Anual (R$)</label>
+        <input type="text" class="form-control valor-mask" name="valoranual" value="<?= number_format((float) $valoranual, 2, '.', ',') ?>">
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Valor Cartão Anual (R$)</label>
+        <input type="text" class="form-control valor-mask" name="valorcartaoanual" value="<?= number_format((float) $valorcartaoanual, 2, '.', ',') ?>">
+    </div>
+
+    <hr>
+
+
+    <div class="col-md-12">
+        <label class="form-label">Pix Valor à vista (Presencial)</label>
+        <input type="text" class="form-control" name="chavepixvaloravista" value="<?= $chavepixvaloravista ?>">
+    </div>
+    <div class="col-md-12">
+        <label class="form-label">Pix Valor anual à vista (Presencial)</label>
+        <input type="text" class="form-control" name="chavepixvaloranualavista" value="<?= $chavepixvaloranualavista ?>">
+    </div>
+
     <div class="col-md-3">
         <label class="form-label">Valor Hora Aula (Institucional)</label>
         <input type="text" class="form-control valor-mask" name="valorhoraaula" value="<?= number_format((float) $valorhoraaula, 2, '.', ',') ?>">
@@ -44,18 +75,12 @@
     </div>
     <div class="col-md-12">
     </div>
-    <div class="col-md-2">
-        <label class="form-label">Valor Anual (R$)</label>
-        <input type="text" class="form-control valor-mask" name="valoranual" value="<?= number_format((float) $valorcartao, 2, '.', ',') ?>">
-    </div>
+
     <div class="col-md-4">
         <label class="form-label">Chave Pix Anual</label>
         <input type="text" class="form-control" name="chavepix" value="<?= htmlspecialchars($chavepix) ?>">
     </div>
-    <div class="col-md-2">
-        <label class="form-label">Valor Vitalício (R$)</label>
-        <input type="text" class="form-control valor-mask" name="valorvendavitalicia" value="<?= number_format((float) $valorvendavitalicia, 2, '.', ',') ?>">
-    </div>
+
     <div class="col-md-4">
         <label class="form-label">Chave Pix Vitalícia</label>
         <input type="text" class="form-control" name="chavepixvitalicia" value="<?= htmlspecialchars($chavepixvitalicia) ?>">

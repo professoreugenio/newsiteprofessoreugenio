@@ -62,13 +62,17 @@ $chvivo   = ($rwTurma['aovivoct'] == '1') ? "checked" : "";
 $chkytube    = ($rwTurma['visiveltube'] == '1') ? "checked" : "";
 
 /*comercial*/
+$valorvenda = $rwTurma['valorbrutoct'] ?? '';
 $valorcartao = $rwTurma['valorcartaoct'] ?? '';
+$valorcartaoanual = $rwTurma['valorcartaoanualct'] ?? '';
+$valoravista = $rwTurma['valoravistact'] ?? '';
+$chavepixvaloravista = $rwTurma['pixvaloravistact'] ?? '';
+$chavepixvaloranualavista = $rwTurma['pixvaloranualavistact'] ?? '';
+$valoranual = $rwTurma['valoranualct'] ?? '';
 $andamento = $rwTurma['andamento'] ?? '0';
 $horasaulast = $rwTurma['horasaulast'] ?? '';
-$valorvenda = $rwTurma['valorbrutoct'] ?? '';
 $chavepix = $rwTurma['chavepix'] ?? '';
 $chavepixvalorvenda = $rwTurma['chavepixvalorvenda'] ?? '';
-$valorvendavitalicia = $rwTurma['valorpixct'] ?? '';
 $chavepixvitalicia = $rwTurma['chavepixvitalicia'] ?? '';
 $linkpagseguro = $rwTurma['linkpagseguro'] ?? '';
 $linkpagsegurovitalicia = $rwTurma['linkpagsegurovitalicia'] ?? '';
