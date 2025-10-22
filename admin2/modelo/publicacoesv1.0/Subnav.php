@@ -22,9 +22,14 @@ $pagina = basename($_SERVER['PHP_SELF']);
             <i class="bi bi-list"></i>
         </a>
         <a href="cursos_publicacoesNovo.php?id=<?= $_GET['id'] ?>&md=<?= $_GET['md'] ?>"
-            class="btn btn-flat btn-sm <?= $pagina == 'cursos_publicacoesNovo.php' ? 'bgverde' : 'bgverde' ?>"
+            class="btn btn-flat btn-sm <?= $pagina == 'cursos_publicacoesNovo.php' ? 'bgroxo' : '' ?>"
             title="Nova publicação">
             <i class="bi bi-file-text"></i> +
+        </a>
+        <a href="cursos_modulosEditar.php?id=<?= $_GET['id'] ?>&md=<?= $_GET['md'] ?>"
+            class="btn btn-flat btn-sm <?= $pagina == 'cursos_modulosEditar.php' ? 'bgverde' : 'bgverde' ?>"
+            title="Editar módulo">
+            <i class="bi bi-pencil-square"></i> Editar
         </a>
         <?php if ($pagina == 'cursos_publicacaoEditarTexto.php'): ?>
             <a href="#" id="abrirPainelFotos" class="btn btn-flat btn-sm " title="Ver imagens">

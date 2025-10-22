@@ -58,9 +58,9 @@ endif;
 
             </div>
 
-            <?php require_once APP_ROOT . '/admin2/modelo/cursosv1.0/SubnavCursosEditar.php'; ?>
+            <?php // require_once APP_ROOT . '/admin2/modelo/cursosv1.0/SubnavCursosEditar.php'; ?>
             
-            <?php require_once APP_ROOT . '/admin2/modelo/publicacoesv1.0/SubnavSecundarioPublicacoes.php'; ?>
+            <?php // require_once APP_ROOT . '/admin2/modelo/publicacoesv1.0/SubnavSecundarioPublicacoes.php'; ?>
 
         </div> -->
         <!-- CORPO PÁGINA -->
