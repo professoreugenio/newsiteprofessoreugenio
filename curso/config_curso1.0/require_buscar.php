@@ -1,4 +1,4 @@
-<div id="buscaInline" class="my-3">
+<div id="buscaInline" class=" mt-4">
     <form class="d-flex justify-content-center" role="search" action="modulos_buscalicao.php" method="get">
         <!-- opcionais -->
         <input type="hidden" name="idcurso" value="<?= htmlspecialchars($idcurso ?? '') ?>">

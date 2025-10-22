@@ -133,6 +133,14 @@ include '../autenticacao.php'; ?>
             scroll-margin-top: 90px;
         }
     </style>
+
+    <style>
+        #lista-modulos a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+
     <link rel="stylesheet" href="config_curso1.0/CSS_sidebarLateral.css?<?php echo time(); ?>">
 </head>
 
@@ -148,8 +156,10 @@ include '../autenticacao.php'; ?>
     <?php endif; ?>
 
 
-    <script src="config_turmas1.0/JS_accessturma.js"></script>
-    <script src="acessosv1.0/ajax_registraAcesso.js"></script>
+
+
+    <script src="acessosv1.0/ajax_registraAcesso.js?<?= time() ?>"></script>
+    <script src="config_turmas1.0/JS_accessturma.js?<?= time() ?>"></script>
 
 </body>
 

@@ -149,7 +149,7 @@ include '../autenticacao.php'; ?>
         <div class="row g-3 align-items-center">
             <div class="col-lg-8" data-aos="fade-up">
                 <div class="d-flex align-items-center gap-3">
-                    
+
                     <span class="badge badge-soft px-3 py-2 fs-6">Lição <strong><?= $ordemAtualSafe ?></strong></span>
                     <h2 class="h4 m-0"><?= $tituloSafe ?></h2>
                     <?php $encIdCurso = $enc = encrypt($codigocurso, $action = 'e'); ?>
@@ -207,61 +207,7 @@ include '../autenticacao.php'; ?>
     </button>
 
     <!-- Bottom Bar fixa -->
-    <div class="bottom-bar py-2">
-        <div class="container d-flex align-items-center justify-content-between gap-2">
-            <div class="d-flex align-items-center gap-2" id="botoesNavegacao">
-                <?php if (!empty($codigoAnterior)): ?>
-                    <a class="btn btn-outline-light px-3" href="actionCurso.php?lc=<?= urlencode($encAnt ?? '') ?>">
-                        <i class="bi bi-chevron-left"></i> Anterior
-                    </a>
-                <?php endif; ?>
-                <?php if (!empty($codigoProxima)): ?>
-                    <a class="btn btn-emerald px-3" href="actionCurso.php?lc=<?= urlencode($encProx ?? '') ?>">
-                        Próxima <i class="bi bi-chevron-right"></i>
-                    </a>
-                <?php endif; ?>
-
-                <?php if (basename($_SERVER['PHP_SELF']) === 'modulo_licao.php'): ?>
-                    <!-- <button onclick="window.location.href='depoimento.php';" class="btn btn-outline-secondary text-start w-100">
-                        <i class="bi bi-chat-dots me-2"></i>Fórum
-                    </button> -->
-
-                    <?php if ($codigoUser == 1): ?>
-                        <button id="btliberaLicao" data-id="<?= $encAula ?>" class="btn btn-outline-light text-start ">
-                            <i class="bi <?= $aulaLiberada == '1' ? 'bi-lock-fill text-success' : 'bi-unlock-fill text-danger' ?> me-2"></i>
-                        </button>
-                        <button id="btpublicalicao"
-                            data-id="<?= $encAula ?>"
-                            data-titulo="<?= htmlspecialchars($titulo) ?>"
-                            data-idturma="<?= $idTurma ?>"
-                            data-idmodulo="<?= $codigomodulo ?>"
-                            data-idartigo="<?= $codigoaula ?>"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalPublicaAula"
-                            class="btn btn-outline-light text-start">
-                            <i class="bi bi-person-badge-fill me-2"></i>
-                        </button>
-                    <?php endif; ?>
-                <?php endif; ?>
-
-                <button class="btn btn-success px-3" id="btnBuscaLicao" title="Buscar na lição" onclick="window.open('modulos_buscalicao.php', '_self')">
-                    <i class="bi bi-search"></i>
-                </button>
-
-
-
-            </div>
-            <div class="d-flex align-items-center gap-2">
-                <button class="btn btn-amber" data-bs-toggle="modal" data-bs-target="#modalCaderno">
-                    <i class="bi bi-journal-text me-1"></i>Caderno
-                </button>
-                <a style="margin-left: 10px" href="#" class="btn btn-light px-2 ml-2" data-bs-toggle="modal" data-bs-target="#modalDepoimento">
-                    Depoimento
-                </a>
-            </div>
-
-        </div>
-    </div>
+    <?php require 'config_aulas1.0/require_bottombar.php' ?>
 
     <!-- Modal Caderno (Summernote) -->
     <div class="modal fade" id="modalCaderno" tabindex="-1" aria-hidden="true">
@@ -283,11 +229,12 @@ include '../autenticacao.php'; ?>
     </div>
     <?php require 'config_aulas1.0/require_ModalDepoimento.php'; ?>
     <!-- Rodapé -->
-    <footer class="container section-gap" style="padding-bottom:96px">
+    <footer class="container section-gap">
         <div class="text-center small text-muted-2">
             © <span id="ano"></span> Professor Eugênio — Todos os direitos reservados.
         </div>
     </footer>
+    <div style="height: 100px;">&nbsp</div>
 
     <!-- MÓDULO BUSCA -->
 

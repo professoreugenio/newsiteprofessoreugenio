@@ -5,29 +5,42 @@
     <div class="container text-center">
         <!-- Listagem de Turmas -->
         <div class="container">
-            <div class="text-center mb-5">
-                <h4 class="mt-4 mb-2 text-white">
-                    <i class="bi bi-layers"></i> Módulos do Curso*
-                </h4>
-                <a href="#modulos" class="btn btn-primary">Acessar Módulos</a>
-            </div>
+
             <!-- BUSCA DE CONTEÚDO -->
             <!-- BUSCA DE CONTEÚDO (compacta, arredondada, centralizada) -->
             <?php require 'config_curso1.0/require_buscar.php'; ?>
+
+            <?php if ($codigoUser == 1): ?>
+
+                <a id="modulos"></a>
+                <?php require 'config_curso1.0/ListaModulos2.0.php'; ?>
+
+            <?php else: ?>
+                <a id="modulos"></a>
+
+                <?php require 'config_curso1.0/ListaModulos2.0.php'; ?>
+
+            <?php endif; ?>
+
             <?php if ($comercialTurma == '1') : ?>
                 <?php require 'config_curso1.0/require_Ultimaspublicacoes.php'; ?>
             <?php endif; ?>
-            <?php if ($codigoUser == 1): ?>
-                <div class="cards-container">
-                    <a id="modulos"></a>
-                    <?php require 'config_curso1.0/ListaModulos2.0.php'; ?>
-                </div>
-            <?php else: ?>
-                <a id="modulos"></a>
-                <div class="cards-container">
-                    <?php require 'config_curso1.0/ListaModulos2.0.php'; ?>
-                </div>
-            <?php endif; ?>
+
+            <!-- aqui banner -->
+            <!-- aqui banner -->
+            <!-- aqui banner -->
+            <?php require 'config_curso1.0/require_BannerAmazon.php' ?>
+
+            <!-- Responsividade personalizada -->
+            <style>
+                @media (min-width: 768px) {
+                    .w-md-50 {
+                        width: 50% !important;
+                    }
+                }
+            </style>
+
+
         </div>
     </div>
 </section>

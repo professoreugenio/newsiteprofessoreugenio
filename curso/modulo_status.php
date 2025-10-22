@@ -169,10 +169,254 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
     <!-- Bootstrap Icons (se já carrega, ignore) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
+    <style>
+        :root {
+            --brand-h1: #00BB9C;
+            --brand-h2: #FF9C00;
+            --brand-bg: #112240;
+            --brand-text: #ffffff;
 
+            --card-bg: rgba(255, 255, 255, .04);
+            --card-bd: rgba(255, 255, 255, .08);
+
+            --amber: #FF9C00;
+            --emerald: #00BB9C;
+            --indigo: #4F46E5;
+            --rose: #E11D48;
+            --slate: #94a3b8;
+        }
+
+        * {
+            scroll-margin-top: 96px
+        }
+
+        body {
+            background: var(--brand-bg);
+            color: var(--brand-text)
+        }
+
+        .navbar {
+            background: #0f1d36
+        }
+
+        .navbar .nav-link,
+        .navbar .navbar-brand {
+            color: #fff !important
+        }
+
+        .navbar .nav-link:hover {
+            opacity: .85
+        }
+
+        .navbar.navbar-dark .navbar-toggler {
+            border-color: rgba(255, 255, 255, .2)
+        }
+
+        .navbar.navbar-dark .navbar-toggler-icon {
+            filter: invert(1)
+        }
+
+        h1,
+        .h1 {
+            color: var(--brand-h1)
+        }
+
+        h2,
+        .h2 {
+            color: var(--brand-h2)
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-bd);
+            backdrop-filter: blur(2px);
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+            border-color: rgba(255, 255, 255, .16);
+        }
+
+        .card-colored {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background: #076379;
+        }
+
+        .card-colored::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, 0));
+            z-index: -1;
+        }
+
+        .lesson-number {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
+        }
+
+        .ln-amber {
+            background: linear-gradient(135deg, #7a4300, var(--amber));
+        }
+
+        .ln-emerald {
+            background: linear-gradient(135deg, #064e3b, var(--emerald));
+        }
+
+        .ln-indigo {
+            background: linear-gradient(135deg, #1e1b4b, var(--indigo));
+        }
+
+        .ln-rose {
+            background: linear-gradient(135deg, #7f1d1d, var(--rose));
+        }
+
+        .badge-soft {
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .12);
+            color: #e2e8f0;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .35rem .6rem;
+            border-radius: 999px;
+            font-size: .8rem;
+            line-height: 1;
+            border: 1px solid rgba(255, 255, 255, .14);
+            background: rgba(0, 0, 0, .2);
+        }
+
+        .chip i {
+            opacity: .9
+        }
+
+        .list-group-item {
+            background: rgba(255, 255, 255, .03);
+            border-color: rgba(255, 255, 255, .08);
+            color: #e5e7eb;
+            display: flex;
+            align-items: center;
+        }
+
+        .lg-stripe {
+            width: 4px;
+            align-self: stretch;
+            border-radius: 4px;
+            margin-right: .75rem;
+            opacity: .9;
+        }
+
+        .stripe-done {
+            background: var(--emerald);
+        }
+
+        .stripe-pending {
+            background: var(--slate);
+        }
+
+        .stripe-late {
+            background: var(--rose);
+        }
+
+        .btn-cta {
+            background: var(--brand-h2);
+            color: #111;
+            border: 0;
+            font-weight: 700
+        }
+
+        .btn-cta:hover {
+            filter: brightness(.95)
+        }
+
+        .btn-amber {
+            background: var(--amber);
+            color: #111;
+            border: 0
+        }
+
+        .btn-amber:hover {
+            filter: brightness(.95)
+        }
+
+        .btn-emerald {
+            background: var(--emerald);
+            color: #0b1c17;
+            border: 0
+        }
+
+        .btn-emerald:hover {
+            filter: brightness(.95)
+        }
+
+        .btn-indigo {
+            background: var(--indigo);
+            color: #fff;
+            border: 0
+        }
+
+        .btn-indigo:hover {
+            filter: brightness(1.05)
+        }
+
+        .btn-outline-light {
+            --bs-btn-color: #e5e7eb;
+            --bs-btn-border-color: #e5e7eb;
+            --bs-btn-hover-bg: #e5e7eb;
+            --bs-btn-hover-color: #0f172a;
+            --bs-btn-hover-border-color: #e5e7eb;
+        }
+
+        .progress {
+            background: rgba(255, 255, 255, .08);
+            height: 10px
+        }
+
+        .progress-bar {
+            background: var(--brand-h1)
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, .2)
+        }
+
+        .section-gap {
+            padding-top: 24px;
+            padding-bottom: 24px
+        }
+
+        .text-muted-2 {
+            color: #cbd5e1 !important
+        }
+
+        .shadow-soft {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .25)
+        }
+
+        .rounded-4 {
+            border-radius: 1rem !important
+        }
+    </style>
     <link rel="stylesheet" href="config_curso1.0/CSS_sidebarLateralv2.0.css?<?php echo time(); ?>">
     <link rel="stylesheet" href="config_default1.0/Css_config_redesocial.css?<?php echo time(); ?>">
-    <link rel="stylesheet" href="config_default1.0/CSS_modulo_status.css?<?php echo time(); ?>">
 </head>
 
 <body>
@@ -180,10 +424,7 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
     <?php include 'v2.0/nav.php'; ?>
 
 
-    <!-- CABEÇALHO / TÍTULO DO MÓDULO -->
-    <!-- <div style="height:70px"></div> -->
     <header class="container section-gap">
-        <?php echo $dec = encrypt("RA9db50a600b6a348067f22f46", $action = 'd'); ?>
         <div class="row align-items-center g-3">
             <div class="col-lg-8" data-aos="fade-right">
                 <h1 class="h3 mb-2"><?= htmlspecialchars($nmmodulo ?? 'Módulo'); ?></h1>
@@ -232,7 +473,7 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
                 </div>
 
                 <!-- Contadores “AULAS / posição no módulo” (teu require com ajustes visuais) -->
-                <div class="mt-1">
+                <div class="mt-3">
                     <?php require 'config_curso1.0/require_CountAulas.php'; ?>
                 </div>
             </div>
@@ -245,12 +486,13 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
         </div>
     </header>
 
+
     <!-- PRIMEIRAS 4 / ÚLTIMAS 4 EM CARDS -->
     <section class="container section-gap">
 
-        <?php require 'config_curso1.0/require_buscar.php'; ?>
+
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <h2 class="h5 m-0"><?= empty($ultimasAssistidas) ? 'Comece por aqui' : 'Continue de onde parou' . $test; ?> ou acesse <a href="#lista-licoes" class="text-decoration-none small btn btn-warning">Ver lista completa <i class="bi bi-arrow-down-short"></i></a></h2>
+            <h2 class="h5 m-0"><?= empty($ultimasAssistidas) ? 'Comece por aqui' : 'Continue de onde parou' . $test; ?> ou acesse <a href="#lista-licoes" class="text-decoration-none small btn btn-warning">lista completa <i class="bi bi-arrow-down-short"></i></a></h2>
 
         </div>
 
@@ -296,7 +538,7 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
                                     </span>
                                 </div>
 
-                                <h3 class="h6 mt-1 mb-2 text-truncate" title="<?= htmlspecialchars($titulo) ?>">
+                                <h3 class="h6 mt-3 mb-2 text-truncate" title="<?= htmlspecialchars($titulo) ?>">
                                     <?= htmlspecialchars($titulo) ?>
                                 </h3>
                                 <p class="small text-muted-2 mb-3"><i class="bi bi-stars me-1"></i> Comece por aqui</p>
@@ -351,7 +593,7 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
                                 </span>
                             </div>
 
-                            <h3 class="h6 mt-1 mb-2 text-truncate" title="<?= htmlspecialchars($titulo) ?>">
+                            <h3 class="h6 mt-3 mb-2 text-truncate" title="<?= htmlspecialchars($titulo) ?>">
                                 <?= htmlspecialchars($titulo) ?>
                             </h3>
 
@@ -370,6 +612,10 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
+
+        <?php require 'config_curso1.0/require_buscar.php'; ?>
+
+        <?php require 'config_curso1.0/require_BannerAmazon.php' ?>
     </section>
 
     <!-- LISTA COMPLETA DE LIÇÕES -->
@@ -455,11 +701,11 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between align-items-center">
                             <strong class="text-white text-truncate"><?= htmlspecialchars($titulo); ?></strong>
-                            <small class="text-muted-2">
+                            <!-- <small class="text-muted-2">
                                 <?= $assistida
                                     ? 'Status: <span class="text-success fw-semibold">Assistida</span>'
                                     : 'Status: <span class="text-warning fw-semibold">Pendente</span>'; ?>
-                            </small>
+                            </small> -->
                         </div>
 
                         <?php if ($wasLocked && (int)($codigoUser ?? 0) === 1): ?>
@@ -504,9 +750,6 @@ $totalLicoesModulo = is_array($fetchTodasLicoes) ? count($fetchTodasLicoes) : 0;
     </script>
 
     <script src="config_default1.0/JS_logoff.js?<?= time(); ?>"></script>
-
-    <script src="config_turmas1.0/JS_accessturma.js"></script>
-    <script src="acessosv1.0/ajax_registraAcesso.js"></script>
 </body>
 
 </html>
