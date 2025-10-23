@@ -163,13 +163,15 @@ $primeiraSessao = $sessoes[0]['codigosessao'] ?? null;
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Nome da Página</label>
-                    <input type="text" name="nomepaginasp" class="form-control" required maxlength="50" placeholder="Ex.: Usuários, Relatórios, Integrações">
+                    <input type="text" id="nomepaginasp" name="nomepaginasp" class="form-control"
+                        required maxlength="50" placeholder="Ex.: Usuários, Relatórios, Integrações">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Pasta (rota)</label>
-                    <input type="text" name="pastasp" class="form-control" maxlength="100" placeholder="Ex.: admin/usuarios">
-                    <div class="form-text">Somente o caminho/slug da página no admin.</div>
+                    <input type="text" id="pastasp" name="pastasp" class="form-control" maxlength="100"
+                        placeholder="Será preenchido automaticamente a partir do nome">
+                    <div class="form-text">Ex.: <code>pg_paginaadmin</code></div>
                 </div>
 
                 <div class="row g-3">
@@ -516,6 +518,53 @@ $primeiraSessao = $sessoes[0]['codigosessao'] ?? null;
                 .replaceAll('&', '&amp;').replaceAll('<', '&lt;')
                 .replaceAll('>', '&gt;').replaceAll('"', '&quot;')
                 .replaceAll("'", '&#039;');
+        }
+    })();
+</script>
+
+<script>
+    (function() {
+        // ===== Auto-gerar rota a partir do nome da página =====
+        const inpNome = document.getElementById('nomepaginasp');
+        const inpRota = document.getElementById('pastasp');
+        if (!inpNome || !inpRota) return;
+
+        let rotaEditadaManualmente = false;
+
+        // Se o usuário digitar no campo rota, marcamos como edição manual
+        inpRota.addEventListener('input', () => {
+            rotaEditadaManualmente = true;
+        });
+
+        // Função que gera a rota com as regras solicitadas
+        function gerarRota(nome) {
+            // 1) minúsculas
+            let s = (nome || '').toString().toLowerCase();
+
+            // 2) remover acentuação (inclui ç/Ç)
+            //   - NFD separa letra + acento; removemos os diacríticos
+            s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+            // 3) manter apenas letras e números (remove espaços e símbolos)
+            s = s.replace(/[^a-z0-9]/g, '');
+
+            // 4) prefixo pg_
+            if (!s.startsWith('pg_')) {
+                s = 'pg_' + s;
+            }
+
+            return s;
+        }
+
+        // Atualiza a rota enquanto digita o nome (a não ser que tenha sido editada manualmente)
+        inpNome.addEventListener('input', () => {
+            if (rotaEditadaManualmente) return;
+            inpRota.value = gerarRota(inpNome.value);
+        });
+
+        // Garante o preenchimento inicial se o nome já vier com valor (ex.: redirecionamentos)
+        if (inpNome.value && !inpRota.value) {
+            inpRota.value = gerarRota(inpNome.value);
         }
     })();
 </script>
