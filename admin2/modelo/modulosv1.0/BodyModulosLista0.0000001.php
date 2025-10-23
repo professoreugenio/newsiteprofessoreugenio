@@ -1,6 +1,8 @@
 <?php
 // --- Controle do filtro de status ---
+// --- Controle do filtro de status ---
 $filtroGet = strtolower(trim($_GET['filtro'] ?? ''));
+
 switch ($filtroGet) {
     case 'oculto':
         $filtro = '0';
@@ -14,11 +16,14 @@ switch ($filtroGet) {
         $filtro = '1';
         break;
 }
+
+// Label e cor do status atual
 $labelFiltro = [
     '1' => ['txt' => 'Visível',  'class' => 'badge bg-success'],
     '0' => ['txt' => 'Oculto',   'class' => 'badge bg-secondary'],
     '9' => ['txt' => 'Lixeira',  'class' => 'badge bg-danger']
 ][$filtro];
+
 
 // --- Consulta ---
 $con = config::connect();
@@ -37,15 +42,10 @@ $stmt->execute();
     <i class="bi bi-view-stacked text-primary"></i>
     <span class="<?= $labelFiltro['class'] ?>"><?= $labelFiltro['txt'] ?></span>
     <small class="text-muted">Curso: <?= (int)$idCurso ?></small>
-    <?php if ($filtro !== '9'): ?>
-        <span class="ms-auto small text-muted">
-            <i class="bi bi-grip-vertical me-1"></i>Arraste para reordenar
-        </span>
-    <?php endif; ?>
 </div>
 
 <?php if ($stmt->rowCount() > 0): ?>
-    <ul id="listaModulos" class="list-group">
+    <ul class="list-group">
         <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
             <?php
             $id     = (int)$row['codigomodulos'];
@@ -53,22 +53,13 @@ $stmt->execute();
             $nm     = $row['modulo'];
             $ordem  = (int)$row['ordemm'];
             $status = (string)$row['visivelm'];
+            // Ícone e cor do status
             $icoClasse = ($status === '1') ? 'text-success' : (($status === '0') ? 'text-muted' : 'text-danger');
             $icoTitle  = ($status === '1') ? 'Visível' : (($status === '0') ? 'Oculto' : 'Lixeira');
             ?>
-            <li class="list-group-item flex-column mb-2 shadow-sm rounded item-modulo"
-                data-id="<?= $encId ?>"
-                draggable="<?= $filtro !== '9' ? 'true' : 'false' ?>">
+            <li class="list-group-item flex-column mb-2 shadow-sm rounded">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <?php if ($filtro !== '9'): ?>
-                            <span class="me-2 text-secondary handle" title="Arrastar" style="cursor:grab;">
-                                <i class="bi bi-grip-vertical fs-5"></i>
-                            </span>
-                        <?php else: ?>
-                            <span class="me-2 text-secondary"><i class="bi bi-dash"></i></span>
-                        <?php endif; ?>
-
                         <i class="bi bi-mortarboard me-2 text-primary fs-5"></i>
                         <a href="cursos_publicacoes.php?id=<?= $_GET['id']; ?>&md=<?= $encId; ?>"
                             class="text-decoration-none fw-semibold text-dark me-3">
@@ -77,10 +68,12 @@ $stmt->execute();
                     </div>
 
                     <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-secondary rounded-pill ordem-badge" title="Ordem"><?= $ordem ?></span>
+                        <span class="badge bg-secondary rounded-pill" title="Ordem"><?= $ordem ?></span>
+
                         <i class="bi bi-globe2 fs-5 <?= $icoClasse ?>" title="<?= $icoTitle ?>"></i>
 
-                        <?php if ($status !== '9'): ?>
+                        <?php if ($status !== '9'): // só mostra lixeira se ainda não estiver na lixeira 
+                        ?>
                             <button type="button"
                                 class="btn btn-sm btn-outline-danger enviar-lixeira"
                                 data-id="<?= $encId ?>"
@@ -101,23 +94,24 @@ $stmt->execute();
 
 <script>
     (function() {
-        // Tooltips
+        // Ativa tooltips se Bootstrap estiver carregado
         if (window.bootstrap && bootstrap.Tooltip) {
             document.querySelectorAll('[title]').forEach(function(el) {
                 new bootstrap.Tooltip(el);
             });
         }
 
-        // Enviar para lixeira (já existente)
+        // Ação: enviar para lixeira
         document.querySelectorAll('.enviar-lixeira').forEach(function(btn) {
             btn.addEventListener('click', async function() {
                 const encId = this.getAttribute('data-id');
                 if (!encId) return;
+
                 if (!confirm('Enviar este módulo para a lixeira?')) return;
 
                 const fd = new FormData();
                 fd.set('id', encId);
-                fd.set('status', '9');
+                fd.set('status', '9'); // lixeira
 
                 try {
                     const resp = await fetch('modulosv1.0/ajax_moduloAlterarStatus.php', {
@@ -129,7 +123,9 @@ $stmt->execute();
                     });
                     const data = await resp.json();
                     if (data && data.success) {
+                        // Recarrega a página mantendo o filtro atual
                         const params = new URLSearchParams(window.location.search);
+                        // mantém id e filtro
                         window.location.search = params.toString();
                     } else {
                         alert(data && data.message ? data.message : 'Falha ao mover para lixeira.');
@@ -139,94 +135,5 @@ $stmt->execute();
                 }
             });
         });
-
-        // ====== Drag & Drop para reordenar ======
-        const lista = document.getElementById('listaModulos');
-        if (!lista) return;
-
-        // Desabilita ordenação quando estiver na lixeira
-        const estaNaLixeira = '<?= $filtro ?>' === '9';
-        if (estaNaLixeira) return;
-
-        let draggingEl = null;
-
-        lista.addEventListener('dragstart', function(e) {
-            const li = e.target.closest('.item-modulo');
-            if (!li) return;
-            draggingEl = li;
-            li.classList.add('opacity-50');
-            e.dataTransfer.effectAllowed = 'move';
-        });
-
-        lista.addEventListener('dragend', function(e) {
-            if (draggingEl) draggingEl.classList.remove('opacity-50');
-            draggingEl = null;
-            atualizarBadges(); // reindexa visualmente
-            salvarOrdem(); // envia ao servidor
-        });
-
-        lista.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            const afterEl = getDragAfterElement(lista, e.clientY);
-            const cur = draggingEl;
-            if (!cur) return;
-            if (afterEl == null) {
-                lista.appendChild(cur);
-            } else {
-                lista.insertBefore(cur, afterEl);
-            }
-        });
-
-        function getDragAfterElement(container, y) {
-            const els = [...container.querySelectorAll('.item-modulo:not(.opacity-50)')];
-            return els.reduce((closest, child) => {
-                const box = child.getBoundingClientRect();
-                const offset = y - box.top - box.height / 2;
-                if (offset < 0 && offset > closest.offset) {
-                    return {
-                        offset: offset,
-                        element: child
-                    };
-                } else {
-                    return closest;
-                }
-            }, {
-                offset: Number.NEGATIVE_INFINITY
-            }).element;
-        }
-
-        function atualizarBadges() {
-            const itens = lista.querySelectorAll('.item-modulo .ordem-badge');
-            let i = 1;
-            itens.forEach(b => {
-                b.textContent = i++;
-            });
-        }
-
-        async function salvarOrdem() {
-            const ids = [...lista.querySelectorAll('.item-modulo')].map(li => li.getAttribute('data-id')).filter(Boolean);
-            if (!ids.length) return;
-
-            const fd = new FormData();
-            ids.forEach((id, idx) => fd.append('ordem[]', id)); // mantém ordem atual
-            fd.set('idcurso', '<?= (int)$idCurso ?>');
-            fd.set('filtro', '<?= $filtro ?>'); // opcional: caso queira tratar por status
-
-            try {
-                const resp = await fetch('modulosv1.0/ajax_moduloReordenar.php', {
-                    method: 'POST',
-                    body: fd,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
-                const data = await resp.json();
-                if (!(data && data.success)) {
-                    alert(data && data.message ? data.message : 'Falha ao salvar a nova ordem.');
-                }
-            } catch (err) {
-                alert('Erro ao salvar ordem: ' + err);
-            }
-        }
     })();
 </script>
