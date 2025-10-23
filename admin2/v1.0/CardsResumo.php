@@ -4,6 +4,7 @@
     <?php require '../v1.0/queryContCursos.php'; ?>
     <?php require '../v1.0/queryContAcessos.php'; ?>
     <!-- CARDS -->
+    <?php require '../v1.0/require_PaginasAdmin.php'; ?>
     <?php require '../v1.0/require_Vendas.php'; ?>
     <?php require '../v1.0/require_Cursos.php'; ?>
     <?php require '../v1.0/require_Aniversariantes.php'; ?>

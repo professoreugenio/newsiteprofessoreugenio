@@ -47,12 +47,16 @@
 
                     if (!empty($nomePagina)) {
 
+
+
                         /* ==========================================================
        🗂️ 1. Definição de caminhos
     ========================================================== */
-                        $baseDir       = dirname(__DIR__, 1) . '/modelo/';
+                        $baseDir       = dirname(__DIR__, 1) . '/';
                         $paginaDir     = $baseDir . $nomePagina . '/';
-                        $versaoDir     = $paginaDir . $nomePagina . '1.0/';
+                        $nomePaginaLimpo = str_replace(array("pg", "_"), "", $nomePagina);
+                        
+                        $versaoDir     = $paginaDir . $nomePaginaLimpo . '1.0/';
 
                         /* ==========================================================
        🏗️ 2. Criação das pastas
