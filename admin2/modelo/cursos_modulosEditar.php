@@ -58,7 +58,7 @@ require_once APP_ROOT . '/autenticacao.php';
         }
     </script>
     
-    <script src="modulosv1.0/JS_moduloEditarExcluir.js?<?= time(); ?>"></script>
+    
     <div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1080;" id="toastContainer">
     </div>
     <!-- Popper e Bootstrap -->

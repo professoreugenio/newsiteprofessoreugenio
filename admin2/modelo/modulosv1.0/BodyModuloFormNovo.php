@@ -45,7 +45,7 @@ try {
     <div class="card-body pt-2">
         <form id="formModuloNovo" class="row g-3">
             <!-- Curso -->
-            <div class="col-md-6">
+            <div class="col-md-5">
 
                 <select class="form-select" id="codcursos" name="codcursos" required>
                     <option value="">— selecione Um Curso —</option>
@@ -59,12 +59,20 @@ try {
             </div>
 
             <!-- Nome do módulo -->
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-floating">
                     <input type="text" class="form-control" id="nomemodulosm" name="nomemodulosm" placeholder="Nome do módulo" required>
                     <label for="nomemodulosm">Nome do módulo *</label>
                 </div>
             </div>
+
+            <div class="col-md-2">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="ordemm" name="ordemm" placeholder="Ordem" min="0" value="1">
+                    <label for="ordemm">Ordem</label>
+                </div>
+            </div>
+
 
             <!-- Descrição -->
             <div class="col-12">
@@ -87,33 +95,11 @@ try {
                 <small class="text-muted">Padrão: <code>padrao.jpg</code>. (Upload pode ser tratado em endpoint dedicado.)</small>
             </div>
 
-            <!-- Valores -->
-            <div class="col-md-4">
-                <div class="form-floating">
-                    <input type="text" class="form-control money" id="valordocursosm" name="valordocursosm" placeholder="Valor do curso">
-                    <label for="valordocursosm">Valor do curso</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-floating">
-                    <input type="text" class="form-control money" id="valordahorasm" name="valordahorasm" placeholder="Valor da hora">
-                    <label for="valordahorasm">Valor da hora</label>
-                </div>
-            </div>
+
+
 
             <!-- Carga horária e ordem -->
-            <div class="col-md-2">
-                <div class="form-floating">
-                    <input type="number" class="form-control" id="cargahorariasm" name="cargahorariasm" placeholder="CH" min="0">
-                    <label for="cargahorariasm">Carga horária</label>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-floating">
-                    <input type="number" class="form-control" id="ordemm" name="ordemm" placeholder="Ordem" min="0" value="1">
-                    <label for="ordemm">Ordem</label>
-                </div>
-            </div>
+
 
             <!-- Visibilidades -->
             <div class="col-md-3">
@@ -132,14 +118,7 @@ try {
             </div>
 
             <!-- Data/Hora -->
-            <div class="col-md-3">
-                <label for="datam" class="form-label fw-semibold">Data</label>
-                <input type="date" class="form-control" id="datam" name="datam">
-            </div>
-            <div class="col-md-3">
-                <label for="horam" class="form-label fw-semibold">Hora</label>
-                <input type="time" class="form-control" id="horam" name="horam">
-            </div>
+
 
             <div class="col-12 d-flex gap-2 pt-2">
                 <button type="submit" class="btn btn-primary">
