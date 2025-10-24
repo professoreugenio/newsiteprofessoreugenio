@@ -170,8 +170,6 @@ if ($rwTurma) {
     // Variáveis principais
     $idCurso      = (string)($rwTurma['codcursost'] ?? '');
     $enIdCurso    = $idCurso !== '' ? encrypt($idCurso, 'e') : '';
-    $idTurma     = (string)($rwTurma['codigoturma'] ?? '');
-    $enIdTurma    = $idCurso !== '' ? encrypt($idTurma, 'e') : '';
     $nomeTurma    = $rwTurma['nometurma'] ?? '';
     $descricao    = $rwTurma['previa'] ?? '';
     $lead         = $rwTurma['lead'] ?? '';
@@ -193,7 +191,7 @@ if ($rwTurma) {
     $linkpagseguro          = $rwTurma['linkpagseguro'] ?? '';
     $linkwhatsapp          = $rwTurma['linkwhatsapp'] ?? '';
     $celularprofessor          = $rwTurma['celularprofessorct'] ?? '';
-    $linkwhatsapp = "https://wa.me/55" . $celularprofessor . "?text=Gostaria de mais informações sobre o curso";
+    $linkwhatsapp ="https://wa.me/55".$celularprofessor."?text=Gostaria de mais informações sobre o curso";
     $linkpagsegurovitalicia = $rwTurma['linkpagsegurovitalicia'] ?? '';
     $linkmercadopago        = $rwTurma['linkmercadopago'] ?? '';
     $linkmercadopagovitalicio = $rwTurma['linkmercadopagovitalicio'] ?? '';
@@ -265,4 +263,3 @@ if (!empty($chaveTurma)) {
         $Codigochave = encrypt($rwChave['chavesc'], 'e');
     }
 }
-

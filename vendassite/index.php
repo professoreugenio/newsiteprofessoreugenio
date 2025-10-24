@@ -120,7 +120,8 @@ $aovivo = 0;
 $horamanha = $horatarde = $horanoite = '';
 $vendaliberada = $horasaulast = $valorvenda = '';
 $chavepix = $chavepixvalorvenda = '';
-$valoranual = $valorvendavitalicia = '';
+$valorbruto = $valoravista = '';
+$valorbruto = $valoravista = '';
 $chavepixvitalicia = '';
 $linkpagseguro = $linkpagsegurovitalicia = '';
 $linkmercadopago = $linkmercadopagovitalicio = '';
@@ -180,8 +181,8 @@ if ($idCursoVenda > 0) {
         $valorvenda             = $rwTurma['valorvenda'] ?? '';
         $chavepix               = $rwTurma['chavepix'] ?? '';
         $chavepixvalorvenda     = $rwTurma['chavepixvalorvenda'] ?? '';
-        $valoranual             = $rwTurma['valoranual'] ?? '';
-        $valorvendavitalicia    = $rwTurma['valorvendavitalicia'] ?? '';
+        $valorbruto             = $rwTurma['valorbruto'] ?? '';
+        $valoravista    = $rwTurma['valoravistact'] ?? '';
         $chavepixvitalicia      = $rwTurma['chavepixvitalicia'] ?? '';
         $linkpagseguro          = $rwTurma['linkpagseguro'] ?? '';
         $linkpagsegurovitalicia = $rwTurma['linkpagsegurovitalicia'] ?? '';
@@ -569,14 +570,13 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                             <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas Limitadas</span>
                         </div>
 
-                        <?php if ((float)$valoranual > 0): ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valoranual) ?>/anual</div>
-                            <div class="small text-white-50 mb-3">ou Vitalício por R$ <?= htmlspecialchars((string)$valorvendavitalicia) ?></div>
-                        <?php else: ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valorvendavitalicia ?: '0,00') ?></div>
+                        
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valorbruto) ?>/à vista</div>
+                            <div class="small text-white-50 mb-3">ou Vitalício por R$ <?= htmlspecialchars((string)$valoravista) ?></div>
+                       
+                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valoravista ?: '0,00') ?></div>
                             <div class="small text-white-50 mb-3">Acesso Vitalício com atualizações</div>
-                        <?php endif; ?>
-
+                       
                         <div class="d-grid gap-2">
                             <?php
                             // Monta link para vendas_inscricao preservando nav/ts/af via sessão/GET

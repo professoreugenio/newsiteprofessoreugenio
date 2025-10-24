@@ -251,36 +251,3 @@
      background: #0e2144;
  }
 
-/*AO VIVO *
-
-/* Destaque "AULA AO VIVO" no cabeçalho do formulário */
-.badge-live {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    padding: .4rem .75rem;
-    border-radius: 999px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #14ccab, #0bb598);
-    color: #0b1832;
-    box-shadow: 0 6px 20px rgba(20, 204, 171, .25);
-    border: 1px solid rgba(20, 204, 171, .35);
-    text-transform: uppercase;
-    letter-spacing: .2px;
-}
-
-.opt-time {
-    background: #0f1f3d;
-    border: 1px solid rgba(255, 255, 255, .15);
-    border-radius: .75rem;
-    padding: .75rem;
-}
-
-.opt-time input {
-    accent-color: #FF9C00;
-}
-
-.form-hint {
-    color: #9fb1d1;
-    font-size: .92rem;
-}
