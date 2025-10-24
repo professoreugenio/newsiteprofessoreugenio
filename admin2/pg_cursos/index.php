@@ -21,19 +21,15 @@ require_once APP_ROOT . '/autenticacao.php';
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="mt-4">
-                <h3><i class="bi bi-journal-text me-2"></i>Páginas Admin Editar</h3>
-
+                <h3><i class="bi bi-journal-text me-2"></i> pg_cursos</h3>
             </div>
-            <?php require_once APP_ROOT . '/admin2/modelo/paginasadmin1.0/Subnav.php'; ?>
+            <?php require_once APP_ROOT . '/admin2/pg_cursos/pg_cursos1.0/Subnav.php'; ?>
         </div>
-        <?php require_once APP_ROOT . '/admin2/modelo/paginasadmin1.0/BodyPaginasAdminEditar.php'; ?>
+        <?php require_once APP_ROOT . '/admin2/pg_cursos/pg_cursos1.0/Bodypg_cursos1.0.php'; ?>
     </div>
     <!-- Scripts -->
-    <script src="../v1.0/PainelLateral.js"></script>
+    <script src="<?php require_once APP_ROOT . "/admin2/v1.0/PainelLateral.js"; ?>"></script>
     <?php require_once APP_ROOT . '/admin2/v1.0/footer.php'; ?>
-    <!-- Bootstrap 5 Bundle (JS + Popper) -->
-    
-
 </body>
 
 </html>

@@ -5,7 +5,7 @@
     <?php
     function ConsultaArray($con, $inicio, $limite)
     {
-        $queryArray = $con->prepare("SELECT * FROM sistema_sessao WHERE visivel = '1'   ORDER BY ordem ASC LIMIT $inicio,$limite");
+        $queryArray = $con->prepare("SELECT * FROM a_site_sessao WHERE visivelss = '1'   ORDER BY ordemss ASC LIMIT $inicio,$limite");
         $queryArray->execute();
         return $queryArray->fetchALL();
     }
@@ -16,47 +16,50 @@
     ?>
 
     <?php foreach ($resultarray as $key => $rw_Sessao) { ?>
-        <?php $idSes = $rw_Sessao['codigosessao']; ?>
+
         <?php $encSessao = encrypt($rw_Sessao['codigosessao'], $action = 'e'); ?>
+
+        <?php
+        // valida $idSes: usa o id da sessão atual se presente, senão usa $idSes existente, senão fallback para 1
+        if (isset($rw_Sessao['codigosessao']) && is_numeric($rw_Sessao['codigosessao'])) {
+            $idSes = (int) $rw_Sessao['codigosessao'];
+        } else {
+            $idSes = (isset($idSes) && is_numeric($idSes)) ? (int) $idSes : 1;
+        }
+        ?>
         <div>
-            <a href="#" class="d-block mb-2 text-dark fw-bold" onclick="abrirMenu('<?php echo $rw_Sessao['tag']; ?>')">
-                <i class="bi bi-journal-text me-2"></i>
-                <?php echo $rw_Sessao['nome']; ?>
-                <span id="toggle-<?php echo $rw_Sessao['tag']; ?>" class="toggle-seta">▶</span>
+            <!-- bi-journal-text -->
+            <a href="#" class="d-block mb-2 text-dark fw-bold" onclick="abrirMenu('<?php echo $rw_Sessao['iconess'] ?? ''; ?>')">
+                <i class="bi <?php echo $rw_Sessao['iconess'] ?? ''; ?>  me-2"></i>
+                <?php echo $rw_Sessao['nomesessao']; ?>
+                <span id="toggle-<?php echo $rw_Sessao['iconess']; ?>" class="toggle-seta">▶</span>
             </a>
-            <div id="menu-<?php echo $rw_Sessao['tag']; ?>" class="submenu ps-3">
+            <div id="menu-<?php echo $rw_Sessao['iconess']; ?>" class="submenu ps-3">
                 <?php
-                $queryCategoria = $con->prepare("SELECT * FROM new_sistema_paginasadmin WHERE codsessao = '$idSes' AND visivelpa = '1' ORDER BY ordemsp ASC LIMIT 0,20");
+                $queryCategoria = $con->prepare("SELECT * FROM a_site_paginas WHERE idsessaosp = '$idSes' AND visivelsp = '1' ORDER BY ordemsp ASC LIMIT 0,20");
                 $queryCategoria->execute();
                 $resultarrayCategoria = $queryCategoria->fetchALL();
                 foreach ($resultarrayCategoria as $rwPagina) {
                 ?>
 
                     <?php
-                    /**
-                     * GERADOR DE ESTRUTURA COMPLETA DE PÁGINAS EM /modelo/
-                     * Cria automaticamente:
-                     * - /modelo/{nomePagina}/
-                     * - /modelo/{nomePagina}/{nomePagina}1.0/
-                     * - index.php
-                     * - Subnav.php
-                     * - Body{nomePagina}1.0.php
-                     */
 
-                    $nomePagina = "pg_" . trim((string)$rwPagina['diretorio']); // Exemplo: 'clientes'
+
+                    $nomePagina = trim((string)$rwPagina['nomepaginasp']); // Exemplo: 'clientes'
+                    $nomePasta = trim((string)$rwPagina['pastasp']); // Exemplo: 'clientes'
 
                     if (!empty($nomePagina)) {
 
 
 
                         /* ==========================================================
-       🗂️ 1. Definição de caminhos
+       🗂️ 1. Definição de caminhosnomePastaLimpo
     ========================================================== */
-                        $baseDir       = dirname(__DIR__, 1) . '/';
-                        $paginaDir     = $baseDir . $nomePagina . '/';
-                        $nomePaginaLimpo = str_replace(array("pg", "_"), "", $nomePagina);
-                        
-                        $versaoDir     = $paginaDir . $nomePaginaLimpo . '1.0/';
+                        $baseDir       = dirname(__DIR__, 3) . '/admin2/modelo/';
+                        $paginaDir     = $baseDir . $nomePasta . '/';
+                        $nomePastaLimpo = str_replace(array("pg", "_"), "", $nomePasta);
+
+                        $versaoDir     = $paginaDir . $nomePastaLimpo . '1.0/';
 
                         /* ==========================================================
        🏗️ 2. Criação das pastas
@@ -97,9 +100,9 @@ require_once APP_ROOT . '/autenticacao.php';
             <div class="mt-4">
                 <h3><i class="bi bi-journal-text me-2"></i> {$nomePagina}</h3>
             </div>
-            <?php require_once APP_ROOT . '/admin2/modelo/{$nomePagina}/{$nomePagina}1.0/Subnav.php'; ?>
+            <?php require_once APP_ROOT . '/admin2/modelo/{$nomePasta}/{$nomePastaLimpo}1.0/Subnav.php'; ?>
         </div>
-        <?php require_once APP_ROOT . '/admin2/modelo/{$nomePagina}/{$nomePagina}1.0/Body{$nomePagina}1.0.php'; ?>
+        <?php require_once APP_ROOT . '/admin2/modelo/{$nomePasta}/{$nomePastaLimpo}1.0/Body{$nomePastaLimpo}1.0.php'; ?>
     </div>
     <!-- Scripts -->
     <script src="<?php require_once APP_ROOT . "/admin2/v1.0/PainelLateral.js"; ?>"></script>
@@ -144,7 +147,7 @@ PHP;
                         /* ==========================================================
        📄 5. Gera o arquivo Body{nomePagina}1.0.php
     ========================================================== */
-                        $bodyPath = $versaoDir . 'Body' . $nomePagina . '1.0.php';
+                        $bodyPath = $versaoDir . 'Body' . $nomePastaLimpo . '1.0.php';
                         $conteudoBody = <<<PHP
 <?php
 /**
@@ -172,21 +175,21 @@ PHP;
                         /* ==========================================================
        ✅ 6. Confirmação visual
     ========================================================== */
-                         "<div class='alert alert-success mt-3'>
+                        "<div class='alert alert-success mt-3'>
             <strong>Módulo criado com sucesso!</strong><br>
-            Estrutura: /modelo/{$nomePagina}/{$nomePagina}1.0/<br>
+            Estrutura: /{$nomePasta}/{$nomePastaLimpo}1.0/<br>
             <ul class='mb-0'>
                 <li>index.php</li>
                 <li>Subnav.php</li>
-                <li>Body{$nomePagina}1.0.php</li>
+                <li>Body{$nomePastaLimpo}1.0.php</li>
             </ul>
           </div>";
                     }
                     ?>
 
 
-                    <?php $encPage = encrypt($rwPagina['codigopaginasadmin'], $action = 'e'); ?>
-                    <a href="../actions.php?ses=<?php echo $encSessao; ?>&page=<?php echo $encPage; ?>&ts=<?= time() ?>" class="d-block text-muted mb-1">:: <?php echo $rwPagina['nomepaginapa']; ?></a>
+                    <?php $encPage = encrypt($rwPagina['codigopaginas'], $action = 'e'); ?>
+                    <a href="../modelo/<?= $rwPagina['pastasp']; ?>/?ses=<?php echo $encSessao; ?>&page=<?php echo $encPage; ?>&ts=<?= time() ?>" class="d-block text-muted mb-1">:: <?php echo $rwPagina['nomepaginasp']; ?></a>
                 <?php } ?>
             </div>
         </div>
