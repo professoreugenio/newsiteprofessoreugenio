@@ -1,17 +1,13 @@
 <?php
 
 declare(strict_types=1);
-
 define('BASEPATH', true);
 define('APP_ROOT', dirname(__DIR__, 1)); // raiz do site (ex.: /public_html)
-
 /* ===================== INCLUDES ===================== */
 require_once APP_ROOT . '/conexao/class.conexao.php';   // $con = config::connect();
 require_once APP_ROOT . '/autenticacao.php';
-
 /* ===================== SESSÃO (4H) ===================== */
 const SESSION_TTL = 4 * 3600;
-
 session_set_cookie_params([
     'lifetime' => SESSION_TTL,
     'path'     => '/',
@@ -21,7 +17,6 @@ session_set_cookie_params([
     'samesite' => 'Lax',
 ]);
 session_start();
-
 if (!isset($_SESSION['session_started_at'])) {
     $_SESSION['session_started_at'] = time();
 } elseif ((time() - (int)$_SESSION['session_started_at']) > SESSION_TTL) {
@@ -29,7 +24,6 @@ if (!isset($_SESSION['session_started_at'])) {
     session_regenerate_id(true);
     $_SESSION['session_started_at'] = time();
 }
-
 /* ===================== Helpers ===================== */
 function get_param(string $k): ?string
 {
@@ -39,12 +33,10 @@ function get_param(string $k): ?string
     if (strlen($v) > 8192) $v = substr($v, 0, 8192);
     return $v;
 }
-
 /* ===================== CAPTURA GET -> SESSÃO ===================== */
 $paramNav = get_param('nav');   // pode vir
 $paramAf  = get_param('af');    // pode não vir
 $paramTs  = get_param('ts');    // opcional
-
 if ($paramNav !== null) {
     $_SESSION['nav']        = $paramNav;
     $_SESSION['nav_set_at'] = time();
@@ -56,12 +48,10 @@ if ($paramAf !== null) {
 if ($paramTs !== null) {
     $_SESSION['ts'] = $paramTs;
 }
-
 /* Exposição (sem forçar "novos"): GET > SESSION > '' */
 $nav = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
 $af  = $_GET['af']  ?? ($_SESSION['af']  ?? '');
 $ts  = $_GET['ts']  ?? ($_SESSION['ts']  ?? '');
-
 /* ===================== PRG (Post/Redirect/Get-like) ===================== */
 /**
  * Redireciona APENAS quando chegaram NOVOS parâmetros pela URL.
@@ -72,21 +62,17 @@ $ts  = $_GET['ts']  ?? ($_SESSION['ts']  ?? '');
 $hasNewParams   = ($paramNav !== null) || ($paramAf !== null) || ($paramTs !== null);
 $prgAlreadyDone = !empty($_SESSION['prg_redirect_done']);
 $noredir        = isset($_GET['noredir']) && $_GET['noredir'] == '1';
-
 if ($hasNewParams && !$prgAlreadyDone && !$noredir) {
     $_SESSION['prg_redirect_done'] = time();
-
     if (!headers_sent()) {
         header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
         header('Pragma: no-cache');
-
         // Redireciona para ESTA MESMA PÁGINA sem querystring
         $self = strtok($_SERVER['REQUEST_URI'], '?'); // ex.: /vendassite/index.php
         header('Location: ' . $self);
         exit;
     }
 }
-
 /* ===================== DECODIFICA NAV -> idCursoVenda ===================== */
 $idCursoVenda = 0;
 $navRaw       = $_SESSION['nav'] ?? '';
@@ -97,7 +83,6 @@ if ($navRaw !== '') {
         $decNavCurso = '';
         // error_log('NAV decrypt error: ' . $e->getMessage());
     }
-
     if ($decNavCurso !== '') {
         // Tenta padrão "a=...&id=123&foto=456"
         parse_str($decNavCurso, $navParams);
@@ -113,25 +98,38 @@ if ($navRaw !== '') {
     }
 }
 $idCursoVenda = max(0, (int)$idCursoVenda);
-
 /* ===================== DEFAULTS ===================== */
-$idCurso = $enIdCurso = $nomeTurma = $descricao = $lead = $chaveTurma = '';
-$aovivo = 0;
-$horamanha = $horatarde = $horanoite = '';
-$vendaliberada = $horasaulast = $valorvenda = '';
-$chavepix = $chavepixvalorvenda = '';
-$valorbruto = $valoravista = '';
-$valorbruto = $valoravista = '';
-$chavepixvitalicia = '';
-$linkpagseguro = $linkpagsegurovitalicia = '';
-$linkmercadopago = $linkmercadopagovitalicio = '';
-$valorhoraaula = '';
-$imgqrcodecurso = $imgqrcodeanual = $imgqrcodevitalicio = '';
 $imgMidiaCurso = 'https://professoreugenio.com/img/cat-2.jpg';
 $nomeCurso = $hero = $sobreocurso = $beneficios = $cta = '';
 $Codigochave = '';
 $youtubeurl = ''; // id do vídeo
-
+$idCurso =   "";
+$enIdCurso =   "";
+$nomeTurma  =   "";
+$idTurma    =   "";
+$descricao   =   "";
+$lead         =   "";
+$chaveTurma    =   "";
+$aovivo        =   "";
+$horamanha    =   "";
+$horatarde    =   "";
+$horanoite     =   "";
+$horasaulast            =   "";
+$vendaliberada          =   "";
+$chavepix               =   "";
+$chavepixvalorvenda     =   "";
+$valordocurso            =   "";
+$valornocartao            =   "";
+$valoravista    =   "";
+$valorhoraaula         =   "";
+$chavepixvitalicia     =   "";
+$linkpagseguro         =   "";
+$linkpagsegurovitalicia  =   "";
+$linkmercadopago        =   "";
+$linkmercadopagovitalicio  =   "";
+$imgqrcodecurso         =   "";
+$imgqrcodeanual         =   "";
+$imgqrcodevitalicio     =   "";
 /* ===================== BUSCAS (se houver idCursoVenda) ===================== */
 if ($idCursoVenda > 0) {
     // TURMA
@@ -139,6 +137,7 @@ if ($idCursoVenda > 0) {
         SELECT 
             t.codcursost,
             t.nometurma,
+            t.codigoturma,
             t.aovivoct,
             t.previa,
             t.lead,
@@ -146,7 +145,7 @@ if ($idCursoVenda > 0) {
             t.horadem, t.horadet, t.horaden,
             t.visivelst, t.horasaulast, t.valorvenda,
             t.chavepix, t.chavepixvalorvenda,
-            t.valoranual, t.valorvendavitalicia,
+            t.valoranual, t.valorvendavitalicia, t.valorbrutoct,t.valorcartaoct,t.valoravistact,
             t.chavepixvitalicia,
             t.linkpagseguro, t.linkpagsegurovitalicia,
             t.linkmercadopago, t.linkmercadopagovitalicio,
@@ -162,37 +161,34 @@ if ($idCursoVenda > 0) {
     $q1->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
     $q1->execute();
     $rwTurma = $q1->fetch(PDO::FETCH_ASSOC);
-
     if ($rwTurma) {
         $idCurso      = (string)($rwTurma['codcursost'] ?? '');
         $enIdCurso    = $idCurso !== '' ? encrypt($idCurso, 'e') : '';
         $nomeTurma    = $rwTurma['nometurma'] ?? '';
+        $idTurma    = $rwTurma['codigoturma'] ?? '';
         $descricao    = $rwTurma['previa'] ?? '';
         $lead         = $rwTurma['lead'] ?? '';
         $chaveTurma   = $rwTurma['chave'] ?? '';
         $aovivo       = (int)($rwTurma['aovivoct'] ?? 0);
-
         $horamanha    = $rwTurma['horadem'] ?? '';
         $horatarde    = $rwTurma['horadet'] ?? '';
         $horanoite    = $rwTurma['horaden'] ?? '';
-
-        $vendaliberada          = $rwTurma['visivelst'] ?? '';
         $horasaulast            = $rwTurma['horasaulast'] ?? '';
-        $valorvenda             = $rwTurma['valorvenda'] ?? '';
+        $vendaliberada          = $rwTurma['visivelst'] ?? '';
         $chavepix               = $rwTurma['chavepix'] ?? '';
         $chavepixvalorvenda     = $rwTurma['chavepixvalorvenda'] ?? '';
-        $valorbruto             = $rwTurma['valorbruto'] ?? '';
+        $valordocurso             = $rwTurma['valorbrutoct'] ?? '';
+        $valornocartao             = $rwTurma['valorcartaoct'] ?? '';
         $valoravista    = $rwTurma['valoravistact'] ?? '';
+        $valorhoraaula          = $rwTurma['valorhoraaula'] ?? '';
         $chavepixvitalicia      = $rwTurma['chavepixvitalicia'] ?? '';
         $linkpagseguro          = $rwTurma['linkpagseguro'] ?? '';
         $linkpagsegurovitalicia = $rwTurma['linkpagsegurovitalicia'] ?? '';
         $linkmercadopago        = $rwTurma['linkmercadopago'] ?? '';
         $linkmercadopagovitalicio = $rwTurma['linkmercadopagovitalicio'] ?? '';
-        $valorhoraaula          = $rwTurma['valorhoraaula'] ?? '';
         $imgqrcodecurso         = $rwTurma['imgqrcodecurso'] ?? '';
         $imgqrcodeanual         = $rwTurma['imgqrcodeanual'] ?? '';
         $imgqrcodevitalicio     = $rwTurma['imgqrcodevitalicio'] ?? '';
-
         // WhatsApp: sanitiza celular ou usa fallback
         $cel = preg_replace('/\D+/', '', (string)($rwTurma['celularprofessorct'] ?? ''));
         if ($cel === '') $cel = '5585995637577';
@@ -202,7 +198,6 @@ if ($idCursoVenda > 0) {
         // fallback de WhatsApp
         $linkwhatsapp = 'https://wa.me/5585995637577?text=' . rawurlencode('Gostaria de mais informações sobre o curso');
     }
-
     // FOTO
     $q2 = $con->prepare("
         SELECT f.pasta, f.foto
@@ -218,7 +213,6 @@ if ($idCursoVenda > 0) {
     if ($rwFoto && !empty($rwFoto['pasta']) && !empty($rwFoto['foto'])) {
         $imgMidiaCurso = "https://professoreugenio.com/fotos/midias/{$rwFoto['pasta']}/{$rwFoto['foto']}";
     }
-
     // CURSO
     $q3 = $con->prepare("
         SELECT nomecurso, youtubeurl, heroSC, sobreSC, beneficiosSC, ctaSC
@@ -236,7 +230,6 @@ if ($idCursoVenda > 0) {
         $sobreocurso = $rwCurso['sobreSC'] ?? '';
         $beneficios  = $rwCurso['beneficiosSC'] ?? '';
         $cta         = $rwCurso['ctaSC'] ?? '';
-
         // Extrai ID do YouTube (aceita várias formas)
         $youtube = trim($youtube);
         $youtubeurl = '';
@@ -264,7 +257,6 @@ if ($idCursoVenda > 0) {
             }
         }
     }
-
     // CHAVE (para próximas etapas)
     if (!empty($chaveTurma)) {
         $q4 = $con->prepare("
@@ -281,7 +273,6 @@ if ($idCursoVenda > 0) {
         }
     }
 }
-
 /* ===================== Destaques (chips) ===================== */
 function fmtHora(?string $h): ?string
 {
@@ -294,7 +285,6 @@ if ((int)$aovivo === 1) $chips[] = ['icon' => 'bi-broadcast',   'label' => 'ONLI
 if ($m = fmtHora($horamanha)) $chips[] = ['icon' => 'bi-sunrise',    'label' => 'MANHÃ às ' . $m, 'class' => 'badge-time'];
 if ($t = fmtHora($horatarde)) $chips[] = ['icon' => 'bi-sunset',     'label' => 'TARDE às ' . $t, 'class' => 'badge-time'];
 if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 'NOITE às ' . $n, 'class' => 'badge-time'];
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -306,7 +296,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
     <title>Curso <?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?> — Professor Eugênio</title>
     <meta name="description" content="Domine Excel para gabaritar questões de concursos: funções, gráficos, tabelas, atalhos e simulados. Aulas online, material para download e certificação.">
     <link rel="canonical" href="https://professoreugenio.com/curso-excel-concursos">
-
     <!-- OG/Twitter -->
     <meta property="og:title" content="<?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?> — Professor Eugênio">
     <meta property="og:description" content="Domine Excel para gabaritar questões de concursos. Aulas online, simulados e material para download.">
@@ -314,7 +303,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
     <meta property="og:image" content="<?= htmlspecialchars($imgMidiaCurso, ENT_QUOTES) ?>">
     <meta property="og:url" content="https://professoreugenio.com/curso-excel-concursos">
     <meta name="twitter:card" content="summary_large_image">
-
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -323,7 +311,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
 </head>
 
 <body>
-
     <!-- ===================== NAV ===================== -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
@@ -346,18 +333,15 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
             </div>
         </div>
     </nav>
-
     <!-- ===================== HERO ===================== -->
     <section id="hero" class="hero pt-5">
         <div class="container position-relative">
             <div class="row align-items-center gy-4">
                 <div class="col-lg-7" data-aos="fade-right">
                     <span class="badge badge-soft rounded-pill px-3 py-2 small mb-3">
-                        <i class="bi bi-trophy me-1"></i> Curso de <?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?>
+                        <i class="bi bi-trophy me-1"></i> Curso de <?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?> <?= $idTurma ?>
                     </span>
-
                     <?= $hero ?: '<h1 class="display-5 fw-bold mb-3">Excel para Concursos</h1><p class="lead">A preparação direta ao ponto para dominar o Excel nas provas.</p>' ?>
-
                     <?php if (!empty($chips)): ?>
                         <div class="chip-line mt-4 mb-4" data-aos="fade-up" data-aos-delay="50">
                             <?php foreach ($chips as $c): ?>
@@ -368,19 +352,16 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-
                     <div class="d-flex flex-wrap gap-2">
                         <a href="#cta" class="btn btn-cta btn-lg"><i class="bi bi-star-fill me-2"></i> Garantir minha vaga</a>
                         <a href="#grade" class="btn btn-outline-soft btn-lg"><i class="bi bi-journal-check me-2"></i> Ver a grade</a>
                     </div>
-
                     <div class="d-flex gap-3 mt-4 small text-white-50">
                         <div><i class="bi bi-camera-video me-1"></i> Aulas ao vivo + gravadas</div>
                         <div><i class="bi bi-patch-check me-1"></i> Certificação</div>
                         <div><i class="bi bi-file-earmark-arrow-down me-1"></i> PDFs e simulados</div>
                     </div>
                 </div>
-
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="hero-card p-3 p-md-4">
                         <div style="background-color:#ffa500;color:#fff;font-weight:bold;padding:2px 16px;border-radius:8px;display:inline-block;">
@@ -401,17 +382,14 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
             </div>
         </div>
     </section>
-
     <!-- ===================== BENEFÍCIOS ===================== -->
     <section id="beneficios">
         <?= $beneficios ?: '<div class="container"><div class="card-dark p-4">Benefícios em breve.</div></div>' ?>
     </section>
-
     <!-- ===================== SOBRE ===================== -->
     <section id="sobre">
         <?= $sobreocurso ?: '<div class="container"><div class="card-dark p-4">Sobre o curso em breve.</div></div>' ?>
     </section>
-
     <!-- ===================== GRADE ===================== -->
     <section id="grade">
         <div class="container">
@@ -419,7 +397,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                 <div class="heading-2">Grade do Curso</div>
                 <p class="lead lead-muted mb-0">Conteúdo organizado por módulos. Expanda cada módulo para ver as aulas.</p>
             </div>
-
             <?php
             $idcv = (int)$idCursoVenda;
             if ($idcv > 0) {
@@ -457,7 +434,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                 $stmt->bindValue(':curso', $idcv, PDO::PARAM_INT);
                 $stmt->execute();
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
                 $modules = [];
                 foreach ($rows as $r) {
                     $mid = (int)$r['mod_id'];
@@ -477,7 +453,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                         ];
                     }
                 }
-
                 if (empty($modules)) {
                     echo '<div class="card-dark p-4"><div class="small text-white-50 mb-0">Conteúdo em atualização. Volte em breve.</div></div>';
                 } else {
@@ -523,7 +498,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                 echo '<div class="card-dark p-4"><div class="small text-white-50 mb-0">Curso não identificado. Verifique o link de acesso.</div></div>';
             }
             ?>
-
             <div class="row g-4 mt-1">
                 <div class="col-md-4" data-aos="fade-up">
                     <div class="card-dark p-4 h-100">
@@ -544,14 +518,12 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                     </div>
                 </div>
             </div>
-
             <div class="row g-4 mt-1">
                 <div class="col-md-4" data-aos="fade-up"></div>
                 <a href="#cta" class="btn btn-cta btn-lg"><i class="bi bi-star-fill me-2"></i> Garantir minha vaga</a>
             </div>
         </div>
     </section>
-
     <!-- ===================== CTA ===================== -->
     <section id="cta" class="cta">
         <div class="container">
@@ -564,50 +536,140 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                     <div class="card-dark p-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <div class="small text-white-50 mb-1">Plano recomendado</div>
+                                <div class="small text-white-50 mb-1">Valores</div>
                                 <div class="fs-3 fw-bold"><?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?></div>
                             </div>
                             <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas Limitadas</span>
                         </div>
+                        <!-- PREÇO VENDAS -->
 
-                        
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valorbruto) ?>/à vista</div>
-                            <div class="small text-white-50 mb-3">ou Vitalício por R$ <?= htmlspecialchars((string)$valoravista) ?></div>
-                       
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valoravista ?: '0,00') ?></div>
-                            <div class="small text-white-50 mb-3">Acesso Vitalício com atualizações</div>
-                       
-                        <div class="d-grid gap-2">
-                            <?php
-                            // Monta link para vendas_inscricao preservando nav/ts/af via sessão/GET
-                            $afForLink  = $_GET['af'] ?? ($_SESSION['af'] ?? '');
-                            $tsForLink  = $_GET['ts'] ?? ($_SESSION['ts'] ?? '');
-                            $navForLink = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
-                            $qs = http_build_query(array_filter([
-                                'nav' => $navForLink,
-                                'ts'  => $tsForLink,
-                                'af'  => $afForLink
-                            ], fn($v) => $v !== '' && $v !== null));
-                            ?>
-                            <a class="btn btn-cta btn-lg" href="vendas_inscricao.php<?= $qs ? ('?' . $qs) : '' ?>">
-                                <i class="bi bi-cart-check me-2"></i> Fazer minha inscrição
-                            </a>
+                        <?php
+                        // ---------- Helpers ----------
+                        $precoBase   = isset($valordocurso)   ? (float)$valordocurso   : 0.0;
+                        $precoVista  = isset($valoravista)    ? (float)$valoravista    : 0.0;
+                        $precoCartao = isset($valornocartao)  ? (float)$valornocartao  : 0.0;
 
-                            <a class="btn btn-outline-soft btn-lg" href="<?= htmlspecialchars($linkwhatsapp, ENT_QUOTES) ?> *<?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?>*" target="_blank" rel="noopener">
-                                <i class="bi bi-whatsapp me-2"></i> Tirar dúvidas no WhatsApp
-                            </a>
+                        $fmt = fn(float $v) => 'R$ ' . number_format($v, 2, ',', '.');
+
+                        $pct = function (float $de, float $para): ?int {
+                            if ($de <= 0 || $para <= 0 || $para >= $de) return null;
+                            return (int)round((1 - ($para / $de)) * 100);
+                        };
+
+                        $offVista  = $pct($precoBase, $precoVista);
+                        $offCartao = $pct($precoBase, $precoCartao);
+
+                        $ecoVista  = $precoBase > 0 && $precoVista  > 0 ? max($precoBase - $precoVista, 0) : 0;
+                        $ecoCartao = $precoBase > 0 && $precoCartao > 0 ? max($precoBase - $precoCartao, 0) : 0;
+                        ?>
+
+                        <!-- ---------- BLOCO DE PREÇOS ---------- -->
+                        <div class="card-dark p-4">
+                            <!-- Preço base -->
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <div class="small text-white-50">Valor do curso</div>
+                                <?php if ($precoBase > 0): ?>
+                                    <div class="text-white-50" style="text-decoration:line-through;">
+                                        <?= $fmt($precoBase) ?>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="text-white-50">—</div>
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- Destaque: À VISTA -->
+                            <div class="d-flex align-items-center justify-content-between mt-2">
+                                <span class="badge rounded-pill text-dark" style="background:#54e1c3; font-weight:800;">
+                                    Melhor preço
+                                </span>
+                                <?php if (!is_null($offVista)): ?>
+                                    <span class="badge rounded-pill" style="background:rgba(84,225,195,.15); border:1px solid rgba(84,225,195,.45); color:#54e1c3;">
+                                        -<?= $offVista ?>%
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="display-5 fw-900 mt-1 mb-1" style="color:#00BB9C; line-height:1;">
+                                <?= $precoVista > 0 ? $fmt($precoVista) : 'Consulte' ?>
+                            </div>
+                            <div class="small text-white-50 mb-2">à vista no Pix/Boleto</div>
+                            <?php if ($ecoVista > 0): ?>
+                                <div class="small" style="color:#9ff3e5;">
+                                    Você economiza <strong><?= $fmt($ecoVista) ?></strong> no pagamento à vista.
+                                </div>
+                            <?php endif; ?>
+
+                            <hr class="my-3" style="border-color:rgba(255,255,255,.08)">
+
+                            <!-- Preço no Cartão -->
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <div class="small text-white-50">No cartão de crédito</div>
+                                <?php if (!is_null($offCartao)): ?>
+                                    <span class="badge rounded-pill" style="background:rgba(255,156,0,.15); border:1px solid rgba(255,156,0,.45); color:#FF9C00;">
+                                        -<?= $offCartao ?>%
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="fs-3 fw-bold" style="color:#FFB64D;">
+                                <?= $precoCartao > 0 ? $fmt($precoCartao) : 'Consulte' ?>
+                            </div>
+                            <?php if ($ecoCartao > 0): ?>
+                                <div class="small text-white-50">
+                                    Economize <?= $fmt($ecoCartao) ?> em relação ao valor cheio.
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Micro-provas sociais / segurança -->
+                            <div class="d-flex flex-wrap gap-3 mt-3 small text-white-50">
+                                <div><i class="bi bi-shield-lock me-1"></i>Pagamento 100% seguro</div>
+                                <div><i class="bi bi-lightning-charge me-1"></i>Acesso imediato</div>
+                                <div><i class="bi bi-arrow-repeat me-1"></i>Atualizações inclusas</div>
+                            </div>
+
+                            <!-- CTA -->
+                            <div class="d-grid gap-2 mt-3">
+                                <a class="btn btn-cta btn-lg" href="vendas_inscricao.php">
+                                    <i class="bi bi-cart-check me-2"></i> Garantir acesso agora
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="d-flex gap-3 mt-3 small text-white-50">
-                            <div><i class="bi bi-shield-lock me-1"></i> Compra segura</div>
-                            <div><i class="bi bi-credit-card me-1"></i> Pix / Cartão / Boleto</div>
-                        </div>
+                        <!-- <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valordocurso ?? '') ?>/Valor do Curso</div>
+                        <span>Com X% de desconto:</span>
+                        <div class="small text-white-50 mb-3">no Cartão R$ <?= htmlspecialchars((string)$valornocartao) ?? '' ?></div>
+                        <div class="small text-white-50 mb-3">À vista</div>
+                        <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valoravista ?: '') ?></div>
+                        <div class="small text-white-50 mb-3">Acesso Vitalício com atualizações</div>
+                        <div class="d-grid gap-2"> -->
+
+                        <!-- FIM PREÇO VENDAS -->
+                        <?php
+                        // Monta link para vendas_inscricao preservando nav/ts/af via sessão/GET
+                        $afForLink  = $_GET['af'] ?? ($_SESSION['af'] ?? '');
+                        $tsForLink  = $_GET['ts'] ?? ($_SESSION['ts'] ?? '');
+                        $navForLink = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
+                        $qs = http_build_query(array_filter([
+                            'nav' => $navForLink,
+                            'ts'  => $tsForLink,
+                            'af'  => $afForLink
+                        ], fn($v) => $v !== '' && $v !== null));
+                        ?>
+                        <a class="btn btn-cta btn-lg" href="vendas_inscricao.php<?= $qs ? ('?' . $qs) : '' ?>">
+                            <i class="bi bi-cart-check me-2"></i> Fazer minha inscrição
+                        </a>
+                        <a class="btn btn-outline-soft btn-lg" href="<?= htmlspecialchars($linkwhatsapp, ENT_QUOTES) ?> *<?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?>*" target="_blank" rel="noopener">
+                            <i class="bi bi-whatsapp me-2"></i> Tirar dúvidas no WhatsApp
+                        </a>
+                    </div>
+                    <div class="d-flex gap-3 mt-3 small text-white-50">
+                        <div><i class="bi bi-shield-lock me-1"></i> Compra segura</div>
+                        <div><i class="bi bi-credit-card me-1"></i> Pix / Cartão / Boleto</div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </section>
-
     <!-- ===================== FOOTER ===================== -->
     <footer class="py-4 border-top border-opacity-25" style="border-color: rgba(255,255,255,.06) !important;">
         <div class="container small text-white-50 d-flex flex-wrap justify-content-between gap-2">
@@ -619,7 +681,6 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
             </div>
         </div>
     </footer>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
