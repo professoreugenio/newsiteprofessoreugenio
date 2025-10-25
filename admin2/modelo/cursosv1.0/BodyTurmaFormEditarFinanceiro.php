@@ -41,10 +41,13 @@
         <label class="form-label">Valor à vista (R$)</label>
         <input type="text" class="form-control valor-mask" name="valoravista" value="<?= number_format((float) $valoravista, 2, '.', ',') ?>">
     </div>
-
+    <div class="col-md-12">
+        <label class="form-label">Pix Valor à vista (Presencial)</label>
+        <input type="text" class="form-control" name="chavepixvaloravista" value="<?= $chavepixvaloravista ?>">
+    </div>
     <h4>Anual</h4>
     <div class="col-md-2">
-        <label class="form-label">Valor Anual (R$)</label>
+        <label class="form-label">Valor Anual à vista(R$)</label>
         <input type="text" class="form-control valor-mask" name="valoranual" value="<?= number_format((float) $valoranual, 2, '.', ',') ?>">
     </div>
 
@@ -53,29 +56,19 @@
         <input type="text" class="form-control valor-mask" name="valoranualcartao" value="<?= number_format((float) $valoranualcartao, 2, '.', ',') ?>">
     </div>
 
-    <hr>
-    <h4>Anual</h4>
-    <div class="col-md-2">
-        <label class="form-label">Valor Anual (R$)</label>
-        <input type="text" class="form-control valor-mask" name="valoranual" value="<?= number_format((float) $valoranual, 2, '.', ',') ?>">
-    </div>
-
-    <div class="col-md-2">
-        <label class="form-label">Valor Cartão Anual (R$)</label>
-        <input type="text" class="form-control valor-mask" name="valorcartaoanual" value="<?= number_format((float) $valorcartaoanual, 2, '.', ',') ?>">
-    </div>
-
-    <hr>
-
-
-    <div class="col-md-12">
-        <label class="form-label">Pix Valor à vista (Presencial)</label>
-        <input type="text" class="form-control" name="chavepixvaloravista" value="<?= $chavepixvaloravista ?>">
-    </div>
     <div class="col-md-12">
         <label class="form-label">Pix Valor anual à vista (Presencial)</label>
         <input type="text" class="form-control" name="chavepixvaloranualavista" value="<?= $chavepixvaloranualavista ?>">
     </div>
+
+    <hr>
+
+
+    <hr>
+
+
+
+
 
     <div class="col-md-3">
         <label class="form-label">Valor Hora Aula (Institucional)</label>

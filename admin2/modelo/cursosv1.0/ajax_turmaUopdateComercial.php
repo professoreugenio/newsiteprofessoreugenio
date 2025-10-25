@@ -68,8 +68,8 @@ try {
         'valorcartaoct'             => $toMoney($p('valorcartao')),
         'valoranualcartaoct'             => $toMoney($p('valoranualcartao')),
         'valoravistact'          => $toMoney($p('valoravista')),
-        'pixvaloravistact'          => $toMoney($p('chavepixvaloravista')),
-        'pixvaloranualavistact'              => $toMoney($p('chavepixvaloranualavista')),
+        'pixvaloravistact'          => $p('chavepixvaloravista'),
+        'pixvaloranualavistact'              => $p('chavepixvaloranualavista'),
         'valoranualct'              => $toMoney($p('valoranual')),
         'valorhoraaula'           => $toMoney($p('valorhoraaula')),
 
