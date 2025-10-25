@@ -107,11 +107,35 @@ $idCursoVenda = max(0, (int)$idCursoVenda);
 
 /* ===================== Defaults ===================== */
 $enIdCurso = $enIdTurma = $Codigochave = '';
-$nomeCurso = '';
-$aovivo = 0;
-$horamanha = $horatarde = $horanoite = '';
-$valoranual = $valorvendavitalicia = '';
-$linkwhatsapp = '';
+$Codigochave = '';
+$youtubeurl = ''; // id do vídeo
+$idCurso =   "";
+$enIdCurso =   "";
+$nomeTurma  =   "";
+$idTurma    =   "";
+$descricao   =   "";
+$lead         =   "";
+$chaveTurma    =   "";
+$aovivo        =   "";
+$horamanha    =   "";
+$horatarde    =   "";
+$horanoite     =   "";
+$horasaulast            =   "";
+$vendaliberada          =   "";
+$chavepix               =   "";
+$chavepixvalorvenda     =   "";
+$valordocurso            =   "";
+$valornocartao            =   "";
+$valoravista    =   "";
+$valorhoraaula         =   "";
+$chavepixvitalicia     =   "";
+$linkpagseguro         =   "";
+$linkpagsegurovitalicia  =   "";
+$linkmercadopago        =   "";
+$linkmercadopagovitalicio  =   "";
+$imgqrcodecurso         =   "";
+$imgqrcodeanual         =   "";
+$imgqrcodevitalicio     =   "";
 
 /* ===================== Buscas (somente se idCursoVenda válido) ===================== */
 if ($idCursoVenda > 0) {
@@ -123,7 +147,7 @@ if ($idCursoVenda > 0) {
             t.nometurma,
             t.aovivoct,
             t.horadem, t.horadet, t.horaden,
-            t.valoranual, t.valorvendavitalicia,
+            t.valoranual, t.valorvendavitalicia,t.valorbrutoct,t.valorcartaoct,t.valoravistact,
             t.linkwhatsapp,
             t.celularprofessorct,
             t.chave AS chave
@@ -146,8 +170,9 @@ if ($idCursoVenda > 0) {
         $horamanha    = (string)($turma['horadem'] ?? '');
         $horatarde    = (string)($turma['horadet'] ?? '');
         $horanoite    = (string)($turma['horaden'] ?? '');
-        $valoranual   = (string)($turma['valoranual'] ?? '');
-        $valorvendavitalicia = (string)($turma['valorvendavitalicia'] ?? '');
+        $valordocurso             = $turma['valorbrutoct'] ?? '';
+        $valornocartao             = $turma['valorcartaoct'] ?? '';
+        $valoravista    = $turma['valoravistact'] ?? '';
 
         // WhatsApp
         $cel = preg_replace('/\D+/', '', (string)($turma['celularprofessorct'] ?? ''));
@@ -390,21 +415,81 @@ $CodigoAfiliadoVal = $_GET['af'] ?? ($_SESSION['af'] ?? '');
                 </div>
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="card-dark p-4">
-                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
                             <div>
                                 <div class="small text-white-50 mb-1">Plano recomendado</div>
-                                <div class="fs-4 fw-bold"><?= h($nomeCurso ?: 'Excel para Concursos') ?></div>
+                                <div class="fs-4 fw-bold"><?= h($nomeCurso ?: 'Desenvolvimento Web (PHP)') ?></div>
                             </div>
                             <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas Limitadas</span>
                         </div>
-                        <?php if ((float)$valoranual > 0): ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valoranual) ?>/anual</div>
-                            <div class="small text-white-50">Vitalício por R$ <?= h((string)$valorvendavitalicia) ?></div>
+
+                        <?php
+                        // ------- Preparação de preços -------
+                        $precoBase   = isset($valordocurso)   ? (float)$valordocurso   : 0.0;
+                        $precoVista  = isset($valoravista)    ? (float)$valoravista    : 0.0;
+                        $precoCartao = isset($valornocartao)  ? (float)$valornocartao  : 0.0;
+
+                        $fmt = fn(float $v) => 'R$ ' . number_format($v, 2, ',', '.');
+                        $pct = function (float $de, float $para): ?int {
+                            if ($de <= 0 || $para <= 0 || $para >= $de) return null;
+                            return (int)round((1 - ($para / $de)) * 100);
+                        };
+
+                        $offVista  = $pct($precoBase, $precoVista);
+                        $offCartao = $pct($precoBase, $precoCartao);
+                        ?>
+
+                        <!-- Valor base (riscado) -->
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="small text-white-50">Valor do curso</div>
+                            <div class="text-white-50" style="text-decoration:line-through;">
+                                <?= $precoBase > 0 ? $fmt($precoBase) : '—' ?>
+                            </div>
+                        </div>
+
+                        <?php if ($precoVista > 0): ?>
+                            <!-- Destaque: À vista -->
+                            <div class="mt-3 p-3 rounded-3"
+                                style="background:linear-gradient(135deg, rgba(84,225,195,.12), rgba(84,225,195,.06)); border:1px solid rgba(84,225,195,.25);">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="badge rounded-pill text-dark" style="background:#54e1c3; font-weight:800;">Melhor preço à vista</span>
+                                    <?php if (!is_null($offVista)): ?>
+                                        <span class="badge rounded-pill"
+                                            style="background:rgba(84,225,195,.15); border:1px solid rgba(84,225,195,.45); color:#54e1c3;">
+                                            -<?= $offVista ?>%
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="d-flex align-items-end gap-2 mt-2">
+                                    <div class="display-5 fw-bold" style="color:#00BB9C; line-height:1;">
+                                        <?= $fmt($precoVista) ?>
+                                    </div>
+                                    <div class="small text-white-50 mb-2">à vista no Pix/Boleto</div>
+                                </div>
+                            </div>
+
+                            <!-- Cartão -->
+                            <div class="mt-3 p-3 rounded-3"
+                                style="background:linear-gradient(135deg, rgba(255,156,0,.08), rgba(255,156,0,.03)); border:1px solid rgba(255,156,0,.25);">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <div class="small text-white-50">No cartão de crédito</div>
+                                    <?php if (!is_null($offCartao)): ?>
+                                        <span class="badge rounded-pill"
+                                            style="background:rgba(255,156,0,.15); border:1px solid rgba(255,156,0,.45); color:#FF9C00;">
+                                            -<?= $offCartao ?>%
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="fs-4 fw-semibold" style="color:#FFB64D; line-height:1;">
+                                    <?= $precoCartao > 0 ? $fmt($precoCartao) : 'Consulte' ?>
+                                </div>
+                            </div>
                         <?php else: ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valorvendavitalicia ?: '0,00') ?></div>
-                            <div class="small text-white-50">Vitalício com atualizações</div>
+                            <div class="small text-white-50 mt-2">Vitalício com atualizações</div>
                         <?php endif; ?>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -547,16 +632,78 @@ $CodigoAfiliadoVal = $_GET['af'] ?? ($_SESSION['af'] ?? '');
                         </ul>
                     </div>
                     <div class="card-dark p-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="small text-white-50">Sua pré-reserva</div>
-                            <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Garantida por 24h</span>
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div>
+                                <div class="small text-white-50 mb-1">Plano recomendado</div>
+                                <div class="fs-4 fw-bold"><?= h($nomeCurso ?: 'Desenvolvimento Web (PHP)') ?></div>
+                            </div>
+                            <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas Limitadas</span>
                         </div>
-                        <?php if ((float)$valoranual > 0): ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valoranual) ?>/anual</div>
-                            <div class="small text-white-50">Vitalício por R$ <?= h((string)$valorvendavitalicia) ?></div>
+
+                        <?php
+                        // ------- Preparação de preços -------
+                        $precoBase   = isset($valordocurso)   ? (float)$valordocurso   : 0.0;
+                        $precoVista  = isset($valoravista)    ? (float)$valoravista    : 0.0;
+                        $precoCartao = isset($valornocartao)  ? (float)$valornocartao  : 0.0;
+
+                        $fmt = fn(float $v) => 'R$ ' . number_format($v, 2, ',', '.');
+                        $pct = function (float $de, float $para): ?int {
+                            if ($de <= 0 || $para <= 0 || $para >= $de) return null;
+                            return (int)round((1 - ($para / $de)) * 100);
+                        };
+
+                        $offVista  = $pct($precoBase, $precoVista);
+                        $offCartao = $pct($precoBase, $precoCartao);
+                        ?>
+
+                        <!-- Valor base (riscado) -->
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="small text-white-50">Valor do curso</div>
+                            <div class="text-white-50" style="text-decoration:line-through;">
+                                <?= $precoBase > 0 ? $fmt($precoBase) : '—' ?>
+                            </div>
+                        </div>
+
+                        <?php if ($precoVista > 0): ?>
+                            <!-- Destaque: À vista -->
+                            <div class="mt-3 p-3 rounded-3"
+                                style="background:linear-gradient(135deg, rgba(84,225,195,.12), rgba(84,225,195,.06)); border:1px solid rgba(84,225,195,.25);">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="badge rounded-pill text-dark" style="background:#54e1c3; font-weight:800;">Melhor preço à vista</span>
+                                    <?php if (!is_null($offVista)): ?>
+                                        <span class="badge rounded-pill"
+                                            style="background:rgba(84,225,195,.15); border:1px solid rgba(84,225,195,.45); color:#54e1c3;">
+                                            -<?= $offVista ?>%
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="d-flex align-items-end gap-2 mt-2">
+                                    <div class="display-5 fw-bold" style="color:#00BB9C; line-height:1;">
+                                        <?= $fmt($precoVista) ?>
+                                    </div>
+                                    <div class="small text-white-50 mb-2">à vista no Pix/Boleto</div>
+                                </div>
+                            </div>
+
+                            <!-- Cartão -->
+                            <div class="mt-3 p-3 rounded-3"
+                                style="background:linear-gradient(135deg, rgba(255,156,0,.08), rgba(255,156,0,.03)); border:1px solid rgba(255,156,0,.25);">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <div class="small text-white-50">No cartão de crédito</div>
+                                    <?php if (!is_null($offCartao)): ?>
+                                        <span class="badge rounded-pill"
+                                            style="background:rgba(255,156,0,.15); border:1px solid rgba(255,156,0,.45); color:#FF9C00;">
+                                            -<?= $offCartao ?>%
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="fs-4 fw-semibold" style="color:#FFB64D; line-height:1;">
+                                    <?= $precoCartao > 0 ? $fmt($precoCartao) : 'Consulte' ?>
+                                </div>
+                            </div>
                         <?php else: ?>
-                            <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= h((string)$valorvendavitalicia ?: '0,00') ?></div>
-                            <div class="small text-white-50">Vitalício com atualizações</div>
+                            <div class="small text-white-50 mt-2">Vitalício com atualizações</div>
                         <?php endif; ?>
                     </div>
                 </div>

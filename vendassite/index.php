@@ -531,23 +531,39 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                 <div class="col-lg-7" data-aos="fade-right">
                     <div class="heading-2 mb-2">Inscreva-se Agora</div>
                     <?= $cta ?: '<div class="card-dark p-3">Pronto para começar? Clique em “Fazer minha inscrição”.</div>' ?>
+
+                    
+
+
                 </div>
+
+                <!-- CTA única -->
+
+                <!-- CTA única -->
+
+
+                <!--  -->
+
+
                 <div class="col-lg-5" data-aos="fade-left">
                     <div class="card-dark p-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <div class="small text-white-50 mb-1">Valores</div>
-                                <div class="fs-3 fw-bold"><?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?></div>
+                                <div class="fs-3 fw-bold">
+                                    <?= htmlspecialchars($nomeCurso ?: 'Desenvolvimento Web (PHP)', ENT_QUOTES) ?>
+                                </div>
                             </div>
                             <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Vagas Limitadas</span>
                         </div>
-                        <!-- PREÇO VENDAS -->
 
                         <?php
                         // ---------- Helpers ----------
                         $precoBase   = isset($valordocurso)   ? (float)$valordocurso   : 0.0;
                         $precoVista  = isset($valoravista)    ? (float)$valoravista    : 0.0;
                         $precoCartao = isset($valornocartao)  ? (float)$valornocartao  : 0.0;
+
+                        $maxParcelas = 12; // ajuste conforme sua regra
 
                         $fmt = fn(float $v) => 'R$ ' . number_format($v, 2, ',', '.');
 
@@ -559,14 +575,35 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                         $offVista  = $pct($precoBase, $precoVista);
                         $offCartao = $pct($precoBase, $precoCartao);
 
-                        $ecoVista  = $precoBase > 0 && $precoVista  > 0 ? max($precoBase - $precoVista, 0) : 0;
-                        $ecoCartao = $precoBase > 0 && $precoCartao > 0 ? max($precoBase - $precoCartao, 0) : 0;
+                        $ecoVista  = ($precoBase > 0 && $precoVista  > 0) ? max($precoBase - $precoVista, 0) : 0;
+                        $ecoCartao = ($precoBase > 0 && $precoCartao > 0) ? max($precoBase - $precoCartao, 0) : 0;
+
+                        $valorParcela = ($precoCartao > 0 && $maxParcelas > 1) ? $precoCartao / $maxParcelas : 0.0;
+
+                        // Monta link para vendas_inscricao preservando nav/ts/af via sessão/GET
+                        $afForLink  = $_GET['af']  ?? ($_SESSION['af']  ?? '');
+                        $tsForLink  = $_GET['ts']  ?? ($_SESSION['ts']  ?? '');
+                        $navForLink = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
+                        $qs = http_build_query(array_filter([
+                            'nav' => $navForLink,
+                            'ts'  => $tsForLink,
+                            'af'  => $afForLink
+                        ], fn($v) => $v !== '' && $v !== null));
+                        $ctaHref = 'vendas_inscricao.php' . ($qs ? ('?' . $qs) : '');
                         ?>
 
-                        <!-- ---------- BLOCO DE PREÇOS ---------- -->
-                        <div class="card-dark p-4">
-                            <!-- Preço base -->
-                            <div class="d-flex align-items-center justify-content-between mb-1">
+                        <!-- ---------- BLOCO DE PREÇOS (visual melhorado) ---------- -->
+                        <div class="card-dark p-4 position-relative overflow-hidden">
+
+                            <?php if (($offVista !== null || $offCartao !== null) && $precoBase > 0): ?>
+                                <!-- Ribbon só quando há desconto real -->
+                                <!-- <div style="position:absolute; top:16px; right:-46px; transform:rotate(35deg); background:#54e1c3; color:#0b1832; font-weight:800; padding:6px 54px; box-shadow:0 8px 30px rgba(0,0,0,.25);">
+          Ofertas ativas
+        </div> -->
+                            <?php endif; ?>
+
+                            <!-- Valor cheio -->
+                            <div class="d-flex align-items-center justify-content-between">
                                 <div class="small text-white-50">Valor do curso</div>
                                 <?php if ($precoBase > 0): ?>
                                     <div class="text-white-50" style="text-decoration:line-through;">
@@ -578,94 +615,95 @@ if ($n = fmtHora($horanoite)) $chips[] = ['icon' => 'bi-moon-stars', 'label' => 
                             </div>
 
                             <!-- Destaque: À VISTA -->
-                            <div class="d-flex align-items-center justify-content-between mt-2">
-                                <span class="badge rounded-pill text-dark" style="background:#54e1c3; font-weight:800;">
-                                    Melhor preço
-                                </span>
-                                <?php if (!is_null($offVista)): ?>
-                                    <span class="badge rounded-pill" style="background:rgba(84,225,195,.15); border:1px solid rgba(84,225,195,.45); color:#54e1c3;">
-                                        -<?= $offVista ?>%
-                                    </span>
+                            <div class="mt-3 p-3 rounded-3" style="background:linear-gradient(135deg, rgba(84,225,195,.12), rgba(84,225,195,.06)); border:1px solid rgba(84,225,195,.25);">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="badge rounded-pill text-dark" style="background:#54e1c3; font-weight:800;">
+                                        Melhor preço à vista
+                                    </div>
+                                    <?php if (!is_null($offVista)): ?>
+                                        <span class="badge rounded-pill" style="background:rgba(84,225,195,.15); border:1px solid rgba(84,225,195,.45); color:#54e1c3;">
+                                            -<?= $offVista ?>%
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="d-flex align-items-end gap-2 mt-2">
+                                    <div class="display-5 fw-900" style="color:#00BB9C; line-height:1;">
+                                        <?= $precoVista > 0 ? $fmt($precoVista) : 'Consulte' ?>
+                                    </div>
+                                    <div class="small text-white-50 mb-2">à vista no Pix/Boleto</div>
+                                </div>
+
+                                <?php if ($ecoVista > 0): ?>
+                                    <div class="small mt-1" style="color:#9ff3e5;">
+                                        Economize <strong><?= $fmt($ecoVista) ?></strong> comparado ao valor cheio.
+                                    </div>
                                 <?php endif; ?>
                             </div>
 
-                            <div class="display-5 fw-900 mt-1 mb-1" style="color:#00BB9C; line-height:1;">
-                                <?= $precoVista > 0 ? $fmt($precoVista) : 'Consulte' ?>
-                            </div>
-                            <div class="small text-white-50 mb-2">à vista no Pix/Boleto</div>
-                            <?php if ($ecoVista > 0): ?>
-                                <div class="small" style="color:#9ff3e5;">
-                                    Você economiza <strong><?= $fmt($ecoVista) ?></strong> no pagamento à vista.
+                            <!-- divisor -->
+                            <div class="my-3" style="height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);"></div>
+
+                            <!-- Cartão -->
+                            <div class="p-3 rounded-3" style="background:linear-gradient(135deg, rgba(255,156,0,.08), rgba(255,156,0,.03)); border:1px solid rgba(255,156,0,.25);">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <div class="small text-white-50">No cartão de crédito</div>
+                                    <?php if (!is_null($offCartao)): ?>
+                                        <span class="badge rounded-pill" style="background:rgba(255,156,0,.15); border:1px solid rgba(255,156,0,.45); color:#FF9C00;">
+                                            -<?= $offCartao ?>%
+                                        </span>
+                                    <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
 
-                            <hr class="my-3" style="border-color:rgba(255,255,255,.08)">
+                                <div class="fs-3 fw-bold" style="color:#FFB64D; line-height:1;">
+                                    <?= $precoCartao > 0 ? $fmt($precoCartao) : 'Consulte' ?>
+                                </div>
 
-                            <!-- Preço no Cartão -->
-                            <div class="d-flex align-items-center justify-content-between mb-1">
-                                <div class="small text-white-50">No cartão de crédito</div>
-                                <?php if (!is_null($offCartao)): ?>
-                                    <span class="badge rounded-pill" style="background:rgba(255,156,0,.15); border:1px solid rgba(255,156,0,.45); color:#FF9C00;">
-                                        -<?= $offCartao ?>%
-                                    </span>
+                                <?php if ($valorParcela > 0): ?>
+                                    <div class="small text-white-50">
+                                        ou em até <strong><?= (int)$maxParcelas ?>x de <?= $fmt($valorParcela) ?></strong> sem juros*
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($ecoCartao > 0): ?>
+                                    <div class="small text-white-50 mt-1">
+                                        Economia de <?= $fmt($ecoCartao) ?> vs. valor cheio.
+                                    </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="fs-3 fw-bold" style="color:#FFB64D;">
-                                <?= $precoCartao > 0 ? $fmt($precoCartao) : 'Consulte' ?>
-                            </div>
-                            <?php if ($ecoCartao > 0): ?>
-                                <div class="small text-white-50">
-                                    Economize <?= $fmt($ecoCartao) ?> em relação ao valor cheio.
-                                </div>
-                            <?php endif; ?>
 
-                            <!-- Micro-provas sociais / segurança -->
+                            <!-- Selos -->
                             <div class="d-flex flex-wrap gap-3 mt-3 small text-white-50">
                                 <div><i class="bi bi-shield-lock me-1"></i>Pagamento 100% seguro</div>
                                 <div><i class="bi bi-lightning-charge me-1"></i>Acesso imediato</div>
                                 <div><i class="bi bi-arrow-repeat me-1"></i>Atualizações inclusas</div>
                             </div>
 
-                            <!-- CTA -->
+                            <!-- CTA única -->
                             <div class="d-grid gap-2 mt-3">
-                                <a class="btn btn-cta btn-lg" href="vendas_inscricao.php">
+                                <a class="btn btn-cta btn-lg" href="<?= htmlspecialchars($ctaHref, ENT_QUOTES) ?>">
                                     <i class="bi bi-cart-check me-2"></i> Garantir acesso agora
                                 </a>
+                                <div class="small text-white-50 text-center">
+                                    *Condição de parcelamento sujeita à operadora do cartão.
+                                </div>
                             </div>
                         </div>
 
-                        <!-- <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valordocurso ?? '') ?>/Valor do Curso</div>
-                        <span>Com X% de desconto:</span>
-                        <div class="small text-white-50 mb-3">no Cartão R$ <?= htmlspecialchars((string)$valornocartao) ?? '' ?></div>
-                        <div class="small text-white-50 mb-3">À vista</div>
-                        <div class="display-6 fw-bold my-2" style="color:#00BB9C;">R$ <?= htmlspecialchars((string)$valoravista ?: '') ?></div>
-                        <div class="small text-white-50 mb-3">Acesso Vitalício com atualizações</div>
-                        <div class="d-grid gap-2"> -->
-
-                        <!-- FIM PREÇO VENDAS -->
-                        <?php
-                        // Monta link para vendas_inscricao preservando nav/ts/af via sessão/GET
-                        $afForLink  = $_GET['af'] ?? ($_SESSION['af'] ?? '');
-                        $tsForLink  = $_GET['ts'] ?? ($_SESSION['ts'] ?? '');
-                        $navForLink = $_GET['nav'] ?? ($_SESSION['nav'] ?? '');
-                        $qs = http_build_query(array_filter([
-                            'nav' => $navForLink,
-                            'ts'  => $tsForLink,
-                            'af'  => $afForLink
-                        ], fn($v) => $v !== '' && $v !== null));
-                        ?>
-                        <a class="btn btn-cta btn-lg" href="vendas_inscricao.php<?= $qs ? ('?' . $qs) : '' ?>">
-                            <i class="bi bi-cart-check me-2"></i> Fazer minha inscrição
-                        </a>
-                        <a class="btn btn-outline-soft btn-lg" href="<?= htmlspecialchars($linkwhatsapp, ENT_QUOTES) ?> *<?= htmlspecialchars($nomeCurso ?: 'Excel para Concursos', ENT_QUOTES) ?>*" target="_blank" rel="noopener">
+                        <!-- WhatsApp -->
+                        <a class="btn btn-outline-soft btn-lg mt-3"
+                            href="<?= htmlspecialchars($linkwhatsapp, ENT_QUOTES) ?> *<?= htmlspecialchars($nomeCurso ?: 'Desenvolvimento Web (PHP)', ENT_QUOTES) ?>*"
+                            target="_blank" rel="noopener">
                             <i class="bi bi-whatsapp me-2"></i> Tirar dúvidas no WhatsApp
                         </a>
                     </div>
+
                     <div class="d-flex gap-3 mt-3 small text-white-50">
                         <div><i class="bi bi-shield-lock me-1"></i> Compra segura</div>
                         <div><i class="bi bi-credit-card me-1"></i> Pix / Cartão / Boleto</div>
                     </div>
                 </div>
+
             </div>
         </div>
         </div>

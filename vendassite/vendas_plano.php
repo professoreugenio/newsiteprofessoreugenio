@@ -1,3 +1,222 @@
+<?php
+
+declare(strict_types=1);
+
+define('BASEPATH', true);
+define('APP_ROOT', dirname(__DIR__, 1)); // ajuste se necessário
+
+/* ===================== INCLUDES DO PROJETO ===================== */
+require_once APP_ROOT . '/conexao/class.conexao.php';   // $con = config::connect();
+require_once APP_ROOT . '/autenticacao.php';            // se precisar (ex.: utilitários de sessão/login)
+
+/* ===================== CONFIG DE SESSÃO (4 HORAS) ===================== */
+const SESSION_TTL = 4 * 3600; // 4 horas
+
+session_set_cookie_params([
+    'lifetime' => SESSION_TTL,
+    'path'     => '/',
+    'domain'   => '',
+    'secure'   => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
+session_start();
+
+if (!isset($_SESSION['session_started_at'])) {
+    $_SESSION['session_started_at'] = time();
+} elseif ((time() - (int)$_SESSION['session_started_at']) > SESSION_TTL) {
+    unset($_SESSION['nav'], $_SESSION['nav_set_at'], $_SESSION['af'], $_SESSION['af_set_at'], $_SESSION['ts'], $_SESSION['prg_redirect_done']);
+    session_regenerate_id(true);
+    $_SESSION['session_started_at'] = time();
+}
+
+/* ===================== Helpers ===================== */
+function get_param(string $k): ?string
+{
+    if (!array_key_exists($k, $_GET)) return null;
+    $v = trim((string)$_GET[$k]);
+    if ($v === '') return null;
+    if (strlen($v) > 8192) $v = substr($v, 0, 8192);
+    return $v;
+}
+function h(string $s): string
+{
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
+function fmtHora(?string $h): ?string
+{
+    if (!$h || $h === '00:00:00') return null;
+    if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $h) === 1) return substr($h, 0, 5);
+    return $h;
+}
+
+/* ===================== Captura GET -> Sessão (PRG) ===================== */
+$paramNav = get_param('nav');
+$paramAf  = get_param('af');
+$paramTs  = get_param('ts');
+
+if ($paramNav !== null) {
+    $_SESSION['nav'] = $paramNav;
+    $_SESSION['nav_set_at'] = time();
+}
+if ($paramAf  !== null) {
+    $_SESSION['af']  = $paramAf;
+    $_SESSION['af_set_at']  = time();
+}
+if ($paramTs  !== null) {
+    $_SESSION['ts']  = $paramTs;
+}
+
+$hasNewParams   = ($paramNav !== null) || ($paramAf !== null) || ($paramTs !== null);
+$prgAlreadyDone = !empty($_SESSION['prg_redirect_done']);
+$noredir        = isset($_GET['noredir']) && $_GET['noredir'] == '1';
+
+if ($hasNewParams && !$prgAlreadyDone && !$noredir) {
+    $_SESSION['prg_redirect_done'] = time();
+    if (!headers_sent()) {
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        $self = strtok($_SERVER['REQUEST_URI'], '?'); // esta mesma página, sem query
+        header('Location: ' . $self);
+        exit;
+    }
+}
+
+/* ===================== Decodifica NAV -> idCursoVenda ===================== */
+$idCursoVenda = 0;
+$navRaw = $_SESSION['nav'] ?? '';
+if ($navRaw !== '') {
+    try {
+        $decNavCurso = encrypt($navRaw, 'd'); // sua função de criptografia (d = decrypt)
+    } catch (Throwable $e) {
+        $decNavCurso = '';
+    }
+    if ($decNavCurso !== '') {
+        parse_str($decNavCurso, $navParams);
+        if (isset($navParams['id'])) {
+            $idCursoVenda = (int)$navParams['id'];
+        }
+        if ($idCursoVenda === 0) {
+            $exp = explode('&', $decNavCurso);
+            $idCursoVenda = isset($exp[1]) ? (int)preg_replace('/\D+/', '', $exp[1]) : 0;
+        }
+    }
+}
+$idCursoVenda = max(0, (int)$idCursoVenda);
+
+/* ===================== Defaults ===================== */
+$enIdCurso = $enIdTurma = $Codigochave = '';
+$Codigochave = '';
+$youtubeurl = ''; // id do vídeo
+$idCurso =   "";
+$enIdCurso =   "";
+$nomeTurma  =   "";
+$idTurma    =   "";
+$descricao   =   "";
+$lead         =   "";
+$chaveTurma    =   "";
+$aovivo        =   "";
+$horamanha    =   "";
+$horatarde    =   "";
+$horanoite     =   "";
+$horasaulast            =   "";
+$vendaliberada          =   "";
+$chavepix               =   "";
+$chavepixvalorvenda     =   "";
+$valordocurso            =   "";
+$valornocartao            =   "";
+$valoravista    =   "";
+$valorhoraaula         =   "";
+$chavepixvitalicia     =   "";
+$linkpagseguro         =   "";
+$linkpagsegurovitalicia  =   "";
+$linkmercadopago        =   "";
+$linkmercadopagovitalicio  =   "";
+$imgqrcodecurso         =   "";
+$imgqrcodeanual         =   "";
+$imgqrcodevitalicio     =   "";
+
+/* ===================== Buscas (somente se idCursoVenda válido) ===================== */
+if ($idCursoVenda > 0) {
+    // TURMA (inclui codigoturma!)
+    $q1 = $con->prepare("
+        SELECT 
+            t.codcursost,
+            t.codigoturma       AS idturma,
+            t.nometurma,
+            t.aovivoct,
+            t.horadem, t.horadet, t.horaden,
+            t.valoranual, t.valorvendavitalicia,t.valorbrutoct,t.valorcartaoct,t.valoravistact,
+            t.linkwhatsapp,
+            t.celularprofessorct,
+            t.chave AS chave
+        FROM new_sistema_cursos_turmas t
+        INNER JOIN new_sistema_chave c ON c.chaveturmasc = t.chave
+        WHERE t.codcursost = :id AND t.comercialt = '1'
+        LIMIT 1
+    ");
+    $q1->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
+    $q1->execute();
+    $turma = $q1->fetch(PDO::FETCH_ASSOC);
+
+    if ($turma) {
+        $idCurso   = (string)($turma['codcursost'] ?? '');
+        $idTurma   = (string)($turma['idturma'] ?? '');
+        $enIdCurso = $idCurso !== '' ? encrypt($idCurso, 'e') : '';
+        $enIdTurma = $idTurma !== '' ? encrypt($idTurma, 'e') : '';
+
+        $aovivo       = (int)($turma['aovivoct'] ?? 0);
+        $horamanha    = (string)($turma['horadem'] ?? '');
+        $horatarde    = (string)($turma['horadet'] ?? '');
+        $horanoite    = (string)($turma['horaden'] ?? '');
+        $valordocurso             = $turma['valorbrutoct'] ?? '';
+        $valornocartao             = $turma['valorcartaoct'] ?? '';
+        $valoravista    = $turma['valoravistact'] ?? '';
+        $valoranual            = $turma['valoranual'] ?? '';
+        $valorvendavitalicia   = $turma['valorvendavitalicia'] ?? '';
+
+
+        // WhatsApp
+        $cel = preg_replace('/\D+/', '', (string)($turma['celularprofessorct'] ?? ''));
+        if ($cel === '') $cel = '5585995637577';
+        if (strpos($cel, '55') !== 0) $cel = '55' . $cel;
+        $linkwhatsapp = 'https://wa.me/' . $cel . '?text=' . rawurlencode('Gostaria de mais informações sobre o curso');
+
+        $chaveTurma = (string)($turma['chave'] ?? '');
+
+        // CHAVE
+        if ($chaveTurma !== '') {
+            $qCh = $con->prepare("SELECT chavesc FROM new_sistema_chave WHERE chaveturmasc = :campo LIMIT 1");
+            $qCh->bindValue(':campo', $chaveTurma, PDO::PARAM_STR);
+            $qCh->execute();
+            $rwCh = $qCh->fetch(PDO::FETCH_ASSOC);
+            if ($rwCh && !empty($rwCh['chavesc'])) {
+                $Codigochave = encrypt($rwCh['chavesc'], 'e');
+            }
+        }
+    }
+
+    // CURSO (nome)
+    $q2 = $con->prepare("SELECT nomecurso FROM new_sistema_cursos WHERE codigocursos = :id LIMIT 1");
+    $q2->bindValue(':id', $idCursoVenda, PDO::PARAM_INT);
+    $q2->execute();
+    $curso = $q2->fetch(PDO::FETCH_ASSOC);
+    if ($curso) {
+        $nomeCurso = (string)($curso['nomecurso'] ?? '');
+    }
+}
+
+/* ===================== Horários ===================== */
+$hasManha  = (bool)fmtHora($horamanha);
+$hasTarde  = (bool)fmtHora($horatarde);
+$hasNoite  = (bool)fmtHora($horanoite);
+$hasAnyTime = $hasManha || $hasTarde || $hasNoite;
+
+/* ===================== Afiliado ===================== */
+$CodigoAfiliadoVal = $_GET['af'] ?? ($_SESSION['af'] ?? '');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -212,6 +431,10 @@
                     <div class="steps mt-3">
                         <div class="progress"></div>
                     </div>
+
+                    af=<?php echo $_SESSION['af'] ?>
+                    ts=<?php echo $_SESSION['ts'] ?>
+                    nav=<?php echo $_SESSION['nav'] ?>
                 </div>
                 <div class="col-lg-4" data-aos="fade-left">
                     <div class="card-dark p-4">
@@ -229,82 +452,168 @@
     </section>
 
     <!-- ===================== PLANOS ===================== -->
+    <!-- ===================== PLANOS ===================== -->
     <section id="planos">
         <div class="container">
+            <?php
+            // Helpers simples para preço
+            $money = function ($v) {
+                $v = (float)$v;
+                return $v > 0 ? ('R$ ' . number_format($v, 2, ',', '.')) : '—';
+            };
+            $hasAnual      = ((float)$valoranual) > 0;
+            $hasVitalicio  = ((float)$valorvendavitalicia) > 0;
+            $hasAvista     = ((float)$valoravista) > 0;
+            $hasCartao     = ((float)$valornocartao) > 0;
+
+            // Para o anual, mostramos valor/ano e, como apoio, o mensal (dividido por 12, sem juros).
+            $mensalAnual = $hasAnual ? ((float)$valoranual / 12.0) : 0.0;
+            ?>
+
             <div class="row g-4">
-                <!-- Plano Anual -->
-                <div class="col-md-6" data-aos="zoom-in">
-                    <div class="card-dark plan h-100 p-4">
-                        <div class="d-flex align-items-start justify-content-between">
-                            <div>
-                                <div class="heading-2 mb-1">Plano Anual</div>
-                                <div class="price display-6 fw-bold">R$ 39,90/mês</div>
-                                <div class="small text-white-50">Cobrança recorrente • Cancela quando quiser</div>
+                <!-- PLANO ANUAL -->
+                <?php if ($hasAnual): ?>
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="0">
+                        <div class="card-dark plan h-100 p-4">
+                            <div class="d-flex align-items-start justify-content-between">
+                                <div>
+                                    <div class="heading-2 mb-1">Plano Anual</div>
+                                    <div class="price fs-3 fw-bold"><?= $money($valoranual) ?><span class="small text-white-50"> / ano</span></div>
+                                    <div class="small text-white-50">
+                                        ou <strong><?= $money($mensalAnual) ?></strong> / mês (referência)
+                                    </div>
+                                </div>
+                                <span class="badge rounded-pill text-dark" style="background:#cdeee7;">Popular</span>
                             </div>
-                            <span class="badge rounded-pill text-dark" style="background:#cdeee7;">Mais popular</span>
-                        </div>
 
-                        <ul class="small mt-3 mb-3">
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Acesso por 12 meses</li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Aulas ao vivo + gravadas</li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>PDFs e simulados</li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Certificação digital</li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Suporte direto</li>
-                        </ul>
+                            <ul class="small mt-3 mb-3">
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Acesso por 12 meses</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Aulas ao vivo + gravadas</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>PDFs, simulados e certificado</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Suporte direto</li>
+                            </ul>
 
-                        <div class="radio-wrap d-flex align-items-center justify-content-between">
-                            <label class="form-check-label" for="plano_anual">
-                                <strong>Selecionar Plano Anual</strong>
-                            </label>
-                            <input type="radio" name="plano" id="plano_anual" value="anual" aria-label="Plano Anual">
-                        </div>
+                            <div class="radio-wrap d-flex align-items-center justify-content-between">
+                                <label class="form-check-label" for="plano_anual"><strong>Selecionar Plano Anual</strong></label>
+                                <input type="radio" name="plano" id="plano_anual" value="anual" aria-label="Plano Anual">
+                            </div>
 
-                        <div class="d-grid mt-3">
-                            <button class="btn btn-outline-soft btn-lg btn-select" data-plan="anual"
-                                data-valor="R$ 39,90/mês">
-                                <i class="bi bi-check-circle me-2"></i> Selecionar Anual
-                            </button>
+                            <div class="d-grid mt-3">
+                                <button class="btn btn-outline-soft btn-lg btn-select"
+                                    data-plan="anual"
+                                    data-valor="<?= $money($valoranual) ?> / ano">
+                                    <i class="bi bi-check-circle me-2"></i> Selecionar Anual
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
-                <!-- Plano Vitalício -->
-                <div class="col-md-6" data-aos="zoom-in" data-aos-delay="50">
-                    <div class="card-dark plan recommended h-100 p-4">
-                        <div class="d-flex align-items-start justify-content-between">
-                            <div>
-                                <div class="heading-2 mb-1">Plano Vitalício</div>
-                                <div class="price display-6 fw-bold">R$ 85,00</div>
-                                <div class="small text-white-50">Pagamento único • Acesso permanente</div>
+                <!-- PLANO VITALÍCIO -->
+                <?php if ($hasVitalicio): ?>
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="50">
+                        <div class="card-dark plan recommended h-100 p-4">
+                            <div class="d-flex align-items-start justify-content-between">
+                                <div>
+                                    <div class="heading-2 mb-1">Plano Vitalício</div>
+                                    <div class="price fs-3 fw-bold"><?= $money($valorvendavitalicia) ?></div>
+                                    <div class="small text-white-50">Pagamento único • Acesso permanente</div>
+                                </div>
+                                <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Melhor custo-benefício</span>
                             </div>
-                            <span class="badge rounded-pill text-dark" style="background:#FF9C00;">Melhor
-                                custo-benefício</span>
-                        </div>
 
-                        <ul class="small mt-3 mb-3">
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Acesso vitalício ao conteúdo
-                            </li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Aulas ao vivo + gravadas</li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>PDFs e simulados</li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Certificação digital</li>
-                            <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Suporte direto</li>
-                        </ul>
+                            <ul class="small mt-3 mb-3">
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Acesso vitalício</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Aulas ao vivo + gravadas</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>PDFs, simulados e certificado</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Suporte direto</li>
+                            </ul>
 
-                        <div class="radio-wrap d-flex align-items-center justify-content-between">
-                            <label class="form-check-label" for="plano_vitalicio">
-                                <strong>Selecionar Plano Vitalício</strong>
-                            </label>
-                            <input type="radio" name="plano" id="plano_vitalicio" value="vitalicio"
-                                aria-label="Plano Vitalício" checked>
-                        </div>
+                            <div class="radio-wrap d-flex align-items-center justify-content-between">
+                                <label class="form-check-label" for="plano_vitalicio"><strong>Selecionar Plano Vitalício</strong></label>
+                                <input type="radio" name="plano" id="plano_vitalicio" value="vitalicio" aria-label="Plano Vitalício">
+                            </div>
 
-                        <div class="d-grid mt-3">
-                            <button class="btn btn-cta btn-lg btn-select" data-plan="vitalicio" data-valor="R$ 85,00">
-                                <i class="bi bi-check-circle-fill me-2"></i> Selecionar Vitalício
-                            </button>
+                            <div class="d-grid mt-3">
+                                <button class="btn btn-cta btn-lg btn-select"
+                                    data-plan="vitalicio"
+                                    data-valor="<?= $money($valorvendavitalicia) ?>">
+                                    <i class="bi bi-check-circle-fill me-2"></i> Selecionar Vitalício
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
+
+                <!-- À VISTA (PIX/BOLETO) -->
+                <?php if ($hasAvista): ?>
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="card-dark plan h-100 p-4">
+                            <div class="d-flex align-items-start justify-content-between">
+                                <div>
+                                    <div class="heading-2 mb-1">À Vista</div>
+                                    <div class="price fs-3 fw-bold"><?= $money($valoravista) ?></div>
+                                    <div class="small text-white-50">Pix / Boleto • Melhor preço</div>
+                                </div>
+                                <span class="badge rounded-pill text-dark" style="background:#54e1c3;">Desconto</span>
+                            </div>
+
+                            <ul class="small mt-3 mb-3">
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Confirmação rápida</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Acesso imediato</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Atualizações inclusas</li>
+                            </ul>
+
+                            <div class="radio-wrap d-flex align-items-center justify-content-between">
+                                <label class="form-check-label" for="plano_avista"><strong>Selecionar À Vista (Pix/Boleto)</strong></label>
+                                <input type="radio" name="plano" id="plano_avista" value="avista" aria-label="Plano À Vista">
+                            </div>
+
+                            <div class="d-grid mt-3">
+                                <button class="btn btn-outline-soft btn-lg btn-select"
+                                    data-plan="avista"
+                                    data-valor="<?= $money($valoravista) ?>">
+                                    <i class="bi bi-check-circle me-2"></i> Selecionar À Vista
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <!-- NO CARTÃO (PARCELADO) -->
+                <?php if ($hasCartao): ?>
+                    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="150">
+                        <div class="card-dark plan h-100 p-4">
+                            <div class="d-flex align-items-start justify-content-between">
+                                <div>
+                                    <div class="heading-2 mb-1">No Cartão</div>
+                                    <div class="price fs-3 fw-bold" style="color:#FFB64D;"><?= $money($valornocartao) ?></div>
+                                    <div class="small text-white-50">Parcelamento disponível</div>
+                                </div>
+                                <span class="badge rounded-pill text-dark" style="background:#ffd58f;">Flexível</span>
+                            </div>
+
+                            <ul class="small mt-3 mb-3">
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Parcele em várias vezes</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Acesso imediato</li>
+                                <li class="mb-1"><i class="bi bi-check2-circle me-2 check"></i>Pagamento seguro</li>
+                            </ul>
+
+                            <div class="radio-wrap d-flex align-items-center justify-content-between">
+                                <label class="form-check-label" for="plano_cartao"><strong>Selecionar No Cartão</strong></label>
+                                <input type="radio" name="plano" id="plano_cartao" value="cartao" aria-label="Plano Cartão">
+                            </div>
+
+                            <div class="d-grid mt-3">
+                                <button class="btn btn-outline-soft btn-lg btn-select"
+                                    data-plan="cartao"
+                                    data-valor="<?= $money($valornocartao) ?>">
+                                    <i class="bi bi-check-circle me-2"></i> Selecionar No Cartão
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- Aviso -->
@@ -313,6 +622,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- ===================== COMPARATIVO ===================== -->
     <section id="comparativo">
@@ -418,44 +728,52 @@
         document.getElementById('ano').textContent = new Date().getFullYear();
 
         // ---------- Estado / Persistência ----------
-        // Chaves salvas na etapa 1 (inscrição)
         const FIELDS = ['nome', 'email', 'telefone', 'objetivo', 'idCurso', 'idTurma', 'utm'];
-
-        function getStore(k) {
+        const getStore = (k) => {
             try {
                 return localStorage.getItem('insc_' + k) || '';
             } catch (e) {
                 return '';
             }
-        }
-
-        function setStore(k, v) {
+        };
+        const setStore = (k, v) => {
             try {
                 localStorage.setItem('insc_' + k, v);
             } catch (e) {}
+        };
+
+        // Determina um plano padrão (prioridade: avista > vitalicio > cartao > anual)
+        const radios = Array.from(document.querySelectorAll('input[name="plano"]'));
+        const has = (val) => radios.some(r => r.value === val);
+        let planoAtual = has('avista') ? 'avista' :
+            has('vitalicio') ? 'vitalicio' :
+            has('cartao') ? 'cartao' :
+            has('anual') ? 'anual' : '';
+
+        if (planoAtual) {
+            const r = document.querySelector(`input[name="plano"][value="${planoAtual}"]`);
+            if (r) r.checked = true;
         }
 
-        // Plano selecionado (default: vitalício)
-        let planoAtual = 'vitalicio';
-        let valorPlanoFmt = 'R$ 85,00';
+        let valorPlanoFmt = (() => {
+            const btn = document.querySelector(`.btn-select[data-plan="${planoAtual}"]`);
+            return btn ? (btn.dataset.valor || '') : '';
+        })();
 
         // Marca rádio ao clicar no botão "Selecionar"
         document.querySelectorAll('.btn-select').forEach(btn => {
-            btn.addEventListener('click', (ev) => {
+            btn.addEventListener('click', () => {
                 const plan = btn.dataset.plan;
                 const valor = btn.dataset.valor || '';
-                const radio = document.querySelector('input[name="plano"][value="' + plan + '"]');
-                if (radio) {
-                    radio.checked = true;
-                }
+                const radio = document.querySelector(`input[name="plano"][value="${plan}"]`);
+                if (radio) radio.checked = true;
                 planoAtual = plan;
                 valorPlanoFmt = valor;
-                // persiste
                 setStore('planoSelecionado', plan);
                 setStore('valorPlanoFmt', valor);
-                // feedback rápido
+
                 btn.classList.add('disabled');
-                setTimeout(() => btn.classList.remove('disabled'), 400);
+                setTimeout(() => btn.classList.remove('disabled'), 350);
             });
         });
 
@@ -463,7 +781,8 @@
         document.querySelectorAll('input[name="plano"]').forEach(r => {
             r.addEventListener('change', () => {
                 planoAtual = r.value;
-                valorPlanoFmt = (planoAtual === 'anual') ? 'R$ 39,90/mês' : 'R$ 85,00';
+                const btn = document.querySelector(`.btn-select[data-plan="${planoAtual}"]`);
+                valorPlanoFmt = btn ? (btn.dataset.valor || '') : '';
                 setStore('planoSelecionado', planoAtual);
                 setStore('valorPlanoFmt', valorPlanoFmt);
             });
@@ -472,24 +791,21 @@
         // UTM carry-over (se vier via querystring)
         const params = new URLSearchParams(location.search);
         const utm = params.get('utm');
-        if (utm) {
-            setStore('utm', utm);
-        }
+        if (utm) setStore('utm', utm);
 
         // ---------- Próxima etapa ----------
         document.getElementById('btnProsseguir').addEventListener('click', () => {
-            // Garante que há um plano marcado
             const checked = document.querySelector('input[name="plano"]:checked');
             if (!checked) {
                 alert('Selecione um plano para continuar.');
                 return;
             }
-            // Monta payload para querystring (ajuste nomes conforme back-end)
+
             const data = {
-                plano: checked.value, // 'anual' | 'vitalicio'
-                valorPlanoFmt: valorPlanoFmt, // ex.: "R$ 39,90/mês" | "R$ 85,00"
-                idCurso: getStore('idCurso') || 'excel-concursos',
-                idTurma: getStore('idTurma') || 'turma-2025-01',
+                plano: checked.value, // 'anual' | 'vitalicio' | 'avista' | 'cartao'
+                valorPlanoFmt: valorPlanoFmt, // Ex.: "R$ 399,00 / ano", "R$ 85,00"
+                idCurso: getStore('idCurso') || '',
+                idTurma: getStore('idTurma') || '',
                 nome: getStore('nome') || '',
                 email: getStore('email') || '',
                 telefone: getStore('telefone') || '',
@@ -497,15 +813,14 @@
                 utm: getStore('utm') || ''
             };
 
-            // Persiste para uso na página de pagamento
             setStore('planoSelecionado', data.plano);
             setStore('valorPlanoFmt', data.valorPlanoFmt);
 
-            // Redireciona para sua página de pagamento
             const qs = new URLSearchParams(data).toString();
             window.location.href = 'vendaPagamento.php?' + qs;
         });
     </script>
+
 </body>
 
 </html>
