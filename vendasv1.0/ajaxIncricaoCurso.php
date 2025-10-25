@@ -90,8 +90,8 @@ try {
     // ----- Busca nome do curso (para e-mail)
     $stmtCurso = $con->prepare("
         SELECT nome
-        FROM new_sistema_curso
-        WHERE codigocurso = :idcurso
+        FROM new_sistema_categorias_PJA
+        WHERE codigocategorias = :idcurso
         LIMIT 1
     ");
     $stmtCurso->bindParam(':idcurso', $idCursoTurma, PDO::PARAM_INT);
