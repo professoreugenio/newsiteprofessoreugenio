@@ -66,7 +66,7 @@ try {
         // monetários
         'valorbrutoct'              => $toMoney($p('valorvenda')),
         'valorcartaoct'             => $toMoney($p('valorcartao')),
-        'valorcartaoanualct'             => $toMoney($p('valorcartaoanual')),
+        'valoranualcartaoct'             => $toMoney($p('valoranualcartao')),
         'valoravistact'          => $toMoney($p('valoravista')),
         'pixvaloravistact'          => $toMoney($p('chavepixvaloravista')),
         'pixvaloranualavistact'              => $toMoney($p('chavepixvaloranualavista')),

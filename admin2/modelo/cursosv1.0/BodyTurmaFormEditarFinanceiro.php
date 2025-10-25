@@ -26,7 +26,7 @@
 
 <form id="formComercial" class="row g-4" enctype="multipart/form-data">
     <input type="hidden" name="chave" value="<?= htmlspecialchars($ChaveTurma) ?>">
-    <h4>Vitalício</h4>
+    <h4>Valor venda</h4>
     <div class="col-md-2">
         <label class="form-label">Valor Venda (Bruto)</label>
         <input type="text" class="form-control valor-mask" name="valorvenda" value="<?= number_format((float) $valorvenda, 2, '.', ',') ?>">
@@ -42,6 +42,18 @@
         <input type="text" class="form-control valor-mask" name="valoravista" value="<?= number_format((float) $valoravista, 2, '.', ',') ?>">
     </div>
 
+    <h4>Anual</h4>
+    <div class="col-md-2">
+        <label class="form-label">Valor Anual (R$)</label>
+        <input type="text" class="form-control valor-mask" name="valoranual" value="<?= number_format((float) $valoranual, 2, '.', ',') ?>">
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Valor Anual cartão (R$)</label>
+        <input type="text" class="form-control valor-mask" name="valoranualcartao" value="<?= number_format((float) $valoranualcartao, 2, '.', ',') ?>">
+    </div>
+
+    <hr>
     <h4>Anual</h4>
     <div class="col-md-2">
         <label class="form-label">Valor Anual (R$)</label>
@@ -175,7 +187,7 @@
     <!-- END LOAD FOTOS QRCODE -->
     <div class="col-12 mt-4">
 
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-success" style="position:fixed; left:40px; bottom:40px; z-index:1050;">
             <i class="bi bi-save me-1"></i> Atualizar Informações
         </button>
     </div>

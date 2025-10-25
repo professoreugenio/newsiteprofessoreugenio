@@ -64,11 +64,11 @@ $chkytube    = ($rwTurma['visiveltube'] == '1') ? "checked" : "";
 /*comercial*/
 $valorvenda = $rwTurma['valorbrutoct'] ?? '';
 $valorcartao = $rwTurma['valorcartaoct'] ?? '';
-$valorcartaoanual = $rwTurma['valorcartaoanualct'] ?? '';
 $valoravista = $rwTurma['valoravistact'] ?? '';
 $chavepixvaloravista = $rwTurma['pixvaloravistact'] ?? '';
 $chavepixvaloranualavista = $rwTurma['pixvaloranualavistact'] ?? '';
 $valoranual = $rwTurma['valoranualct'] ?? '';
+$valoranualcartao = $rwTurma['valoranualcartaoct'] ?? '';
 $andamento = $rwTurma['andamento'] ?? '0';
 $horasaulast = $rwTurma['horasaulast'] ?? '';
 $chavepix = $rwTurma['chavepix'] ?? '';
