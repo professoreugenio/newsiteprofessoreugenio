@@ -623,7 +623,36 @@ $CodigoAfiliadoVal = $_GET['af'] ?? ($_SESSION['af'] ?? '');
         </div>
     </section>
 
+<!-- ===================== CTA / PROSSEGUIR ===================== -->
+    <section id="prosseguir">
+        <div class="container">
+            <div class="card-dark p-4" data-aos="fade-up">
+                <div class="row gy-3 align-items-center">
+                    <div class="col-lg-8">
+                        <div class="heading-2 mb-1">Pronto para continuar?</div>
+                        <p class="mb-0 small-muted">Clique em <strong>Prosseguir para Pagamento</strong>. Mantemos seus
+                            dados salvos para agilizar a finalização.</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="d-grid d-md-flex gap-2 justify-content-lg-end">
+                            <a class="btn btn-outline-soft btn-lg" href="inscricao.html">
+                                <i class="bi bi-arrow-left-circle me-2"></i> Voltar
+                            </a>
+                            <button class="btn btn-cta btn-lg" id="btnProsseguir">
+                                <i class="bi bi-credit-card me-2"></i> Prosseguir para Pagamento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <p class="small text-white-50 mt-3">
+                Dúvidas? <a class="link-light link-underline-opacity-0" target="_blank" rel="noopener"
+                    href="https://wa.me/5585XXXXXXXX?text=Tenho%20d%C3%BAvidas%20sobre%20o%20plano%20do%20Curso%20de%20Excel%20para%20Concursos">Fale
+                    no WhatsApp</a>.
+            </p>
+        </div>
+    </section>
     <!-- ===================== COMPARATIVO ===================== -->
     <section id="comparativo">
         <div class="container">
@@ -674,36 +703,7 @@ $CodigoAfiliadoVal = $_GET['af'] ?? ($_SESSION['af'] ?? '');
         </div>
     </section>
 
-    <!-- ===================== CTA / PROSSEGUIR ===================== -->
-    <section id="prosseguir">
-        <div class="container">
-            <div class="card-dark p-4" data-aos="fade-up">
-                <div class="row gy-3 align-items-center">
-                    <div class="col-lg-8">
-                        <div class="heading-2 mb-1">Pronto para continuar?</div>
-                        <p class="mb-0 small-muted">Clique em <strong>Prosseguir para Pagamento</strong>. Mantemos seus
-                            dados salvos para agilizar a finalização.</p>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="d-grid d-md-flex gap-2 justify-content-lg-end">
-                            <a class="btn btn-outline-soft btn-lg" href="inscricao.html">
-                                <i class="bi bi-arrow-left-circle me-2"></i> Voltar
-                            </a>
-                            <button class="btn btn-cta btn-lg" id="btnProsseguir">
-                                <i class="bi bi-credit-card me-2"></i> Prosseguir para Pagamento
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <p class="small text-white-50 mt-3">
-                Dúvidas? <a class="link-light link-underline-opacity-0" target="_blank" rel="noopener"
-                    href="https://wa.me/5585XXXXXXXX?text=Tenho%20d%C3%BAvidas%20sobre%20o%20plano%20do%20Curso%20de%20Excel%20para%20Concursos">Fale
-                    no WhatsApp</a>.
-            </p>
-        </div>
-    </section>
+    
 
     <!-- ===================== FOOTER ===================== -->
     <footer class="py-4 border-top border-opacity-25" style="border-color: rgba(255,255,255,.06) !important;">
